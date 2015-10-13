@@ -1,0 +1,6 @@
+D:\Programs\Life\Life\bin\Debug\Life.exe.config
+D:\Programs\Life\Life\obj\Debug\Life.csprojResolveAssemblyReference.cache
+D:\Programs\Life\Life\bin\Debug\Life.exe
+D:\Programs\Life\Life\bin\Debug\Life.pdb
+D:\Programs\Life\Life\obj\Debug\Life.exe
+D:\Programs\Life\Life\obj\Debug\Life.pdb
