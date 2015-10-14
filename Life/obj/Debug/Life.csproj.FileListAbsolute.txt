@@ -4,3 +4,9 @@ D:\Programs\Life\Life\bin\Debug\Life.exe
 D:\Programs\Life\Life\bin\Debug\Life.pdb
 D:\Programs\Life\Life\obj\Debug\Life.exe
 D:\Programs\Life\Life\obj\Debug\Life.pdb
+C:\Users\Андреевич\Documents\GitHub\CellarAutomat\Life\bin\Debug\Life.exe.config
+C:\Users\Андреевич\Documents\GitHub\CellarAutomat\Life\obj\Debug\Life.exe
+C:\Users\Андреевич\Documents\GitHub\CellarAutomat\Life\obj\Debug\Life.pdb
+C:\Users\Андреевич\Documents\GitHub\CellarAutomat\Life\bin\Debug\Life.exe
+C:\Users\Андреевич\Documents\GitHub\CellarAutomat\Life\bin\Debug\Life.pdb
+C:\Users\Андреевич\Documents\GitHub\CellarAutomat\Life\obj\Debug\Life.csprojResolveAssemblyReference.cache

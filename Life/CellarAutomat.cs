@@ -37,7 +37,7 @@ namespace Life
                     break;
                 }
                 PrintLife();
-                PastField.CopyFieldToAnother(ref CurrentField);
+                CurrentField.CopyFieldToAnother(ref PastField);
                 System.Threading.Thread.Sleep(timeDelay);
             }
         }
@@ -53,7 +53,7 @@ namespace Life
         public void PrintLife()
         {
             Console.WriteLine("Cellar automat rules: " + Enum.GetName(typeof(CellarAutomatRules), Rule));
-            PastField.PrintField();
+            CurrentField.PrintField();
             Console.WriteLine("Generation number: " + Generation);
             Console.WriteLine();
         }
@@ -80,11 +80,11 @@ namespace Life
             Transformation.Add(CellarAutomatRules.VenusSurface, new VenusSurface());
         }
 
-        public CellarAutomat(CellarAutomatRules rule, Field f)
+        public CellarAutomat(CellarAutomatRules rule, Field createdField)
         {
-            PastField = f;
-            CurrentField = new Field(f.GetWidth(), f.GetHeight());
-            //f.CopyFieldToAnother(ref CurrentField);
+            PastField = createdField;
+            CurrentField = new Field(createdField.GetWidth(), createdField.GetHeight());
+            createdField.CopyFieldToAnother(ref CurrentField);
             this.Rule = rule;
             timeDelay = 250;
             Transformation = new Dictionary<CellarAutomatRules, ITransform>();

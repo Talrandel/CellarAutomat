@@ -133,13 +133,13 @@ namespace Life
             }
             return tempList.ToArray();
         }
-        public void CopyFieldToAnother(ref Field lastStateField)
+        public void CopyFieldToAnother(ref Field secondField)
         {
             for (int i = 0; i < GetHeight(); i++)
             {
                 for (int j = 0; j < GetWidth(); j++)
                 {
-                    lastStateField.SetCell(i, j, GetCell(i, j));
+                    secondField.SetCell(i, j, GetCell(i, j));
                 }
             }
         }
