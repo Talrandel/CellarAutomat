@@ -8,9 +8,11 @@ namespace Life
         {
             Field f = new Field(10, 10);
             CellarAutomat Automat = new CellarAutomat(CellarAutomatRules.BaseLife, f);
+            Automat.Rule = CellarAutomatRules.MooreCyclic;
             Automat.NewCellarAutomat();
             Automat.TimeDelay = 2000;
             Automat.SetDensityForField(90);
+            //Automat.PastField.CreateFigure();
             
             Automat.CellarAutomatProcess();
             Console.ReadLine();

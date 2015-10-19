@@ -188,11 +188,22 @@ namespace Life
             {
                 for (int j = 0; j < GetWidth(); j++)
                 {
-                    //if (GetCell(i, j) != 0)
+                    if (GetCell(i, j) != 0)
                         Console.Write(GetCell(i, j));
+                    else
+                        Console.Write(" ");
                 }
                 Console.WriteLine();
             }
+        }
+
+        public void CreateFigure()
+        {
+            SetCell(4, 5, 1);
+            SetCell(5, 6, 1);
+            SetCell(6, 4, 1);
+            SetCell(6, 5, 1);
+            SetCell(6, 6, 1);
         }
 
         public Field(int Width, int Height)
