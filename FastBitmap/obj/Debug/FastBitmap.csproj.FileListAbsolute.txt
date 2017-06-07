@@ -1,0 +1,5 @@
+C:\Programs\CellarAutomat\FastBitmap\bin\Debug\FastBitmap.dll
+C:\Programs\CellarAutomat\FastBitmap\bin\Debug\FastBitmap.pdb
+C:\Programs\CellarAutomat\FastBitmap\obj\Debug\FastBitmap.csprojResolveAssemblyReference.cache
+C:\Programs\CellarAutomat\FastBitmap\obj\Debug\FastBitmap.dll
+C:\Programs\CellarAutomat\FastBitmap\obj\Debug\FastBitmap.pdb

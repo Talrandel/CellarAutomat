@@ -1,5 +1,4 @@
-﻿
-namespace Life
+﻿namespace Life
 {
     class NeimanSimple : ITransform
     {

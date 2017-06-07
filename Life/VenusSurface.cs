@@ -1,5 +1,4 @@
-﻿
-namespace Life
+﻿namespace Life
 {
     class VenusSurface : ITransform
     {
