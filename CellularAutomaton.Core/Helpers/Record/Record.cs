@@ -53,7 +53,7 @@ namespace CellularAutomaton.Core.Helpers.Record
         /// </summary>
         public int StatesCount
         {
-            get { return _statesCount; }
+            get { return _statesCount; }            
             set
             {
                 if (value < CellularAutomaton.StatesNumberMin)

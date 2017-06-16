@@ -11,6 +11,7 @@
 #endregion
 
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Timers;
@@ -47,6 +48,11 @@ namespace CellularAutomaton.Core.Helpers.Player
         /// Воспроизводимая запись.
         /// </summary>
         private Record.Record _record;
+
+        /// <summary>
+        /// Перечислитель для записи
+        /// </summary>
+        private IEnumerator<Bitmap> _recordEnumerator;
         #endregion
 
         #region Properties
@@ -154,6 +160,7 @@ namespace CellularAutomaton.Core.Helpers.Player
                 throw new ArgumentNullException(nameof(rec));
 
             _record = rec;
+            CreateRecordEnumerator();
         }
 
         /// <summary>
@@ -165,6 +172,7 @@ namespace CellularAutomaton.Core.Helpers.Player
         {
             Stop();
             _record.Load(fileName);
+            CreateRecordEnumerator();
         }
 
         /// <summary>
@@ -221,6 +229,8 @@ namespace CellularAutomaton.Core.Helpers.Player
             }
 
             CurrenFrame = frame;
+            for (int i = 0; i < CurrenFrame; i++)
+                _recordEnumerator.MoveNext();
         }
 
         /// <summary>
@@ -230,11 +240,11 @@ namespace CellularAutomaton.Core.Helpers.Player
         {
             if (State != StatePlayer.Stop)
             {
+                _timer.Stop();
                 State = StatePlayer.Stop;
                 OnStopPlay();
                 CurrenFrame = 0;
-
-                _timer.Stop();
+                _recordEnumerator.Reset();
             }
         }
         #endregion
@@ -247,8 +257,10 @@ namespace CellularAutomaton.Core.Helpers.Player
         /// <param name="e"></param>
         private void Reproduce(object sender, ElapsedEventArgs e)
         {
-            _bufGr.Graphics.DrawImage(_record.Rec.Skip(CurrenFrame++).First(), _bufGrContext.MaximumBuffer.Width, _bufGrContext.MaximumBuffer.Height);
+            _bufGr.Graphics.DrawImage(_recordEnumerator.Current, _bufGrContext.MaximumBuffer.Width, _bufGrContext.MaximumBuffer.Height);
             _bufGr.Render();
+            if (!_recordEnumerator.MoveNext())
+                Stop();
         }
 
         /// <summary>
@@ -273,6 +285,14 @@ namespace CellularAutomaton.Core.Helpers.Player
         protected virtual void OnPausePlay()
         {
             PausePlay?.Invoke(this, EventArgs.Empty);
+        }
+
+        /// <summary>
+        /// Создать перечислитель для записи.
+        /// </summary>
+        private void CreateRecordEnumerator()
+        {
+            _recordEnumerator = _record.Rec.GetEnumerator();
         }
         #endregion
     }
