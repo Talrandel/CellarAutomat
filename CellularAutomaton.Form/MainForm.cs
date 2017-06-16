@@ -12,10 +12,11 @@
 
 using System;
 using System.Windows.Forms;
+using CellarAutomatForm.Presenter;
 
 namespace CellarAutomatForm
 {
-    public partial class MainForm : Form
+    public partial class MainForm : Form, IViewMainForm
     {
         #region Fields
         /// <summary>
@@ -74,6 +75,31 @@ namespace CellarAutomatForm
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             _controller.Close();
+        }
+
+        public void PlayRecord()
+        {
+            // Изменение состояний контролов
+        }
+
+        public void StopRecord()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RewindRecord(short frame)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void LoadRecord(string fileName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SaveRecord(string fileName)
+        {
+            throw new NotImplementedException();
         }
         #endregion
     }
