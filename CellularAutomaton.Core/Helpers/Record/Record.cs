@@ -2,11 +2,11 @@
 // Solution      : CellularAutomaton
 // Project       : CellularAutomaton.Core
 // Project type  : 
-// Language      : C# 7.0
+// Language      : C# 6.0
 // File          : Record.cs
-// Author        : Антипкин С.С.
-// Created       : 13.06.2017 21:43
-// Last Revision : 14.06.2017 21:38
+// Author        : Антипкин С.С., Макаров Е.А.
+// Created       : 16.06.2017 12:37
+// Last Revision : 16.06.2017 12:48
 // Description   : 
 #endregion
 

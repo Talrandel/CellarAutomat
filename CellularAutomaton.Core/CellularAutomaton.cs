@@ -2,11 +2,11 @@
 // Solution      : CellularAutomaton
 // Project       : CellularAutomaton.Core
 // Project type  : 
-// Language      : C# 7.0
+// Language      : C# 6.0
 // File          : CellularAutomaton.cs
-// Author        : Антипкин С.С.
-// Created       : 10.06.2017 22:06
-// Last Revision : 14.06.2017 22:38
+// Author        : Антипкин С.С., Макаров Е.А.
+// Created       : 16.06.2017 12:37
+// Last Revision : 16.06.2017 12:48
 // Description   : 
 #endregion
 
@@ -106,6 +106,7 @@ namespace CellularAutomaton.Core
                 throw new ArgumentNullException(nameof(rule));
             if (createdField == null)
                 throw new ArgumentNullException(nameof(createdField));
+
             Rule = rule;
             _pastField = createdField;
 

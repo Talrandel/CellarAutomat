@@ -2,11 +2,11 @@
 // Solution      : CellularAutomaton
 // Project       : CellularAutomaton.Core
 // Project type  : 
-// Language      : C# 7.0
+// Language      : C# 6.0
 // File          : NeimanSimple.cs
-// Author        : Антипкин С.С.
+// Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 12.06.2017 16:39
-// Last Revision : 14.06.2017 21:38
+// Last Revision : 16.06.2017 12:48
 // Description   : 
 #endregion
 

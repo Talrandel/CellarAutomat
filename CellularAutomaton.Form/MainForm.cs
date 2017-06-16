@@ -2,11 +2,11 @@
 // Solution      : CellularAutomaton
 // Project       : CellularAutomaton.Form
 // Project type  : 
-// Language      : C# 7.0
+// Language      : C# 6.0
 // File          : MainForm.cs
-// Author        : Антипкин С.С.
+// Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 10.06.2017 22:06
-// Last Revision : 14.06.2017 21:39
+// Last Revision : 16.06.2017 12:49
 // Description   : 
 #endregion
 

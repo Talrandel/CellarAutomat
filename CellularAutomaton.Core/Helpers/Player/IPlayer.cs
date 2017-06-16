@@ -2,11 +2,11 @@
 // Solution      : CellularAutomaton
 // Project       : CellularAutomaton.Core
 // Project type  : 
-// Language      : C# 7.0
+// Language      : C# 6.0
 // File          : IPlayer.cs
-// Author        : Антипкин С.С.
+// Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 13.06.2017 21:43
-// Last Revision : 14.06.2017 23:09
+// Last Revision : 16.06.2017 12:48
 // Description   : 
 #endregion
 

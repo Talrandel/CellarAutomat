@@ -2,11 +2,11 @@
 // Solution      : CellularAutomaton
 // Project       : CellularAutomaton.Core
 // Project type  : 
-// Language      : C# 7.0
+// Language      : C# 6.0
 // File          : Player.cs
-// Author        : Антипкин С.С.
-// Created       : 13.06.2017 21:43
-// Last Revision : 16.06.2017 0:15
+// Author        : Антипкин С.С., Макаров Е.А.
+// Created       : 16.06.2017 12:37
+// Last Revision : 16.06.2017 12:47
 // Description   : 
 #endregion
 
@@ -27,7 +27,6 @@ namespace CellularAutomaton.Core.Helpers.Player
         /// Объект <see cref="Timer"/> управляющий сменой кадров.
         /// </summary>
         private readonly Timer _timer;
-
 
         // https://docs.microsoft.com/en-us/dotnet/api/system.drawing.bufferedgraphics?view=netframework-4.7
         // https://docs.microsoft.com/en-us/dotnet/api/system.drawing.bufferedgraphicscontext.allocate?view=netframework-4.7
@@ -124,7 +123,8 @@ namespace CellularAutomaton.Core.Helpers.Player
             Stop();
             if (rec == null)
                 throw new ArgumentNullException(nameof(rec));
-            _record = rec; 
+
+            _record = rec;
         }
 
         /// <summary>

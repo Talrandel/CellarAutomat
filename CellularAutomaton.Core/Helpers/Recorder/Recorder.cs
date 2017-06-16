@@ -2,11 +2,11 @@
 // Solution      : CellularAutomaton
 // Project       : CellularAutomaton.Core
 // Project type  : 
-// Language      : C# 7.0
+// Language      : C# 6.0
 // File          : Recorder.cs
-// Author        : Антипкин С.С.
-// Created       : 13.06.2017 21:43
-// Last Revision : 14.06.2017 22:56
+// Author        : Антипкин С.С., Макаров Е.А.
+// Created       : 16.06.2017 12:37
+// Last Revision : 16.06.2017 12:48
 // Description   : 
 #endregion
 
@@ -56,6 +56,7 @@ namespace CellularAutomaton.Core.Helpers.Recorder
         {
             if (ca == null)
                 throw new ArgumentNullException(nameof(ca));
+
             _ca = ca;
             _ca.GenerationChanged += CellularAutomatonGenerationChanged;
 
@@ -77,6 +78,7 @@ namespace CellularAutomaton.Core.Helpers.Recorder
         {
             if (colorize == null)
                 throw new ArgumentNullException(nameof(colorize));
+
             _colorize = colorize;
         }
         #endregion
@@ -184,40 +186,23 @@ namespace CellularAutomaton.Core.Helpers.Recorder
         {
             switch (value)
             {
-                case 0:
-                    return Color.Red;
-                case 1:
-                    return Color.Green;
-                case 2:
-                    return Color.Blue;
-                case 3:
-                    return Color.Yellow;
-                case 4:
-                    return Color.Pink;
-                case 5:
-                    return Color.DarkBlue;
-                case 6:
-                    return Color.White;
-                case 7:
-                    return Color.Orange;
-                case 8:
-                    return Color.GreenYellow;
-                case 9:
-                    return Color.MediumVioletRed;
-                case 10:
-                    return Color.BlueViolet;
-                case 11:
-                    return Color.PaleVioletRed;
-                case 12:
-                    return Color.LightGreen;
-                case 13:
-                    return Color.Purple;
-                case 14:
-                    return Color.PapayaWhip;
-                case 15:
-                    return Color.SaddleBrown;
-                default:
-                    return Color.Black;
+                case 0: return Color.Red;
+                case 1: return Color.Green;
+                case 2: return Color.Blue;
+                case 3: return Color.Yellow;
+                case 4: return Color.Pink;
+                case 5: return Color.DarkBlue;
+                case 6: return Color.White;
+                case 7: return Color.Orange;
+                case 8: return Color.GreenYellow;
+                case 9: return Color.MediumVioletRed;
+                case 10: return Color.BlueViolet;
+                case 11: return Color.PaleVioletRed;
+                case 12: return Color.LightGreen;
+                case 13: return Color.Purple;
+                case 14: return Color.PapayaWhip;
+                case 15: return Color.SaddleBrown;
+                default: return Color.Black;
             }
         }
 
