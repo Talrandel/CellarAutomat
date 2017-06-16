@@ -5,8 +5,8 @@
 // Language      : C# 6.0
 // File          : Player.cs
 // Author        : Антипкин С.С., Макаров Е.А.
-// Created       : 16.06.2017 12:37
-// Last Revision : 16.06.2017 12:47
+// Created       : 16.06.2017 13:14
+// Last Revision : 16.06.2017 15:46
 // Description   : 
 #endregion
 
@@ -20,20 +20,23 @@ namespace CellularAutomaton.Core.Helpers.Player
     /// <summary>
     /// Предоставляет методы для визуализации работы клеточного автомата.
     /// </summary>
-    public class Player : IPlayer
+    public class Player : IPlayer, IDisposable
     {
         #region Fields
+        /// <summary>
+        /// Графический буфер на который осуществляется вывод изображения.
+        /// </summary>
+        private readonly Buffered​Graphics _bufGr;
+
+        /// <summary>
+        /// Экземпляр класса <see cref="BufferedGraphicsContext"/> управляющий <see cref="_bufGr"/>.
+        /// </summary>
+        private readonly BufferedGraphicsContext _bufGrContext;
+
         /// <summary>
         /// Объект <see cref="Timer"/> управляющий сменой кадров.
         /// </summary>
         private readonly Timer _timer;
-
-        // https://docs.microsoft.com/en-us/dotnet/api/system.drawing.bufferedgraphics?view=netframework-4.7
-        // https://docs.microsoft.com/en-us/dotnet/api/system.drawing.bufferedgraphicscontext.allocate?view=netframework-4.7
-
-        private Buffered​Graphics _bg;
-
-        private BufferedGraphicsContext _context;
 
         /// <summary>
         /// Число кадров в минуту.
@@ -57,10 +60,36 @@ namespace CellularAutomaton.Core.Helpers.Player
         /// <summary>
         /// Инициализирует новый экземпляр класса <see cref="Player"/>.
         /// </summary>
-        public Player()
+        /// <param name="e">Поверхность рисования GDI+ на которую осуществляется вывод изображения.</param>
+        /// <param name="rec">Размеры области на которую осуществяется вывод изображения.</param>
+        /// <exception cref="ArgumentNullException">Параметр <paramref name="e"/> имеет значение <b>null</b>.</exception>
+        /// <exception cref="ArgumentException">Значение высоты или ширины размера меньше или равно нулю.</exception>
+        public Player(Graphics e, Rectangle rec)
         {
+            if (e == null)
+                throw new ArgumentNullException(nameof(e));
+
+            if ((rec.Width == 0) || (rec.Height == 0))
+                throw new ArgumentException("Значение высоты или ширины размера меньше или равно нулю.", nameof(rec));
+
+            _bufGrContext = new BufferedGraphicsContext();
+            _bufGr = _bufGrContext.Allocate(e, rec);
+            _bufGrContext.MaximumBuffer = rec.Size;
+
             _timer = new Timer();
             _timer.Elapsed += Reproduce;
+        }
+        #endregion
+
+        #region IDisposable Members
+        /// <summary>
+        /// Освобождает все ресурсы занимаемые <see cref="Player"/>.
+        /// </summary>
+        public void Dispose()
+        {
+            _bufGr?.Dispose();
+            _bufGrContext?.Dispose();
+            _timer?.Dispose();
         }
         #endregion
 
@@ -212,15 +241,14 @@ namespace CellularAutomaton.Core.Helpers.Player
 
         #region Members
         /// <summary>
-        /// Обработчик события <see cref="Timer.Elapsed"/>. Передаёт текущий кадр в буфер <see cref="_bg"/> для отображения.
+        /// Обработчик события <see cref="Timer.Elapsed"/>. Передаёт текущий кадр в буфер <see cref="_bufGr"/> для отображения.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void Reproduce(object sender, ElapsedEventArgs e)
         {
-            Bitmap bitmap = _record.Rec.Skip(CurrenFrame++).First();
-            // TODO: передать кадр в выходной буфер.
-            throw new NotImplementedException();
+            _bufGr.Graphics.DrawImage(_record.Rec.Skip(CurrenFrame++).First(), _bufGrContext.MaximumBuffer.Width, _bufGrContext.MaximumBuffer.Height);
+            _bufGr.Render();
         }
 
         /// <summary>
