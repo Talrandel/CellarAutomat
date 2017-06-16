@@ -1,7 +1,10 @@
 ﻿using System;
 
-namespace Life
+namespace CellarAutomat
 {
+    /// <summary>
+    /// КА - реакция Белоусова-Жаботинского
+    /// </summary>
     class BelousovZhabotinskyReaction : ITransform
     {
         public int TransformCell(Field pastF, int x, int y)
@@ -24,6 +27,13 @@ namespace Life
                 return 0;
             else
                 return Math.Min(sum / 8 + 5, pastF.GetCell(x, y) - 1);
+        }
+
+        public int StatesCount { get; set; }
+
+        public BelousovZhabotinskyReaction(int StatesCount)
+        {
+            this.StatesCount = StatesCount;
         }
     }
 }

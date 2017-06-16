@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Life", "Life\Life.csproj", "{ACCA44E9-4895-4852-97F2-C6BF4BD588CF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CellarAutomat", "Life\CellarAutomat.csproj", "{ACCA44E9-4895-4852-97F2-C6BF4BD588CF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CellarAutomatForm", "Life_Forms\CellarAutomatForm.csproj", "{0120F5FE-A962-4A80-8AE6-E09A89ADA4BF}"
 EndProject

@@ -1,6 +1,6 @@
-﻿using System;
+﻿using CellarAutomat;
+using System;
 using System.Windows.Forms;
-using Life;
 
 namespace CellarAutomatForm
 {
@@ -24,7 +24,7 @@ namespace CellarAutomatForm
 
         private void buttonStart_Click(object sender, EventArgs e)
         {
-            controller.Build(int.Parse(textBoxHeight.Text), int.Parse(textBoxWidth.Text), int.Parse(textBoxDencity.Text), (CellarAutomatRules)comboBoxRules.SelectedIndex);
+            controller.Build(int.Parse(textBoxHeight.Text), int.Parse(textBoxWidth.Text), int.Parse(textBoxDencity.Text), (CellarAutomatRules)comboBoxRules.SelectedIndex, int.Parse(textBoxStatesCount.Text));
         }
 
         private void textBox_KeyPress_SkipLetters(object sender, KeyPressEventArgs e)

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Life
+namespace CellarAutomat
 {
     /// <summary>
     /// Направления для определения соседей для клетки
@@ -308,11 +308,11 @@ namespace Life
             {
                 for (int j = 0; j < GetWidth(); j++)
                 {
-                    //if (rand.Next(1, 100) < density)
-                    //    cells[i, j] = rand.Next(1, StatesNumber);
-                    //else
-                    //    cells[i, j] = 0;
-                    cells[i, j] = rand.Next(0, StatesNumber);
+                    if (rand.Next(0, 101) > density)
+                        cells[i, j] = rand.Next(1, StatesNumber);
+                    else
+                        cells[i, j] = 0;
+                    //cells[i, j] = rand.Next(0, StatesNumber);
                 }
             }
         }

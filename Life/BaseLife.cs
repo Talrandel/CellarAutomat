@@ -1,5 +1,8 @@
-﻿namespace Life
+﻿namespace CellarAutomat
 {
+    /// <summary>
+    /// КА - Жизнь
+    /// </summary>
     class BaseLife : ITransform
     {
         public int TransformCell(Field pastF, int x, int y)
@@ -11,6 +14,13 @@
                 return pastF.GetCell(x, y);
             else
                 return 0;
+        }
+
+        public int StatesCount { get { return 2; } set { value = 2; } }
+
+        public BaseLife(int StatesCount)
+        {
+            this.StatesCount = StatesCount;
         }
     }
 }

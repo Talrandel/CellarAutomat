@@ -1,5 +1,8 @@
-﻿namespace Life
+﻿namespace CellarAutomat
 {
+    /// <summary>
+    /// КА - Поверхность Венеры
+    /// </summary>
     class VenusSurface : ITransform
     {
         public int TransformCell(Field pastF, int x, int y)
@@ -31,6 +34,13 @@
                 return 2 * ((southWestCell % 2) ^ (southEastCell % 2)) + southCell % 2;
             else
                 return 2 * ((southEastCell % 2) ^ (northEastCell % 2)) + eastCell % 2;
+        }
+
+        public int StatesCount { get; set; }
+
+        public VenusSurface(int StatesCount)
+        {
+            this.StatesCount = StatesCount;
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Life
+namespace CellarAutomat
 {
     /// <summary>
     /// Набор правил для КА
@@ -24,7 +24,7 @@ namespace Life
         /// <summary>
         /// Минимальное количество состояний клеток
         /// </summary>
-        public const int StatesNumberMin = 3;
+        public const int StatesNumberMin = 2;
 
         /// <summary>
         /// Поле КА на текущей итерации
@@ -46,11 +46,11 @@ namespace Life
         /// </summary>
         public bool Stop { get; set; }
 
-        private int statesNumber;
+        private int statesCount;
         /// <summary>
         /// Количество состояний клеток для экземпляра КА
         /// </summary>
-        public int StatesNumber { get { return statesNumber; } set { if (value <= 0) statesNumber = StatesNumberMin; else if (value > StatesNumberMax) statesNumber = StatesNumberMax; else statesNumber = value; } }
+        public int StatesCount { get { return statesCount; } set { if (value <= 0) statesCount = StatesNumberMin; else if (value > StatesNumberMax) statesCount = StatesNumberMax; else statesCount = value; } }
 
         /// <summary>
         /// Набор пар: правило - логика изменения состояний клеток
@@ -92,7 +92,7 @@ namespace Life
         /// </summary>
         public void NewCellarAutomat()
         {
-            PastField.SetStartValues(StatesNumber);
+            PastField.SetStartValues(StatesCount);
             Generation = 0;
         }
 
@@ -102,7 +102,11 @@ namespace Life
         /// <param name="density">Плотность распределения клеток на поле</param>
         public void SetDensityForField(int density)
         {
-            PastField.SetStartValues(density, StatesNumber);
+            if (density < 0)
+                density = 0;
+            if (density > 100)
+                density = 100;
+            PastField.SetStartValues(density, StatesCount);
         }
 
         /// <summary>
@@ -129,15 +133,24 @@ namespace Life
         /// </summary>
         private void InitializeTransormationPairs()
         {
-            // TODO: загружать из файла?
-            _transformation.Add(CellarAutomatRules.BaseLife, new BaseLife());
-            _transformation.Add(CellarAutomatRules.MooreSimple, new MooreSimple());
-            _transformation.Add(CellarAutomatRules.NeimanSimple, new NeimanSimple());
-            _transformation.Add(CellarAutomatRules.MooreCyclic, new MooreCyclic(StatesNumber));
-            _transformation.Add(CellarAutomatRules.NeimanCyclic, new NeimanCyclic(StatesNumber));
-            _transformation.Add(CellarAutomatRules.OneDimentionalCyclic, new OneDimentionalCyclic(StatesNumber));
-            _transformation.Add(CellarAutomatRules.BelousovZhabotinskyReaction, new BelousovZhabotinskyReaction());
-            _transformation.Add(CellarAutomatRules.VenusSurface, new VenusSurface());
+            _transformation.Add(CellarAutomatRules.BaseLife, new BaseLife(StatesCount));
+            _transformation.Add(CellarAutomatRules.MooreSimple, new MooreSimple(StatesCount));
+            _transformation.Add(CellarAutomatRules.NeimanSimple, new NeimanSimple(StatesCount));
+            _transformation.Add(CellarAutomatRules.MooreCyclic, new MooreCyclic(StatesCount));
+            _transformation.Add(CellarAutomatRules.NeimanCyclic, new NeimanCyclic(StatesCount));
+            _transformation.Add(CellarAutomatRules.OneDimentionalCyclic, new OneDimentionalCyclic(StatesCount));
+            _transformation.Add(CellarAutomatRules.BelousovZhabotinskyReaction, new BelousovZhabotinskyReaction(StatesCount));
+            _transformation.Add(CellarAutomatRules.VenusSurface, new VenusSurface(StatesCount));
+        }
+
+        /// <summary>
+        /// Обновить количество состояний клеток для выбранного правила КА
+        /// </summary>
+        /// <param name="rule">Выбранное правило</param>
+        /// <param name="StatesCount">Количество состояний</param>
+        public void RefreshRuleStatesCount(CellarAutomatRules rule, int StatesCount)
+        {
+            _transformation[rule].StatesCount = StatesCount;
         }
 
         /// <summary>
@@ -145,7 +158,7 @@ namespace Life
         /// </summary>
         /// <param name="rule">Выбранное правило работы КА</param>
         /// <param name="createdField">Созданное поле</param>
-        public CellarAutomat(CellarAutomatRules rule, Field createdField)
+        public CellarAutomat(CellarAutomatRules rule, Field createdField, int statesCount)
         {
             PastField = createdField;
             CurrentField = new Field(createdField.GetWidth(), createdField.GetHeight());
@@ -153,8 +166,8 @@ namespace Life
             Rule = rule;
             Stop = false;
             _transformation = new Dictionary<CellarAutomatRules, ITransform>();
-            StatesNumber = 4;
             InitializeTransormationPairs();
+            StatesCount = statesCount;
         }
     }
 }

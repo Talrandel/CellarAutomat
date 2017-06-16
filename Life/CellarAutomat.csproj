@@ -7,8 +7,8 @@
     <ProjectGuid>{ACCA44E9-4895-4852-97F2-C6BF4BD588CF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Life</RootNamespace>
-    <AssemblyName>Life</AssemblyName>
+    <RootNamespace>CellarAutomat</RootNamespace>
+    <AssemblyName>CellarAutomat</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -60,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

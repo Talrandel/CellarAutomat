@@ -1,12 +1,14 @@
-﻿namespace Life
+﻿namespace CellarAutomat
 {
+    /// <summary>
+    /// КА - циклический, окрестность Неймана
+    /// </summary>
     class NeimanCyclic : ITransform
     {
-        private int StatesNumber;
         public int TransformCell(Field pastF, int x, int y)
         {
             int[] ExistingNeighbors = pastF.GetNeighborsInFourDirections(x, y);
-            int nextState = (pastF.GetCell(x, y) + 1) % StatesNumber;
+            int nextState = (pastF.GetCell(x, y) + 1) % StatesCount;
             foreach (int c in ExistingNeighbors)
             {
                 if (c == nextState)
@@ -14,9 +16,11 @@
             }
             return pastF.GetCell(x, y);
         }
-        public NeimanCyclic(int statesNumber)
+
+        public int StatesCount { get; set; }
+        public NeimanCyclic(int StatesCount)
         {
-            StatesNumber = statesNumber;
+            this.StatesCount = StatesCount;
         }
     }
 }

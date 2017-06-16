@@ -1,5 +1,5 @@
 ﻿using FastBitmap;
-using Life;
+using CellarAutomat;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -20,7 +20,7 @@ namespace CellarAutomatForm
         /// <summary>
         /// Максимальное количество итераций
         /// </summary>
-        public const int MaxIterations = 5000;
+        public const int MaxIterations = 50000;
 
         /// <summary>
         /// Имя файла для хранения последнего построенного КА
@@ -45,7 +45,7 @@ namespace CellarAutomatForm
         /// <summary>
         /// Клеточный автомат - КА
         /// </summary>
-        private CellarAutomat automat;
+        private CellarAutomat.CellarAutomat automat;
 
         /// <summary>
         /// Поле для КА
@@ -135,12 +135,12 @@ namespace CellarAutomatForm
         /// <param name="width"></param>
         /// <param name="dencity"></param>
         /// <param name="rule"></param>
-        private void InitializeCAVariables(int height, int width, int dencity, CellarAutomatRules rule)
+        private void InitializeCAVariables(int height, int width, int dencity, CellarAutomatRules rule, int statesCount)
         {
             _map = new Bitmap(width, height);
             _field = new Field(width, height);
             //_lI = new LockImage(ref _map);
-            InitializeCA(dencity, rule);
+            InitializeCA(dencity, rule, statesCount);
         }
 
         /// <summary>
@@ -163,6 +163,7 @@ namespace CellarAutomatForm
             MainForm.buttonStopBuild.Enabled = false;
             MainForm.buttonStopPlay.Enabled = false;
             MainForm.buttonPlay.Enabled = false;
+            MainForm.textBoxStatesCount.Text = "2";
         }
 
         /// <summary>
@@ -172,28 +173,36 @@ namespace CellarAutomatForm
         /// <param name="width">B</param>
         /// <param name="dencity">C</param>
         /// <param name="rule">D</param>
-        public void Build(int height, int width, int dencity, CellarAutomatRules rule)
+        public void Build(int height, int width, int dencity, CellarAutomatRules rule, int statesCount)
         {
             if (isBuilding)
                 return;
             if (isPlaying)
                 return;
+            // Пара объектов для отмены асинхронной операции
             _cts = new CancellationTokenSource();
             _ct = _cts.Token;
-            _sBitmap.BitmapArray = new Bitmap[MaxIterations];
             Task.Factory.StartNew(() =>
             {
                 isBuilding = true;
+                // Меняем значения контролов формы
                 MainForm.Invoke(new Action(() => MainForm.pictureBoxField.Image = null));
                 MainForm.Invoke(new Action(() => MainForm.buttonBuild.Enabled = false));
                 MainForm.Invoke(new Action(() => MainForm.buttonStopBuild.Enabled = true));
                 MainForm.Invoke(new Action(() => MainForm.buttonPlay.Enabled = false));
                 MainForm.Invoke(new Action(() => MainForm.labelMessage.Text = CAMessages.Build));
-                InitializeCAVariables(height, width, dencity, rule);
+                // Инициализируем массив изображений - поколений КА
+                _sBitmap.BitmapArray = new Bitmap[MaxIterations];
+                // Инициализация переменных для КА
+                InitializeCAVariables(height, width, dencity, rule, statesCount);
+                // Обновляем количество состояний клеток для выбранного правила
+                automat.RefreshRuleStatesCount(rule, statesCount);
+                // Запускаем основной процесс
                 automat.CellarAutomatProcess();
             }, _ct).ContinueWith((t) =>
             {
                 isBuilding = false;
+                // Сохраняем построенный КА в файл
                 SaveCA();
                 MainForm.Invoke(new Action(() => MainForm.buttonBuild.Enabled = true));
                 MainForm.Invoke(new Action(() => MainForm.buttonStopBuild.Enabled = false));
@@ -356,7 +365,7 @@ namespace CellarAutomatForm
                 MainForm.Invoke(new Action(() => MainForm.buttonStopPlay.Enabled = true));
                 for (int j = 0; j < _sBitmap.BitmapArray.Length; j++)
                 {
-                    // Массив хранит 5000 поколений, но не все заполнены. Если встречается пустой bitmap, это признак последней итерации
+                    // Массив хранит 50000 поколений, но не все заполнены. Если встречается пустой bitmap, это признак последней итерации
                     if (_sBitmap.BitmapArray[j] == null)
                         break;
                     Tick(j);
@@ -403,9 +412,9 @@ namespace CellarAutomatForm
         /// </summary>
         /// <param name="dencity"></param>
         /// <param name="rule"></param>
-        private void InitializeCA(int dencity, CellarAutomatRules rule)
+        private void InitializeCA(int dencity, CellarAutomatRules rule, int statesCount)
         {
-            automat = new CellarAutomat(rule, _field);
+            automat = new CellarAutomat.CellarAutomat(rule, _field, statesCount);
             automat.GenerationChanged += RefreshField;
             automat.NewCellarAutomat();
             automat.SetDensityForField(dencity);

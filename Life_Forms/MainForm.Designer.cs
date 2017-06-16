@@ -46,7 +46,8 @@
             this.buttonStopPlay = new System.Windows.Forms.Button();
             this.textBoxSeparator = new System.Windows.Forms.TextBox();
             this.textBoxHint = new System.Windows.Forms.TextBox();
-            this.labelCALoaded = new System.Windows.Forms.Label();
+            this.textBoxStatesCount = new System.Windows.Forms.TextBox();
+            this.labelStatesCount = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxField)).BeginInit();
             this.SuspendLayout();
             // 
@@ -63,9 +64,8 @@
             // 
             // buttonBuild
             // 
-            this.buttonBuild.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonBuild.Location = new System.Drawing.Point(616, 158);
+            this.buttonBuild.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonBuild.Location = new System.Drawing.Point(616, 192);
             this.buttonBuild.Name = "buttonBuild";
             this.buttonBuild.Size = new System.Drawing.Size(75, 23);
             this.buttonBuild.TabIndex = 7;
@@ -75,9 +75,8 @@
             // 
             // buttonStopBuild
             // 
-            this.buttonStopBuild.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonStopBuild.Location = new System.Drawing.Point(717, 158);
+            this.buttonStopBuild.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonStopBuild.Location = new System.Drawing.Point(717, 192);
             this.buttonStopBuild.Name = "buttonStopBuild";
             this.buttonStopBuild.Size = new System.Drawing.Size(153, 23);
             this.buttonStopBuild.TabIndex = 8;
@@ -87,19 +86,17 @@
             // 
             // comboBoxRules
             // 
-            this.comboBoxRules.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBoxRules.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBoxRules.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxRules.FormattingEnabled = true;
-            this.comboBoxRules.Location = new System.Drawing.Point(693, 117);
+            this.comboBoxRules.Location = new System.Drawing.Point(693, 151);
             this.comboBoxRules.Name = "comboBoxRules";
             this.comboBoxRules.Size = new System.Drawing.Size(177, 21);
             this.comboBoxRules.TabIndex = 6;
             // 
             // textBoxWidth
             // 
-            this.textBoxWidth.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxWidth.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxWidth.Location = new System.Drawing.Point(770, 12);
             this.textBoxWidth.Name = "textBoxWidth";
             this.textBoxWidth.Size = new System.Drawing.Size(100, 20);
@@ -108,17 +105,16 @@
             // 
             // textBoxHeight
             // 
-            this.textBoxHeight.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxHeight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxHeight.Location = new System.Drawing.Point(770, 38);
             this.textBoxHeight.Name = "textBoxHeight";
             this.textBoxHeight.Size = new System.Drawing.Size(100, 20);
             this.textBoxHeight.TabIndex = 2;
+            this.textBoxHeight.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress_SkipLetters);
             // 
             // labelWidth
             // 
-            this.labelWidth.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelWidth.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelWidth.AutoSize = true;
             this.labelWidth.Location = new System.Drawing.Point(694, 18);
             this.labelWidth.Name = "labelWidth";
@@ -128,8 +124,7 @@
             // 
             // labelHeight
             // 
-            this.labelHeight.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelHeight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelHeight.AutoSize = true;
             this.labelHeight.Location = new System.Drawing.Point(694, 41);
             this.labelHeight.Name = "labelHeight";
@@ -141,15 +136,14 @@
             // 
             this.labelMessage.AutoSize = true;
             this.labelMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelMessage.Location = new System.Drawing.Point(538, 205);
+            this.labelMessage.Location = new System.Drawing.Point(538, 235);
             this.labelMessage.Name = "labelMessage";
             this.labelMessage.Size = new System.Drawing.Size(0, 20);
             this.labelMessage.TabIndex = 5;
             // 
             // buttonLoad
             // 
-            this.buttonLoad.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonLoad.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonLoad.Location = new System.Drawing.Point(616, 284);
             this.buttonLoad.Name = "buttonLoad";
             this.buttonLoad.Size = new System.Drawing.Size(75, 23);
@@ -160,8 +154,7 @@
             // 
             // buttonPlay
             // 
-            this.buttonPlay.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonPlay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonPlay.Location = new System.Drawing.Point(717, 284);
             this.buttonPlay.Name = "buttonPlay";
             this.buttonPlay.Size = new System.Drawing.Size(153, 23);
@@ -172,17 +165,16 @@
             // 
             // textBoxDencity
             // 
-            this.textBoxDencity.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxDencity.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxDencity.Location = new System.Drawing.Point(770, 65);
             this.textBoxDencity.Name = "textBoxDencity";
             this.textBoxDencity.Size = new System.Drawing.Size(100, 20);
             this.textBoxDencity.TabIndex = 3;
+            this.textBoxDencity.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress_SkipLetters);
             // 
             // labelDencity
             // 
-            this.labelDencity.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelDencity.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelDencity.AutoSize = true;
             this.labelDencity.Location = new System.Drawing.Point(694, 68);
             this.labelDencity.Name = "labelDencity";
@@ -192,8 +184,7 @@
             // 
             // labelShowDelay
             // 
-            this.labelShowDelay.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelShowDelay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelShowDelay.AutoSize = true;
             this.labelShowDelay.Location = new System.Drawing.Point(613, 94);
             this.labelShowDelay.Name = "labelShowDelay";
@@ -203,17 +194,16 @@
             // 
             // textBoxShowDelay
             // 
-            this.textBoxShowDelay.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxShowDelay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxShowDelay.Location = new System.Drawing.Point(770, 91);
             this.textBoxShowDelay.Name = "textBoxShowDelay";
             this.textBoxShowDelay.Size = new System.Drawing.Size(100, 20);
             this.textBoxShowDelay.TabIndex = 5;
+            this.textBoxShowDelay.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress_SkipLetters);
             // 
             // buttonStopPlay
             // 
-            this.buttonStopPlay.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonStopPlay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonStopPlay.Location = new System.Drawing.Point(717, 335);
             this.buttonStopPlay.Name = "buttonStopPlay";
             this.buttonStopPlay.Size = new System.Drawing.Size(153, 23);
@@ -236,8 +226,7 @@
             // 
             // textBoxHint
             // 
-            this.textBoxHint.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxHint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxHint.Enabled = false;
             this.textBoxHint.Location = new System.Drawing.Point(616, 368);
             this.textBoxHint.Multiline = true;
@@ -246,21 +235,32 @@
             this.textBoxHint.Size = new System.Drawing.Size(254, 146);
             this.textBoxHint.TabIndex = 13;
             // 
-            // labelCALoaded
+            // textBoxStatesCount
             // 
-            this.labelCALoaded.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelCALoaded.AutoSize = true;
-            this.labelCALoaded.Location = new System.Drawing.Point(539, 310);
-            this.labelCALoaded.Name = "labelCALoaded";
-            this.labelCALoaded.Size = new System.Drawing.Size(0, 13);
-            this.labelCALoaded.TabIndex = 4;
+            this.textBoxStatesCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxStatesCount.Location = new System.Drawing.Point(770, 117);
+            this.textBoxStatesCount.Name = "textBoxStatesCount";
+            this.textBoxStatesCount.Size = new System.Drawing.Size(100, 20);
+            this.textBoxStatesCount.TabIndex = 15;
+            this.textBoxStatesCount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress_SkipLetters);
+            // 
+            // labelStatesCount
+            // 
+            this.labelStatesCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelStatesCount.AutoSize = true;
+            this.labelStatesCount.Location = new System.Drawing.Point(604, 120);
+            this.labelStatesCount.Name = "labelStatesCount";
+            this.labelStatesCount.Size = new System.Drawing.Size(160, 13);
+            this.labelStatesCount.TabIndex = 14;
+            this.labelStatesCount.Text = "Количество состояний клеток";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(895, 526);
+            this.Controls.Add(this.textBoxStatesCount);
+            this.Controls.Add(this.labelStatesCount);
             this.Controls.Add(this.textBoxHint);
             this.Controls.Add(this.textBoxSeparator);
             this.Controls.Add(this.buttonStopPlay);
@@ -268,7 +268,6 @@
             this.Controls.Add(this.textBoxDencity);
             this.Controls.Add(this.buttonPlay);
             this.Controls.Add(this.buttonLoad);
-            this.Controls.Add(this.labelCALoaded);
             this.Controls.Add(this.labelShowDelay);
             this.Controls.Add(this.labelMessage);
             this.Controls.Add(this.labelDencity);
@@ -310,6 +309,7 @@
         public System.Windows.Forms.TextBox textBoxSeparator;
         public System.Windows.Forms.TextBox textBoxHint;
         public System.Windows.Forms.Label labelMessage;
-        public System.Windows.Forms.Label labelCALoaded;
+        public System.Windows.Forms.TextBox textBoxStatesCount;
+        public System.Windows.Forms.Label labelStatesCount;
     }
 }

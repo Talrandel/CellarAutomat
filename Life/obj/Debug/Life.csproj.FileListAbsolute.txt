@@ -10,3 +10,9 @@ C:\Users\Андреевич\Documents\GitHub\CellarAutomat\Life\obj\Debug\Life.p
 C:\Users\Андреевич\Documents\GitHub\CellarAutomat\Life\bin\Debug\Life.exe
 C:\Users\Андреевич\Documents\GitHub\CellarAutomat\Life\bin\Debug\Life.pdb
 C:\Users\Андреевич\Documents\GitHub\CellarAutomat\Life\obj\Debug\Life.csprojResolveAssemblyReference.cache
+C:\Programs\CellarAutomat\Life\obj\Debug\Life.pdb
+C:\Programs\CellarAutomat\Life\bin\Debug\Life.pdb
+C:\Programs\CellarAutomat\Life\obj\Debug\Life.csprojResolveAssemblyReference.cache
+C:\Programs\CellarAutomat\Life\bin\Debug\Life.dll.config
+C:\Programs\CellarAutomat\Life\bin\Debug\Life.dll
+C:\Programs\CellarAutomat\Life\obj\Debug\Life.dll

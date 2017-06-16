@@ -1,12 +1,15 @@
-﻿namespace Life
+﻿namespace CellarAutomat
 {
+    /// <summary>
+    /// КА - циклический, одномерный
+    /// </summary>
     class OneDimentionalCyclic : ITransform
     {
-        private int StatesNumber;
+        public int StatesCount { get; set; }
         public int TransformCell(Field pastF, int x, int y)
         {
             int[] ExistingNeighbors = pastF.GetNeighborsInTwoDirections(x, y);
-            int nextState = (pastF.GetCell(x, y) + 1) % StatesNumber;
+            int nextState = (pastF.GetCell(x, y) + 1) % StatesCount;
             foreach (int c in ExistingNeighbors)
             {
                 if (c == nextState)
@@ -14,9 +17,9 @@
             }
             return pastF.GetCell(x, y);
         }
-        public OneDimentionalCyclic(int statesNumber)
+        public OneDimentionalCyclic(int StatesCount)
         {
-            StatesNumber = statesNumber;
+            this.StatesCount = StatesCount;
         }
     }
 }
