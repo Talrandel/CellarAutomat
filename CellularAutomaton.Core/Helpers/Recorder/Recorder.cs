@@ -54,7 +54,9 @@ namespace CellularAutomaton.Core.Helpers.Recorder
         /// <exception cref="ArgumentNullException">Параметр <paramref name="ca"/> имеет значение <b>null</b>.</exception>
         public Recorder(CellularAutomaton ca)
         {
-            _ca = ca ?? throw new ArgumentNullException(nameof(ca));
+            if (ca == null)
+                throw new ArgumentNullException(nameof(ca));
+            _ca = ca;
             _ca.GenerationChanged += CellularAutomatonGenerationChanged;
 
             _record = new Record.Record();
@@ -73,7 +75,9 @@ namespace CellularAutomaton.Core.Helpers.Recorder
         /// </exception>
         public Recorder(CellularAutomaton ca, ConvertPointValueToColor colorize) : this(ca)
         {
-            _colorize = colorize ?? throw new ArgumentNullException(nameof(colorize));
+            if (colorize == null)
+                throw new ArgumentNullException(nameof(colorize));
+            _colorize = colorize;
         }
         #endregion
 

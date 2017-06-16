@@ -72,7 +72,7 @@ namespace CellularAutomaton.Core
         // ReSharper disable once MemberCanBePrivate.Global
         public int StatesCount
         {
-            get => _statesCount;
+            get { return _statesCount; }
             set
             {
                 if (value <= 0)
@@ -102,8 +102,12 @@ namespace CellularAutomaton.Core
         /// </exception>
         public CellularAutomaton(IRule rule, Field createdField, int statesCount)
         {
-            Rule = rule ?? throw new ArgumentNullException(nameof(rule));
-            _pastField = createdField ?? throw new ArgumentNullException(nameof(createdField));
+            if (rule == null)
+                throw new ArgumentNullException(nameof(rule));
+            if (createdField == null)
+                throw new ArgumentNullException(nameof(createdField));
+            Rule = rule;
+            _pastField = createdField;
 
             CurrentField = new Field(createdField.Width, createdField.Height);
             createdField.Copy(ref CurrentField);

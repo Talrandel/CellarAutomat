@@ -77,7 +77,7 @@ namespace CellularAutomaton.Core.Helpers.Player
         /// <exception cref="ArgumentOutOfRangeException">Число кадров в минуту не может равной нулю величиной.</exception>
         public byte FramesPerMinute
         {
-            get => _framesPerMinute;
+            get { return _framesPerMinute; }
             set
             {
                 if (value <= 0)
@@ -122,7 +122,9 @@ namespace CellularAutomaton.Core.Helpers.Player
         public void Load(Record.Record rec)
         {
             Stop();
-            _record = rec ?? throw new ArgumentNullException(nameof(rec));
+            if (rec == null)
+                throw new ArgumentNullException(nameof(rec));
+            _record = rec; 
         }
 
         /// <summary>
