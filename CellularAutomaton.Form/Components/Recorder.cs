@@ -6,13 +6,16 @@
 // File          : Recorder.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 17.06.2017 20:30
-// Last Revision : 17.06.2017 21:19
+// Last Revision : 17.06.2017 22:59
 // Description   : 
 #endregion
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Forms;
 
 using CellularAutomaton.Core.Rules;
@@ -116,7 +119,6 @@ namespace CellarAutomatForm.Components
         /// <summary>
         /// Возвращает коллекцию правил построения клеточных автоматов.
         /// </summary>
-        /// TODO: Добавить обновление cBCellularAutomatonRules.Items всоответствии с Rules.
         [Browsable(false)]
         public IList<IRule> Rules { get; }
         #endregion
@@ -127,7 +129,9 @@ namespace CellarAutomatForm.Components
         /// </summary>
         public Recorder()
         {
-            Rules = new List<IRule>();
+            ObservableCollection<IRule> innerRules = new ObservableCollection<IRule>();
+            innerRules.CollectionChanged += InnerRules_CollectionChanged;
+            Rules = innerRules;
 
             InitializeComponent();
         }
@@ -135,13 +139,24 @@ namespace CellarAutomatForm.Components
 
         #region Members
         /// <summary>
+        /// Обработчик события <see cref="ObservableCollection{T}.CollectionChanged"/>. Актуализирует состояние <see cref="cBCellularAutomatonRules"/>.
+        /// </summary>
+        /// <param name="sender">Источник события.</param>
+        /// <param name="e">Сведения о событии.</param>
+        private void InnerRules_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            cBCellularAutomatonRules.Items.Clear();
+            cBCellularAutomatonRules.Items.AddRange((object[])Rules.Select(item => item.Name));
+        }
+
+        /// <summary>
         /// Обработчик события <see cref="Control.Click"/>. Начинает запись функционирования клеточного автомата.
         /// </summary>
         /// <param name="sender">Источник события.</param>
         /// <param name="e">Сведения о событии.</param>
         private void bRecord_Click(object sender, EventArgs e)
         {
-            //throw new NotImplementedException();
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -151,7 +166,7 @@ namespace CellarAutomatForm.Components
         /// <param name="e">Сведения о событии.</param>
         private void bStop_Click(object sender, EventArgs e)
         {
-            //throw new NotImplementedException();
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -161,7 +176,7 @@ namespace CellarAutomatForm.Components
         /// <param name="e">Сведения о событии.</param>
         private void bSave_Click(object sender, EventArgs e)
         {
-            //throw new NotImplementedException();
+            throw new NotImplementedException();
         }
         #endregion
     }
