@@ -68,21 +68,21 @@ namespace CellarAutomatForm
         /// </summary>
         public void InitializeForm()
         {
-            foreach (KeyValuePair<CellarAutomatRules, string> rule in _ruleName)
-                MainForm.comboBoxRules.Items.Add(rule.Value);
+            //foreach (KeyValuePair<CellarAutomatRules, string> rule in _ruleName)
+            //    MainForm.cBCellularAutomatonRules.Items.Add(rule.Value);
 
             // TODO: вынести в константы?
-            MainForm.comboBoxRules.SelectedIndex = 0;
-            MainForm.textBoxHeight.Text = "200";
-            MainForm.textBoxWidth.Text = "200";
-            MainForm.textBoxDencity.Text = "50";
-            MainForm.textBoxShowDelay.Text = "200";
-            MainForm.labelMessage.Text = "Нет сообщений.";
-            MainForm.textBoxHint.Text = CAMessages.Hint;
-            MainForm.buttonStopBuild.Enabled = false;
-            MainForm.buttonStopPlay.Enabled = false;
-            MainForm.buttonPlay.Enabled = false;
-            MainForm.textBoxStatesCount.Text = "2";
+            //MainForm.cBCellularAutomatonRules.SelectedIndex = 0;
+            //MainForm.textBoxHeight.Text = "200";
+            //MainForm.textBoxWidth.Text = "200";
+            //MainForm.textBoxDencity.Text = "50";
+            //MainForm.textBoxShowDelay.Text = "200";
+            //MainForm.labelMessage.Text = "Нет сообщений.";
+            //MainForm.textBoxHint.Text = CAMessages.Hint;
+            //MainForm.buttonStopBuild.Enabled = false;
+            //MainForm.buttonStopPlay.Enabled = false;
+            //MainForm.buttonPlay.Enabled = false;
+            //MainForm.textBoxStatesCount.Text = "2";
         }
 
         /// <summary>
@@ -104,11 +104,11 @@ namespace CellarAutomatForm
             {
                 _isBuilding = true;
                 // Меняем значения контролов формы
-                MainForm.Invoke(new Action(() => MainForm.pictureBoxField.Image = null));
-                MainForm.Invoke(new Action(() => MainForm.buttonBuild.Enabled = false));
-                MainForm.Invoke(new Action(() => MainForm.buttonStopBuild.Enabled = true));
-                MainForm.Invoke(new Action(() => MainForm.buttonPlay.Enabled = false));
-                MainForm.Invoke(new Action(() => MainForm.labelMessage.Text = CAMessages.Build));
+                //MainForm.Invoke(new Action(() => MainForm.pictureBoxField.Image = null));
+                //MainForm.Invoke(new Action(() => MainForm.buttonBuild.Enabled = false));
+                //MainForm.Invoke(new Action(() => MainForm.buttonStopBuild.Enabled = true));
+                //MainForm.Invoke(new Action(() => MainForm.buttonPlay.Enabled = false));
+                //MainForm.Invoke(new Action(() => MainForm.labelMessage.Text = CAMessages.Build));
 
                 IRule rule;
                 switch (ruleI)
@@ -153,10 +153,10 @@ namespace CellarAutomatForm
                 _isBuilding = false;
                 // Сохраняем построенный КА в файл
                 SaveCA();
-                MainForm.Invoke(new Action(() => MainForm.buttonBuild.Enabled = true));
-                MainForm.Invoke(new Action(() => MainForm.buttonStopBuild.Enabled = false));
-                MainForm.Invoke(new Action(() => MainForm.buttonPlay.Enabled = true));
-                MainForm.Invoke(new Action(() => MainForm.labelMessage.Text = CAMessages.Built));
+                //MainForm.Invoke(new Action(() => MainForm.buttonBuild.Enabled = true));
+                //MainForm.Invoke(new Action(() => MainForm.buttonStopBuild.Enabled = false));
+                //MainForm.Invoke(new Action(() => MainForm.buttonPlay.Enabled = true));
+                //MainForm.Invoke(new Action(() => MainForm.labelMessage.Text = CAMessages.Built));
             }, _ct);
         }
 
@@ -171,9 +171,9 @@ namespace CellarAutomatForm
             _isBuilding = false;
             _automat.Stop = true;
 
-            MainForm.Invoke(new Action(() => MainForm.buttonBuild.Enabled = true));
-            MainForm.Invoke(new Action(() => MainForm.buttonPlay.Enabled = true));
-            MainForm.Invoke(new Action(() => MainForm.labelMessage.Text = CAMessages.StopBuilding));
+            //MainForm.Invoke(new Action(() => MainForm.buttonBuild.Enabled = true));
+            //MainForm.Invoke(new Action(() => MainForm.buttonPlay.Enabled = true));
+            //MainForm.Invoke(new Action(() => MainForm.labelMessage.Text = CAMessages.StopBuilding));
         }
 
         /// <summary>
@@ -183,7 +183,7 @@ namespace CellarAutomatForm
         {
 #warning SAVE
 
-            MainForm.Invoke(new Action(() => MainForm.labelMessage.Text = CAMessages.Saved));
+            //MainForm.Invoke(new Action(() => MainForm.labelMessage.Text = CAMessages.Saved));
         }
 
         /// <summary>
@@ -191,21 +191,21 @@ namespace CellarAutomatForm
         /// </summary>
         public void LoadCA()
         {
-            while (true)
-                try
-                {
-#warning LOAD
+//            while (true)
+//                try
+//                {
+//#warning LOAD
 
-                    _isLoaded = true;
-                    MainForm.Invoke(new Action(() => MainForm.buttonPlay.Enabled = true));
-                    MainForm.Invoke(new Action(() => MainForm.labelMessage.Text = CAMessages.Loaded));
-                    MainForm.Invoke(new Action(() => MainForm.labelMessage.Text = CAMessages.Loaded));
-                    break;
-                }
-                catch
-                {
-                    MainForm.Invoke(new Action(() => MainForm.labelMessage.Text = CAMessages.LoadError));
-                }
+//                    _isLoaded = true;
+//                    MainForm.Invoke(new Action(() => MainForm.buttonPlay.Enabled = true));
+//                    MainForm.Invoke(new Action(() => MainForm.labelMessage.Text = CAMessages.Loaded));
+//                    MainForm.Invoke(new Action(() => MainForm.labelMessage.Text = CAMessages.Loaded));
+//                    break;
+//                }
+//                catch
+//                {
+//                    MainForm.Invoke(new Action(() => MainForm.labelMessage.Text = CAMessages.LoadError));
+//                }
         }
 
         /// <summary>
@@ -216,7 +216,7 @@ namespace CellarAutomatForm
         {
             if (_isBuilding)
             {
-                MainForm.Invoke(new Action(() => MainForm.labelMessage.Text = CAMessages.Building));
+                //MainForm.Invoke(new Action(() => MainForm.labelMessage.Text = CAMessages.Building));
                 return;
             }
 
@@ -230,21 +230,21 @@ namespace CellarAutomatForm
             Task.Factory.StartNew(() =>
             {
                 _isPlaying = true;
-                MainForm.Invoke(new Action(() => MainForm.labelMessage.Text = CAMessages.Play));
-                MainForm.Invoke(new Action(() => MainForm.buttonStopBuild.Enabled = false));
-                MainForm.Invoke(new Action(() => MainForm.buttonBuild.Enabled = false));
-                MainForm.Invoke(new Action(() => MainForm.buttonPlay.Enabled = false));
-                MainForm.Invoke(new Action(() => MainForm.buttonStopPlay.Enabled = true));
+                //MainForm.Invoke(new Action(() => MainForm.labelMessage.Text = CAMessages.Play));
+                //MainForm.Invoke(new Action(() => MainForm.buttonStopBuild.Enabled = false));
+                //MainForm.Invoke(new Action(() => MainForm.buttonBuild.Enabled = false));
+                //MainForm.Invoke(new Action(() => MainForm.buttonPlay.Enabled = false));
+                //MainForm.Invoke(new Action(() => MainForm.buttonStopPlay.Enabled = true));
 
                 // PLAY RECORD
             }, _ct).ContinueWith(t =>
             {
                 _isPlaying = false;
-                MainForm.Invoke(new Action(() => MainForm.buttonStopBuild.Enabled = true));
-                MainForm.Invoke(new Action(() => MainForm.buttonBuild.Enabled = true));
-                MainForm.Invoke(new Action(() => MainForm.buttonPlay.Enabled = true));
-                MainForm.Invoke(new Action(() => MainForm.buttonStopPlay.Enabled = false));
-                MainForm.Invoke(new Action(() => MainForm.labelMessage.Text = CAMessages.PlayingEnded));
+                //MainForm.Invoke(new Action(() => MainForm.buttonStopBuild.Enabled = true));
+                //MainForm.Invoke(new Action(() => MainForm.buttonBuild.Enabled = true));
+                //MainForm.Invoke(new Action(() => MainForm.buttonPlay.Enabled = true));
+                //MainForm.Invoke(new Action(() => MainForm.buttonStopPlay.Enabled = false));
+                //MainForm.Invoke(new Action(() => MainForm.labelMessage.Text = CAMessages.PlayingEnded));
             }, _ct);
         }
 
@@ -255,12 +255,12 @@ namespace CellarAutomatForm
         {
             _cts.Cancel();
             _cts = new CancellationTokenSource();
-            _isPlaying = false;
-            MainForm.Invoke(new Action(() => MainForm.buttonStopBuild.Enabled = true));
-            MainForm.Invoke(new Action(() => MainForm.buttonBuild.Enabled = true));
-            MainForm.Invoke(new Action(() => MainForm.buttonPlay.Enabled = true));
-            MainForm.Invoke(new Action(() => MainForm.buttonStopPlay.Enabled = false));
-            MainForm.Invoke(new Action(() => MainForm.labelMessage.Text = CAMessages.StopPlaying));
+            //_isPlaying = false;
+            //MainForm.Invoke(new Action(() => MainForm.buttonStopBuild.Enabled = true));
+            //MainForm.Invoke(new Action(() => MainForm.buttonBuild.Enabled = true));
+            //MainForm.Invoke(new Action(() => MainForm.buttonPlay.Enabled = true));
+            //MainForm.Invoke(new Action(() => MainForm.buttonStopPlay.Enabled = false));
+            //MainForm.Invoke(new Action(() => MainForm.labelMessage.Text = CAMessages.StopPlaying));
         }
 
         /// <summary>

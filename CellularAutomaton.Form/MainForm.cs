@@ -29,6 +29,8 @@ namespace CellarAutomatForm
         public MainForm()
         {
             InitializeComponent();
+
+
             _controller = new MainFormController(this);
         }
         #endregion
@@ -41,10 +43,10 @@ namespace CellarAutomatForm
 
         private void buttonStart_Click(object sender, EventArgs e)
         {
-            _controller.Build(int.Parse(textBoxHeight.Text), int.Parse(textBoxWidth.Text),
-                              byte.Parse(textBoxDencity.Text),
-                              (MainFormController.CellarAutomatRules)comboBoxRules.SelectedIndex,
-                              int.Parse(textBoxStatesCount.Text));
+            //_controller.Build(int.Parse(textBoxHeight.Text), int.Parse(textBoxWidth.Text),
+            //                  byte.Parse(textBoxDencity.Text),
+            //                  (MainFormController.CellarAutomatRules)cBCellularAutomatonRules.SelectedIndex,
+            //                  int.Parse(textBoxStatesCount.Text));
         }
 
         private void textBox_KeyPress_SkipLetters(object sender, KeyPressEventArgs e)
@@ -69,7 +71,7 @@ namespace CellarAutomatForm
 
         private void buttonPlay_Click(object sender, EventArgs e)
         {
-            _controller.Play(int.Parse(textBoxShowDelay.Text));
+            //_controller.Play(int.Parse(textBoxShowDelay.Text));
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
