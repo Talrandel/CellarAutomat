@@ -61,6 +61,15 @@ namespace CellularAutomaton.Core.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Реакция Белоусова-Жаботинского.
+        /// </summary>
+        internal static string BelousovZhabotinskyReaction_Name {
+            get {
+                return ResourceManager.GetString("BelousovZhabotinskyReaction_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Выполнена попытка перехода к кадру номер которого больше, чем кадров в текущей записи..
         /// </summary>
         internal static string Ex__Выполнена_попытка_перехода_к_кадру_номер_которого_больше__чем_кадров_в_текущей_записи_ {
@@ -130,6 +139,69 @@ namespace CellularAutomaton.Core.Properties {
         internal static string Ex__Ширина_поля__0__меньше_нуля_ {
             get {
                 return ResourceManager.GetString("Ex__Ширина_поля__0__меньше_нуля_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Жизнь.
+        /// </summary>
+        internal static string Life_Name {
+            get {
+                return ResourceManager.GetString("Life_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Циклический автомат Мура.
+        /// </summary>
+        internal static string MooreCyclic_Name {
+            get {
+                return ResourceManager.GetString("MooreCyclic_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Автомат Мура.
+        /// </summary>
+        internal static string MooreSimple_Name {
+            get {
+                return ResourceManager.GetString("MooreSimple_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Циклический автомат Неймана.
+        /// </summary>
+        internal static string NeimanCyclic_Name {
+            get {
+                return ResourceManager.GetString("NeimanCyclic_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Автомат Неймана.
+        /// </summary>
+        internal static string NeimanSimple_Name {
+            get {
+                return ResourceManager.GetString("NeimanSimple_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Одномерный автома.
+        /// </summary>
+        internal static string OneDimentionalCyclic_Name {
+            get {
+                return ResourceManager.GetString("OneDimentionalCyclic_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Поверхность Венеры.
+        /// </summary>
+        internal static string VenusSurface_Name {
+            get {
+                return ResourceManager.GetString("VenusSurface_Name", resourceCulture);
             }
         }
     }

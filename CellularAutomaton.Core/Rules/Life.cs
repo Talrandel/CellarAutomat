@@ -6,11 +6,13 @@
 // File          : Life.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 16.06.2017 13:14
-// Last Revision : 17.06.2017 14:15
+// Last Revision : 17.06.2017 17:35
 // Description   : 
 #endregion
 
 using System;
+
+using CellularAutomaton.Core.Properties;
 
 namespace CellularAutomaton.Core.Rules
 {
@@ -23,7 +25,7 @@ namespace CellularAutomaton.Core.Rules
         /// <summary>
         /// Возвращает название правила.
         /// </summary>
-        public string Name { get; }
+        public string Name => Resources.Life_Name;
 
         /// <summary>
         /// Изменяет состояние клетки расположенной по заданным координатам.
@@ -41,9 +43,12 @@ namespace CellularAutomaton.Core.Rules
 
             switch (pastFiled.GetLiveNeighborCount(x, y))
             {
-                case 3: return 1;
-                case 2: return pastFiled[x, y];
-                default: return 0;
+                case 3:
+                    return 1;
+                case 2:
+                    return pastFiled[x, y];
+                default:
+                    return 0;
             }
         }
         #endregion

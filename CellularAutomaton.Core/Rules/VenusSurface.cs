@@ -6,11 +6,13 @@
 // File          : VenusSurface.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 16.06.2017 13:14
-// Last Revision : 17.06.2017 14:16
+// Last Revision : 17.06.2017 17:45
 // Description   : 
 #endregion
 
 using System;
+
+using CellularAutomaton.Core.Properties;
 
 namespace CellularAutomaton.Core.Rules
 {
@@ -23,7 +25,7 @@ namespace CellularAutomaton.Core.Rules
         /// <summary>
         /// Возвращает название правила.
         /// </summary>
-        public string Name { get; }
+        public string Name => Resources.VenusSurface_Name;
 
         /// <summary>
         /// Изменяет состояние клетки расположенной по заданным координатам.
@@ -68,10 +70,14 @@ namespace CellularAutomaton.Core.Rules
 
             switch (pastFiled[x, y])
             {
-                case 0: return 2 * ((northWestCell % 2) ^ (northEastCell % 2)) + northCell % 2;
-                case 1: return 2 * ((northWestCell % 2) ^ (southWestCell % 2)) + westCell % 2;
-                case 2: return 2 * ((southWestCell % 2) ^ (southEastCell % 2)) + southCell % 2;
-                default: return 2 * ((southEastCell % 2) ^ (northEastCell % 2)) + eastCell % 2;
+                case 0:
+                    return 2 * ((northWestCell % 2) ^ (northEastCell % 2)) + northCell % 2;
+                case 1:
+                    return 2 * ((northWestCell % 2) ^ (southWestCell % 2)) + westCell % 2;
+                case 2:
+                    return 2 * ((southWestCell % 2) ^ (southEastCell % 2)) + southCell % 2;
+                default:
+                    return 2 * ((southEastCell % 2) ^ (northEastCell % 2)) + eastCell % 2;
             }
         }
         #endregion

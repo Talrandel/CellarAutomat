@@ -39,14 +39,14 @@ namespace CellarAutomatForm
 
             _ruleName = new Dictionary<CellarAutomatRules, string>
             {
-                {CellarAutomatRules.BaseLife, "Жизнь"},
-                {CellarAutomatRules.MooreSimple, "Автомат Мура"},
-                {CellarAutomatRules.NeimanSimple, "Автомат Неймана"},
-                {CellarAutomatRules.MooreCyclic, "Циклический автомат Мура"},
-                {CellarAutomatRules.NeimanCyclic, "Циклический автомат Неймана"},
-                {CellarAutomatRules.OneDimentionalCyclic, "Одномерный автомат"},
-                {CellarAutomatRules.BelousovZhabotinskyReaction, "Реакция Белоусова-Жаботинского"},
-                {CellarAutomatRules.VenusSurface, "Поверхность Венеры"}
+                {CellarAutomatRules.BaseLife, ""},
+                {CellarAutomatRules.MooreSimple, ""},
+                {CellarAutomatRules.NeimanSimple, ""},
+                {CellarAutomatRules.MooreCyclic, ""},
+                {CellarAutomatRules.NeimanCyclic, ""},
+                {CellarAutomatRules.OneDimentionalCyclic, ""},
+                {CellarAutomatRules.BelousovZhabotinskyReaction, ""},
+                {CellarAutomatRules.VenusSurface, ""}
             };
 
             _cts = new CancellationTokenSource();

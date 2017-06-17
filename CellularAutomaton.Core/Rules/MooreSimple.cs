@@ -6,11 +6,13 @@
 // File          : MooreSimple.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 16.06.2017 13:14
-// Last Revision : 17.06.2017 14:16
+// Last Revision : 17.06.2017 17:35
 // Description   : 
 #endregion
 
 using System;
+
+using CellularAutomaton.Core.Properties;
 
 namespace CellularAutomaton.Core.Rules
 {
@@ -23,7 +25,7 @@ namespace CellularAutomaton.Core.Rules
         /// <summary>
         /// Возвращает название правила.
         /// </summary>
-        public string Name { get; }
+        public string Name => Resources.MooreSimple_Name;
 
         /// <summary>
         /// Изменяет состояние клетки расположенной по заданным координатам.
