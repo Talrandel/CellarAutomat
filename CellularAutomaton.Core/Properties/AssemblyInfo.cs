@@ -6,10 +6,11 @@
 // File          : AssemblyInfo.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 16.06.2017 13:14
-// Last Revision : 17.06.2017 15:07
+// Last Revision : 17.06.2017 17:26
 // Description   : 
 #endregion
 
+using System;
 using System.Reflection;
 using System.Resources;
 using System.Runtime.InteropServices;
@@ -25,7 +26,8 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
-
+[assembly: NeutralResourcesLanguage("ru")]
+[assembly: CLSCompliant(true)]
 // Параметр ComVisible со значением FALSE делает типы в сборке невидимыми 
 // для COM-компонентов.  Если требуется обратиться к типу в этой сборке через 
 // COM, задайте атрибуту ComVisible значение TRUE для этого типа.
@@ -46,4 +48,3 @@ using System.Runtime.InteropServices;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
-[assembly: NeutralResourcesLanguage("ru")]
