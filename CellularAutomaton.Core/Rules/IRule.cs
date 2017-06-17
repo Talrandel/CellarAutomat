@@ -5,8 +5,8 @@
 // Language      : C# 6.0
 // File          : IRule.cs
 // Author        : Антипкин С.С., Макаров Е.А.
-// Created       : 12.06.2017 17:02
-// Last Revision : 16.06.2017 12:48
+// Created       : 16.06.2017 13:14
+// Last Revision : 17.06.2017 14:14
 // Description   : 
 #endregion
 
@@ -20,6 +20,13 @@ namespace CellularAutomaton.Core.Rules
     /// </summary>
     public interface IRule
     {
+        #region Properties
+        /// <summary>
+        /// Возвращает название правила.
+        /// </summary>
+        string Name { get; }
+        #endregion
+
         #region Members
         /// <summary>
         /// Изменяет состояние клетки расположенной по заданным координатам.

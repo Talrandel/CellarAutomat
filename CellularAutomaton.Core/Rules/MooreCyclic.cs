@@ -6,7 +6,7 @@
 // File          : MooreCyclic.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 16.06.2017 13:14
-// Last Revision : 17.06.2017 12:11
+// Last Revision : 17.06.2017 14:15
 // Description   : 
 #endregion
 
@@ -20,6 +20,11 @@ namespace CellularAutomaton.Core.Rules
     public class MooreCyclic : IRule
     {
         #region IRule Members
+        /// <summary>
+        /// Возвращает название правила.
+        /// </summary>
+        public string Name { get; }
+
         /// <summary>
         /// Изменяет состояние клетки расположенной по заданным координатам.
         /// </summary>

@@ -6,7 +6,7 @@
 // File          : Life.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 16.06.2017 13:14
-// Last Revision : 17.06.2017 12:12
+// Last Revision : 17.06.2017 14:15
 // Description   : 
 #endregion
 
@@ -20,6 +20,11 @@ namespace CellularAutomaton.Core.Rules
     public class Life : IRule
     {
         #region IRule Members
+        /// <summary>
+        /// Возвращает название правила.
+        /// </summary>
+        public string Name { get; }
+
         /// <summary>
         /// Изменяет состояние клетки расположенной по заданным координатам.
         /// </summary>
