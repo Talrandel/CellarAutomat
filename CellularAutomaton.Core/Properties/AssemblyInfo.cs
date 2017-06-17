@@ -1,4 +1,17 @@
-﻿using System.Reflection;
+﻿#region Header
+// Solution      : CellularAutomaton
+// Project       : CellularAutomaton.Core
+// Project type  : 
+// Language      : C# 6.0
+// File          : AssemblyInfo.cs
+// Author        : Антипкин С.С., Макаров Е.А.
+// Created       : 16.06.2017 13:14
+// Last Revision : 17.06.2017 15:07
+// Description   : 
+#endregion
+
+using System.Reflection;
+using System.Resources;
 using System.Runtime.InteropServices;
 
 // Управление общими сведениями о сборке осуществляется с помощью 
@@ -33,3 +46,4 @@ using System.Runtime.InteropServices;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: NeutralResourcesLanguage("ru")]

@@ -52,6 +52,11 @@
     <Compile Include="Helpers\Recorder\Recorder.cs" />
     <Compile Include="Helpers\Recorder\StateRecorder.cs" />
     <Compile Include="Helpers\Record\Record.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Rules\Life.cs" />
     <Compile Include="Rules\BelousovZhabotinskyReaction.cs" />
     <Compile Include="Field.cs" />
@@ -69,7 +74,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Resource.resx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

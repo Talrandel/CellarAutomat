@@ -5,8 +5,8 @@
 // Language      : C# 6.0
 // File          : Record.cs
 // Author        : Антипкин С.С., Макаров Е.А.
-// Created       : 16.06.2017 12:37
-// Last Revision : 16.06.2017 12:48
+// Created       : 17.06.2017 11:54
+// Last Revision : 17.06.2017 16:30
 // Description   : 
 #endregion
 
@@ -15,6 +15,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+
+using CellularAutomaton.Core.Properties;
 
 namespace CellularAutomaton.Core.Helpers.Record
 {
@@ -53,7 +55,7 @@ namespace CellularAutomaton.Core.Helpers.Record
         /// </summary>
         public int StatesCount
         {
-            get { return _statesCount; }            
+            get { return _statesCount; }
             set
             {
                 if (value < CellularAutomaton.StatesNumberMin)
@@ -89,8 +91,8 @@ namespace CellularAutomaton.Core.Helpers.Record
         {
             if (string.IsNullOrWhiteSpace(fileName))
             {
-                throw new ArgumentException("Имя файла не задано, пустое или состоит из одних пробелов.",
-                                            nameof(fileName));
+                throw new ArgumentException(
+                    Resources.Ex__Имя_файла_не_задано__пустое_или_состоит_из_одних_пробелов_, nameof(fileName));
             }
 
             using (FileStream fs = File.Create(fileName))
@@ -106,8 +108,8 @@ namespace CellularAutomaton.Core.Helpers.Record
         {
             if (string.IsNullOrWhiteSpace(fileName))
             {
-                throw new ArgumentException("Имя файла не задано, пустое или состоит из одних пробелов.",
-                                            nameof(fileName));
+                throw new ArgumentException(
+                    Resources.Ex__Имя_файла_не_задано__пустое_или_состоит_из_одних_пробелов_, nameof(fileName));
             }
 
             using (FileStream fs = File.OpenRead(fileName))

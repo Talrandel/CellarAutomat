@@ -6,7 +6,7 @@
 // File          : Player.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 17.06.2017 11:54
-// Last Revision : 17.06.2017 12:39
+// Last Revision : 17.06.2017 16:29
 // Description   : 
 #endregion
 
@@ -15,6 +15,8 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Timers;
+
+using CellularAutomaton.Core.Properties;
 
 namespace CellularAutomaton.Core.Helpers.Player
 {
@@ -82,7 +84,10 @@ namespace CellularAutomaton.Core.Helpers.Player
                 throw new ArgumentNullException(nameof(e));
 
             if ((rec.Width == 0) || (rec.Height == 0))
-                throw new ArgumentException("Значение высоты или ширины размера меньше или равно нулю.", nameof(rec));
+            {
+                throw new ArgumentException(
+                    Resources.Ex__Значение_высоты_или_ширины_размера_меньше_или_равно_нулю_, nameof(rec));
+            }
 
             _bufGrContext = new BufferedGraphicsContext();
             _bufGr = _bufGrContext.Allocate(e, rec);
@@ -122,7 +127,7 @@ namespace CellularAutomaton.Core.Helpers.Player
                 if (value <= 0)
                 {
                     throw new ArgumentOutOfRangeException(nameof(value), value,
-                                                          "Число кадров в минуту не может быть равной нулю величиной.");
+                        Resources.Ex__Число_кадров_в_минуту_не_может_быть_равной_нулю_величиной_);
                 }
 
                 _framesPerMinute = value;
@@ -224,13 +229,13 @@ namespace CellularAutomaton.Core.Helpers.Player
             if (frame < 0)
             {
                 throw new ArgumentOutOfRangeException(nameof(frame), frame,
-                                                      "Выполнена попытка перехода к кадру с отрицательным индексом.");
+                    Resources.Ex__Выполнена_попытка_перехода_к_кадру_с_отрицательным_индексом_);
             }
 
             if (_record.Rec.Count < frame)
             {
                 throw new ArgumentOutOfRangeException(nameof(frame), frame,
-                                                      "Выполнена попытка перехода к кадру номер которого больше, чем кадров в текущей записи.");
+                    Resources.Ex__Выполнена_попытка_перехода_к_кадру_номер_которого_больше__чем_кадров_в_текущей_записи_);
             }
 
             CurrenFrame = frame;
@@ -283,8 +288,7 @@ namespace CellularAutomaton.Core.Helpers.Player
         /// <param name="e">Сведения о событии <see cref="Timer.Elapsed"/>.</param>
         private void Reproduce(object sender, ElapsedEventArgs e)
         {
-            _bufGr.Graphics.DrawImage(_recordEnumerator.Current, _bufGrContext.MaximumBuffer.Width,
-                                      _bufGrContext.MaximumBuffer.Height);
+            _bufGr.Graphics.DrawImage(_recordEnumerator.Current, _bufGrContext.MaximumBuffer.Width, _bufGrContext.MaximumBuffer.Height);
             _bufGr.Render();
 
             CurrenFrame++;

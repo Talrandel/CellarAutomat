@@ -6,7 +6,7 @@
 // File          : Recorder.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 16.06.2017 13:14
-// Last Revision : 17.06.2017 12:58
+// Last Revision : 17.06.2017 16:30
 // Description   : 
 #endregion
 
@@ -186,23 +186,40 @@ namespace CellularAutomaton.Core.Helpers.Recorder
         {
             switch (value)
             {
-                case 0: return Color.Red;
-                case 1: return Color.Green;
-                case 2: return Color.Blue;
-                case 3: return Color.Yellow;
-                case 4: return Color.Pink;
-                case 5: return Color.DarkBlue;
-                case 6: return Color.White;
-                case 7: return Color.Orange;
-                case 8: return Color.GreenYellow;
-                case 9: return Color.MediumVioletRed;
-                case 10: return Color.BlueViolet;
-                case 11: return Color.PaleVioletRed;
-                case 12: return Color.LightGreen;
-                case 13: return Color.Purple;
-                case 14: return Color.PapayaWhip;
-                case 15: return Color.SaddleBrown;
-                default: return Color.Black;
+                case 0:
+                    return Color.Red;
+                case 1:
+                    return Color.Green;
+                case 2:
+                    return Color.Blue;
+                case 3:
+                    return Color.Yellow;
+                case 4:
+                    return Color.Pink;
+                case 5:
+                    return Color.DarkBlue;
+                case 6:
+                    return Color.White;
+                case 7:
+                    return Color.Orange;
+                case 8:
+                    return Color.GreenYellow;
+                case 9:
+                    return Color.MediumVioletRed;
+                case 10:
+                    return Color.BlueViolet;
+                case 11:
+                    return Color.PaleVioletRed;
+                case 12:
+                    return Color.LightGreen;
+                case 13:
+                    return Color.Purple;
+                case 14:
+                    return Color.PapayaWhip;
+                case 15:
+                    return Color.SaddleBrown;
+                default:
+                    return Color.Black;
             }
         }
 

@@ -6,7 +6,7 @@
 // File          : Field.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 16.06.2017 13:14
-// Last Revision : 17.06.2017 12:15
+// Last Revision : 17.06.2017 16:31
 // Description   : 
 #endregion
 
@@ -14,6 +14,8 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+
+using CellularAutomaton.Core.Properties;
 
 namespace CellularAutomaton.Core
 {
@@ -26,8 +28,8 @@ namespace CellularAutomaton.Core
         /// <summary>
         /// Поле.
         /// </summary>
-        [SuppressMessage("Microsoft.Performance", "CA1814:PreferJaggedArraysOverMultidimensional", MessageId =
-                "Member")]
+        [SuppressMessage("Microsoft.Performance", "CA1814:PreferJaggedArraysOverMultidimensional",
+            MessageId = "Member")]
         private readonly int[,] _cells;
 
         /// <summary>
@@ -84,10 +86,16 @@ namespace CellularAutomaton.Core
         public Field(int width, int height)
         {
             if (width < 0)
-                throw new ArgumentOutOfRangeException(nameof(width), $"Ширина поля {nameof(width)} меньше нуля.");
+            {
+                throw new ArgumentOutOfRangeException(nameof(width),
+                    string.Format(Resources.Ex__Ширина_поля__0__меньше_нуля_, nameof(width)));
+            }
 
             if (height < 0)
-                throw new ArgumentOutOfRangeException(nameof(width), $"Высота поля {nameof(height)} меньше нуля.");
+            {
+                throw new ArgumentOutOfRangeException(nameof(width),
+                    string.Format(Resources.Ex__Высота_поля__0__меньше_нуля_, nameof(height)));
+            }
 
             _width = width;
             _height = height;
@@ -208,7 +216,7 @@ namespace CellularAutomaton.Core
                 }
                 default:
                     throw new ArgumentOutOfRangeException(nameof(direction), direction,
-                                                          $"Недопустимое значение параметра {nameof(direction)}.");
+                        string.Format(Resources.Ex__Недопустимое_значение_параметра__0__, nameof(direction)));
             }
 
             return state;

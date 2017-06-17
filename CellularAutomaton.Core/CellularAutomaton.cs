@@ -6,15 +6,13 @@
 // File          : CellularAutomaton.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 16.06.2017 13:14
-// Last Revision : 17.06.2017 12:11
+// Last Revision : 17.06.2017 16:30
 // Description   : 
 #endregion
 
 using System;
 
 using CellularAutomaton.Core.Rules;
-
-[assembly: CLSCompliant(true)]
 
 namespace CellularAutomaton.Core
 {
