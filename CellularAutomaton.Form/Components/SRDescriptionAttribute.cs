@@ -23,6 +23,11 @@ namespace CellarAutomatForm.Components
     // ReSharper disable once InconsistentNaming
     internal sealed class SRDescriptionAttribute : DescriptionAttribute
     {
+        /// <summary>
+        /// Суффикс, добавляемый к именам ресурсов с описанием свойств и событий.
+        /// </summary>
+        public const string Suffix = "Descr";
+
         #region Properties
         /// <summary>
         /// Возвращает описание, хранящееся в данном атрибуте.

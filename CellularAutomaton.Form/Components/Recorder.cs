@@ -34,7 +34,7 @@ namespace CellarAutomatForm.Components
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [SRCategory("SizeFieldWidth")]
-        [SRDescription(nameof(SizeFieldMinWidth) + "Descr")]
+        [SRDescription(nameof(SizeFieldMinWidth) + SRDescriptionAttribute.Suffix)]
         public short SizeFieldMinWidth
         {
             get { return Convert.ToInt16(nUDWidth.Minimum); }
@@ -56,7 +56,7 @@ namespace CellarAutomatForm.Components
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [SRCategory("SizeFieldWidth")]
-        [SRDescription(nameof(SizeFieldMaxWidth) + "Descr")]
+        [SRDescription(nameof(SizeFieldMaxWidth) + SRDescriptionAttribute.Suffix)]
         public short SizeFieldMaxWidth
         {
             get { return Convert.ToInt16(nUDWidth.Maximum); }
@@ -78,7 +78,7 @@ namespace CellarAutomatForm.Components
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [SRCategory("SizeFieldHeight")]
-        [SRDescription(nameof(SizeFieldMinHeight) + "Descr")]
+        [SRDescription(nameof(SizeFieldMinHeight) + SRDescriptionAttribute.Suffix)]
         public short SizeFieldMinHeight
         {
             get { return Convert.ToInt16(nUDHeight.Minimum); }
@@ -100,7 +100,7 @@ namespace CellarAutomatForm.Components
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [SRCategory("SizeFieldHeight")]
-        [SRDescription(nameof(SizeFieldMaxHeight) + "Descr")]
+        [SRDescription(nameof(SizeFieldMaxHeight) + SRDescriptionAttribute.Suffix)]
         public short SizeFieldMaxHeight
         {
             get { return Convert.ToInt16(nUDHeight.Maximum); }
