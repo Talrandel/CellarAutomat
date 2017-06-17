@@ -5,8 +5,8 @@
 // Language      : C# 6.0
 // File          : NeimanCyclic.cs
 // Author        : Антипкин С.С., Макаров Е.А.
-// Created       : 12.06.2017 16:39
-// Last Revision : 16.06.2017 12:48
+// Created       : 16.06.2017 13:14
+// Last Revision : 17.06.2017 12:11
 // Description   : 
 #endregion
 
@@ -34,13 +34,13 @@ namespace CellularAutomaton.Core.Rules
             if (pastFiled == null)
                 throw new ArgumentNullException(nameof(pastFiled));
 
-            int nextState = (pastFiled.GetCell(x, y) + 1) % statesCount;
+            int nextState = (pastFiled[x, y] + 1) % statesCount;
 
             foreach (int c in pastFiled.GetNeighborsInFourDirections(x, y))
                 if (c == nextState)
                     return nextState;
 
-            return pastFiled.GetCell(x, y);
+            return pastFiled[x, y];
         }
         #endregion
     }

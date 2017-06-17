@@ -5,8 +5,8 @@
 // Language      : C# 6.0
 // File          : Life.cs
 // Author        : Антипкин С.С., Макаров Е.А.
-// Created       : 12.06.2017 16:39
-// Last Revision : 16.06.2017 12:48
+// Created       : 16.06.2017 13:14
+// Last Revision : 17.06.2017 12:12
 // Description   : 
 #endregion
 
@@ -37,7 +37,7 @@ namespace CellularAutomaton.Core.Rules
             switch (pastFiled.GetLiveNeighborCount(x, y))
             {
                 case 3: return 1;
-                case 2: return pastFiled.GetCell(x, y);
+                case 2: return pastFiled[x, y];
                 default: return 0;
             }
         }

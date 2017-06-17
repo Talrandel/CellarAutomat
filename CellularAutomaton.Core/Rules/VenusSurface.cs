@@ -5,8 +5,8 @@
 // Language      : C# 6.0
 // File          : VenusSurface.cs
 // Author        : Антипкин С.С., Макаров Е.А.
-// Created       : 12.06.2017 16:39
-// Last Revision : 16.06.2017 12:48
+// Created       : 16.06.2017 13:14
+// Last Revision : 17.06.2017 12:11
 // Description   : 
 #endregion
 
@@ -61,7 +61,7 @@ namespace CellularAutomaton.Core.Rules
                 if (neighbors[i] < 0)
                     neighbors[i] = 0;
 
-            switch (pastFiled.GetCell(x, y))
+            switch (pastFiled[x, y])
             {
                 case 0: return 2 * ((northWestCell % 2) ^ (northEastCell % 2)) + northCell % 2;
                 case 1: return 2 * ((northWestCell % 2) ^ (southWestCell % 2)) + westCell % 2;

@@ -5,15 +5,15 @@
 // Language      : C# 6.0
 // File          : Player.cs
 // Author        : Антипкин С.С., Макаров Е.А.
-// Created       : 16.06.2017 13:14
-// Last Revision : 16.06.2017 15:46
+// Created       : 17.06.2017 11:54
+// Last Revision : 17.06.2017 12:39
 // Description   : 
 #endregion
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
-using System.Linq;
 using System.Timers;
 
 namespace CellularAutomaton.Core.Helpers.Player
@@ -38,6 +38,11 @@ namespace CellularAutomaton.Core.Helpers.Player
         /// Объект <see cref="Timer"/> управляющий сменой кадров.
         /// </summary>
         private readonly Timer _timer;
+
+        /// <summary>
+        /// True, если освобождение ресурсов осуществлялось, иначе false.
+        /// </summary>
+        private bool _disposed;
 
         /// <summary>
         /// Число кадров в минуту.
@@ -70,6 +75,7 @@ namespace CellularAutomaton.Core.Helpers.Player
         /// <param name="rec">Размеры области на которую осуществяется вывод изображения.</param>
         /// <exception cref="ArgumentNullException">Параметр <paramref name="e"/> имеет значение <b>null</b>.</exception>
         /// <exception cref="ArgumentException">Значение высоты или ширины размера меньше или равно нулю.</exception>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "e")]
         public Player(Graphics e, Rectangle rec)
         {
             if (e == null)
@@ -93,9 +99,8 @@ namespace CellularAutomaton.Core.Helpers.Player
         /// </summary>
         public void Dispose()
         {
-            _bufGr?.Dispose();
-            _bufGrContext?.Dispose();
-            _timer?.Dispose();
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
         #endregion
 
@@ -160,7 +165,7 @@ namespace CellularAutomaton.Core.Helpers.Player
                 throw new ArgumentNullException(nameof(rec));
 
             _record = rec;
-            CreateRecordEnumerator();
+            GetRecordEnumerator();
         }
 
         /// <summary>
@@ -172,7 +177,7 @@ namespace CellularAutomaton.Core.Helpers.Player
         {
             Stop();
             _record.Load(fileName);
-            CreateRecordEnumerator();
+            GetRecordEnumerator();
         }
 
         /// <summary>
@@ -229,7 +234,7 @@ namespace CellularAutomaton.Core.Helpers.Player
             }
 
             CurrenFrame = frame;
-            for (int i = 0; i < CurrenFrame; i++)
+            for (int i = 0; i < CurrenFrame; i++) // Перейти к указанному кадру.
                 _recordEnumerator.MoveNext();
         }
 
@@ -240,26 +245,51 @@ namespace CellularAutomaton.Core.Helpers.Player
         {
             if (State != StatePlayer.Stop)
             {
-                _timer.Stop();
                 State = StatePlayer.Stop;
                 OnStopPlay();
                 CurrenFrame = 0;
                 _recordEnumerator.Reset();
+                _timer.Stop();
             }
         }
         #endregion
 
         #region Members
         /// <summary>
+        /// Освобождает все ресурсы, используемые текущим объектом <see cref="Player"/>.
+        /// </summary>
+        /// <param name="disposing">True - освободить управляемые и неуправляемые ресурсы; false освободить только неуправляемые ресурсы.</param>
+        [SuppressMessage("Microsoft.Usage", "CA2213:DisposableFieldsShouldBeDisposed", MessageId = "_timer")]
+        [SuppressMessage("Microsoft.Usage", "CA2213:DisposableFieldsShouldBeDisposed", MessageId = "_bufGrContext")]
+        protected virtual void Dispose(bool disposing)
+        {
+            if (_disposed)
+                return;
+
+            if (disposing)
+            {
+                _bufGr?.Dispose();
+                _bufGrContext?.Dispose();
+                _timer?.Close();
+            }
+
+            _disposed = true;
+        }
+
+        /// <summary>
         /// Обработчик события <see cref="Timer.Elapsed"/>. Передаёт текущий кадр в буфер <see cref="_bufGr"/> для отображения.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Источник события.</param>
+        /// <param name="e">Сведения о событии <see cref="Timer.Elapsed"/>.</param>
         private void Reproduce(object sender, ElapsedEventArgs e)
         {
-            _bufGr.Graphics.DrawImage(_recordEnumerator.Current, _bufGrContext.MaximumBuffer.Width, _bufGrContext.MaximumBuffer.Height);
+            _bufGr.Graphics.DrawImage(_recordEnumerator.Current, _bufGrContext.MaximumBuffer.Width,
+                                      _bufGrContext.MaximumBuffer.Height);
             _bufGr.Render();
-            if (!_recordEnumerator.MoveNext())
+
+            CurrenFrame++;
+
+            if (!_recordEnumerator.MoveNext()) // Не достигнут конец записи?
                 Stop();
         }
 
@@ -288,9 +318,9 @@ namespace CellularAutomaton.Core.Helpers.Player
         }
 
         /// <summary>
-        /// Создать перечислитель для записи.
+        /// Возвращает перечислитель для записи <see cref="_record"/>.
         /// </summary>
-        private void CreateRecordEnumerator()
+        private void GetRecordEnumerator()
         {
             _recordEnumerator = _record.Rec.GetEnumerator();
         }

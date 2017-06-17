@@ -47,6 +47,7 @@
     <Compile Include="Helpers\Player\IPlayer.cs" />
     <Compile Include="Helpers\Player\Player.cs" />
     <Compile Include="Helpers\Player\StatePlayer.cs" />
+    <Compile Include="Helpers\Recorder\ConvertPointValueToColor.cs" />
     <Compile Include="Helpers\Recorder\IRecorder.cs" />
     <Compile Include="Helpers\Recorder\Recorder.cs" />
     <Compile Include="Helpers\Recorder\StateRecorder.cs" />

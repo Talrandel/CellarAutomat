@@ -5,8 +5,8 @@
 // Language      : C# 6.0
 // File          : Recorder.cs
 // Author        : Антипкин С.С., Макаров Е.А.
-// Created       : 16.06.2017 12:37
-// Last Revision : 16.06.2017 12:48
+// Created       : 16.06.2017 13:14
+// Last Revision : 17.06.2017 12:58
 // Description   : 
 #endregion
 
@@ -20,15 +20,6 @@ namespace CellularAutomaton.Core.Helpers.Recorder
     /// </summary>
     public class Recorder : IRecorder
     {
-        #region Delegates
-        /// <summary>
-        /// Делегат описания метода преобразования состояния клетки поля клеточного автомата в цвет.
-        /// </summary>
-        /// <param name="value">Состояние клетки поля.</param>
-        /// <returns>Цвет соответствующий состоянию клетки.</returns>
-        public delegate Color ConvertPointValueToColor(int value);
-        #endregion
-
         #region Fields
         /// <summary>
         /// Регистрируемый клеточный автомат.
@@ -166,15 +157,24 @@ namespace CellularAutomaton.Core.Helpers.Recorder
             int width = field.Width;
             int height = field.Height;
 
-            Bitmap bitmap = new Bitmap(width, height);
-
-            for (int i = 0; i < width; i++)
+            Bitmap bitmap = null;
+            try
             {
-                for (int j = 0; j < height; j++)
-                    bitmap.SetPixel(i, j, _colorize(field.GetCell(i, j)));
-            }
+                bitmap = new Bitmap(width, height);
 
-            return bitmap;
+                for (int i = 0; i < width; i++)
+                {
+                    for (int j = 0; j < height; j++)
+                        bitmap.SetPixel(i, j, _colorize(field[i, j]));
+                }
+
+                return bitmap;
+            }
+            catch
+            {
+                bitmap?.Dispose();
+                throw;
+            }
         }
 
         /// <summary>

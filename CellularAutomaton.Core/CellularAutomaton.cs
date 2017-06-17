@@ -5,8 +5,8 @@
 // Language      : C# 6.0
 // File          : CellularAutomaton.cs
 // Author        : Антипкин С.С., Макаров Е.А.
-// Created       : 16.06.2017 12:37
-// Last Revision : 16.06.2017 12:48
+// Created       : 16.06.2017 13:14
+// Last Revision : 17.06.2017 12:11
 // Description   : 
 #endregion
 
@@ -41,7 +41,7 @@ namespace CellularAutomaton.Core
         /// <summary>
         /// Поле клеточного автомата на текущей итерации.
         /// </summary>
-        public readonly Field CurrentField;
+        private readonly Field _currentField;
 
         /// <summary>
         /// Поле клеточного автомата на прошлой итерации.
@@ -86,6 +86,11 @@ namespace CellularAutomaton.Core
         /// Возвращает номер поколения.
         /// </summary>
         public int Generation { get; private set; }
+
+        /// <summary>
+        /// Возвращает текущее поле.
+        /// </summary>
+        public Field CurrentField => _currentField;
         #endregion
 
         #region Constructors
@@ -110,8 +115,8 @@ namespace CellularAutomaton.Core
             Rule = rule;
             _pastField = createdField;
 
-            CurrentField = new Field(createdField.Width, createdField.Height);
-            createdField.Copy(ref CurrentField);
+            _currentField = new Field(createdField.Width, createdField.Height);
+            createdField.Copy(ref _currentField);
             StatesCount = statesCount;
 
             Stop = false;
@@ -236,7 +241,7 @@ namespace CellularAutomaton.Core
         {
             for (int i = 0; i < _pastField.Height; i++)
                 for (int j = 0; j < _pastField.Width; j++)
-                    CurrentField.SetCell(i, j, Rule.TransformCell(_pastField, i, j, StatesCount));
+                    CurrentField[i, j] = Rule.TransformCell(_pastField, i, j, StatesCount);
         }
 
         /// <summary>

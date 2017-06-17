@@ -5,8 +5,8 @@
 // Language      : C# 6.0
 // File          : Field.cs
 // Author        : Антипкин С.С., Макаров Е.А.
-// Created       : 10.06.2017 22:06
-// Last Revision : 16.06.2017 12:48
+// Created       : 16.06.2017 13:14
+// Last Revision : 17.06.2017 12:15
 // Description   : 
 #endregion
 
@@ -53,6 +53,23 @@ namespace CellularAutomaton.Core
         public int Height => _height;
         #endregion
 
+        #region Indexers
+        /// <summary>
+        /// Возвращает или задаёт значение клетки расположенной по заданным координатам.
+        /// </summary>
+        /// <param name="x">Координата по оси X клетки.</param>
+        /// <param name="y">Координата по оси Y клетки.</param>
+        /// <returns>Значение клетки.</returns>
+        [SuppressMessage("Microsoft.Design", "CA1023:IndexersShouldNotBeMultidimensional")]
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "y")]
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "x")]
+        public int this[int x, int y]
+        {
+            get { return _cells[x, y]; }
+            set { _cells[x, y] = value; }
+        }
+        #endregion
+
         #region Constructors
         /// <summary>
         /// Инициализирует новый экземпляр класса <see cref="Field"/> с заданными размерами.
@@ -92,7 +109,7 @@ namespace CellularAutomaton.Core
             for (int i = 0; i < _height; i++)
             {
                 for (int j = 0; j < _width; j++)
-                    if (GetCell(i, j) != other.GetCell(i, j))
+                    if (this[i, j] != other[i, j])
                         return false;
             }
 
@@ -101,32 +118,6 @@ namespace CellularAutomaton.Core
         #endregion
 
         #region Members
-        /// <summary>
-        /// Получить значение клетки расположенной по заданным координатам.
-        /// </summary>
-        /// <param name="x">Координата по оси X клетки.</param>
-        /// <param name="y">Координата по оси Y клетки.</param>
-        /// <returns>Значение выбранной клетки.</returns>
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "y")]
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "x")]
-        public int GetCell(int x, int y)
-        {
-            return _cells[x, y];
-        }
-
-        /// <summary>
-        /// Установить значение клетки расположенной по заданным координатам.
-        /// </summary>
-        /// <param name="x">Координата по оси X клетки.</param>
-        /// <param name="y">Координата по оси Y клетки.</param>
-        /// <param name="value">Значение, которое следует установить для выбранной клетки.</param>
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "y")]
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "x")]
-        public void SetCell(int x, int y, int value)
-        {
-            _cells[x, y] = value;
-        }
-
         /// <summary>
         /// Возвращает состояние клетки расположенной в заданном направлении относительно клетки заданной координатами.
         /// </summary>
@@ -148,7 +139,7 @@ namespace CellularAutomaton.Core
                     y--;
 
                     if ((0 <= x) && (0 <= y))
-                        state = GetCell(x, y);
+                        state = this[x, y];
                     break;
                 }
                 case Directions.North:
@@ -156,7 +147,7 @@ namespace CellularAutomaton.Core
                     x--;
 
                     if (0 <= x)
-                        state = GetCell(x, y);
+                        state = this[x, y];
                     break;
                 }
                 case Directions.NorthEast:
@@ -165,7 +156,7 @@ namespace CellularAutomaton.Core
                     y++;
 
                     if ((0 <= x) && (y < _width))
-                        state = GetCell(x, y);
+                        state = this[x, y];
                     break;
                 }
                 case Directions.East:
@@ -173,7 +164,7 @@ namespace CellularAutomaton.Core
                     y++;
 
                     if (y < _width)
-                        state = GetCell(x, y);
+                        state = this[x, y];
                     break;
                 }
                 case Directions.SouthEast:
@@ -182,7 +173,7 @@ namespace CellularAutomaton.Core
                     y++;
 
                     if ((x < _height) && (y < _width))
-                        state = GetCell(x, y);
+                        state = this[x, y];
                     break;
                 }
                 case Directions.South:
@@ -190,7 +181,7 @@ namespace CellularAutomaton.Core
                     x++;
 
                     if (x < _height)
-                        state = GetCell(x, y);
+                        state = this[x, y];
                     break;
                 }
                 case Directions.SouthWest:
@@ -199,7 +190,7 @@ namespace CellularAutomaton.Core
                     y--;
 
                     if ((x < _height) && (0 <= y))
-                        state = GetCell(x, y);
+                        state = this[x, y];
                     break;
                 }
                 case Directions.West:
@@ -207,12 +198,12 @@ namespace CellularAutomaton.Core
                     y--;
 
                     if (0 <= y)
-                        state = GetCell(x, y);
+                        state = this[x, y];
                     break;
                 }
                 case Directions.Center:
                 {
-                    state = GetCell(x, y);
+                    state = this[x, y];
                     break;
                 }
                 default:
@@ -349,10 +340,12 @@ namespace CellularAutomaton.Core
         }
 
         /// <summary>
-        /// Выполняет копирование текущего поля в заданное.
+        /// Осуществляет копирование текущего поля в заданное.
         /// </summary>
         /// <param name="other">Поле, в которое осуществляется копирование.</param>
         /// <exception cref="ArgumentNullException">Параметр <paramref name="other"/> имеет значение <b>null</b>.</exception>
+        [SuppressMessage("Microsoft.Design", "CA1062:Проверить аргументы или открытые методы", MessageId = "0")]
+        [SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference", MessageId = "0#")]
         public void Copy(ref Field other)
         {
             if (other == null)
@@ -361,7 +354,7 @@ namespace CellularAutomaton.Core
             for (int i = 0; i < _height; i++)
             {
                 for (int j = 0; j < _width; j++)
-                    other.SetCell(i, j, GetCell(i, j));
+                    other[i, j] = this[i, j];
             }
         }
 

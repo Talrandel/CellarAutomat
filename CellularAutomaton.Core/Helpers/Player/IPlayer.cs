@@ -50,6 +50,7 @@ namespace CellularAutomaton.Core.Helpers.Player
         /// <summary>
         /// Останавливает воспроизведение и переходит в начало записи.
         /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Stop")]
         void Stop();
 
         /// <summary>

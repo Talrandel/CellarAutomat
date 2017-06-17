@@ -35,6 +35,7 @@ namespace CellularAutomaton.Core.Helpers.Recorder
         /// <summary>
         /// Останавливает запись.
         /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Stop")]
         void Stop();
 
         /// <summary>

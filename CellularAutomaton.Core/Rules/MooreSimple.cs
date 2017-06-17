@@ -5,8 +5,8 @@
 // Language      : C# 6.0
 // File          : MooreSimple.cs
 // Author        : Антипкин С.С., Макаров Е.А.
-// Created       : 12.06.2017 16:39
-// Last Revision : 16.06.2017 12:48
+// Created       : 16.06.2017 13:14
+// Last Revision : 17.06.2017 12:11
 // Description   : 
 #endregion
 
@@ -34,7 +34,7 @@ namespace CellularAutomaton.Core.Rules
             if (pastFiled == null)
                 throw new ArgumentNullException(nameof(pastFiled));
 
-            return (pastFiled.GetLiveNeighborCount(x, y) == 1) ? 1 : pastFiled.GetCell(x, y);
+            return (pastFiled.GetLiveNeighborCount(x, y) == 1) ? 1 : pastFiled[x, y];
         }
         #endregion
     }

@@ -5,8 +5,8 @@
 // Language      : C# 6.0
 // File          : BelousovZhabotinskyReaction.cs
 // Author        : Антипкин С.С., Макаров Е.А.
-// Created       : 12.06.2017 16:39
-// Last Revision : 16.06.2017 12:48
+// Created       : 16.06.2017 13:14
+// Last Revision : 17.06.2017 12:12
 // Description   : 
 #endregion
 
@@ -35,7 +35,7 @@ namespace CellularAutomaton.Core.Rules
             if (pastFiled == null)
                 throw new ArgumentNullException(nameof(pastFiled));
 
-            int centerCell = pastFiled.GetCell(x, y);
+            int centerCell = pastFiled[x, y];
             int sum = pastFiled.GetNeighborsInAllDirections(x, y).Sum();
 
             if (centerCell == 0)
@@ -46,7 +46,7 @@ namespace CellularAutomaton.Core.Rules
                 return sum < 100 ? 2 : 3;
             }
 
-            return (centerCell == pastFiled.GetCell(x, y) - 1) ? 0 : Math.Min(sum / 8 + 5, pastFiled.GetCell(x, y) - 1);
+            return (centerCell == pastFiled[x, y] - 1) ? 0 : Math.Min(sum / 8 + 5, pastFiled[x, y] - 1);
         }
         #endregion
     }
