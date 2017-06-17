@@ -117,9 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="gBSettings.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>False</value>
-  </metadata>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="gBSettings.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -252,33 +249,21 @@
   <data name="tLPMain.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="gBSettings" Row="0" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="bStop" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="bRecord" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="bSave" Row="2" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,50,Percent,50" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
-  <metadata name="tLPSettings.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>False</value>
-  </metadata>
   <data name="tLPSettings.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="tLPSettings.ColumnCount" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <metadata name="gBSettingsField.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>False</value>
-  </metadata>
   <data name="gBSettingsField.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <metadata name="tLPSettingsField.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>False</value>
-  </metadata>
   <data name="tLPSettingsField.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="tLPSettingsField.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <metadata name="lHeight.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>False</value>
-  </metadata>
   <data name="lHeight.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -315,9 +300,6 @@
   <data name="&gt;&gt;lHeight.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <metadata name="lWidth.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>False</value>
-  </metadata>
   <data name="lWidth.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -465,24 +447,15 @@
   <data name="&gt;&gt;gBSettingsField.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <metadata name="gBSettingsCellularAutomaton.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>False</value>
-  </metadata>
   <data name="gBSettingsCellularAutomaton.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <metadata name="tLPSettingsCellularAutomaton.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>False</value>
-  </metadata>
   <data name="tLPSettingsCellularAutomaton.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="tLPSettingsCellularAutomaton.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <metadata name="lRule.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>False</value>
-  </metadata>
   <data name="lRule.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -570,9 +543,6 @@
   <data name="&gt;&gt;nUDStatesCount.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <metadata name="lDencity.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>False</value>
-  </metadata>
   <data name="lDencity.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -636,9 +606,6 @@
   <data name="&gt;&gt;nUDDencity.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <metadata name="lStatesCount.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>False</value>
-  </metadata>
   <data name="lStatesCount.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
