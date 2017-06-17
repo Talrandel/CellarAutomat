@@ -6,7 +6,7 @@
 // File          : Recorder.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 17.06.2017 20:30
-// Last Revision : 17.06.2017 22:59
+// Last Revision : 17.06.2017 23:15
 // Description   : 
 #endregion
 
@@ -34,8 +34,8 @@ namespace CellarAutomatForm.Components
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [SRCategory("SizeFieldWidth")]
-        [SRDescription(nameof(SizeFieldMinWidth) + SRDescriptionAttribute.Suffix)]
-        public short SizeFieldMinWidth
+        [SRDescription(nameof(SizeFieldWidthMin) + SRDescriptionAttribute.Suffix)]
+        public short SizeFieldWidthMin
         {
             get { return Convert.ToInt16(nUDWidth.Minimum); }
             set
@@ -43,7 +43,7 @@ namespace CellarAutomatForm.Components
                 if (value < 0)
                     return;
 
-                if (SizeFieldMaxWidth < value)
+                if (SizeFieldWidthMax < value)
                     return;
 
                 nUDWidth.Minimum = value;
@@ -56,8 +56,8 @@ namespace CellarAutomatForm.Components
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [SRCategory("SizeFieldWidth")]
-        [SRDescription(nameof(SizeFieldMaxWidth) + SRDescriptionAttribute.Suffix)]
-        public short SizeFieldMaxWidth
+        [SRDescription(nameof(SizeFieldWidthMax) + SRDescriptionAttribute.Suffix)]
+        public short SizeFieldWidthMax
         {
             get { return Convert.ToInt16(nUDWidth.Maximum); }
             set
@@ -65,7 +65,7 @@ namespace CellarAutomatForm.Components
                 if (value < 0)
                     return;
 
-                if (value < SizeFieldMinWidth)
+                if (value < SizeFieldWidthMin)
                     return;
 
                 nUDWidth.Maximum = value;
@@ -78,8 +78,8 @@ namespace CellarAutomatForm.Components
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [SRCategory("SizeFieldHeight")]
-        [SRDescription(nameof(SizeFieldMinHeight) + SRDescriptionAttribute.Suffix)]
-        public short SizeFieldMinHeight
+        [SRDescription(nameof(SizeFieldHeightMin) + SRDescriptionAttribute.Suffix)]
+        public short SizeFieldHeightMin
         {
             get { return Convert.ToInt16(nUDHeight.Minimum); }
             set
@@ -87,7 +87,7 @@ namespace CellarAutomatForm.Components
                 if (value < 0)
                     return;
 
-                if (SizeFieldMaxHeight < value)
+                if (SizeFieldHeightMax < value)
                     return;
 
                 nUDHeight.Minimum = value;
@@ -100,8 +100,8 @@ namespace CellarAutomatForm.Components
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [SRCategory("SizeFieldHeight")]
-        [SRDescription(nameof(SizeFieldMaxHeight) + SRDescriptionAttribute.Suffix)]
-        public short SizeFieldMaxHeight
+        [SRDescription(nameof(SizeFieldHeightMax) + SRDescriptionAttribute.Suffix)]
+        public short SizeFieldHeightMax
         {
             get { return Convert.ToInt16(nUDHeight.Maximum); }
             set
@@ -109,7 +109,7 @@ namespace CellarAutomatForm.Components
                 if (value < 0)
                     return;
 
-                if (value < SizeFieldMinHeight)
+                if (value < SizeFieldHeightMin)
                     return;
 
                 nUDHeight.Maximum = value;
