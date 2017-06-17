@@ -31,6 +31,7 @@ namespace CellarAutomatForm.Components
         /// <summary>
         /// Возвращает или задаёт минимальную ширину поля клеточного автомата.
         /// </summary>
+        /// <exception cref="ArgumentOutOfRangeException">Значение '<see cref="SizeFieldWidthMin"/>' должно лежать в диапазоне от 0 до '<see cref="SizeFieldWidthMax"/>'.</exception>
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [SRCategory("SizeFieldWidth")]
@@ -40,11 +41,14 @@ namespace CellarAutomatForm.Components
             get { return Convert.ToInt16(nUDWidth.Minimum); }
             set
             {
-                if (value < 0)
-                    return;
-
-                if (SizeFieldWidthMax < value)
-                    return;
+                if (value < 0 ||
+                    SizeFieldWidthMax < value)
+                {
+                    throw new ArgumentOutOfRangeException(
+                          nameof(SizeFieldWidthMin),
+                          value,
+                          $"Значение '{nameof(SizeFieldWidthMin)}' должно лежать в диапазоне от 0 до '{nameof(SizeFieldWidthMax)}'.");
+                }
 
                 nUDWidth.Minimum = value;
             }
@@ -53,6 +57,7 @@ namespace CellarAutomatForm.Components
         /// <summary>
         /// Возвращает или задаёт максимальную ширину поля клеточного автомата.
         /// </summary>
+        /// <exception cref="ArgumentOutOfRangeException">Значение '<see cref="SizeFieldWidthMax"/>' не должно быть меньше '<see cref="SizeFieldWidthMin"/>'.</exception>
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [SRCategory("SizeFieldWidth")]
@@ -62,11 +67,13 @@ namespace CellarAutomatForm.Components
             get { return Convert.ToInt16(nUDWidth.Maximum); }
             set
             {
-                if (value < 0)
-                    return;
-
                 if (value < SizeFieldWidthMin)
-                    return;
+                {
+                    throw new ArgumentOutOfRangeException(
+                          nameof(SizeFieldWidthMax),
+                          value,
+                          $"Значение '{nameof(SizeFieldWidthMax)}' не должно быть меньше '{nameof(SizeFieldWidthMin)}'.");
+                }
 
                 nUDWidth.Maximum = value;
             }
@@ -75,7 +82,7 @@ namespace CellarAutomatForm.Components
         /// <summary>
         /// Возвращает или задаёт ширину поля клеточного автомата.
         /// </summary>
-        /// <exception cref="ArgumentOutOfRangeException">'<see cref="SizeFieldHeightValue"/>' должно лежать в диапазоне от '<see cref="SizeFieldHeightMin"/>' до '<see cref="SizeFieldHeightMax"/>'.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">Значение '<see cref="SizeFieldHeightValue"/>' должно лежать в диапазоне от '<see cref="SizeFieldHeightMin"/>' до '<see cref="SizeFieldHeightMax"/>'.</exception>
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [SRCategory("SizeFieldWidth")]
@@ -91,7 +98,7 @@ namespace CellarAutomatForm.Components
                     throw new ArgumentOutOfRangeException(
                           nameof(SizeFieldWidthValue),
                           value,
-                          $"'{nameof(SizeFieldWidthValue)}' должно лежать в диапазоне от '{nameof(SizeFieldWidthMin)}' до '{nameof(SizeFieldWidthMax)}'.");
+                          $"Значение '{nameof(SizeFieldWidthValue)}' должно лежать в диапазоне от '{nameof(SizeFieldWidthMin)}' до '{nameof(SizeFieldWidthMax)}'.");
                 }
 
                 nUDWidth.Value = value;
@@ -101,6 +108,7 @@ namespace CellarAutomatForm.Components
         /// <summary>
         /// Возвращает или задаёт минимальную высоту поля клеточного автомата.
         /// </summary>
+        /// <exception cref="ArgumentOutOfRangeException">Значение '<see cref="SizeFieldHeightMin"/>' должно лежать в диапазоне от 0 до '<see cref="SizeFieldHeightMax"/>'.</exception>
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [SRCategory("SizeFieldHeight")]
@@ -110,11 +118,14 @@ namespace CellarAutomatForm.Components
             get { return Convert.ToInt16(nUDHeight.Minimum); }
             set
             {
-                if (value < 0)
-                    return;
-
-                if (SizeFieldHeightMax < value)
-                    return;
+                if (value < 0 ||
+                    SizeFieldHeightMax < value)
+                {
+                    throw new ArgumentOutOfRangeException(
+                          nameof(SizeFieldHeightMin),
+                          value,
+                          $"Значение '{nameof(SizeFieldHeightMin)}' должно лежать в диапазоне от 0 до '{nameof(SizeFieldHeightMax)}'.");
+                }
 
                 nUDHeight.Minimum = value;
             }
@@ -123,6 +134,7 @@ namespace CellarAutomatForm.Components
         /// <summary>
         /// Возвращает или задаёт максимальную высоту поля клеточного автомата.
         /// </summary>
+        /// <exception cref="ArgumentOutOfRangeException">Значение '<see cref="SizeFieldHeightMax"/>' не должно быть меньше '<see cref="SizeFieldHeightMin"/>'.</exception>
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [SRCategory("SizeFieldHeight")]
@@ -132,11 +144,13 @@ namespace CellarAutomatForm.Components
             get { return Convert.ToInt16(nUDHeight.Maximum); }
             set
             {
-                if (value < 0)
-                    return;
-
                 if (value < SizeFieldHeightMin)
-                    return;
+                {
+                    throw new ArgumentOutOfRangeException(
+                          nameof(SizeFieldHeightMax),
+                          value,
+                          $"Значение '{nameof(SizeFieldHeightMax)}' не должно быть меньше '{nameof(SizeFieldHeightMin)}'.");
+                }
 
                 nUDHeight.Maximum = value;
             }
