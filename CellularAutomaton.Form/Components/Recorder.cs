@@ -23,7 +23,7 @@ using CellularAutomaton.Core.Rules;
 namespace CellarAutomatForm.Components
 {
     /// <summary>
-    /// Представляет регистратор функционирования <see cref="CellularAutomaton.Core.CellularAutomaton"/>.
+    /// Представляет регистратор функционирования клеточного автомата описываемого <see cref="CellularAutomaton.Core.CellularAutomaton"/>.
     /// </summary>
     public partial class Recorder : UserControl
     {
