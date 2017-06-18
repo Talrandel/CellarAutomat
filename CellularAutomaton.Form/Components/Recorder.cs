@@ -6,7 +6,7 @@
 // File          : Recorder.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 17.06.2017 20:30
-// Last Revision : 18.06.2017 10:50
+// Last Revision : 18.06.2017 11:44
 // Description   : 
 #endregion
 
@@ -196,7 +196,7 @@ namespace CellarAutomatForm.Components
         /// <remarks>
         ///     <b>Значение по умолчанию - 100.</b>
         /// </remarks>
-        /// <exception cref="ArgumentOutOfRangeException">'<see cref="SizeFieldHeightValue"/>' должно лежать в диапазоне от '<see cref="SizeFieldHeightMin"/>' до '<see cref="SizeFieldHeightMax"/>'.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">Значение '<see cref="SizeFieldHeightValue"/>' должно лежать в диапазоне от '<see cref="SizeFieldHeightMin"/>' до '<see cref="SizeFieldHeightMax"/>'.</exception>
         [DefaultValue(100)]
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
@@ -214,7 +214,7 @@ namespace CellarAutomatForm.Components
                     throw new ArgumentOutOfRangeException(
                         nameof(SizeFieldHeightValue),
                         value,
-                        $"'{nameof(SizeFieldHeightValue)}' должно лежать в диапазоне от '{nameof(SizeFieldHeightMin)}' до '{nameof(SizeFieldHeightMax)}'.");
+                        $"Значение '{nameof(SizeFieldHeightValue)}' должно лежать в диапазоне от '{nameof(SizeFieldHeightMin)}' до '{nameof(SizeFieldHeightMax)}'.");
                 }
 
                 nUDHeight.Value = value;
@@ -222,10 +222,196 @@ namespace CellarAutomatForm.Components
         }
 
         /// <summary>
+        /// Возвращает или задаёт минимальную плотность распределения клеток на поле клеточного автомата.
+        /// </summary>
+        /// <remarks>
+        ///     <b>Значение по умолчанию - 0.</b>
+        /// </remarks>
+        /// <exception cref="ArgumentOutOfRangeException">Значение '<see cref="DencityMin"/>' должно лежать в диапазоне от 0 до '<see cref="DencityMax"/>'.</exception>
+        [DefaultValue(0)]
+        [Browsable(true)]
+        [EditorBrowsable(EditorBrowsableState.Always)]
+        [RefreshProperties(RefreshProperties.All)]
+        [SRCategory("Dencity")]
+        [SRDescription(nameof(DencityMin) + SRDescriptionAttribute.Suffix)]
+        public short DencityMin
+        {
+            get { return Convert.ToInt16(nUDDencity.Minimum); }
+            set
+            {
+                if (value < 0 ||
+                    DencityMax < value)
+                {
+                    throw new ArgumentOutOfRangeException(
+                        nameof(DencityMin),
+                        value,
+                        $"Значение '{nameof(DencityMin)}' должно лежать в диапазоне от 0 до '{nameof(DencityMax)}'.");
+                }
+
+                nUDDencity.Minimum = value;
+            }
+        }
+
+        /// <summary>
+        /// Возвращает или задаёт максимальную плотность распределения клеток на поле клеточного автомата.
+        /// </summary>
+        /// <remarks>
+        ///     <b>Значение по умолчанию - 100.</b>
+        /// </remarks>
+        /// <exception cref="ArgumentOutOfRangeException">Значение '<see cref="DencityMax"/>' должно лежать в интервале от '<see cref="DencityMin"/>' до 100.</exception>
+        [DefaultValue(100)]
+        [Browsable(true)]
+        [EditorBrowsable(EditorBrowsableState.Always)]
+        [RefreshProperties(RefreshProperties.All)]
+        [SRCategory("Dencity")]
+        [SRDescription(nameof(DencityMax) + SRDescriptionAttribute.Suffix)]
+        public short DencityMax
+        {
+            get { return Convert.ToInt16(nUDDencity.Maximum); }
+            set
+            {
+                if (value < DencityMin ||
+                    value < 100)
+                {
+                    throw new ArgumentOutOfRangeException(
+                        nameof(DencityMax),
+                        value,
+                        $"Значение '{nameof(DencityMax)}' должно лежать в интервале от '{nameof(DencityMin)}' до 100.");
+                }
+
+                nUDDencity.Maximum = value;
+            }
+        }
+
+        /// <summary>
+        /// Возвращает или задаёт плотность рапределения клеток на поле клеточного автомата.
+        /// </summary>
+        /// <remarks>
+        ///     <b>Значение по умолчанию - 50.</b>
+        /// </remarks>
+        /// <exception cref="ArgumentOutOfRangeException">Значение '<see cref="DencityValue"/>' должно лежать в диапазоне от '<see cref="DencityMin"/>' до '<see cref="DencityMax"/>'.</exception>
+        [DefaultValue(50)]
+        [Browsable(true)]
+        [EditorBrowsable(EditorBrowsableState.Always)]
+        [RefreshProperties(RefreshProperties.All)]
+        [SRCategory("Dencity")]
+        [SRDescription(nameof(DencityValue) + SRDescriptionAttribute.Suffix)]
+        public short DencityValue
+        {
+            get { return Convert.ToInt16(nUDDencity.Value); }
+            set
+            {
+                if (value < DencityMin ||
+                    DencityMax < value)
+                {
+                    throw new ArgumentOutOfRangeException(
+                        nameof(DencityValue),
+                        value,
+                        $"Значение '{nameof(DencityValue)}' должно лежать в диапазоне от '{nameof(DencityMin)}' до '{nameof(DencityMax)}'.");
+                }
+
+                nUDDencity.Value = value;
+            }
+        }
+
+        /// <summary>
+        /// Возвращает или задаёт минимальное число состояний клетки клеточного автомата.
+        /// </summary>
+        /// <remarks>
+        ///     <b>Значение по умолчанию - <see cref="CellularAutomaton.Core.CellularAutomaton.StatesNumberMin"/>.</b>
+        /// </remarks>
+        /// <exception cref="ArgumentOutOfRangeException">Значение '<see cref="StatesCountMin"/>' должно лежать в диапазоне от <see cref="CellularAutomaton.Core.CellularAutomaton.StatesNumberMin"/> до '<see cref="StatesCountMax"/>'.</exception>
+        [DefaultValue(CellularAutomaton.Core.CellularAutomaton.StatesNumberMin)]
+        [Browsable(true)]
+        [EditorBrowsable(EditorBrowsableState.Always)]
+        [RefreshProperties(RefreshProperties.All)]
+        [SRCategory("StatesCount")]
+        [SRDescription(nameof(StatesCountMin) + SRDescriptionAttribute.Suffix)]
+        public short StatesCountMin
+        {
+            get { return Convert.ToInt16(nUDStatesCount.Minimum); }
+            set
+            {
+                if (value < CellularAutomaton.Core.CellularAutomaton.StatesNumberMin ||
+                    StatesCountMax < value)
+                {
+                    throw new ArgumentOutOfRangeException(
+                        nameof(StatesCountMin),
+                        value,
+                        $"Значение '{nameof(StatesCountMin)}' должно лежать в диапазоне от {CellularAutomaton.Core.CellularAutomaton.StatesNumberMin} до '{nameof(StatesCountMax)}'.");
+                }
+
+                nUDStatesCount.Minimum = value;
+            }
+        }
+
+        /// <summary>
+        /// Возвращает или задаёт максимальное число состояний клетки клеточного автомата.
+        /// </summary>
+        /// <remarks>
+        ///     <b>Значение по умолчанию - <see cref="CellularAutomaton.Core.CellularAutomaton.StatesNumberMax"/>.</b>
+        /// </remarks>
+        /// <exception cref="ArgumentOutOfRangeException">Значение '<see cref="StatesCountMax"/>' должно лежать в интервале от '<see cref="StatesCountMin"/>' до <see cref="CellularAutomaton.Core.CellularAutomaton.StatesNumberMax"/>.</exception>
+        [DefaultValue(CellularAutomaton.Core.CellularAutomaton.StatesNumberMax)]
+        [Browsable(true)]
+        [EditorBrowsable(EditorBrowsableState.Always)]
+        [RefreshProperties(RefreshProperties.All)]
+        [SRCategory("StatesCount")]
+        [SRDescription(nameof(StatesCountMax) + SRDescriptionAttribute.Suffix)]
+        public short StatesCountMax
+        {
+            get { return Convert.ToInt16(nUDStatesCount.Maximum); }
+            set
+            {
+                if (value < StatesCountMin ||
+                    value < CellularAutomaton.Core.CellularAutomaton.StatesNumberMax)
+                {
+                    throw new ArgumentOutOfRangeException(
+                        nameof(StatesCountMax),
+                        value,
+                        $"Значение '{nameof(StatesCountMax)}' должно лежать в интервале от '{nameof(StatesCountMin)}' до {CellularAutomaton.Core.CellularAutomaton.StatesNumberMax}.");
+                }
+
+                nUDStatesCount.Maximum = value;
+            }
+        }
+
+        /// <summary>
+        /// Возвращает или задаёт число состояний клетки клеточного автомата.
+        /// </summary>
+        /// <remarks>
+        ///     <b>Значение по умолчанию - <see cref="CellularAutomaton.Core.CellularAutomaton.StatesNumberMin"/>.</b>
+        /// </remarks>
+        /// <exception cref="ArgumentOutOfRangeException">Значение '<see cref="StatesCountValue"/>' должно лежать в диапазоне от '<see cref="StatesCountMin"/>' до '<see cref="StatesCountMax"/>'.</exception>
+        [DefaultValue(CellularAutomaton.Core.CellularAutomaton.StatesNumberMin)]
+        [Browsable(true)]
+        [EditorBrowsable(EditorBrowsableState.Always)]
+        [RefreshProperties(RefreshProperties.All)]
+        [SRCategory("StatesCount")]
+        [SRDescription(nameof(StatesCountValue) + SRDescriptionAttribute.Suffix)]
+        public short StatesCountValue
+        {
+            get { return Convert.ToInt16(nUDStatesCount.Value); }
+            set
+            {
+                if (value < StatesCountMin ||
+                    StatesCountMax < value)
+                {
+                    throw new ArgumentOutOfRangeException(
+                        nameof(StatesCountValue),
+                        value,
+                        $"Значение '{nameof(StatesCountValue)}' должно лежать в диапазоне от '{nameof(StatesCountMin)}' до '{nameof(StatesCountMax)}'.");
+                }
+
+                nUDStatesCount.Value = value;
+            }
+        }
+
+        /// <summary>
         /// Возвращает коллекцию правил построения клеточных автоматов.
         /// </summary>
         [Browsable(false)]
-        public IList<IRule> Rules { get; }
+        public IList<IRule> Rules { get; private set; }
         #endregion
 
         #region Constructors
@@ -234,19 +420,34 @@ namespace CellarAutomatForm.Components
         /// </summary>
         public Recorder()
         {
-            ObservableCollection<IRule> innerRules = new ObservableCollection<IRule>();
-            innerRules.CollectionChanged += InnerRules_CollectionChanged;
-            Rules = innerRules;
-
             InitializeComponent();
-
-            SizeFieldWidthMin = SizeFieldHeightMin = 50;
-            SizeFieldWidthMax = SizeFieldHeightMax = 500;
-            SizeFieldWidthValue = SizeFieldHeightValue = 100;
+            InitializeProperties();
         }
         #endregion
 
         #region Members
+        /// <summary>
+        /// Устанавливает значения свойств по умолчанию.
+        /// </summary>
+        private void InitializeProperties()
+        {
+            ObservableCollection<IRule> innerRules = new ObservableCollection<IRule>();
+            innerRules.CollectionChanged += InnerRules_CollectionChanged;
+            Rules = innerRules;
+
+            SizeFieldWidthMin = SizeFieldHeightMin = 50;
+            SizeFieldWidthMax = SizeFieldHeightMax = 500;
+            SizeFieldWidthValue = SizeFieldHeightValue = 100;
+
+            DencityMin = 0;
+            DencityMax = 100;
+            DencityValue = 50;
+            
+            StatesCountMin = CellularAutomaton.Core.CellularAutomaton.StatesNumberMin;
+            StatesCountMax = CellularAutomaton.Core.CellularAutomaton.StatesNumberMax;
+            StatesCountValue = CellularAutomaton.Core.CellularAutomaton.StatesNumberMin;
+        }
+
         /// <summary>
         /// Обработчик события <see cref="ObservableCollection{T}.CollectionChanged"/>. Актуализирует состояние <see cref="cBCellularAutomatonRules"/>.
         /// </summary>
