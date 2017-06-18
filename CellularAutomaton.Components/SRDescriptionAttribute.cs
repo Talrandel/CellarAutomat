@@ -6,12 +6,14 @@
 // File          : SRDescriptionAttribute.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 18.06.2017 12:11
-// Last Revision : 18.06.2017 12:12
+// Last Revision : 18.06.2017 15:51
 // Description   : 
 #endregion
 
 using System;
 using System.ComponentModel;
+
+using CellularAutomaton.Components.Properties;
 
 namespace CellularAutomaton.Components
 {
@@ -34,13 +36,19 @@ namespace CellularAutomaton.Components
         /// <summary>
         /// Возвращает описание, хранящееся в данном атрибуте.
         /// </summary>
+        /// <returns>Локализованное описание или значение null, если локализованное описание не существует.</returns>
         public override string Description
         {
             get
             {
-                // TODO: string Description
-                return "";
-                //throw new NotImplementedException();
+                try
+                {
+                    return Resources.ResourceManager.GetString(DescriptionValue);
+                }
+                catch
+                {
+                    return null;
+                }
             }
         }
         #endregion

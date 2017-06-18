@@ -6,12 +6,14 @@
 // File          : SRCategoryAttribute.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 18.06.2017 12:11
-// Last Revision : 18.06.2017 12:12
+// Last Revision : 18.06.2017 15:51
 // Description   : 
 #endregion
 
 using System;
 using System.ComponentModel;
+
+using CellularAutomaton.Components.Properties;
 
 namespace CellularAutomaton.Components
 {
@@ -39,9 +41,14 @@ namespace CellularAutomaton.Components
         /// <returns>Локализованное имя категории или значение null, если локализованное имя не существует.</returns>
         protected override string GetLocalizedString(string value)
         {
-            // TODO: string GetLocalizedString(string value)
-            return value;
-            //throw new NotImplementedException();
+            try
+            {
+                return Resources.ResourceManager.GetString(value);
+            }
+            catch
+            {
+                return null;
+            }
         }
         #endregion
     }

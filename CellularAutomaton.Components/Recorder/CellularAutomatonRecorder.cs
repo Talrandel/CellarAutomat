@@ -3,10 +3,10 @@
 // Project       : CellularAutomaton.Components
 // Project type  : 
 // Language      : C# 6.0
-// File          : Recorder.cs
+// File          : CellularAutomatonRecorder.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 18.06.2017 12:21
-// Last Revision : 18.06.2017 12:34
+// Last Revision : 18.06.2017 15:50
 // Description   : 
 #endregion
 
@@ -50,7 +50,7 @@ namespace CellularAutomaton.Components.Recorder
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [RefreshProperties(RefreshProperties.All)]
-        [SRCategory("SizeFieldWidth")]
+        [SRCategory("SizeField")]
         [SRDescription(nameof(SizeFieldWidthMin) + SRDescriptionAttribute.Suffix)]
         public short SizeFieldWidthMin
         {
@@ -81,7 +81,7 @@ namespace CellularAutomaton.Components.Recorder
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [RefreshProperties(RefreshProperties.All)]
-        [SRCategory("SizeFieldWidth")]
+        [SRCategory("SizeField")]
         [SRDescription(nameof(SizeFieldWidthMax) + SRDescriptionAttribute.Suffix)]
         public short SizeFieldWidthMax
         {
@@ -111,7 +111,7 @@ namespace CellularAutomaton.Components.Recorder
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [RefreshProperties(RefreshProperties.All)]
-        [SRCategory("SizeFieldWidth")]
+        [SRCategory("SizeField")]
         [SRDescription(nameof(SizeFieldWidthValue) + SRDescriptionAttribute.Suffix)]
         public short SizeFieldWidthValue
         {
@@ -142,7 +142,7 @@ namespace CellularAutomaton.Components.Recorder
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [RefreshProperties(RefreshProperties.All)]
-        [SRCategory("SizeFieldHeight")]
+        [SRCategory("SizeField")]
         [SRDescription(nameof(SizeFieldHeightMin) + SRDescriptionAttribute.Suffix)]
         public short SizeFieldHeightMin
         {
@@ -173,7 +173,7 @@ namespace CellularAutomaton.Components.Recorder
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [RefreshProperties(RefreshProperties.All)]
-        [SRCategory("SizeFieldHeight")]
+        [SRCategory("SizeField")]
         [SRDescription(nameof(SizeFieldHeightMax) + SRDescriptionAttribute.Suffix)]
         public short SizeFieldHeightMax
         {
@@ -203,7 +203,7 @@ namespace CellularAutomaton.Components.Recorder
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [RefreshProperties(RefreshProperties.All)]
-        [SRCategory("SizeFieldHeight")]
+        [SRCategory("SizeField")]
         [SRDescription(nameof(SizeFieldHeightValue) + SRDescriptionAttribute.Suffix)]
         public short SizeFieldHeightValue
         {
