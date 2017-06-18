@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CellarAutomatForm.Presenter
+﻿namespace CellarAutomatForm.Presenter
 {
     public interface IViewMainForm
     {
@@ -12,10 +6,12 @@ namespace CellarAutomatForm.Presenter
 
         void StopRecord();
 
-        void RewindRecord(short frame);
+        void RewindRecord();
 
-        void LoadRecord(string fileName);
+        void LoadRecord();
 
-        void SaveRecord(string fileName);
+        void SaveRecord();
+
+        void GetRecordParameters();
     }
 }
