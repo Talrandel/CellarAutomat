@@ -5,8 +5,8 @@
 // Language      : C# 6.0
 // File          : Record.cs
 // Author        : Антипкин С.С., Макаров Е.А.
-// Created       : 17.06.2017 11:54
-// Last Revision : 17.06.2017 16:30
+// Created       : 18.06.2017 12:18
+// Last Revision : 18.06.2017 12:19
 // Description   : 
 #endregion
 
@@ -18,7 +18,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 using CellularAutomaton.Core.Properties;
 
-namespace CellularAutomaton.Core.Helpers.Record
+namespace CellularAutomaton.Core
 {
     /// <summary>
     /// Представляет запись функционирования клеточного автомата.

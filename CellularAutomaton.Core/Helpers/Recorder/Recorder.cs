@@ -6,7 +6,7 @@
 // File          : Recorder.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 16.06.2017 13:14
-// Last Revision : 17.06.2017 16:30
+// Last Revision : 18.06.2017 12:19
 // Description   : 
 #endregion
 
@@ -34,7 +34,7 @@ namespace CellularAutomaton.Core.Helpers.Recorder
         /// <summary>
         /// Запись функционирования клеточного автомата.
         /// </summary>
-        private readonly Record.Record _record;
+        private readonly Record _record;
         #endregion
 
         #region Constructors
@@ -51,7 +51,7 @@ namespace CellularAutomaton.Core.Helpers.Recorder
             _ca = ca;
             _ca.GenerationChanged += CellularAutomatonGenerationChanged;
 
-            _record = new Record.Record();
+            _record = new Record();
             _colorize = PointValueToColor;
         }
 

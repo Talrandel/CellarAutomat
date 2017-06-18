@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using CellularAutomaton.Core.Rules;
 using CellularAutomaton.Core.Helpers.Player;
-using CellularAutomaton.Core.Helpers.Record;
 using CellularAutomaton.Core.Helpers.Recorder;
 
 namespace CellarAutomatForm.Presenter

@@ -6,7 +6,7 @@
 // File          : Player.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 17.06.2017 11:54
-// Last Revision : 17.06.2017 16:29
+// Last Revision : 18.06.2017 12:19
 // Description   : 
 #endregion
 
@@ -54,7 +54,7 @@ namespace CellularAutomaton.Core.Helpers.Player
         /// <summary>
         /// Воспроизводимая запись.
         /// </summary>
-        private Record.Record _record;
+        private Record _record;
 
         /// <summary>
         /// Перечислитель для записи
@@ -163,7 +163,7 @@ namespace CellularAutomaton.Core.Helpers.Player
         /// </summary>
         /// <param name="rec">Запись для воспроизведения.</param>
         /// <exception cref="ArgumentNullException">Параметр <paramref name="rec"/> имеет значение <b>null</b>.</exception>
-        public void Load(Record.Record rec)
+        public void Load(Record rec)
         {
             Stop();
             if (rec == null)

@@ -5,12 +5,13 @@
 // Language      : C# 6.0
 // File          : IPlayer.cs
 // Author        : Антипкин С.С., Макаров Е.А.
-// Created       : 13.06.2017 21:43
-// Last Revision : 16.06.2017 12:48
+// Created       : 16.06.2017 13:14
+// Last Revision : 18.06.2017 12:19
 // Description   : 
 #endregion
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace CellularAutomaton.Core.Helpers.Player
 {
@@ -50,7 +51,7 @@ namespace CellularAutomaton.Core.Helpers.Player
         /// <summary>
         /// Останавливает воспроизведение и переходит в начало записи.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Stop")]
+        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Stop")]
         void Stop();
 
         /// <summary>
@@ -78,7 +79,7 @@ namespace CellularAutomaton.Core.Helpers.Player
         /// Загружает указанную запись в проигрыватель.
         /// </summary>
         /// <param name="rec">Запись для воспроизведения.</param>
-        void Load(Record.Record rec);
+        void Load(Record rec);
 
         /// <summary>
         /// Загружает запись из указаннного файла.
