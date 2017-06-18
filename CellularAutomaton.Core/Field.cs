@@ -13,6 +13,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using System.Linq;
 
 using CellularAutomaton.Core.Properties;
@@ -88,13 +89,13 @@ namespace CellularAutomaton.Core
             if (width < 0)
             {
                 throw new ArgumentOutOfRangeException(nameof(width),
-                    string.Format(Resources.Ex__Ширина_поля__0__меньше_нуля_, nameof(width)));
+                    string.Format(CultureInfo.CurrentCulture, Resources.Ex__Ширина_поля__0__меньше_нуля_, nameof(width)));
             }
 
             if (height < 0)
             {
                 throw new ArgumentOutOfRangeException(nameof(width),
-                    string.Format(Resources.Ex__Высота_поля__0__меньше_нуля_, nameof(height)));
+                    string.Format(CultureInfo.CurrentCulture, Resources.Ex__Высота_поля__0__меньше_нуля_, nameof(height)));
             }
 
             _width = width;
@@ -216,7 +217,7 @@ namespace CellularAutomaton.Core
                 }
                 default:
                     throw new ArgumentOutOfRangeException(nameof(direction), direction,
-                        string.Format(Resources.Ex__Недопустимое_значение_параметра__0__, nameof(direction)));
+                        string.Format(CultureInfo.CurrentCulture, Resources.Ex__Недопустимое_значение_параметра__0__, nameof(direction)));
             }
 
             return state;
