@@ -38,19 +38,18 @@
   <PropertyGroup>
     <StartupObject />
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>CellularAutomaton.Core.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Directions.cs" />
-    <Compile Include="Helpers\Player\IPlayer.cs" />
-    <Compile Include="Helpers\Player\Player.cs" />
-    <Compile Include="Helpers\Player\StatePlayer.cs" />
-    <Compile Include="Helpers\Recorder\ConvertPointValueToColor.cs" />
-    <Compile Include="Helpers\Recorder\IRecorder.cs" />
-    <Compile Include="Helpers\Recorder\Recorder.cs" />
-    <Compile Include="Helpers\Recorder\StateRecorder.cs" />
     <Compile Include="Record.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -72,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="CellularAutomaton.Core.pfx" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">

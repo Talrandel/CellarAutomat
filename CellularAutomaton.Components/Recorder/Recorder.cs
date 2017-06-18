@@ -5,489 +5,240 @@
 // Language      : C# 6.0
 // File          : Recorder.cs
 // Author        : Антипкин С.С., Макаров Е.А.
-// Created       : 18.06.2017 12:21
-// Last Revision : 18.06.2017 12:34
+// Created       : 18.06.2017 12:44
+// Last Revision : 18.06.2017 12:51
 // Description   : 
 #endregion
 
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Linq;
-using System.Windows.Forms;
+using System.Drawing;
 
-using CellularAutomaton.Components.Properties;
-using CellularAutomaton.Core.Rules;
+using CellularAutomaton.Core;
 
 namespace CellularAutomaton.Components.Recorder
 {
     /// <summary>
-    /// Представляет регистратор функционирования клеточного автомата описываемого <see cref="CellularAutomaton.Core.CellularAutomaton"/>.
+    /// Представляет регистратор функционирования клеточного автомата.
     /// </summary>
-    public partial class Recorder : UserControl
+    public class Recorder : IRecorder
     {
-        #region Properties
+        #region Fields
         /// <summary>
-        /// Возвращает или задаёт имя файла в который осуществляется сохранение записи.
+        /// Регистрируемый клеточный автомат.
         /// </summary>
-        [Browsable(true)]
-        [EditorBrowsable(EditorBrowsableState.Always)]
-        [SRCategory("CatData")]
-        [SRDescription(nameof(FileName) + SRDescriptionAttribute.Suffix)]
-        public string FileName { get; set; }
+        private readonly Core.CellularAutomaton _ca;
 
         /// <summary>
-        /// Возвращает или задаёт минимальную ширину поля клеточного автомата.
+        /// Метод преобразования кода клетки поля в цвет.
         /// </summary>
-        /// <remarks>
-        ///     <b>Значение по умолчанию - 50.</b>
-        /// </remarks>
-        /// <exception cref="ArgumentOutOfRangeException">Значение '<see cref="SizeFieldWidthMin"/>' должно лежать в диапазоне от 0 до '<see cref="SizeFieldWidthMax"/>'.</exception>
-        [DefaultValue(50)]
-        [Browsable(true)]
-        [EditorBrowsable(EditorBrowsableState.Always)]
-        [RefreshProperties(RefreshProperties.All)]
-        [SRCategory("SizeFieldWidth")]
-        [SRDescription(nameof(SizeFieldWidthMin) + SRDescriptionAttribute.Suffix)]
-        public short SizeFieldWidthMin
-        {
-            get { return Convert.ToInt16(nUDWidth.Minimum); }
-            set
-            {
-                if (value < 0 ||
-                    SizeFieldWidthMax < value)
-                {
-                    throw new ArgumentOutOfRangeException(
-                        nameof(SizeFieldWidthMin),
-                        value,
-                        string.Format(Resources.Ex__Значение___0___должно_лежать_в_диапазоне_от___1___до___2___, nameof(SizeFieldWidthMin), nameof(SizeFieldWidthMax)));
-                }
-
-                nUDWidth.Minimum = value;
-            }
-        }
+        private readonly ConvertPointValueToColor _colorize;
 
         /// <summary>
-        /// Возвращает или задаёт максимальную ширину поля клеточного автомата.
+        /// Запись функционирования клеточного автомата.
         /// </summary>
-        /// <remarks>
-        ///     <b>Значение по умолчанию - 500.</b>
-        /// </remarks>
-        /// <exception cref="ArgumentOutOfRangeException">Значение '<see cref="SizeFieldWidthMax"/>' не должно быть меньше '<see cref="SizeFieldWidthMin"/>'.</exception>
-        [DefaultValue(500)]
-        [Browsable(true)]
-        [EditorBrowsable(EditorBrowsableState.Always)]
-        [RefreshProperties(RefreshProperties.All)]
-        [SRCategory("SizeFieldWidth")]
-        [SRDescription(nameof(SizeFieldWidthMax) + SRDescriptionAttribute.Suffix)]
-        public short SizeFieldWidthMax
-        {
-            get { return Convert.ToInt16(nUDWidth.Maximum); }
-            set
-            {
-                if (value < SizeFieldWidthMin)
-                {
-                    throw new ArgumentOutOfRangeException(
-                        nameof(SizeFieldWidthMax),
-                        value,
-                        string.Format(Resources.Ex__Значение___0___не_должно_быть_меньше___1___, nameof(SizeFieldWidthMax), nameof(SizeFieldWidthMin)));
-                }
-
-                nUDWidth.Maximum = value;
-            }
-        }
-
-        /// <summary>
-        /// Возвращает или задаёт ширину поля клеточного автомата.
-        /// </summary>
-        /// <remarks>
-        ///     <b>Значение по умолчанию - 100.</b>
-        /// </remarks>
-        /// <exception cref="ArgumentOutOfRangeException">Значение '<see cref="SizeFieldHeightValue"/>' должно лежать в диапазоне от '<see cref="SizeFieldHeightMin"/>' до '<see cref="SizeFieldHeightMax"/>'.</exception>
-        [DefaultValue(100)]
-        [Browsable(true)]
-        [EditorBrowsable(EditorBrowsableState.Always)]
-        [RefreshProperties(RefreshProperties.All)]
-        [SRCategory("SizeFieldWidth")]
-        [SRDescription(nameof(SizeFieldWidthValue) + SRDescriptionAttribute.Suffix)]
-        public short SizeFieldWidthValue
-        {
-            get { return Convert.ToInt16(nUDWidth.Value); }
-            set
-            {
-                if (value < SizeFieldWidthMin ||
-                    SizeFieldWidthMax < value)
-                {
-                    throw new ArgumentOutOfRangeException(
-                        nameof(SizeFieldWidthValue),
-                        value,
-                        string.Format(Resources.Ex__Значение___0___должно_лежать_в_диапазоне_от___1___до___2___, nameof(SizeFieldWidthValue), nameof(SizeFieldWidthMin), nameof(SizeFieldWidthMax)));
-                }
-
-                nUDWidth.Value = value;
-            }
-        }
-
-        /// <summary>
-        /// Возвращает или задаёт минимальную высоту поля клеточного автомата.
-        /// </summary>
-        /// <remarks>
-        ///     <b>Значение по умолчанию - 50.</b>
-        /// </remarks>
-        /// <exception cref="ArgumentOutOfRangeException">Значение '<see cref="SizeFieldHeightMin"/>' должно лежать в диапазоне от 0 до '<see cref="SizeFieldHeightMax"/>'.</exception>
-        [DefaultValue(50)]
-        [Browsable(true)]
-        [EditorBrowsable(EditorBrowsableState.Always)]
-        [RefreshProperties(RefreshProperties.All)]
-        [SRCategory("SizeFieldHeight")]
-        [SRDescription(nameof(SizeFieldHeightMin) + SRDescriptionAttribute.Suffix)]
-        public short SizeFieldHeightMin
-        {
-            get { return Convert.ToInt16(nUDHeight.Minimum); }
-            set
-            {
-                if (value < 0 ||
-                    SizeFieldHeightMax < value)
-                {
-                    throw new ArgumentOutOfRangeException(
-                        nameof(SizeFieldHeightMin),
-                        value,
-                        string.Format(Resources.Ex__Значение___0___должно_лежать_в_диапазоне_от___1___до___2___, nameof(SizeFieldHeightMin), nameof(SizeFieldHeightMax)));
-                }
-
-                nUDHeight.Minimum = value;
-            }
-        }
-
-        /// <summary>
-        /// Возвращает или задаёт максимальную высоту поля клеточного автомата.
-        /// </summary>
-        /// <remarks>
-        ///     <b>Значение по умолчанию - 500.</b>
-        /// </remarks>
-        /// <exception cref="ArgumentOutOfRangeException">Значение '<see cref="SizeFieldHeightMax"/>' не должно быть меньше '<see cref="SizeFieldHeightMin"/>'.</exception>
-        [DefaultValue(500)]
-        [Browsable(true)]
-        [EditorBrowsable(EditorBrowsableState.Always)]
-        [RefreshProperties(RefreshProperties.All)]
-        [SRCategory("SizeFieldHeight")]
-        [SRDescription(nameof(SizeFieldHeightMax) + SRDescriptionAttribute.Suffix)]
-        public short SizeFieldHeightMax
-        {
-            get { return Convert.ToInt16(nUDHeight.Maximum); }
-            set
-            {
-                if (value < SizeFieldHeightMin)
-                {
-                    throw new ArgumentOutOfRangeException(
-                        nameof(SizeFieldHeightMax),
-                        value,
-                        string.Format(Resources.Ex__Значение___0___не_должно_быть_меньше___1___, nameof(SizeFieldHeightMax), nameof(SizeFieldHeightMin)));
-                }
-
-                nUDHeight.Maximum = value;
-            }
-        }
-
-        /// <summary>
-        /// Возвращает или задаёт высоту поля клеточного автомата.
-        /// </summary>
-        /// <remarks>
-        ///     <b>Значение по умолчанию - 100.</b>
-        /// </remarks>
-        /// <exception cref="ArgumentOutOfRangeException">Значение '<see cref="SizeFieldHeightValue"/>' должно лежать в диапазоне от '<see cref="SizeFieldHeightMin"/>' до '<see cref="SizeFieldHeightMax"/>'.</exception>
-        [DefaultValue(100)]
-        [Browsable(true)]
-        [EditorBrowsable(EditorBrowsableState.Always)]
-        [RefreshProperties(RefreshProperties.All)]
-        [SRCategory("SizeFieldHeight")]
-        [SRDescription(nameof(SizeFieldHeightValue) + SRDescriptionAttribute.Suffix)]
-        public short SizeFieldHeightValue
-        {
-            get { return Convert.ToInt16(nUDHeight.Value); }
-            set
-            {
-                if (value < SizeFieldHeightMin ||
-                    SizeFieldHeightMax < value)
-                {
-                    throw new ArgumentOutOfRangeException(
-                        nameof(SizeFieldHeightValue),
-                        value,
-                        string.Format(Resources.Ex__Значение___0___должно_лежать_в_диапазоне_от___1___до___2___, nameof(SizeFieldHeightValue), nameof(SizeFieldHeightMin), nameof(SizeFieldHeightMax)));
-                }
-
-                nUDHeight.Value = value;
-            }
-        }
-
-        /// <summary>
-        /// Возвращает или задаёт минимальную плотность распределения клеток на поле клеточного автомата.
-        /// </summary>
-        /// <remarks>
-        ///     <b>Значение по умолчанию - 0.</b>
-        /// </remarks>
-        /// <exception cref="ArgumentOutOfRangeException">Значение '<see cref="DencityMin"/>' должно лежать в диапазоне от 0 до '<see cref="DencityMax"/>'.</exception>
-        [DefaultValue(0)]
-        [Browsable(true)]
-        [EditorBrowsable(EditorBrowsableState.Always)]
-        [RefreshProperties(RefreshProperties.All)]
-        [SRCategory("Dencity")]
-        [SRDescription(nameof(DencityMin) + SRDescriptionAttribute.Suffix)]
-        public short DencityMin
-        {
-            get { return Convert.ToInt16(nUDDencity.Minimum); }
-            set
-            {
-                if (value < 0 ||
-                    DencityMax < value)
-                {
-                    throw new ArgumentOutOfRangeException(
-                        nameof(DencityMin),
-                        value,
-                        string.Format(Resources.Ex__Значение___0___должно_лежать_в_диапазоне_от___1___до___2___, nameof(DencityMin), nameof(DencityMax)));
-                }
-
-                nUDDencity.Minimum = value;
-            }
-        }
-
-        /// <summary>
-        /// Возвращает или задаёт максимальную плотность распределения клеток на поле клеточного автомата.
-        /// </summary>
-        /// <remarks>
-        ///     <b>Значение по умолчанию - 100.</b>
-        /// </remarks>
-        /// <exception cref="ArgumentOutOfRangeException">Значение '<see cref="DencityMax"/>' должно лежать в интервале от '<see cref="DencityMin"/>' до 100.</exception>
-        [DefaultValue(100)]
-        [Browsable(true)]
-        [EditorBrowsable(EditorBrowsableState.Always)]
-        [RefreshProperties(RefreshProperties.All)]
-        [SRCategory("Dencity")]
-        [SRDescription(nameof(DencityMax) + SRDescriptionAttribute.Suffix)]
-        public short DencityMax
-        {
-            get { return Convert.ToInt16(nUDDencity.Maximum); }
-            set
-            {
-                if (value < DencityMin ||
-                    value < 100)
-                {
-                    throw new ArgumentOutOfRangeException(
-                        nameof(DencityMax),
-                        value,
-                        string.Format(Resources.Ex__Значение___0___должно_лежать_в_диапазоне_от___1___до___2___, nameof(DencityMax), nameof(DencityMin), 0));
-                }
-
-                nUDDencity.Maximum = value;
-            }
-        }
-
-        /// <summary>
-        /// Возвращает или задаёт плотность рапределения клеток на поле клеточного автомата.
-        /// </summary>
-        /// <remarks>
-        ///     <b>Значение по умолчанию - 50.</b>
-        /// </remarks>
-        /// <exception cref="ArgumentOutOfRangeException">Значение '<see cref="DencityValue"/>' должно лежать в диапазоне от '<see cref="DencityMin"/>' до '<see cref="DencityMax"/>'.</exception>
-        [DefaultValue(50)]
-        [Browsable(true)]
-        [EditorBrowsable(EditorBrowsableState.Always)]
-        [RefreshProperties(RefreshProperties.All)]
-        [SRCategory("Dencity")]
-        [SRDescription(nameof(DencityValue) + SRDescriptionAttribute.Suffix)]
-        public short DencityValue
-        {
-            get { return Convert.ToInt16(nUDDencity.Value); }
-            set
-            {
-                if (value < DencityMin ||
-                    DencityMax < value)
-                {
-                    throw new ArgumentOutOfRangeException(
-                        nameof(DencityValue),
-                        value,
-                        string.Format(Resources.Ex__Значение___0___должно_лежать_в_диапазоне_от___1___до___2___, nameof(DencityValue), nameof(DencityMin), nameof(DencityMax)));
-                }
-
-                nUDDencity.Value = value;
-            }
-        }
-
-        /// <summary>
-        /// Возвращает или задаёт минимальное число состояний клетки клеточного автомата.
-        /// </summary>
-        /// <remarks>
-        ///     <b>Значение по умолчанию - <see cref="CellularAutomaton.Core.CellularAutomaton.StatesNumberMin"/>.</b>
-        /// </remarks>
-        /// <exception cref="ArgumentOutOfRangeException">Значение '<see cref="StatesCountMin"/>' должно лежать в диапазоне от <see cref="CellularAutomaton.Core.CellularAutomaton.StatesNumberMin"/> до '<see cref="StatesCountMax"/>'.</exception>
-        [DefaultValue(Core.CellularAutomaton.StatesNumberMin)]
-        [Browsable(true)]
-        [EditorBrowsable(EditorBrowsableState.Always)]
-        [RefreshProperties(RefreshProperties.All)]
-        [SRCategory("StatesCount")]
-        [SRDescription(nameof(StatesCountMin) + SRDescriptionAttribute.Suffix)]
-        public short StatesCountMin
-        {
-            get { return Convert.ToInt16(nUDStatesCount.Minimum); }
-            set
-            {
-                if (value < Core.CellularAutomaton.StatesNumberMin ||
-                    StatesCountMax < value)
-                {
-                    throw new ArgumentOutOfRangeException(
-                        nameof(StatesCountMin),
-                        value,
-                        string.Format(Resources.Ex__Значение___0___должно_лежать_в_диапазоне_от___1___до___2___, nameof(StatesCountMin), nameof(Core.CellularAutomaton.StatesNumberMin), nameof(StatesCountMax)));
-                }
-
-                nUDStatesCount.Minimum = value;
-            }
-        }
-
-        /// <summary>
-        /// Возвращает или задаёт максимальное число состояний клетки клеточного автомата.
-        /// </summary>
-        /// <remarks>
-        ///     <b>Значение по умолчанию - <see cref="CellularAutomaton.Core.CellularAutomaton.StatesNumberMax"/>.</b>
-        /// </remarks>
-        /// <exception cref="ArgumentOutOfRangeException">Значение '<see cref="StatesCountMax"/>' должно лежать в интервале от '<see cref="StatesCountMin"/>' до <see cref="CellularAutomaton.Core.CellularAutomaton.StatesNumberMax"/>.</exception>
-        [DefaultValue(Core.CellularAutomaton.StatesNumberMax)]
-        [Browsable(true)]
-        [EditorBrowsable(EditorBrowsableState.Always)]
-        [RefreshProperties(RefreshProperties.All)]
-        [SRCategory("StatesCount")]
-        [SRDescription(nameof(StatesCountMax) + SRDescriptionAttribute.Suffix)]
-        public short StatesCountMax
-        {
-            get { return Convert.ToInt16(nUDStatesCount.Maximum); }
-            set
-            {
-                if (value < StatesCountMin ||
-                    value < Core.CellularAutomaton.StatesNumberMax)
-                {
-                    throw new ArgumentOutOfRangeException(
-                        nameof(StatesCountMax),
-                        value,
-                        string.Format(Resources.Ex__Значение___0___должно_лежать_в_диапазоне_от___1___до___2___, nameof(StatesCountMax), nameof(StatesCountMin), Core.CellularAutomaton.StatesNumberMax));
-                }
-
-                nUDStatesCount.Maximum = value;
-            }
-        }
-
-        /// <summary>
-        /// Возвращает или задаёт число состояний клетки клеточного автомата.
-        /// </summary>
-        /// <remarks>
-        ///     <b>Значение по умолчанию - <see cref="CellularAutomaton.Core.CellularAutomaton.StatesNumberMin"/>.</b>
-        /// </remarks>
-        /// <exception cref="ArgumentOutOfRangeException">Значение '<see cref="StatesCountValue"/>' должно лежать в диапазоне от '<see cref="StatesCountMin"/>' до '<see cref="StatesCountMax"/>'.</exception>
-        [DefaultValue(Core.CellularAutomaton.StatesNumberMin)]
-        [Browsable(true)]
-        [EditorBrowsable(EditorBrowsableState.Always)]
-        [RefreshProperties(RefreshProperties.All)]
-        [SRCategory("StatesCount")]
-        [SRDescription(nameof(StatesCountValue) + SRDescriptionAttribute.Suffix)]
-        public short StatesCountValue
-        {
-            get { return Convert.ToInt16(nUDStatesCount.Value); }
-            set
-            {
-                if (value < StatesCountMin ||
-                    StatesCountMax < value)
-                {
-                    throw new ArgumentOutOfRangeException(
-                        nameof(StatesCountValue),
-                        value,
-                        string.Format(Resources.Ex__Значение___0___должно_лежать_в_диапазоне_от___1___до___2___, nameof(StatesCountValue), nameof(StatesCountMin), nameof(StatesCountMax)));
-                }
-
-                nUDStatesCount.Value = value;
-            }
-        }
-
-        /// <summary>
-        /// Возвращает коллекцию правил построения клеточных автоматов.
-        /// </summary>
-        [Browsable(false)]
-        public IList<IRule> Rules { get; private set; }
+        private readonly Record _record;
         #endregion
 
         #region Constructors
         /// <summary>
-        /// Инициализирует новый экземплр класса <see cref="Recorder"/>.
+        /// Инициализирует новый экземпляр класса <see cref="Recorder"/>.
         /// </summary>
-        public Recorder()
+        /// <param name="ca">Экземпляр класса <see cref="CellularAutomaton"/> функционирование которого регистрируется.</param>
+        /// <exception cref="ArgumentNullException">Параметр <paramref name="ca"/> имеет значение <b>null</b>.</exception>
+        public Recorder(Core.CellularAutomaton ca)
         {
-            InitializeComponent();
-            InitializeProperties();
+            if (ca == null)
+                throw new ArgumentNullException(nameof(ca));
+
+            _ca = ca;
+            _ca.GenerationChanged += CellularAutomatonGenerationChanged;
+
+            _record = new Record();
+            _colorize = PointValueToColor;
         }
+
+        /// <summary>
+        /// Инициализирует новый экземпляр класса <see cref="Recorder"/>, заданной функцией раскрашивания результатов функционирования.
+        /// </summary>
+        /// <param name="ca">Экземпляр класса <see cref="CellularAutomaton"/> функционирование которого регистрируется.</param>
+        /// <param name="colorize">Функция раскрашивания визуализируемого клеточного автомата.</param>
+        /// <exception cref="ArgumentNullException">
+        ///     <para>Параметр <paramref name="ca"/> имеет значение <b>null</b>.</para>
+        ///     <para>-- или --</para>
+        ///     <para>Параметр <paramref name="colorize"/> имеет значение <b>null</b>.</para>
+        /// </exception>
+        public Recorder(Core.CellularAutomaton ca, ConvertPointValueToColor colorize) : this(ca)
+        {
+            if (colorize == null)
+                throw new ArgumentNullException(nameof(colorize));
+
+            _colorize = colorize;
+        }
+        #endregion
+
+        #region IRecorder Members
+        /// <summary>
+        /// Возвращает состояние регистратора.
+        /// </summary>
+        public StateRecorder State { get; private set; } = StateRecorder.Stop;
+
+        /// <summary>
+        /// Начинает запись.
+        /// </summary>
+        public void Record()
+        {
+            if (State != StateRecorder.Record)
+            {
+                State = StateRecorder.Record;
+                _ca.Stop = false;
+
+                OnStartRecord();
+
+                _ca.Processing();
+            }
+        }
+
+        /// <summary>
+        /// Останавливает запись.
+        /// </summary>
+        public void Stop()
+        {
+            if (State != StateRecorder.Stop)
+            {
+                State = StateRecorder.Stop;
+                _ca.Stop = true;
+
+                OnStopRecord();
+            }
+        }
+
+        /// <summary>
+        /// Сохраняет запись в указанный файл.
+        /// </summary>
+        /// <param name="fileName">Имя файла для сохранения записи.</param>
+        /// <exception cref="ArgumentException">Имя файла не задано, пустое или состоит из одних пробелов.</exception>
+        public void Save(string fileName)
+        {
+            Stop();
+            _record.Save(fileName);
+        }
+
+        /// <summary>
+        /// Происходит при начале записи.
+        /// </summary>
+        public event EventHandler StartRecord;
+
+        /// <summary>
+        /// Происходит при окончании записи.
+        /// </summary>
+        public event EventHandler StopRecord;
         #endregion
 
         #region Members
         /// <summary>
-        /// Устанавливает значения свойств по умолчанию.
+        /// Обработчик события <see cref="Core.CellularAutomaton.GenerationChanged"/>. Создаёт и сохраняет новый кадр в записи.
         /// </summary>
-        private void InitializeProperties()
+        /// <param name="sender">Источник события.</param>
+        /// <param name="e">Информация о событии.</param>
+        private void CellularAutomatonGenerationChanged(object sender, EventArgs e)
         {
-            ObservableCollection<IRule> innerRules = new ObservableCollection<IRule>();
-            innerRules.CollectionChanged += InnerRules_CollectionChanged;
-            Rules = innerRules;
-
-            SizeFieldWidthMin = SizeFieldHeightMin = 50;
-            SizeFieldWidthMax = SizeFieldHeightMax = 500;
-            SizeFieldWidthValue = SizeFieldHeightValue = 100;
-
-            DencityMin = 0;
-            DencityMax = 100;
-            DencityValue = 50;
-
-            StatesCountMin = Core.CellularAutomaton.StatesNumberMin;
-            StatesCountMax = Core.CellularAutomaton.StatesNumberMax;
-            StatesCountValue = Core.CellularAutomaton.StatesNumberMin;
+            _record.Rec.Add(DrawingFromField(_ca.CurrentField));
         }
 
         /// <summary>
-        /// Обработчик события <see cref="ObservableCollection{T}.CollectionChanged"/>. Актуализирует состояние <see cref="cBCellularAutomatonRules"/>.
+        /// Создаёт рисунок из поля клеточного автомата.
         /// </summary>
-        /// <param name="sender">Источник события.</param>
-        /// <param name="e">Сведения о событии.</param>
-        private void InnerRules_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        /// <param name="field">Визуализируемое поле клеточного автомата.</param>
+        /// <returns>Визуализированное поле.</returns>
+        /// <exception cref="ArgumentNullException">Параметр <paramref name="field"/> имеет значение <b>null</b>.</exception>
+        public Bitmap DrawingFromField(Field field)
         {
-            cBCellularAutomatonRules.Items.Clear();
-            cBCellularAutomatonRules.Items.AddRange((object[])Rules.Select(item => item.Name));
+            if (field == null)
+                throw new ArgumentNullException(nameof(field));
+
+            int width = field.Width;
+            int height = field.Height;
+
+            Bitmap bitmap = null;
+            try
+            {
+                bitmap = new Bitmap(width, height);
+
+                for (int i = 0; i < width; i++)
+                {
+                    for (int j = 0; j < height; j++)
+                        bitmap.SetPixel(i, j, _colorize(field[i, j]));
+                }
+
+                return bitmap;
+            }
+            catch
+            {
+                bitmap?.Dispose();
+                throw;
+            }
         }
 
         /// <summary>
-        /// Обработчик события <see cref="Control.Click"/>. Начинает запись функционирования клеточного автомата.
+        /// Преобразует состояние клетки поля клеточного автомата в цвет.
         /// </summary>
-        /// <param name="sender">Источник события.</param>
-        /// <param name="e">Сведения о событии.</param>
-        private void bRecord_Click(object sender, EventArgs e)
+        /// <param name="value">Состояние клетки поля.</param>
+        /// <returns>Цвет соответствующий состоянию клетки.</returns>
+        private static Color PointValueToColor(int value)
         {
-            throw new NotImplementedException();
+            switch (value)
+            {
+                case 0:
+                    return Color.Red;
+                case 1:
+                    return Color.Green;
+                case 2:
+                    return Color.Blue;
+                case 3:
+                    return Color.Yellow;
+                case 4:
+                    return Color.Pink;
+                case 5:
+                    return Color.DarkBlue;
+                case 6:
+                    return Color.White;
+                case 7:
+                    return Color.Orange;
+                case 8:
+                    return Color.GreenYellow;
+                case 9:
+                    return Color.MediumVioletRed;
+                case 10:
+                    return Color.BlueViolet;
+                case 11:
+                    return Color.PaleVioletRed;
+                case 12:
+                    return Color.LightGreen;
+                case 13:
+                    return Color.Purple;
+                case 14:
+                    return Color.PapayaWhip;
+                case 15:
+                    return Color.SaddleBrown;
+                default:
+                    return Color.Black;
+            }
         }
 
         /// <summary>
-        /// Обработчик события <see cref="Control.Click"/>. Останавливает запись функционирования клеточного автомата.
+        /// Вызывает событие <see cref="StartRecord"/>.
         /// </summary>
-        /// <param name="sender">Источник события.</param>
-        /// <param name="e">Сведения о событии.</param>
-        private void bStop_Click(object sender, EventArgs e)
+        protected virtual void OnStartRecord()
         {
-            throw new NotImplementedException();
+            StartRecord?.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>
-        /// Обработчик события <see cref="Control.Click"/>. Сохраняет запись функционирования клеточного автомата в файл.
+        /// Вызывает событие <see cref="StopRecord"/>.
         /// </summary>
-        /// <param name="sender">Источник события.</param>
-        /// <param name="e">Сведения о событии.</param>
-        private void bSave_Click(object sender, EventArgs e)
+        protected virtual void OnStopRecord()
         {
-            throw new NotImplementedException();
+            StopRecord?.Invoke(this, EventArgs.Empty);
         }
         #endregion
     }

@@ -1,12 +1,12 @@
 ﻿#region Header
 // Solution      : CellularAutomaton
-// Project       : CellularAutomaton.Core
+// Project       : CellularAutomaton.Components
 // Project type  : 
 // Language      : C# 6.0
 // File          : Player.cs
 // Author        : Антипкин С.С., Макаров Е.А.
-// Created       : 17.06.2017 11:54
-// Last Revision : 18.06.2017 12:19
+// Created       : 18.06.2017 12:46
+// Last Revision : 18.06.2017 12:46
 // Description   : 
 #endregion
 
@@ -16,9 +16,10 @@ using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Timers;
 
-using CellularAutomaton.Core.Properties;
+using CellularAutomaton.Components.Properties;
+using CellularAutomaton.Core;
 
-namespace CellularAutomaton.Core.Helpers.Player
+namespace CellularAutomaton.Components.Player
 {
     /// <summary>
     /// Предоставляет методы для визуализации работы клеточного автомата.

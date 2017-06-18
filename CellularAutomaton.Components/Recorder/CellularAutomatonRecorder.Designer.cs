@@ -1,6 +1,6 @@
 ﻿namespace CellularAutomaton.Components.Recorder
 {
-    partial class Recorder
+    partial class CellularAutomatonRecorder
     {
         /// <summary> 
         /// Обязательная переменная конструктора.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Recorder));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CellularAutomatonRecorder));
             this.gBSettings = new System.Windows.Forms.GroupBox();
             this.tLPSettings = new System.Windows.Forms.TableLayoutPanel();
             this.gBSettingsField = new System.Windows.Forms.GroupBox();

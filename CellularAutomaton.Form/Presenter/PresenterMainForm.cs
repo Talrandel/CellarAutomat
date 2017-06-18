@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
+using CellularAutomaton.Components.Player;
 using CellularAutomaton.Core.Rules;
-using CellularAutomaton.Core.Helpers.Player;
-using CellularAutomaton.Core.Helpers.Recorder;
 
 namespace CellarAutomatForm.Presenter
 {

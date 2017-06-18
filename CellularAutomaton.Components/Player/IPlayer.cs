@@ -1,19 +1,21 @@
 ﻿#region Header
 // Solution      : CellularAutomaton
-// Project       : CellularAutomaton.Core
+// Project       : CellularAutomaton.Components
 // Project type  : 
 // Language      : C# 6.0
 // File          : IPlayer.cs
 // Author        : Антипкин С.С., Макаров Е.А.
-// Created       : 16.06.2017 13:14
-// Last Revision : 18.06.2017 12:19
+// Created       : 18.06.2017 12:46
+// Last Revision : 18.06.2017 12:46
 // Description   : 
 #endregion
 
 using System;
 using System.Diagnostics.CodeAnalysis;
 
-namespace CellularAutomaton.Core.Helpers.Player
+using CellularAutomaton.Core;
+
+namespace CellularAutomaton.Components.Player
 {
     /// <summary>
     /// Интерфейс проигрывателя записей работы клеточного автомата.

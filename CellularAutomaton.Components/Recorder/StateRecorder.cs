@@ -1,16 +1,16 @@
 ﻿#region Header
 // Solution      : CellularAutomaton
-// Project       : CellularAutomaton.Core
+// Project       : CellularAutomaton.Components
 // Project type  : 
 // Language      : C# 6.0
 // File          : StateRecorder.cs
 // Author        : Антипкин С.С., Макаров Е.А.
-// Created       : 14.06.2017 22:43
-// Last Revision : 16.06.2017 12:48
+// Created       : 18.06.2017 12:44
+// Last Revision : 18.06.2017 12:45
 // Description   : 
 #endregion
 
-namespace CellularAutomaton.Core.Helpers.Recorder
+namespace CellularAutomaton.Components.Recorder
 {
     /// <summary>
     /// Перечисление состояний регистратора.

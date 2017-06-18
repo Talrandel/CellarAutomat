@@ -1,6 +1,18 @@
-﻿using System.Resources;
+﻿#region Header
+// Solution      : CellularAutomaton
+// Project       : CellularAutomaton.Components
+// Project type  : 
+// Language      : C# 6.0
+// File          : AssemblyInfo.cs
+// Author        : Антипкин С.С., Макаров Е.А.
+// Created       : 18.06.2017 12:10
+// Last Revision : 18.06.2017 12:52
+// Description   : 
+#endregion
+
+using System;
 using System.Reflection;
-using System.Runtime.CompilerServices;
+using System.Resources;
 using System.Runtime.InteropServices;
 
 // Общие сведения об этой сборке предоставляются следующим набором
@@ -36,4 +48,4 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
 [assembly: NeutralResourcesLanguage("ru")]
-
+[assembly: CLSCompliant(true)]

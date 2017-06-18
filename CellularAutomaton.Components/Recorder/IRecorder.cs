@@ -1,18 +1,19 @@
 ﻿#region Header
 // Solution      : CellularAutomaton
-// Project       : CellularAutomaton.Core
+// Project       : CellularAutomaton.Components
 // Project type  : 
 // Language      : C# 6.0
 // File          : IRecorder.cs
 // Author        : Антипкин С.С., Макаров Е.А.
-// Created       : 13.06.2017 21:43
-// Last Revision : 16.06.2017 12:48
+// Created       : 18.06.2017 12:44
+// Last Revision : 18.06.2017 12:45
 // Description   : 
 #endregion
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 
-namespace CellularAutomaton.Core.Helpers.Recorder
+namespace CellularAutomaton.Components.Recorder
 {
     /// <summary>
     /// Интерфейс регистратора, позволяющего записывать функциорирование клеточного автомата.
@@ -35,7 +36,7 @@ namespace CellularAutomaton.Core.Helpers.Recorder
         /// <summary>
         /// Останавливает запись.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Stop")]
+        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Stop")]
         void Stop();
 
         /// <summary>

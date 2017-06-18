@@ -70,39 +70,11 @@ namespace CellularAutomaton.Core.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Выполнена попытка перехода к кадру номер которого больше, чем кадров в текущей записи..
-        /// </summary>
-        internal static string Ex__Выполнена_попытка_перехода_к_кадру_номер_которого_больше__чем_кадров_в_текущей_записи_ {
-            get {
-                return ResourceManager.GetString("Ex__Выполнена_попытка_перехода_к_кадру_номер_которого_больше__чем_кадров_в_текуще" +
-                        "й_записи_", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Выполнена попытка перехода к кадру с отрицательным индексом..
-        /// </summary>
-        internal static string Ex__Выполнена_попытка_перехода_к_кадру_с_отрицательным_индексом_ {
-            get {
-                return ResourceManager.GetString("Ex__Выполнена_попытка_перехода_к_кадру_с_отрицательным_индексом_", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Ищет локализованную строку, похожую на Высота поля {0} меньше нуля..
         /// </summary>
         internal static string Ex__Высота_поля__0__меньше_нуля_ {
             get {
                 return ResourceManager.GetString("Ex__Высота_поля__0__меньше_нуля_", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Значение высоты или ширины размера меньше или равно нулю..
-        /// </summary>
-        internal static string Ex__Значение_высоты_или_ширины_размера_меньше_или_равно_нулю_ {
-            get {
-                return ResourceManager.GetString("Ex__Значение_высоты_или_ширины_размера_меньше_или_равно_нулю_", resourceCulture);
             }
         }
         
@@ -121,15 +93,6 @@ namespace CellularAutomaton.Core.Properties {
         internal static string Ex__Недопустимое_значение_параметра__0__ {
             get {
                 return ResourceManager.GetString("Ex__Недопустимое_значение_параметра__0__", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Число кадров в минуту не может быть равной нулю величиной..
-        /// </summary>
-        internal static string Ex__Число_кадров_в_минуту_не_может_быть_равной_нулю_величиной_ {
-            get {
-                return ResourceManager.GetString("Ex__Число_кадров_в_минуту_не_может_быть_равной_нулю_величиной_", resourceCulture);
             }
         }
         

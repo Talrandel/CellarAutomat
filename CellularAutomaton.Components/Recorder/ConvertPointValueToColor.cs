@@ -1,18 +1,18 @@
 ﻿#region Header
 // Solution      : CellularAutomaton
-// Project       : CellularAutomaton.Core
+// Project       : CellularAutomaton.Components
 // Project type  : 
 // Language      : C# 6.0
 // File          : ConvertPointValueToColor.cs
 // Author        : Антипкин С.С., Макаров Е.А.
-// Created       : 17.06.2017 12:24
-// Last Revision : 17.06.2017 12:24
+// Created       : 18.06.2017 12:44
+// Last Revision : 18.06.2017 12:45
 // Description   : 
 #endregion
 
 using System.Drawing;
 
-namespace CellularAutomaton.Core.Helpers.Recorder
+namespace CellularAutomaton.Components.Recorder
 {
     /// <summary>
     /// Делегат описания метода преобразования состояния клетки поля клеточного автомата в цвет.
