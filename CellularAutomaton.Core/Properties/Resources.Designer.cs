@@ -145,63 +145,63 @@ namespace CellularAutomaton.Core.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Жизнь.
         /// </summary>
-        internal static string Life_Name {
+        internal static string Rule_Life_Name {
             get {
-                return ResourceManager.GetString("Life_Name", resourceCulture);
+                return ResourceManager.GetString("Rule_Life_Name", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Ищет локализованную строку, похожую на Циклический автомат Мура.
         /// </summary>
-        internal static string MooreCyclic_Name {
+        internal static string Rule_MooreCyclic_Name {
             get {
-                return ResourceManager.GetString("MooreCyclic_Name", resourceCulture);
+                return ResourceManager.GetString("Rule_MooreCyclic_Name", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Ищет локализованную строку, похожую на Автомат Мура.
         /// </summary>
-        internal static string MooreSimple_Name {
+        internal static string Rule_MooreSimple_Name {
             get {
-                return ResourceManager.GetString("MooreSimple_Name", resourceCulture);
+                return ResourceManager.GetString("Rule_MooreSimple_Name", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Ищет локализованную строку, похожую на Циклический автомат Неймана.
         /// </summary>
-        internal static string NeimanCyclic_Name {
+        internal static string Rule_NeimanCyclic_Name {
             get {
-                return ResourceManager.GetString("NeimanCyclic_Name", resourceCulture);
+                return ResourceManager.GetString("Rule_NeimanCyclic_Name", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Ищет локализованную строку, похожую на Автомат Неймана.
         /// </summary>
-        internal static string NeimanSimple_Name {
+        internal static string Rule_NeimanSimple_Name {
             get {
-                return ResourceManager.GetString("NeimanSimple_Name", resourceCulture);
+                return ResourceManager.GetString("Rule_NeimanSimple_Name", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Ищет локализованную строку, похожую на Одномерный автома.
         /// </summary>
-        internal static string OneDimentionalCyclic_Name {
+        internal static string Rule_OneDimentionalCyclic_Name {
             get {
-                return ResourceManager.GetString("OneDimentionalCyclic_Name", resourceCulture);
+                return ResourceManager.GetString("Rule_OneDimentionalCyclic_Name", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Ищет локализованную строку, похожую на Поверхность Венеры.
         /// </summary>
-        internal static string VenusSurface_Name {
+        internal static string Rule_VenusSurface_Name {
             get {
-                return ResourceManager.GetString("VenusSurface_Name", resourceCulture);
+                return ResourceManager.GetString("Rule_VenusSurface_Name", resourceCulture);
             }
         }
     }

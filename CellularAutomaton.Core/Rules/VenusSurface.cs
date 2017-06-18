@@ -25,7 +25,7 @@ namespace CellularAutomaton.Core.Rules
         /// <summary>
         /// Возвращает название правила.
         /// </summary>
-        public string Name => Resources.VenusSurface_Name;
+        public string Name => Resources.Rule_VenusSurface_Name;
 
         /// <summary>
         /// Изменяет состояние клетки расположенной по заданным координатам.

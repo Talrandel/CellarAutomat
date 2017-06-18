@@ -5,8 +5,8 @@
 // Language      : C# 6.0
 // File          : Recorder.cs
 // Author        : Антипкин С.С., Макаров Е.А.
-// Created       : 18.06.2017 12:12
-// Last Revision : 18.06.2017 12:13
+// Created       : 18.06.2017 12:21
+// Last Revision : 18.06.2017 12:34
 // Description   : 
 #endregion
 
@@ -18,6 +18,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
 
+using CellularAutomaton.Components.Properties;
 using CellularAutomaton.Core.Rules;
 
 namespace CellularAutomaton.Components.Recorder
@@ -61,7 +62,7 @@ namespace CellularAutomaton.Components.Recorder
                     throw new ArgumentOutOfRangeException(
                         nameof(SizeFieldWidthMin),
                         value,
-                        $"Значение '{nameof(SizeFieldWidthMin)}' должно лежать в диапазоне от 0 до '{nameof(SizeFieldWidthMax)}'.");
+                        string.Format(Resources.Ex__Значение___0___должно_лежать_в_диапазоне_от___1___до___2___, nameof(SizeFieldWidthMin), nameof(SizeFieldWidthMax)));
                 }
 
                 nUDWidth.Minimum = value;
@@ -91,7 +92,7 @@ namespace CellularAutomaton.Components.Recorder
                     throw new ArgumentOutOfRangeException(
                         nameof(SizeFieldWidthMax),
                         value,
-                        $"Значение '{nameof(SizeFieldWidthMax)}' не должно быть меньше '{nameof(SizeFieldWidthMin)}'.");
+                        string.Format(Resources.Ex__Значение___0___не_должно_быть_меньше___1___, nameof(SizeFieldWidthMax), nameof(SizeFieldWidthMin)));
                 }
 
                 nUDWidth.Maximum = value;
@@ -122,7 +123,7 @@ namespace CellularAutomaton.Components.Recorder
                     throw new ArgumentOutOfRangeException(
                         nameof(SizeFieldWidthValue),
                         value,
-                        $"Значение '{nameof(SizeFieldWidthValue)}' должно лежать в диапазоне от '{nameof(SizeFieldWidthMin)}' до '{nameof(SizeFieldWidthMax)}'.");
+                        string.Format(Resources.Ex__Значение___0___должно_лежать_в_диапазоне_от___1___до___2___, nameof(SizeFieldWidthValue), nameof(SizeFieldWidthMin), nameof(SizeFieldWidthMax)));
                 }
 
                 nUDWidth.Value = value;
@@ -153,7 +154,7 @@ namespace CellularAutomaton.Components.Recorder
                     throw new ArgumentOutOfRangeException(
                         nameof(SizeFieldHeightMin),
                         value,
-                        $"Значение '{nameof(SizeFieldHeightMin)}' должно лежать в диапазоне от 0 до '{nameof(SizeFieldHeightMax)}'.");
+                        string.Format(Resources.Ex__Значение___0___должно_лежать_в_диапазоне_от___1___до___2___, nameof(SizeFieldHeightMin), nameof(SizeFieldHeightMax)));
                 }
 
                 nUDHeight.Minimum = value;
@@ -183,7 +184,7 @@ namespace CellularAutomaton.Components.Recorder
                     throw new ArgumentOutOfRangeException(
                         nameof(SizeFieldHeightMax),
                         value,
-                        $"Значение '{nameof(SizeFieldHeightMax)}' не должно быть меньше '{nameof(SizeFieldHeightMin)}'.");
+                        string.Format(Resources.Ex__Значение___0___не_должно_быть_меньше___1___, nameof(SizeFieldHeightMax), nameof(SizeFieldHeightMin)));
                 }
 
                 nUDHeight.Maximum = value;
@@ -214,7 +215,7 @@ namespace CellularAutomaton.Components.Recorder
                     throw new ArgumentOutOfRangeException(
                         nameof(SizeFieldHeightValue),
                         value,
-                        $"Значение '{nameof(SizeFieldHeightValue)}' должно лежать в диапазоне от '{nameof(SizeFieldHeightMin)}' до '{nameof(SizeFieldHeightMax)}'.");
+                        string.Format(Resources.Ex__Значение___0___должно_лежать_в_диапазоне_от___1___до___2___, nameof(SizeFieldHeightValue), nameof(SizeFieldHeightMin), nameof(SizeFieldHeightMax)));
                 }
 
                 nUDHeight.Value = value;
@@ -245,7 +246,7 @@ namespace CellularAutomaton.Components.Recorder
                     throw new ArgumentOutOfRangeException(
                         nameof(DencityMin),
                         value,
-                        $"Значение '{nameof(DencityMin)}' должно лежать в диапазоне от 0 до '{nameof(DencityMax)}'.");
+                        string.Format(Resources.Ex__Значение___0___должно_лежать_в_диапазоне_от___1___до___2___, nameof(DencityMin), nameof(DencityMax)));
                 }
 
                 nUDDencity.Minimum = value;
@@ -276,7 +277,7 @@ namespace CellularAutomaton.Components.Recorder
                     throw new ArgumentOutOfRangeException(
                         nameof(DencityMax),
                         value,
-                        $"Значение '{nameof(DencityMax)}' должно лежать в интервале от '{nameof(DencityMin)}' до 100.");
+                        string.Format(Resources.Ex__Значение___0___должно_лежать_в_диапазоне_от___1___до___2___, nameof(DencityMax), nameof(DencityMin), 0));
                 }
 
                 nUDDencity.Maximum = value;
@@ -307,7 +308,7 @@ namespace CellularAutomaton.Components.Recorder
                     throw new ArgumentOutOfRangeException(
                         nameof(DencityValue),
                         value,
-                        $"Значение '{nameof(DencityValue)}' должно лежать в диапазоне от '{nameof(DencityMin)}' до '{nameof(DencityMax)}'.");
+                        string.Format(Resources.Ex__Значение___0___должно_лежать_в_диапазоне_от___1___до___2___, nameof(DencityValue), nameof(DencityMin), nameof(DencityMax)));
                 }
 
                 nUDDencity.Value = value;
@@ -338,7 +339,7 @@ namespace CellularAutomaton.Components.Recorder
                     throw new ArgumentOutOfRangeException(
                         nameof(StatesCountMin),
                         value,
-                        $"Значение '{nameof(StatesCountMin)}' должно лежать в диапазоне от {Core.CellularAutomaton.StatesNumberMin} до '{nameof(StatesCountMax)}'.");
+                        string.Format(Resources.Ex__Значение___0___должно_лежать_в_диапазоне_от___1___до___2___, nameof(StatesCountMin), nameof(Core.CellularAutomaton.StatesNumberMin), nameof(StatesCountMax)));
                 }
 
                 nUDStatesCount.Minimum = value;
@@ -369,7 +370,7 @@ namespace CellularAutomaton.Components.Recorder
                     throw new ArgumentOutOfRangeException(
                         nameof(StatesCountMax),
                         value,
-                        $"Значение '{nameof(StatesCountMax)}' должно лежать в интервале от '{nameof(StatesCountMin)}' до {Core.CellularAutomaton.StatesNumberMax}.");
+                        string.Format(Resources.Ex__Значение___0___должно_лежать_в_диапазоне_от___1___до___2___, nameof(StatesCountMax), nameof(StatesCountMin), Core.CellularAutomaton.StatesNumberMax));
                 }
 
                 nUDStatesCount.Maximum = value;
@@ -400,7 +401,7 @@ namespace CellularAutomaton.Components.Recorder
                     throw new ArgumentOutOfRangeException(
                         nameof(StatesCountValue),
                         value,
-                        $"Значение '{nameof(StatesCountValue)}' должно лежать в диапазоне от '{nameof(StatesCountMin)}' до '{nameof(StatesCountMax)}'.");
+                        string.Format(Resources.Ex__Значение___0___должно_лежать_в_диапазоне_от___1___до___2___, nameof(StatesCountValue), nameof(StatesCountMin), nameof(StatesCountMax)));
                 }
 
                 nUDStatesCount.Value = value;
