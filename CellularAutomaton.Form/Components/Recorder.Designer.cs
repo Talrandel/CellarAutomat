@@ -106,42 +106,12 @@
             // nUDHeight
             // 
             resources.ApplyResources(this.nUDHeight, "nUDHeight");
-            this.nUDHeight.Maximum = new decimal(new int[] {
-            500,
-            0,
-            0,
-            0});
-            this.nUDHeight.Minimum = new decimal(new int[] {
-            50,
-            0,
-            0,
-            0});
             this.nUDHeight.Name = "nUDHeight";
-            this.nUDHeight.Value = new decimal(new int[] {
-            50,
-            0,
-            0,
-            0});
             // 
             // nUDWidth
             // 
             resources.ApplyResources(this.nUDWidth, "nUDWidth");
-            this.nUDWidth.Maximum = new decimal(new int[] {
-            500,
-            0,
-            0,
-            0});
-            this.nUDWidth.Minimum = new decimal(new int[] {
-            50,
-            0,
-            0,
-            0});
             this.nUDWidth.Name = "nUDWidth";
-            this.nUDWidth.Value = new decimal(new int[] {
-            50,
-            0,
-            0,
-            0});
             // 
             // gBSettingsCellularAutomaton
             // 
