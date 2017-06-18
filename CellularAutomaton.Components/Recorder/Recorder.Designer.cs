@@ -1,4 +1,4 @@
-﻿namespace CellarAutomatForm.Components
+﻿namespace CellularAutomaton.Components.Recorder
 {
     partial class Recorder
     {

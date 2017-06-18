@@ -1,19 +1,19 @@
 ﻿#region Header
 // Solution      : CellularAutomaton
-// Project       : CellularAutomaton.Form
+// Project       : CellularAutomaton.Components
 // Project type  : 
 // Language      : C# 6.0
 // File          : SRCategoryAttribute.cs
 // Author        : Антипкин С.С., Макаров Е.А.
-// Created       : 17.06.2017 20:32
-// Last Revision : 17.06.2017 20:47
+// Created       : 18.06.2017 12:11
+// Last Revision : 18.06.2017 12:12
 // Description   : 
 #endregion
 
 using System;
 using System.ComponentModel;
 
-namespace CellarAutomatForm.Components
+namespace CellularAutomaton.Components
 {
     /// <summary>
     /// Задает описание свойства или события.

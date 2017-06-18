@@ -1,12 +1,12 @@
 ﻿#region Header
 // Solution      : CellularAutomaton
-// Project       : CellularAutomaton.Form
+// Project       : CellularAutomaton.Components
 // Project type  : 
 // Language      : C# 6.0
 // File          : Recorder.cs
 // Author        : Антипкин С.С., Макаров Е.А.
-// Created       : 17.06.2017 20:30
-// Last Revision : 18.06.2017 11:44
+// Created       : 18.06.2017 12:12
+// Last Revision : 18.06.2017 12:13
 // Description   : 
 #endregion
 
@@ -20,7 +20,7 @@ using System.Windows.Forms;
 
 using CellularAutomaton.Core.Rules;
 
-namespace CellarAutomatForm.Components
+namespace CellularAutomaton.Components.Recorder
 {
     /// <summary>
     /// Представляет регистратор функционирования клеточного автомата описываемого <see cref="CellularAutomaton.Core.CellularAutomaton"/>.
@@ -321,7 +321,7 @@ namespace CellarAutomatForm.Components
         ///     <b>Значение по умолчанию - <see cref="CellularAutomaton.Core.CellularAutomaton.StatesNumberMin"/>.</b>
         /// </remarks>
         /// <exception cref="ArgumentOutOfRangeException">Значение '<see cref="StatesCountMin"/>' должно лежать в диапазоне от <see cref="CellularAutomaton.Core.CellularAutomaton.StatesNumberMin"/> до '<see cref="StatesCountMax"/>'.</exception>
-        [DefaultValue(CellularAutomaton.Core.CellularAutomaton.StatesNumberMin)]
+        [DefaultValue(Core.CellularAutomaton.StatesNumberMin)]
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [RefreshProperties(RefreshProperties.All)]
@@ -332,13 +332,13 @@ namespace CellarAutomatForm.Components
             get { return Convert.ToInt16(nUDStatesCount.Minimum); }
             set
             {
-                if (value < CellularAutomaton.Core.CellularAutomaton.StatesNumberMin ||
+                if (value < Core.CellularAutomaton.StatesNumberMin ||
                     StatesCountMax < value)
                 {
                     throw new ArgumentOutOfRangeException(
                         nameof(StatesCountMin),
                         value,
-                        $"Значение '{nameof(StatesCountMin)}' должно лежать в диапазоне от {CellularAutomaton.Core.CellularAutomaton.StatesNumberMin} до '{nameof(StatesCountMax)}'.");
+                        $"Значение '{nameof(StatesCountMin)}' должно лежать в диапазоне от {Core.CellularAutomaton.StatesNumberMin} до '{nameof(StatesCountMax)}'.");
                 }
 
                 nUDStatesCount.Minimum = value;
@@ -352,7 +352,7 @@ namespace CellarAutomatForm.Components
         ///     <b>Значение по умолчанию - <see cref="CellularAutomaton.Core.CellularAutomaton.StatesNumberMax"/>.</b>
         /// </remarks>
         /// <exception cref="ArgumentOutOfRangeException">Значение '<see cref="StatesCountMax"/>' должно лежать в интервале от '<see cref="StatesCountMin"/>' до <see cref="CellularAutomaton.Core.CellularAutomaton.StatesNumberMax"/>.</exception>
-        [DefaultValue(CellularAutomaton.Core.CellularAutomaton.StatesNumberMax)]
+        [DefaultValue(Core.CellularAutomaton.StatesNumberMax)]
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [RefreshProperties(RefreshProperties.All)]
@@ -364,12 +364,12 @@ namespace CellarAutomatForm.Components
             set
             {
                 if (value < StatesCountMin ||
-                    value < CellularAutomaton.Core.CellularAutomaton.StatesNumberMax)
+                    value < Core.CellularAutomaton.StatesNumberMax)
                 {
                     throw new ArgumentOutOfRangeException(
                         nameof(StatesCountMax),
                         value,
-                        $"Значение '{nameof(StatesCountMax)}' должно лежать в интервале от '{nameof(StatesCountMin)}' до {CellularAutomaton.Core.CellularAutomaton.StatesNumberMax}.");
+                        $"Значение '{nameof(StatesCountMax)}' должно лежать в интервале от '{nameof(StatesCountMin)}' до {Core.CellularAutomaton.StatesNumberMax}.");
                 }
 
                 nUDStatesCount.Maximum = value;
@@ -383,7 +383,7 @@ namespace CellarAutomatForm.Components
         ///     <b>Значение по умолчанию - <see cref="CellularAutomaton.Core.CellularAutomaton.StatesNumberMin"/>.</b>
         /// </remarks>
         /// <exception cref="ArgumentOutOfRangeException">Значение '<see cref="StatesCountValue"/>' должно лежать в диапазоне от '<see cref="StatesCountMin"/>' до '<see cref="StatesCountMax"/>'.</exception>
-        [DefaultValue(CellularAutomaton.Core.CellularAutomaton.StatesNumberMin)]
+        [DefaultValue(Core.CellularAutomaton.StatesNumberMin)]
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [RefreshProperties(RefreshProperties.All)]
@@ -442,10 +442,10 @@ namespace CellarAutomatForm.Components
             DencityMin = 0;
             DencityMax = 100;
             DencityValue = 50;
-            
-            StatesCountMin = CellularAutomaton.Core.CellularAutomaton.StatesNumberMin;
-            StatesCountMax = CellularAutomaton.Core.CellularAutomaton.StatesNumberMax;
-            StatesCountValue = CellularAutomaton.Core.CellularAutomaton.StatesNumberMin;
+
+            StatesCountMin = Core.CellularAutomaton.StatesNumberMin;
+            StatesCountMax = Core.CellularAutomaton.StatesNumberMax;
+            StatesCountValue = Core.CellularAutomaton.StatesNumberMin;
         }
 
         /// <summary>

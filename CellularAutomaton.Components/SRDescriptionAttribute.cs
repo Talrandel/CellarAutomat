@@ -1,19 +1,19 @@
 ﻿#region Header
 // Solution      : CellularAutomaton
-// Project       : CellularAutomaton.Form
+// Project       : CellularAutomaton.Components
 // Project type  : 
 // Language      : C# 6.0
 // File          : SRDescriptionAttribute.cs
 // Author        : Антипкин С.С., Макаров Е.А.
-// Created       : 17.06.2017 20:40
-// Last Revision : 17.06.2017 20:49
+// Created       : 18.06.2017 12:11
+// Last Revision : 18.06.2017 12:12
 // Description   : 
 #endregion
 
 using System;
 using System.ComponentModel;
 
-namespace CellarAutomatForm.Components
+namespace CellularAutomaton.Components
 {
     /// <summary>
     /// Задает описание свойства или события.
@@ -23,10 +23,12 @@ namespace CellarAutomatForm.Components
     // ReSharper disable once InconsistentNaming
     internal sealed class SRDescriptionAttribute : DescriptionAttribute
     {
+        #region Static Fields and Constants
         /// <summary>
         /// Суффикс, добавляемый к именам ресурсов с описанием свойств и событий.
         /// </summary>
         public const string Suffix = "Descr";
+        #endregion
 
         #region Properties
         /// <summary>
