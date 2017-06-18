@@ -6,7 +6,7 @@
 // File          : CellularAutomatonRecorder.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 18.06.2017 12:21
-// Last Revision : 18.06.2017 15:50
+// Last Revision : 18.06.2017 16:06
 // Description   : 
 #endregion
 
@@ -25,7 +25,7 @@ using CellularAutomaton.Core.Rules;
 namespace CellularAutomaton.Components.Recorder
 {
     /// <summary>
-    /// Представляет регистратор функционирования клеточного автомата описываемого <see cref="CellularAutomaton.Core.CellularAutomaton"/>.
+    /// Представляет регистратор функционирования клеточного автомата описываемого <see cref="Core.CellularAutomaton"/>.
     /// </summary>
     public partial class CellularAutomatonRecorder : UserControl
     {
@@ -39,6 +39,91 @@ namespace CellularAutomaton.Components.Recorder
         [SRDescription(nameof(FileName) + SRDescriptionAttribute.Suffix)]
         public string FileName { get; set; }
 
+        /// <summary>
+        /// Возвращает коллекцию правил построения клеточных автоматов.
+        /// </summary>
+        [Browsable(false)]
+        public IList<IRule> Rules { get; private set; }
+        #endregion
+
+        #region Constructors
+        /// <summary>
+        /// Инициализирует новый экземплр класса <see cref="CellularAutomatonRecorder"/>.
+        /// </summary>
+        public CellularAutomatonRecorder()
+        {
+            InitializeComponent();
+            InitializeProperties();
+        }
+        #endregion
+
+        #region Members
+        /// <summary>
+        /// Устанавливает значения свойств по умолчанию.
+        /// </summary>
+        private void InitializeProperties()
+        {
+            ObservableCollection<IRule> innerRules = new ObservableCollection<IRule>();
+            innerRules.CollectionChanged += InnerRules_CollectionChanged;
+            Rules = innerRules;
+
+            SizeFieldWidthMin = SizeFieldHeightMin = 50;
+            SizeFieldWidthMax = SizeFieldHeightMax = 500;
+            SizeFieldWidthValue = SizeFieldHeightValue = 100;
+
+            DencityMin = 0;
+            DencityMax = 100;
+            DencityValue = 50;
+
+            StatesCountMin = Core.CellularAutomaton.StatesNumberMin;
+            StatesCountMax = Core.CellularAutomaton.StatesNumberMax;
+            StatesCountValue = Core.CellularAutomaton.StatesNumberMin;
+        }
+
+        /// <summary>
+        /// Обработчик события <see cref="ObservableCollection{T}.CollectionChanged"/>. Актуализирует состояние <see cref="cBCellularAutomatonRules"/>.
+        /// </summary>
+        /// <param name="sender">Источник события.</param>
+        /// <param name="e">Сведения о событии.</param>
+        private void InnerRules_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            cBCellularAutomatonRules.Items.Clear();
+            cBCellularAutomatonRules.Items.AddRange((object[])Rules.Select(item => item.Name));
+        }
+
+        /// <summary>
+        /// Обработчик события <see cref="Control.Click"/>. Начинает запись функционирования клеточного автомата.
+        /// </summary>
+        /// <param name="sender">Источник события.</param>
+        /// <param name="e">Сведения о событии.</param>
+        private void bRecord_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Обработчик события <see cref="Control.Click"/>. Останавливает запись функционирования клеточного автомата.
+        /// </summary>
+        /// <param name="sender">Источник события.</param>
+        /// <param name="e">Сведения о событии.</param>
+        private void bStop_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Обработчик события <see cref="Control.Click"/>. Сохраняет запись функционирования клеточного автомата в файл.
+        /// </summary>
+        /// <param name="sender">Источник события.</param>
+        /// <param name="e">Сведения о событии.</param>
+        private void bSave_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
+
+        #region SizeField
+        #region SizeFieldWidth
         /// <summary>
         /// Возвращает или задаёт минимальную ширину поля клеточного автомата.
         /// </summary>
@@ -130,7 +215,9 @@ namespace CellularAutomaton.Components.Recorder
                 nUDWidth.Value = value;
             }
         }
+        #endregion
 
+        #region SizeFieldHeight
         /// <summary>
         /// Возвращает или задаёт минимальную высоту поля клеточного автомата.
         /// </summary>
@@ -222,7 +309,10 @@ namespace CellularAutomaton.Components.Recorder
                 nUDHeight.Value = value;
             }
         }
+        #endregion
+        #endregion
 
+        #region Dencity
         /// <summary>
         /// Возвращает или задаёт минимальную плотность распределения клеток на поле клеточного автомата.
         /// </summary>
@@ -315,7 +405,9 @@ namespace CellularAutomaton.Components.Recorder
                 nUDDencity.Value = value;
             }
         }
+        #endregion
 
+        #region StatesCount
         /// <summary>
         /// Возвращает или задаёт минимальное число состояний клетки клеточного автомата.
         /// </summary>
@@ -407,88 +499,6 @@ namespace CellularAutomaton.Components.Recorder
 
                 nUDStatesCount.Value = value;
             }
-        }
-
-        /// <summary>
-        /// Возвращает коллекцию правил построения клеточных автоматов.
-        /// </summary>
-        [Browsable(false)]
-        public IList<IRule> Rules { get; private set; }
-        #endregion
-
-        #region Constructors
-        /// <summary>
-        /// Инициализирует новый экземплр класса <see cref="CellularAutomatonRecorder"/>.
-        /// </summary>
-        public CellularAutomatonRecorder()
-        {
-            InitializeComponent();
-            InitializeProperties();
-        }
-        #endregion
-
-        #region Members
-        /// <summary>
-        /// Устанавливает значения свойств по умолчанию.
-        /// </summary>
-        private void InitializeProperties()
-        {
-            ObservableCollection<IRule> innerRules = new ObservableCollection<IRule>();
-            innerRules.CollectionChanged += InnerRules_CollectionChanged;
-            Rules = innerRules;
-
-            SizeFieldWidthMin = SizeFieldHeightMin = 50;
-            SizeFieldWidthMax = SizeFieldHeightMax = 500;
-            SizeFieldWidthValue = SizeFieldHeightValue = 100;
-
-            DencityMin = 0;
-            DencityMax = 100;
-            DencityValue = 50;
-
-            StatesCountMin = Core.CellularAutomaton.StatesNumberMin;
-            StatesCountMax = Core.CellularAutomaton.StatesNumberMax;
-            StatesCountValue = Core.CellularAutomaton.StatesNumberMin;
-        }
-
-        /// <summary>
-        /// Обработчик события <see cref="ObservableCollection{T}.CollectionChanged"/>. Актуализирует состояние <see cref="cBCellularAutomatonRules"/>.
-        /// </summary>
-        /// <param name="sender">Источник события.</param>
-        /// <param name="e">Сведения о событии.</param>
-        private void InnerRules_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            cBCellularAutomatonRules.Items.Clear();
-            cBCellularAutomatonRules.Items.AddRange((object[])Rules.Select(item => item.Name));
-        }
-
-        /// <summary>
-        /// Обработчик события <see cref="Control.Click"/>. Начинает запись функционирования клеточного автомата.
-        /// </summary>
-        /// <param name="sender">Источник события.</param>
-        /// <param name="e">Сведения о событии.</param>
-        private void bRecord_Click(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Обработчик события <see cref="Control.Click"/>. Останавливает запись функционирования клеточного автомата.
-        /// </summary>
-        /// <param name="sender">Источник события.</param>
-        /// <param name="e">Сведения о событии.</param>
-        private void bStop_Click(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Обработчик события <see cref="Control.Click"/>. Сохраняет запись функционирования клеточного автомата в файл.
-        /// </summary>
-        /// <param name="sender">Источник события.</param>
-        /// <param name="e">Сведения о событии.</param>
-        private void bSave_Click(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
         }
         #endregion
     }
