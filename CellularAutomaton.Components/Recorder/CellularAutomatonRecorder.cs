@@ -92,7 +92,7 @@ namespace CellularAutomaton.Components.Recorder
         private void InnerRules_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             cBCellularAutomatonRules.Items.Clear();
-            cBCellularAutomatonRules.Items.AddRange((object[])Rules.Select(item => item.Name));
+            cBCellularAutomatonRules.Items.AddRange(Rules.Select(item => item.Name).ToArray<object>());
         }
 
         /// <summary>
