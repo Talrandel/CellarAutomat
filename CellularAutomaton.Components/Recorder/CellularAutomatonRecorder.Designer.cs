@@ -32,28 +32,28 @@
             this.tLPMain = new System.Windows.Forms.TableLayoutPanel();
             this.gBSettings = new System.Windows.Forms.GroupBox();
             this.tLPSettings = new System.Windows.Forms.TableLayoutPanel();
-            this.cBCellularAutomatonRules = new System.Windows.Forms.ComboBox();
-            this.lRule = new System.Windows.Forms.Label();
-            this.nUDStatesCount = new System.Windows.Forms.NumericUpDown();
+            this.lWidth = new System.Windows.Forms.Label();
+            this.nUDWidth = new System.Windows.Forms.NumericUpDown();
+            this.lHeight = new System.Windows.Forms.Label();
+            this.nUDHeight = new System.Windows.Forms.NumericUpDown();
+            this.lDencity = new System.Windows.Forms.Label();
             this.lStatesCount = new System.Windows.Forms.Label();
             this.nUDDencity = new System.Windows.Forms.NumericUpDown();
-            this.lDencity = new System.Windows.Forms.Label();
-            this.nUDHeight = new System.Windows.Forms.NumericUpDown();
-            this.lHeight = new System.Windows.Forms.Label();
-            this.nUDWidth = new System.Windows.Forms.NumericUpDown();
-            this.lWidth = new System.Windows.Forms.Label();
+            this.nUDStatesCount = new System.Windows.Forms.NumericUpDown();
+            this.lRule = new System.Windows.Forms.Label();
+            this.cBCellularAutomatonRules = new System.Windows.Forms.ComboBox();
             this.gBControlButton = new System.Windows.Forms.GroupBox();
             this.tLPControlButton = new System.Windows.Forms.TableLayoutPanel();
-            this.bSave = new System.Windows.Forms.Button();
-            this.bStop = new System.Windows.Forms.Button();
             this.bRecord = new System.Windows.Forms.Button();
+            this.bStop = new System.Windows.Forms.Button();
+            this.bSave = new System.Windows.Forms.Button();
             this.tLPMain.SuspendLayout();
             this.gBSettings.SuspendLayout();
             this.tLPSettings.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nUDStatesCount)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nUDDencity)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nUDHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDWidth)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nUDHeight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nUDDencity)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nUDStatesCount)).BeginInit();
             this.gBControlButton.SuspendLayout();
             this.tLPControlButton.SuspendLayout();
             this.SuspendLayout();
@@ -87,22 +87,30 @@
             this.tLPSettings.Controls.Add(this.cBCellularAutomatonRules, 1, 4);
             this.tLPSettings.Name = "tLPSettings";
             // 
-            // cBCellularAutomatonRules
+            // lWidth
             // 
-            resources.ApplyResources(this.cBCellularAutomatonRules, "cBCellularAutomatonRules");
-            this.cBCellularAutomatonRules.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cBCellularAutomatonRules.FormattingEnabled = true;
-            this.cBCellularAutomatonRules.Name = "cBCellularAutomatonRules";
+            resources.ApplyResources(this.lWidth, "lWidth");
+            this.lWidth.Name = "lWidth";
             // 
-            // lRule
+            // nUDWidth
             // 
-            resources.ApplyResources(this.lRule, "lRule");
-            this.lRule.Name = "lRule";
+            resources.ApplyResources(this.nUDWidth, "nUDWidth");
+            this.nUDWidth.Name = "nUDWidth";
             // 
-            // nUDStatesCount
+            // lHeight
             // 
-            resources.ApplyResources(this.nUDStatesCount, "nUDStatesCount");
-            this.nUDStatesCount.Name = "nUDStatesCount";
+            resources.ApplyResources(this.lHeight, "lHeight");
+            this.lHeight.Name = "lHeight";
+            // 
+            // nUDHeight
+            // 
+            resources.ApplyResources(this.nUDHeight, "nUDHeight");
+            this.nUDHeight.Name = "nUDHeight";
+            // 
+            // lDencity
+            // 
+            resources.ApplyResources(this.lDencity, "lDencity");
+            this.lDencity.Name = "lDencity";
             // 
             // lStatesCount
             // 
@@ -114,30 +122,22 @@
             resources.ApplyResources(this.nUDDencity, "nUDDencity");
             this.nUDDencity.Name = "nUDDencity";
             // 
-            // lDencity
+            // nUDStatesCount
             // 
-            resources.ApplyResources(this.lDencity, "lDencity");
-            this.lDencity.Name = "lDencity";
+            resources.ApplyResources(this.nUDStatesCount, "nUDStatesCount");
+            this.nUDStatesCount.Name = "nUDStatesCount";
             // 
-            // nUDHeight
+            // lRule
             // 
-            resources.ApplyResources(this.nUDHeight, "nUDHeight");
-            this.nUDHeight.Name = "nUDHeight";
+            resources.ApplyResources(this.lRule, "lRule");
+            this.lRule.Name = "lRule";
             // 
-            // lHeight
+            // cBCellularAutomatonRules
             // 
-            resources.ApplyResources(this.lHeight, "lHeight");
-            this.lHeight.Name = "lHeight";
-            // 
-            // nUDWidth
-            // 
-            resources.ApplyResources(this.nUDWidth, "nUDWidth");
-            this.nUDWidth.Name = "nUDWidth";
-            // 
-            // lWidth
-            // 
-            resources.ApplyResources(this.lWidth, "lWidth");
-            this.lWidth.Name = "lWidth";
+            resources.ApplyResources(this.cBCellularAutomatonRules, "cBCellularAutomatonRules");
+            this.cBCellularAutomatonRules.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cBCellularAutomatonRules.FormattingEnabled = true;
+            this.cBCellularAutomatonRules.Name = "cBCellularAutomatonRules";
             // 
             // gBControlButton
             // 
@@ -154,24 +154,27 @@
             this.tLPControlButton.Controls.Add(this.bSave, 0, 1);
             this.tLPControlButton.Name = "tLPControlButton";
             // 
-            // bSave
+            // bRecord
             // 
-            resources.ApplyResources(this.bSave, "bSave");
-            this.tLPControlButton.SetColumnSpan(this.bSave, 2);
-            this.bSave.Name = "bSave";
-            this.bSave.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.bRecord, "bRecord");
+            this.bRecord.Name = "bRecord";
+            this.bRecord.UseVisualStyleBackColor = true;
+            this.bRecord.Click += new System.EventHandler(this.bRecord_Click);
             // 
             // bStop
             // 
             resources.ApplyResources(this.bStop, "bStop");
             this.bStop.Name = "bStop";
             this.bStop.UseVisualStyleBackColor = true;
+            this.bStop.Click += new System.EventHandler(this.bStop_Click);
             // 
-            // bRecord
+            // bSave
             // 
-            resources.ApplyResources(this.bRecord, "bRecord");
-            this.bRecord.Name = "bRecord";
-            this.bRecord.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.bSave, "bSave");
+            this.tLPControlButton.SetColumnSpan(this.bSave, 2);
+            this.bSave.Name = "bSave";
+            this.bSave.UseVisualStyleBackColor = true;
+            this.bSave.Click += new System.EventHandler(this.bSave_Click);
             // 
             // CellularAutomatonRecorder
             // 
@@ -185,10 +188,10 @@
             this.gBSettings.PerformLayout();
             this.tLPSettings.ResumeLayout(false);
             this.tLPSettings.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nUDStatesCount)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nUDDencity)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nUDHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDWidth)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nUDHeight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nUDDencity)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nUDStatesCount)).EndInit();
             this.gBControlButton.ResumeLayout(false);
             this.gBControlButton.PerformLayout();
             this.tLPControlButton.ResumeLayout(false);
