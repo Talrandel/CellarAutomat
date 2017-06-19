@@ -6,7 +6,7 @@
 // File          : CellularAutomatonRecorder.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 18.06.2017 12:21
-// Last Revision : 18.06.2017 16:06
+// Last Revision : 18.06.2017 16:49
 // Description   : 
 #endregion
 
@@ -118,7 +118,35 @@ namespace CellularAutomaton.Components.Recorder
         /// <param name="e">Сведения о событии.</param>
         private void bSave_Click(object sender, EventArgs e)
         {
+            SaveRecordDlg();
             throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Отображает диалог выбора расположения для охранения файла с записью работы клеточного автомата.
+        /// </summary>
+        /// <returns>Имя файла, в который необходимо сохранить запись.</returns>
+        private string SaveRecordDlg()
+        {
+            using (SaveFileDialog svfDlg = new SaveFileDialog
+            {
+                CheckFileExists = false,
+                CheckPathExists = true,
+                ValidateNames = true,
+
+                AddExtension = true,
+                DereferenceLinks = true,
+                RestoreDirectory = true,
+                OverwritePrompt = true,
+
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+
+                Title = Resources.SaveFileDialogRecordTitle,
+                FileName = Resources.SaveFileDialogRecordDefFileName,
+                DefaultExt = Resources.SaveFileDialogRecordExt,
+                Filter = Resources.SaveFileDialogRecordFilter
+            })
+                return FileName = svfDlg.ShowDialog() == DialogResult.OK ? svfDlg.FileName : FileName;
         }
         #endregion
 

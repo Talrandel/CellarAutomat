@@ -135,4 +135,16 @@
   <data name="Ex__Число_кадров_в_минуту_не_может_быть_равной_нулю_величиной_" xml:space="preserve">
     <value>Число кадров в минуту не может быть равной нулю величиной.</value>
   </data>
+  <data name="SaveFileDialogRecordExt" xml:space="preserve">
+    <value>bin</value>
+  </data>
+  <data name="SaveFileDialogRecordFilter" xml:space="preserve">
+    <value>Двоичные файлы (*.bin)|*.bin</value>
+  </data>
+  <data name="SaveFileDialogRecordTitle" xml:space="preserve">
+    <value>Сохранить запись как...</value>
+  </data>
+  <data name="SaveFileDialogRecordDefFileName" xml:space="preserve">
+    <value>record</value>
+  </data>
 </root>

@@ -114,5 +114,41 @@ namespace CellularAutomaton.Components.Properties {
                 return ResourceManager.GetString("Ex__Число_кадров_в_минуту_не_может_быть_равной_нулю_величиной_", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на record.
+        /// </summary>
+        internal static string SaveFileDialogRecordDefFileName {
+            get {
+                return ResourceManager.GetString("SaveFileDialogRecordDefFileName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на bin.
+        /// </summary>
+        internal static string SaveFileDialogRecordExt {
+            get {
+                return ResourceManager.GetString("SaveFileDialogRecordExt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Двоичные файлы (*.bin)|*.bin.
+        /// </summary>
+        internal static string SaveFileDialogRecordFilter {
+            get {
+                return ResourceManager.GetString("SaveFileDialogRecordFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Сохранить запись как....
+        /// </summary>
+        internal static string SaveFileDialogRecordTitle {
+            get {
+                return ResourceManager.GetString("SaveFileDialogRecordTitle", resourceCulture);
+            }
+        }
     }
 }

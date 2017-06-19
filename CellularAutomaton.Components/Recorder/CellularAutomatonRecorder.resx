@@ -118,61 +118,418 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="gBSettings.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="tLPMain.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="tLPMain.ColumnCount" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="gBSettings.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="tLPSettings.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="tLPSettings.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="bStop.AutoSize" type="System.Boolean, mscorlib">
+  <data name="lWidth.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="bStop.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
+  <data name="lWidth.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="lWidth.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="bStop.Location" type="System.Drawing.Point, System.Drawing">
-    <value>174, 209</value>
+  <data name="lWidth.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 0</value>
   </data>
-  <data name="bStop.Size" type="System.Drawing.Size, System.Drawing">
-    <value>165, 23</value>
+  <data name="lWidth.Size" type="System.Drawing.Size, System.Drawing">
+    <value>73, 26</value>
   </data>
-  <data name="bStop.TabIndex" type="System.Int32, mscorlib">
+  <data name="lWidth.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="lWidth.Text" xml:space="preserve">
+    <value>Ширина поля</value>
+  </data>
+  <data name="lWidth.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lWidth.Name" xml:space="preserve">
+    <value>lWidth</value>
+  </data>
+  <data name="&gt;&gt;lWidth.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lWidth.Parent" xml:space="preserve">
+    <value>tLPSettings</value>
+  </data>
+  <data name="&gt;&gt;lWidth.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="nUDWidth.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="nUDWidth.Location" type="System.Drawing.Point, System.Drawing">
+    <value>125, 3</value>
+  </data>
+  <data name="nUDWidth.Size" type="System.Drawing.Size, System.Drawing">
+    <value>116, 20</value>
+  </data>
+  <data name="nUDWidth.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="nUDWidth.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Right</value>
+  </data>
+  <data name="&gt;&gt;nUDWidth.Name" xml:space="preserve">
+    <value>nUDWidth</value>
+  </data>
+  <data name="&gt;&gt;nUDWidth.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;nUDWidth.Parent" xml:space="preserve">
+    <value>tLPSettings</value>
+  </data>
+  <data name="&gt;&gt;nUDWidth.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lHeight.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lHeight.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="lHeight.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lHeight.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 26</value>
+  </data>
+  <data name="lHeight.Size" type="System.Drawing.Size, System.Drawing">
+    <value>72, 26</value>
+  </data>
+  <data name="lHeight.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="lHeight.Text" xml:space="preserve">
+    <value>Высота поля</value>
+  </data>
+  <data name="lHeight.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lHeight.Name" xml:space="preserve">
+    <value>lHeight</value>
+  </data>
+  <data name="&gt;&gt;lHeight.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lHeight.Parent" xml:space="preserve">
+    <value>tLPSettings</value>
+  </data>
+  <data name="&gt;&gt;lHeight.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="nUDHeight.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="nUDHeight.Location" type="System.Drawing.Point, System.Drawing">
+    <value>125, 29</value>
+  </data>
+  <data name="nUDHeight.Size" type="System.Drawing.Size, System.Drawing">
+    <value>116, 20</value>
+  </data>
+  <data name="nUDHeight.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
   </data>
-  <data name="bStop.Text" xml:space="preserve">
-    <value>Остановить запись</value>
+  <data name="nUDHeight.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Right</value>
   </data>
-  <data name="&gt;&gt;bStop.Name" xml:space="preserve">
-    <value>bStop</value>
+  <data name="&gt;&gt;nUDHeight.Name" xml:space="preserve">
+    <value>nUDHeight</value>
   </data>
-  <data name="&gt;&gt;bStop.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;nUDHeight.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;bStop.Parent" xml:space="preserve">
+  <data name="&gt;&gt;nUDHeight.Parent" xml:space="preserve">
+    <value>tLPSettings</value>
+  </data>
+  <data name="&gt;&gt;nUDHeight.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="lDencity.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lDencity.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="lDencity.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lDencity.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 52</value>
+  </data>
+  <data name="lDencity.Size" type="System.Drawing.Size, System.Drawing">
+    <value>114, 26</value>
+  </data>
+  <data name="lDencity.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="lDencity.Text" xml:space="preserve">
+    <value>Плотность клеток на поле</value>
+  </data>
+  <data name="lDencity.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lDencity.Name" xml:space="preserve">
+    <value>lDencity</value>
+  </data>
+  <data name="&gt;&gt;lDencity.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lDencity.Parent" xml:space="preserve">
+    <value>tLPSettings</value>
+  </data>
+  <data name="&gt;&gt;lDencity.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="lStatesCount.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lStatesCount.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="lStatesCount.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lStatesCount.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 78</value>
+  </data>
+  <data name="lStatesCount.Size" type="System.Drawing.Size, System.Drawing">
+    <value>98, 26</value>
+  </data>
+  <data name="lStatesCount.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
+  </data>
+  <data name="lStatesCount.Text" xml:space="preserve">
+    <value>Количество состояний клетки</value>
+  </data>
+  <data name="lStatesCount.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lStatesCount.Name" xml:space="preserve">
+    <value>lStatesCount</value>
+  </data>
+  <data name="&gt;&gt;lStatesCount.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lStatesCount.Parent" xml:space="preserve">
+    <value>tLPSettings</value>
+  </data>
+  <data name="&gt;&gt;lStatesCount.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="nUDDencity.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="nUDDencity.Location" type="System.Drawing.Point, System.Drawing">
+    <value>125, 55</value>
+  </data>
+  <data name="nUDDencity.Size" type="System.Drawing.Size, System.Drawing">
+    <value>116, 20</value>
+  </data>
+  <data name="nUDDencity.TabIndex" type="System.Int32, mscorlib">
+    <value>21</value>
+  </data>
+  <data name="nUDDencity.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Right</value>
+  </data>
+  <data name="&gt;&gt;nUDDencity.Name" xml:space="preserve">
+    <value>nUDDencity</value>
+  </data>
+  <data name="&gt;&gt;nUDDencity.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;nUDDencity.Parent" xml:space="preserve">
+    <value>tLPSettings</value>
+  </data>
+  <data name="&gt;&gt;nUDDencity.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="nUDStatesCount.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="nUDStatesCount.Location" type="System.Drawing.Point, System.Drawing">
+    <value>125, 81</value>
+  </data>
+  <data name="nUDStatesCount.Size" type="System.Drawing.Size, System.Drawing">
+    <value>116, 20</value>
+  </data>
+  <data name="nUDStatesCount.TabIndex" type="System.Int32, mscorlib">
+    <value>23</value>
+  </data>
+  <data name="nUDStatesCount.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Right</value>
+  </data>
+  <data name="&gt;&gt;nUDStatesCount.Name" xml:space="preserve">
+    <value>nUDStatesCount</value>
+  </data>
+  <data name="&gt;&gt;nUDStatesCount.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;nUDStatesCount.Parent" xml:space="preserve">
+    <value>tLPSettings</value>
+  </data>
+  <data name="&gt;&gt;nUDStatesCount.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="lRule.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lRule.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="lRule.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lRule.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 104</value>
+  </data>
+  <data name="lRule.Size" type="System.Drawing.Size, System.Drawing">
+    <value>51, 27</value>
+  </data>
+  <data name="lRule.TabIndex" type="System.Int32, mscorlib">
+    <value>24</value>
+  </data>
+  <data name="lRule.Text" xml:space="preserve">
+    <value>Правило</value>
+  </data>
+  <data name="lRule.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lRule.Name" xml:space="preserve">
+    <value>lRule</value>
+  </data>
+  <data name="&gt;&gt;lRule.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lRule.Parent" xml:space="preserve">
+    <value>tLPSettings</value>
+  </data>
+  <data name="&gt;&gt;lRule.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="cBCellularAutomatonRules.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="cBCellularAutomatonRules.Location" type="System.Drawing.Point, System.Drawing">
+    <value>125, 107</value>
+  </data>
+  <data name="cBCellularAutomatonRules.Size" type="System.Drawing.Size, System.Drawing">
+    <value>116, 21</value>
+  </data>
+  <data name="cBCellularAutomatonRules.TabIndex" type="System.Int32, mscorlib">
+    <value>25</value>
+  </data>
+  <data name="&gt;&gt;cBCellularAutomatonRules.Name" xml:space="preserve">
+    <value>cBCellularAutomatonRules</value>
+  </data>
+  <data name="&gt;&gt;cBCellularAutomatonRules.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cBCellularAutomatonRules.Parent" xml:space="preserve">
+    <value>tLPSettings</value>
+  </data>
+  <data name="&gt;&gt;cBCellularAutomatonRules.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="tLPSettings.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="tLPSettings.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 16</value>
+  </data>
+  <data name="tLPSettings.RowCount" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="tLPSettings.Size" type="System.Drawing.Size, System.Drawing">
+    <value>244, 131</value>
+  </data>
+  <data name="tLPSettings.TabIndex" type="System.Int32, mscorlib">
+    <value>24</value>
+  </data>
+  <data name="&gt;&gt;tLPSettings.Name" xml:space="preserve">
+    <value>tLPSettings</value>
+  </data>
+  <data name="&gt;&gt;tLPSettings.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tLPSettings.Parent" xml:space="preserve">
+    <value>gBSettings</value>
+  </data>
+  <data name="&gt;&gt;tLPSettings.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tLPSettings.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="lWidth" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="nUDWidth" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lHeight" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="nUDHeight" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lDencity" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lStatesCount" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="nUDDencity" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="nUDStatesCount" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lRule" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="cBCellularAutomatonRules" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,50,Percent,50" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Absolute,20,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="gBSettings.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="gBSettings.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="gBSettings.Size" type="System.Drawing.Size, System.Drawing">
+    <value>250, 150</value>
+  </data>
+  <data name="gBSettings.TabIndex" type="System.Int32, mscorlib">
+    <value>23</value>
+  </data>
+  <data name="gBSettings.Text" xml:space="preserve">
+    <value>Параметры</value>
+  </data>
+  <data name="&gt;&gt;gBSettings.Name" xml:space="preserve">
+    <value>gBSettings</value>
+  </data>
+  <data name="&gt;&gt;gBSettings.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;gBSettings.Parent" xml:space="preserve">
     <value>tLPMain</value>
   </data>
-  <data name="&gt;&gt;bStop.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="&gt;&gt;gBSettings.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="gBControlButton.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="tLPControlButton.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="tLPControlButton.ColumnCount" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
   <data name="bRecord.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="bRecord.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
+    <value>Fill</value>
+  </data>
+  <data name="bRecord.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="bRecord.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 209</value>
+    <value>3, 3</value>
   </data>
   <data name="bRecord.Size" type="System.Drawing.Size, System.Drawing">
-    <value>165, 23</value>
+    <value>116, 23</value>
   </data>
   <data name="bRecord.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
+    <value>20</value>
   </data>
   <data name="bRecord.Text" xml:space="preserve">
     <value>Начать запись</value>
@@ -184,25 +541,61 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;bRecord.Parent" xml:space="preserve">
-    <value>tLPMain</value>
+    <value>tLPControlButton</value>
   </data>
   <data name="&gt;&gt;bRecord.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>0</value>
+  </data>
+  <data name="bStop.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="bStop.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="bStop.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="bStop.Location" type="System.Drawing.Point, System.Drawing">
+    <value>125, 3</value>
+  </data>
+  <data name="bStop.Size" type="System.Drawing.Size, System.Drawing">
+    <value>116, 23</value>
+  </data>
+  <data name="bStop.TabIndex" type="System.Int32, mscorlib">
+    <value>21</value>
+  </data>
+  <data name="bStop.Text" xml:space="preserve">
+    <value>Остановить запись</value>
+  </data>
+  <data name="&gt;&gt;bStop.Name" xml:space="preserve">
+    <value>bStop</value>
+  </data>
+  <data name="&gt;&gt;bStop.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;bStop.Parent" xml:space="preserve">
+    <value>tLPControlButton</value>
+  </data>
+  <data name="&gt;&gt;bStop.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="bSave.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="bSave.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
+    <value>Fill</value>
+  </data>
+  <data name="bSave.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="bSave.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 238</value>
+    <value>3, 32</value>
   </data>
   <data name="bSave.Size" type="System.Drawing.Size, System.Drawing">
-    <value>336, 23</value>
+    <value>238, 23</value>
   </data>
   <data name="bSave.TabIndex" type="System.Int32, mscorlib">
-    <value>20</value>
+    <value>22</value>
   </data>
   <data name="bSave.Text" xml:space="preserve">
     <value>Сохранить запись</value>
@@ -214,10 +607,64 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;bSave.Parent" xml:space="preserve">
-    <value>tLPMain</value>
+    <value>tLPControlButton</value>
   </data>
   <data name="&gt;&gt;bSave.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
+  </data>
+  <data name="tLPControlButton.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="tLPControlButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 16</value>
+  </data>
+  <data name="tLPControlButton.RowCount" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="tLPControlButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>244, 58</value>
+  </data>
+  <data name="tLPControlButton.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tLPControlButton.Name" xml:space="preserve">
+    <value>tLPControlButton</value>
+  </data>
+  <data name="&gt;&gt;tLPControlButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tLPControlButton.Parent" xml:space="preserve">
+    <value>gBControlButton</value>
+  </data>
+  <data name="&gt;&gt;tLPControlButton.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tLPControlButton.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="bRecord" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="bStop" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="bSave" Row="1" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,50,Percent,50" /&gt;&lt;Rows Styles="Percent,50,Percent,50" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="gBControlButton.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="gBControlButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 159</value>
+  </data>
+  <data name="gBControlButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>250, 77</value>
+  </data>
+  <data name="gBControlButton.TabIndex" type="System.Int32, mscorlib">
+    <value>24</value>
+  </data>
+  <data name="&gt;&gt;gBControlButton.Name" xml:space="preserve">
+    <value>gBControlButton</value>
+  </data>
+  <data name="&gt;&gt;gBControlButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;gBControlButton.Parent" xml:space="preserve">
+    <value>tLPMain</value>
+  </data>
+  <data name="&gt;&gt;gBControlButton.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="tLPMain.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -226,10 +673,10 @@
     <value>0, 0</value>
   </data>
   <data name="tLPMain.RowCount" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="tLPMain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>342, 264</value>
+    <value>256, 239</value>
   </data>
   <data name="tLPMain.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
@@ -247,514 +694,7 @@
     <value>0</value>
   </data>
   <data name="tLPMain.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="gBSettings" Row="0" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="bStop" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="bRecord" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="bSave" Row="2" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,50,Percent,50" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
-  </data>
-  <data name="tLPSettings.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="tLPSettings.ColumnCount" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="gBSettingsField.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="tLPSettingsField.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="tLPSettingsField.ColumnCount" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="lHeight.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lHeight.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="lHeight.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lHeight.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 26</value>
-  </data>
-  <data name="lHeight.Size" type="System.Drawing.Size, System.Drawing">
-    <value>162, 26</value>
-  </data>
-  <data name="lHeight.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="lHeight.Text" xml:space="preserve">
-    <value>Высота</value>
-  </data>
-  <data name="lHeight.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="&gt;&gt;lHeight.Name" xml:space="preserve">
-    <value>lHeight</value>
-  </data>
-  <data name="&gt;&gt;lHeight.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lHeight.Parent" xml:space="preserve">
-    <value>tLPSettingsField</value>
-  </data>
-  <data name="&gt;&gt;lHeight.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="lWidth.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lWidth.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="lWidth.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lWidth.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 0</value>
-  </data>
-  <data name="lWidth.Size" type="System.Drawing.Size, System.Drawing">
-    <value>162, 26</value>
-  </data>
-  <data name="lWidth.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="lWidth.Text" xml:space="preserve">
-    <value>Ширина</value>
-  </data>
-  <data name="lWidth.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="&gt;&gt;lWidth.Name" xml:space="preserve">
-    <value>lWidth</value>
-  </data>
-  <data name="&gt;&gt;lWidth.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lWidth.Parent" xml:space="preserve">
-    <value>tLPSettingsField</value>
-  </data>
-  <data name="&gt;&gt;lWidth.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="nUDHeight.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="nUDHeight.Location" type="System.Drawing.Point, System.Drawing">
-    <value>171, 29</value>
-  </data>
-  <data name="nUDHeight.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 20</value>
-  </data>
-  <data name="nUDHeight.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
-  </data>
-  <data name="nUDHeight.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Right</value>
-  </data>
-  <data name="&gt;&gt;nUDHeight.Name" xml:space="preserve">
-    <value>nUDHeight</value>
-  </data>
-  <data name="&gt;&gt;nUDHeight.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;nUDHeight.Parent" xml:space="preserve">
-    <value>tLPSettingsField</value>
-  </data>
-  <data name="&gt;&gt;nUDHeight.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="nUDWidth.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="nUDWidth.Location" type="System.Drawing.Point, System.Drawing">
-    <value>171, 3</value>
-  </data>
-  <data name="nUDWidth.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 20</value>
-  </data>
-  <data name="nUDWidth.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
-  </data>
-  <data name="nUDWidth.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Right</value>
-  </data>
-  <data name="&gt;&gt;nUDWidth.Name" xml:space="preserve">
-    <value>nUDWidth</value>
-  </data>
-  <data name="&gt;&gt;nUDWidth.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;nUDWidth.Parent" xml:space="preserve">
-    <value>tLPSettingsField</value>
-  </data>
-  <data name="&gt;&gt;nUDWidth.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="tLPSettingsField.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="tLPSettingsField.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 16</value>
-  </data>
-  <data name="tLPSettingsField.RowCount" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="tLPSettingsField.Size" type="System.Drawing.Size, System.Drawing">
-    <value>318, 52</value>
-  </data>
-  <data name="tLPSettingsField.TabIndex" type="System.Int32, mscorlib">
-    <value>21</value>
-  </data>
-  <data name="&gt;&gt;tLPSettingsField.Name" xml:space="preserve">
-    <value>tLPSettingsField</value>
-  </data>
-  <data name="&gt;&gt;tLPSettingsField.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tLPSettingsField.Parent" xml:space="preserve">
-    <value>gBSettingsField</value>
-  </data>
-  <data name="&gt;&gt;tLPSettingsField.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="tLPSettingsField.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="lHeight" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lWidth" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="nUDHeight" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="nUDWidth" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100,Absolute,150" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
-  </data>
-  <data name="gBSettingsField.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="gBSettingsField.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="gBSettingsField.Size" type="System.Drawing.Size, System.Drawing">
-    <value>324, 71</value>
-  </data>
-  <data name="gBSettingsField.TabIndex" type="System.Int32, mscorlib">
-    <value>22</value>
-  </data>
-  <data name="gBSettingsField.Text" xml:space="preserve">
-    <value>Поле</value>
-  </data>
-  <data name="&gt;&gt;gBSettingsField.Name" xml:space="preserve">
-    <value>gBSettingsField</value>
-  </data>
-  <data name="&gt;&gt;gBSettingsField.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;gBSettingsField.Parent" xml:space="preserve">
-    <value>tLPSettings</value>
-  </data>
-  <data name="&gt;&gt;gBSettingsField.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="gBSettingsCellularAutomaton.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="tLPSettingsCellularAutomaton.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="tLPSettingsCellularAutomaton.ColumnCount" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="lRule.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lRule.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="lRule.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lRule.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 52</value>
-  </data>
-  <data name="lRule.Size" type="System.Drawing.Size, System.Drawing">
-    <value>162, 27</value>
-  </data>
-  <data name="lRule.TabIndex" type="System.Int32, mscorlib">
-    <value>21</value>
-  </data>
-  <data name="lRule.Text" xml:space="preserve">
-    <value>Правило</value>
-  </data>
-  <data name="lRule.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="&gt;&gt;lRule.Name" xml:space="preserve">
-    <value>lRule</value>
-  </data>
-  <data name="&gt;&gt;lRule.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lRule.Parent" xml:space="preserve">
-    <value>tLPSettingsCellularAutomaton</value>
-  </data>
-  <data name="&gt;&gt;lRule.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="cBCellularAutomatonRules.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="cBCellularAutomatonRules.Location" type="System.Drawing.Point, System.Drawing">
-    <value>171, 55</value>
-  </data>
-  <data name="cBCellularAutomatonRules.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 21</value>
-  </data>
-  <data name="cBCellularAutomatonRules.TabIndex" type="System.Int32, mscorlib">
-    <value>20</value>
-  </data>
-  <data name="&gt;&gt;cBCellularAutomatonRules.Name" xml:space="preserve">
-    <value>cBCellularAutomatonRules</value>
-  </data>
-  <data name="&gt;&gt;cBCellularAutomatonRules.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cBCellularAutomatonRules.Parent" xml:space="preserve">
-    <value>tLPSettingsCellularAutomaton</value>
-  </data>
-  <data name="&gt;&gt;cBCellularAutomatonRules.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="nUDStatesCount.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="nUDStatesCount.Location" type="System.Drawing.Point, System.Drawing">
-    <value>171, 29</value>
-  </data>
-  <data name="nUDStatesCount.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 20</value>
-  </data>
-  <data name="nUDStatesCount.TabIndex" type="System.Int32, mscorlib">
-    <value>20</value>
-  </data>
-  <data name="nUDStatesCount.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Right</value>
-  </data>
-  <data name="&gt;&gt;nUDStatesCount.Name" xml:space="preserve">
-    <value>nUDStatesCount</value>
-  </data>
-  <data name="&gt;&gt;nUDStatesCount.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;nUDStatesCount.Parent" xml:space="preserve">
-    <value>tLPSettingsCellularAutomaton</value>
-  </data>
-  <data name="&gt;&gt;nUDStatesCount.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="lDencity.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lDencity.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="lDencity.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lDencity.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 0</value>
-  </data>
-  <data name="lDencity.Size" type="System.Drawing.Size, System.Drawing">
-    <value>162, 26</value>
-  </data>
-  <data name="lDencity.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="lDencity.Text" xml:space="preserve">
-    <value>Плотность клеток на поле</value>
-  </data>
-  <data name="lDencity.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="&gt;&gt;lDencity.Name" xml:space="preserve">
-    <value>lDencity</value>
-  </data>
-  <data name="&gt;&gt;lDencity.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lDencity.Parent" xml:space="preserve">
-    <value>tLPSettingsCellularAutomaton</value>
-  </data>
-  <data name="&gt;&gt;lDencity.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="nUDDencity.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="nUDDencity.Location" type="System.Drawing.Point, System.Drawing">
-    <value>171, 3</value>
-  </data>
-  <data name="nUDDencity.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 20</value>
-  </data>
-  <data name="nUDDencity.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
-  </data>
-  <data name="nUDDencity.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Right</value>
-  </data>
-  <data name="&gt;&gt;nUDDencity.Name" xml:space="preserve">
-    <value>nUDDencity</value>
-  </data>
-  <data name="&gt;&gt;nUDDencity.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;nUDDencity.Parent" xml:space="preserve">
-    <value>tLPSettingsCellularAutomaton</value>
-  </data>
-  <data name="&gt;&gt;nUDDencity.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="lStatesCount.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lStatesCount.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="lStatesCount.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lStatesCount.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 26</value>
-  </data>
-  <data name="lStatesCount.Size" type="System.Drawing.Size, System.Drawing">
-    <value>162, 26</value>
-  </data>
-  <data name="lStatesCount.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
-  </data>
-  <data name="lStatesCount.Text" xml:space="preserve">
-    <value>Количество состояний клетки</value>
-  </data>
-  <data name="lStatesCount.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="&gt;&gt;lStatesCount.Name" xml:space="preserve">
-    <value>lStatesCount</value>
-  </data>
-  <data name="&gt;&gt;lStatesCount.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lStatesCount.Parent" xml:space="preserve">
-    <value>tLPSettingsCellularAutomaton</value>
-  </data>
-  <data name="&gt;&gt;lStatesCount.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="tLPSettingsCellularAutomaton.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="tLPSettingsCellularAutomaton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 16</value>
-  </data>
-  <data name="tLPSettingsCellularAutomaton.RowCount" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="tLPSettingsCellularAutomaton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>318, 79</value>
-  </data>
-  <data name="tLPSettingsCellularAutomaton.TabIndex" type="System.Int32, mscorlib">
-    <value>21</value>
-  </data>
-  <data name="&gt;&gt;tLPSettingsCellularAutomaton.Name" xml:space="preserve">
-    <value>tLPSettingsCellularAutomaton</value>
-  </data>
-  <data name="&gt;&gt;tLPSettingsCellularAutomaton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tLPSettingsCellularAutomaton.Parent" xml:space="preserve">
-    <value>gBSettingsCellularAutomaton</value>
-  </data>
-  <data name="&gt;&gt;tLPSettingsCellularAutomaton.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="tLPSettingsCellularAutomaton.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="lRule" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="cBCellularAutomatonRules" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="nUDStatesCount" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lDencity" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="nUDDencity" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lStatesCount" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100,Absolute,150" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
-  </data>
-  <data name="gBSettingsCellularAutomaton.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="gBSettingsCellularAutomaton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 80</value>
-  </data>
-  <data name="gBSettingsCellularAutomaton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>324, 98</value>
-  </data>
-  <data name="gBSettingsCellularAutomaton.TabIndex" type="System.Int32, mscorlib">
-    <value>21</value>
-  </data>
-  <data name="gBSettingsCellularAutomaton.Text" xml:space="preserve">
-    <value>Клеточный автомат</value>
-  </data>
-  <data name="&gt;&gt;gBSettingsCellularAutomaton.Name" xml:space="preserve">
-    <value>gBSettingsCellularAutomaton</value>
-  </data>
-  <data name="&gt;&gt;gBSettingsCellularAutomaton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;gBSettingsCellularAutomaton.Parent" xml:space="preserve">
-    <value>tLPSettings</value>
-  </data>
-  <data name="&gt;&gt;gBSettingsCellularAutomaton.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="tLPSettings.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="tLPSettings.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 16</value>
-  </data>
-  <data name="tLPSettings.RowCount" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="tLPSettings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>330, 181</value>
-  </data>
-  <data name="tLPSettings.TabIndex" type="System.Int32, mscorlib">
-    <value>23</value>
-  </data>
-  <data name="&gt;&gt;tLPSettings.Name" xml:space="preserve">
-    <value>tLPSettings</value>
-  </data>
-  <data name="&gt;&gt;tLPSettings.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tLPSettings.Parent" xml:space="preserve">
-    <value>gBSettings</value>
-  </data>
-  <data name="&gt;&gt;tLPSettings.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="tLPSettings.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="gBSettingsField" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="gBSettingsCellularAutomaton" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
-  </data>
-  <data name="gBSettings.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="gBSettings.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="gBSettings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>336, 200</value>
-  </data>
-  <data name="gBSettings.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
-  </data>
-  <data name="gBSettings.Text" xml:space="preserve">
-    <value>Параметры</value>
-  </data>
-  <data name="&gt;&gt;gBSettings.Name" xml:space="preserve">
-    <value>gBSettings</value>
-  </data>
-  <data name="&gt;&gt;gBSettings.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;gBSettings.Parent" xml:space="preserve">
-    <value>tLPMain</value>
-  </data>
-  <data name="&gt;&gt;gBSettings.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="gBSettings" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="gBControlButton" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -766,10 +706,10 @@
     <value>True</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>342, 264</value>
+    <value>256, 239</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>Recorder</value>
+    <value>CellularAutomatonRecorder</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
