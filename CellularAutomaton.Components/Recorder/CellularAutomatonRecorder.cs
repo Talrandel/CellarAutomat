@@ -43,6 +43,7 @@ namespace CellularAutomaton.Components.Recorder
         /// Возвращает коллекцию правил построения клеточных автоматов.
         /// </summary>
         [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public IList<IRule> Rules { get; private set; }
         #endregion
 
