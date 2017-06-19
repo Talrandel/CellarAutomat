@@ -61,6 +61,33 @@ namespace CellularAutomaton.Components.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на 100.
+        /// </summary>
+        internal static string DencityMaxDefValue {
+            get {
+                return ResourceManager.GetString("DencityMaxDefValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на 0.
+        /// </summary>
+        internal static string DencityMinDefValue {
+            get {
+                return ResourceManager.GetString("DencityMinDefValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на 50.
+        /// </summary>
+        internal static string DencityValueDefValue {
+            get {
+                return ResourceManager.GetString("DencityValueDefValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Выполнена попытка перехода к кадру номер которого больше, чем кадров в текущей записи..
         /// </summary>
         internal static string Ex__Выполнена_попытка_перехода_к_кадру_номер_которого_больше__чем_кадров_в_текущей_записи_ {
@@ -148,6 +175,60 @@ namespace CellularAutomaton.Components.Properties {
         internal static string SaveFileDialogRecordTitle {
             get {
                 return ResourceManager.GetString("SaveFileDialogRecordTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на 500.
+        /// </summary>
+        internal static string SizeFieldHeightMaxDefValue {
+            get {
+                return ResourceManager.GetString("SizeFieldHeightMaxDefValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на 50.
+        /// </summary>
+        internal static string SizeFieldHeightMinDefValue {
+            get {
+                return ResourceManager.GetString("SizeFieldHeightMinDefValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на 100.
+        /// </summary>
+        internal static string SizeFieldHeightValueDefValue {
+            get {
+                return ResourceManager.GetString("SizeFieldHeightValueDefValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на 500.
+        /// </summary>
+        internal static string SizeFieldWidthMaxDefValue {
+            get {
+                return ResourceManager.GetString("SizeFieldWidthMaxDefValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на 50.
+        /// </summary>
+        internal static string SizeFieldWidthMinDefValue {
+            get {
+                return ResourceManager.GetString("SizeFieldWidthMinDefValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на 100.
+        /// </summary>
+        internal static string SizeFieldWidthValueDefValue {
+            get {
+                return ResourceManager.GetString("SizeFieldWidthValueDefValue", resourceCulture);
             }
         }
     }

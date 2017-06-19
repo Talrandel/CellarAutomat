@@ -6,7 +6,7 @@
 // File          : CellularAutomatonRecorder.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 18.06.2017 12:21
-// Last Revision : 18.06.2017 16:49
+// Last Revision : 19.06.2017 20:42
 // Description   : 
 #endregion
 
@@ -67,13 +67,16 @@ namespace CellularAutomaton.Components.Recorder
             innerRules.CollectionChanged += InnerRules_CollectionChanged;
             Rules = innerRules;
 
-            SizeFieldWidthMin = SizeFieldHeightMin = 50;
-            SizeFieldWidthMax = SizeFieldHeightMax = 500;
-            SizeFieldWidthValue = SizeFieldHeightValue = 100;
+            SizeFieldWidthMin = Convert.ToInt16(Resources.SizeFieldWidthMinDefValue);
+            SizeFieldHeightMin = Convert.ToInt16(Resources.SizeFieldHeightMinDefValue);
+            SizeFieldWidthMax = Convert.ToInt16(Resources.SizeFieldWidthMaxDefValue);
+            SizeFieldHeightMax = Convert.ToInt16(Resources.SizeFieldHeightMaxDefValue);
+            SizeFieldWidthValue = Convert.ToInt16(Resources.SizeFieldWidthValueDefValue);
+            SizeFieldHeightValue = Convert.ToInt16(Resources.SizeFieldHeightValueDefValue);
 
-            DencityMin = 0;
-            DencityMax = 100;
-            DencityValue = 50;
+            DencityMin = Convert.ToInt16(Resources.DencityMinDefValue);
+            DencityMax = Convert.ToInt16(Resources.DencityMaxDefValue);
+            DencityValue = Convert.ToInt16(Resources.DencityValueDefValue);
 
             StatesCountMin = Core.CellularAutomaton.StatesNumberMin;
             StatesCountMax = Core.CellularAutomaton.StatesNumberMax;

@@ -147,4 +147,31 @@
   <data name="SaveFileDialogRecordDefFileName" xml:space="preserve">
     <value>record</value>
   </data>
+  <data name="DencityMaxDefValue" xml:space="preserve">
+    <value>100</value>
+  </data>
+  <data name="DencityMinDefValue" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="DencityValueDefValue" xml:space="preserve">
+    <value>50</value>
+  </data>
+  <data name="SizeFieldHeightMaxDefValue" xml:space="preserve">
+    <value>500</value>
+  </data>
+  <data name="SizeFieldHeightMinDefValue" xml:space="preserve">
+    <value>50</value>
+  </data>
+  <data name="SizeFieldHeightValueDefValue" xml:space="preserve">
+    <value>100</value>
+  </data>
+  <data name="SizeFieldWidthMaxDefValue" xml:space="preserve">
+    <value>500</value>
+  </data>
+  <data name="SizeFieldWidthMinDefValue" xml:space="preserve">
+    <value>50</value>
+  </data>
+  <data name="SizeFieldWidthValueDefValue" xml:space="preserve">
+    <value>100</value>
+  </data>
 </root>
