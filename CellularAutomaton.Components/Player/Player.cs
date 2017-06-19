@@ -6,7 +6,7 @@
 // File          : Player.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 18.06.2017 12:46
-// Last Revision : 18.06.2017 12:46
+// Last Revision : 19.06.2017 23:38
 // Description   : 
 #endregion
 
@@ -225,7 +225,12 @@ namespace CellularAutomaton.Components.Player
         /// </exception>
         public void Rewind(short frame)
         {
-            Stop();
+            bool isFastRewind = (frame - CurrenFrame == 1) && (frame <= GetFrames); // Возможна быстрая перемотка?
+
+            if (isFastRewind)
+                StopNoReset();
+            else
+                Stop();
 
             if (frame < 0)
             {
@@ -233,15 +238,21 @@ namespace CellularAutomaton.Components.Player
                     Resources.Ex__Выполнена_попытка_перехода_к_кадру_с_отрицательным_индексом_);
             }
 
-            if (_record.Rec.Count < frame)
+            if (GetFrames < frame)
             {
                 throw new ArgumentOutOfRangeException(nameof(frame), frame,
                     Resources.Ex__Выполнена_попытка_перехода_к_кадру_номер_которого_больше__чем_кадров_в_текущей_записи_);
             }
 
             CurrenFrame = frame;
-            for (int i = 0; i < CurrenFrame; i++) // Перейти к указанному кадру.
+
+            if (isFastRewind)
                 _recordEnumerator.MoveNext();
+            else
+            {
+                for (int i = 0; i < CurrenFrame; i++) // Перейти к указанному кадру.
+                    _recordEnumerator.MoveNext();
+            }
         }
 
         /// <summary>
@@ -261,6 +272,19 @@ namespace CellularAutomaton.Components.Player
         #endregion
 
         #region Members
+        /// <summary>
+        /// Останавливает воспроизведение без перемотки в начало записи.
+        /// </summary>
+        private void StopNoReset()
+        {
+            if (State != StatePlayer.Stop)
+            {
+                State = StatePlayer.Stop;
+                OnStopPlay();
+                _timer.Stop();
+            }
+        }
+
         /// <summary>
         /// Освобождает все ресурсы, используемые текущим объектом <see cref="Player"/>.
         /// </summary>
