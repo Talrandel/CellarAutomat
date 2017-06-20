@@ -39,8 +39,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Player\CellularAutomatonPlayer.cs">
@@ -51,6 +53,12 @@
     </Compile>
     <Compile Include="Player\IPlayer.cs" />
     <Compile Include="Player\Player.cs" />
+    <Compile Include="Player\PlayerController.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Player\PlayerController.Designer.cs">
+      <DependentUpon>PlayerController.cs</DependentUpon>
+    </Compile>
     <Compile Include="Player\StatePlayer.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -75,6 +83,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Player\CellularAutomatonPlayer.resx">
       <DependentUpon>CellularAutomatonPlayer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Player\PlayerController.resx">
+      <DependentUpon>PlayerController.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

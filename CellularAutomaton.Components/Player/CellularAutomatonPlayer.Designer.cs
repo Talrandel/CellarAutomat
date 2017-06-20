@@ -29,20 +29,41 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CellularAutomatonPlayer));
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tLPMain = new System.Windows.Forms.TableLayoutPanel();
+            this.pBMain = new System.Windows.Forms.PictureBox();
+            this.playerController1 = new CellularAutomaton.Components.Player.PlayerController();
+            this.tLPMain.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pBMain)).BeginInit();
             this.SuspendLayout();
             // 
-            // tableLayoutPanel1
+            // tLPMain
             // 
-            resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            resources.ApplyResources(this.tLPMain, "tLPMain");
+            this.tLPMain.Controls.Add(this.pBMain, 0, 0);
+            this.tLPMain.Controls.Add(this.playerController1, 0, 1);
+            this.tLPMain.Name = "tLPMain";
+            // 
+            // pBMain
+            // 
+            resources.ApplyResources(this.pBMain, "pBMain");
+            this.pBMain.Name = "pBMain";
+            this.pBMain.TabStop = false;
+            // 
+            // playerController1
+            // 
+            resources.ApplyResources(this.playerController1, "playerController1");
+            this.playerController1.Name = "playerController1";
             // 
             // CellularAutomatonPlayer
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.tableLayoutPanel1);
+            this.Controls.Add(this.tLPMain);
+            this.DoubleBuffered = true;
             this.Name = "CellularAutomatonPlayer";
+            this.tLPMain.ResumeLayout(false);
+            this.tLPMain.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pBMain)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -50,6 +71,8 @@
 
         #endregion
 
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TableLayoutPanel tLPMain;
+        private System.Windows.Forms.PictureBox pBMain;
+        private PlayerController playerController1;
     }
 }
