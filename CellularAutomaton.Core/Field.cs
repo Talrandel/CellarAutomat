@@ -6,15 +6,13 @@
 // File          : Field.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 16.06.2017 13:14
-// Last Revision : 20.06.2017 20:52
+// Last Revision : 20.06.2017 22:24
 // Description   : 
 #endregion
 
 using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
-using System.Linq;
 
 using CellularAutomaton.Core.Properties;
 
@@ -127,7 +125,7 @@ namespace CellularAutomaton.Core
                 for (int i = 0; i < Height; i++)
                 {
                     for (int j = 0; j < Width; j++)
-                        if (rnd.Next(0, 101) > density)
+                        if (density < rnd.Next(0, 101))
                             _cells[i, j] = rnd.Next(1, statesNumber);
                         else
                             _cells[i, j] = 0;
@@ -135,9 +133,7 @@ namespace CellularAutomaton.Core
                 }
             }
         }
-        #endregion
 
-        #region IReadOnlyField Members
         /// <summary>
         /// Возвращает ширину поля.
         /// </summary>
@@ -237,8 +233,13 @@ namespace CellularAutomaton.Core
                     break;
                 }
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(direction), direction,
-                        string.Format(CultureInfo.CurrentCulture, Resources.Ex__Недопустимое_значение_параметра__0__, nameof(direction)));
+                    throw new ArgumentOutOfRangeException(
+                        nameof(direction),
+                        direction,
+                        string.Format(
+                            CultureInfo.CurrentCulture,
+                            Resources.Ex__Недопустимое_значение_параметра__0__,
+                            nameof(direction)));
             }
 
             return state;
@@ -261,133 +262,6 @@ namespace CellularAutomaton.Core
                 for (int j = 0; j < Width; j++)
                     other[i, j] = this[i, j];
             }
-        }
-        #endregion
-
-        #region Members
-        /// <summary>
-        /// Получить количество живых соседей в окрестности Мура для клетки с координатами.
-        /// </summary>
-        /// <param name="x">Координата по оси X клетки.</param>
-        /// <param name="y">Координата по оси Y клетки.</param>
-        /// <returns>Количество живых соседей для выбранной клетки.</returns>
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "y")]
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "x")]
-        public int GetLiveNeighborCount(int x, int y)
-        {
-#warning TEST
-            int count = 0;
-            for (int i = y - 1; i <= y; i++)
-            {
-                for (int j = x - 1; j <= x; j++)
-                {
-                    if (i == y && j == x)
-                        continue;
-
-                    if (0 <= i && i <= Height && 0 <= j && j <= Width && _cells[i, j] != 0)
-                        count++;
-                }
-            }
-
-            return count;
-
-            //int[] tempArray =
-            //{
-            //    GetCellAtDirection(x, y, Directions.NorthWest),
-            //    GetCellAtDirection(x, y, Directions.NorthEast),
-            //    GetCellAtDirection(x, y, Directions.North),
-            //    GetCellAtDirection(x, y, Directions.SouthWest),
-            //    GetCellAtDirection(x, y, Directions.SouthEast),
-            //    GetCellAtDirection(x, y, Directions.South),
-            //    GetCellAtDirection(x, y, Directions.West),
-            //    GetCellAtDirection(x, y, Directions.East)
-            //};
-
-            //int count2 = tempArray.Count(item => item != 0);
-
-            //return count2;
-        }
-
-        /// <summary>
-        /// Получить число живых соседей в окрестности Фон Неймана для клетки с координатами.
-        /// </summary>
-        /// <param name="x">Координата по оси X клетки.</param>
-        /// <param name="y">Координата по оси Y клетки.</param>
-        /// <returns>Количество живых соседей для выбранной клетки.</returns>
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "y")]
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "x")]
-        public int GetLiveNeighborCountNeiman(int x, int y)
-        {
-            int[] tempArray =
-            {
-                GetCellAtDirection(x, y, Directions.North),
-                GetCellAtDirection(x, y, Directions.East),
-                GetCellAtDirection(x, y, Directions.South),
-                GetCellAtDirection(x, y, Directions.West)
-            };
-
-            return tempArray.Count(item => item > 0);
-        }
-
-        /// <summary>
-        /// Получить список соседей в окрестности Мура для клетки с координатами.
-        /// </summary>
-        /// <param name="x">Координата по оси X клетки.</param>
-        /// <param name="y">Координата по оси Y клетки.</param>
-        /// <returns>Список существующих соседей для клетки с заданными координатами.</returns>
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "y")]
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "x")]
-        public IEnumerable<int> GetNeighborsInAllDirections(int x, int y)
-        {
-            int[] tempArray =
-            {
-                GetCellAtDirection(x, y, Directions.NorthWest),
-                GetCellAtDirection(x, y, Directions.NorthEast),
-                GetCellAtDirection(x, y, Directions.North),
-                GetCellAtDirection(x, y, Directions.SouthWest),
-                GetCellAtDirection(x, y, Directions.SouthEast),
-                GetCellAtDirection(x, y, Directions.South),
-                GetCellAtDirection(x, y, Directions.West),
-                GetCellAtDirection(x, y, Directions.East)
-            };
-
-            return tempArray.Where(cell => cell != -1);
-        }
-
-        /// <summary>
-        /// Получить список соседей в окрестности Фон Неймана для клетки с координатами.
-        /// </summary>
-        /// <param name="x">Координата по оси X клетки.</param>
-        /// <param name="y">Координата по оси Y клетки.</param>
-        /// <returns>Список существующих соседей для клетки с заданными координатами.</returns>
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "y")]
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "x")]
-        public IEnumerable<int> GetNeighborsInFourDirections(int x, int y)
-        {
-            int[] tempArray =
-            {
-                GetCellAtDirection(x, y, Directions.North),
-                GetCellAtDirection(x, y, Directions.South),
-                GetCellAtDirection(x, y, Directions.West),
-                GetCellAtDirection(x, y, Directions.East)
-            };
-
-            return tempArray.Where(cell => cell != -1);
-        }
-
-        /// <summary>
-        /// Получить список соседей в двух направлениях (на западе и востоке) для клетки с координатами.
-        /// </summary>
-        /// <param name="x">Координата по оси X клетки.</param>
-        /// <param name="y">Координата по оси Y клетки.</param>
-        /// <returns>Список существующих соседей для клетки с заданными координатами.</returns>
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "y")]
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "x")]
-        public IEnumerable<int> GetNeighborsInTwoDirections(int x, int y)
-        {
-            int[] tempArray = { GetCellAtDirection(x, y, Directions.West), GetCellAtDirection(x, y, Directions.East) };
-
-            return tempArray.Where(cell => cell != -1);
         }
         #endregion
     }

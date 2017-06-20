@@ -17,7 +17,7 @@ namespace CellularAutomaton.Core
     /// <summary>
     /// Определяет методы используемые для управления полями клеточных автоматов.
     /// </summary>
-    public interface IField
+    public interface IField : IReadOnlyField
     {
         #region Indexers
         /// <summary>

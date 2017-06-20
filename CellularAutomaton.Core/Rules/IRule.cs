@@ -6,7 +6,7 @@
 // File          : IRule.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 16.06.2017 13:14
-// Last Revision : 20.06.2017 21:14
+// Last Revision : 20.06.2017 22:25
 // Description   : 
 #endregion
 
@@ -39,7 +39,7 @@ namespace CellularAutomaton.Core.Rules
         /// <exception cref="ArgumentNullException">Параметр <paramref name="pastFiled"/> имеет значение <b>null</b>.</exception>
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "y")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "x")]
-        int TransformCell(Field pastFiled, int x, int y, int statesCount);
+        int TransformCell(IField pastFiled, int x, int y, int statesCount);
         #endregion
     }
 }

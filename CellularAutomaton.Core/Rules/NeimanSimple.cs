@@ -6,7 +6,7 @@
 // File          : NeimanSimple.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 16.06.2017 13:14
-// Last Revision : 17.06.2017 17:36
+// Last Revision : 20.06.2017 22:25
 // Description   : 
 #endregion
 
@@ -26,7 +26,9 @@ namespace CellularAutomaton.Core.Rules
         /// Возвращает название правила.
         /// </summary>
         public string Name => Resources.Rule_NeimanSimple_Name;
+        #endregion
 
+        #region Members
         /// <summary>
         /// Изменяет состояние клетки расположенной по заданным координатам.
         /// </summary>
@@ -36,7 +38,7 @@ namespace CellularAutomaton.Core.Rules
         /// <param name="statesCount"><b>Не используется.</b> Количество состояний клетки.</param>
         /// <returns>Новое состояние клетки.</returns>
         /// <exception cref="ArgumentNullException">Параметр <paramref name="pastFiled"/> имеет значение <b>null</b>.</exception>
-        public int TransformCell(Field pastFiled, int x, int y, int statesCount)
+        public int TransformCell(IField pastFiled, int x, int y, int statesCount)
         {
             if (pastFiled == null)
                 throw new ArgumentNullException(nameof(pastFiled));

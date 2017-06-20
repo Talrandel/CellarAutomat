@@ -49,6 +49,7 @@
     <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FieldExtension.cs" />
     <Compile Include="Directions.cs" />
     <Compile Include="IField.cs" />
     <Compile Include="IReadOnlyField.cs" />
