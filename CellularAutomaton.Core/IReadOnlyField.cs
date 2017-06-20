@@ -38,6 +38,9 @@ namespace CellularAutomaton.Core
         /// <param name="x">Координата по оси X клетки.</param>
         /// <param name="y">Координата по оси Y клетки.</param>
         /// <returns>Значение клетки.</returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1023:IndexersShouldNotBeMultidimensional")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "y")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "x")]
         int this[int x, int y] { get; }
         #endregion
 
@@ -50,6 +53,8 @@ namespace CellularAutomaton.Core
         /// <param name="direction">Направление движения.</param>
         /// <returns>Состояние клетки.</returns>
         /// <exception cref="ArgumentOutOfRangeException">Недопустимое значение параметра <paramref name="direction"/>.</exception>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "y")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "x")]
         int GetCellAtDirection(int x, int y, Directions direction);
 
         /// <summary>
@@ -57,6 +62,7 @@ namespace CellularAutomaton.Core
         /// </summary>
         /// <param name="other">Поле, в которое осуществляется копирование.</param>
         /// <exception cref="ArgumentNullException">Параметр <paramref name="other"/> имеет значение <b>null</b>.</exception>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference", MessageId = "0#")]
         void Copy(ref Field other);
         #endregion
     }

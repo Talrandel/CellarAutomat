@@ -6,7 +6,7 @@
 // File          : SRDescriptionAttribute.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 18.06.2017 12:11
-// Last Revision : 18.06.2017 15:51
+// Last Revision : 20.06.2017 22:55
 // Description   : 
 #endregion
 
@@ -32,23 +32,29 @@ namespace CellularAutomaton.Components
         public const string Suffix = "Descr";
         #endregion
 
+        #region Fields
+        /// <summary>
+        /// <b>True</b> - локализованная строка загружена из ресурсов, иначе <b>false</b>.
+        /// </summary>
+        private bool _isLoaded;
+        #endregion
+
         #region Properties
         /// <summary>
         /// Возвращает описание, хранящееся в данном атрибуте.
         /// </summary>
-        /// <returns>Локализованное описание или значение null, если локализованное описание не существует.</returns>
+        /// <returns>Локализованное описание или значение <b>null</b>, если локализованное описание не существует.</returns>
         public override string Description
         {
             get
             {
-                try
+                if (!_isLoaded) // Локализованная строка не загружена из ресурсов?
                 {
-                    return Resources.ResourceManager.GetString(DescriptionValue);
+                    _isLoaded = true;
+                    DescriptionValue = Resources.ResourceManager.GetString(base.Description);
                 }
-                catch
-                {
-                    return null;
-                }
+
+                return DescriptionValue;
             }
         }
         #endregion

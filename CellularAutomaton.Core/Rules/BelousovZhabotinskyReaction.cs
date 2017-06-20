@@ -37,7 +37,7 @@ namespace CellularAutomaton.Core.Rules
         /// <param name="statesCount"><b>Не используется.</b> Количество состояний клетки.</param>
         /// <returns>Новое состояние клетки.</returns>
         /// <exception cref="ArgumentNullException">Параметр <paramref name="pastFiled"/> имеет значение <b>null</b>.</exception>
-        public int TransformCell(IField pastFiled, int x, int y, int statesCount)
+        public int TransformCell(IReadOnlyField pastFiled, int x, int y, int statesCount)
         {
             if (pastFiled == null)
                 throw new ArgumentNullException(nameof(pastFiled));

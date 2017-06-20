@@ -17,7 +17,7 @@ namespace CellularAutomaton.Core
     /// <summary>
     /// Определяет методы используемые для управления полями клеточных автоматов.
     /// </summary>
-    public interface IField : IReadOnlyField
+    public interface IField
     {
         #region Indexers
         /// <summary>
@@ -26,6 +26,9 @@ namespace CellularAutomaton.Core
         /// <param name="x">Координата по оси X клетки.</param>
         /// <param name="y">Координата по оси Y клетки.</param>
         /// <returns>Значение клетки.</returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1023:IndexersShouldNotBeMultidimensional")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "y")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "x")]
         int this[int x, int y] { get; set; }
         #endregion
 

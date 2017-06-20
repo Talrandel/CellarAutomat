@@ -41,14 +41,7 @@ namespace CellularAutomaton.Components
         /// <returns>Локализованное имя категории или значение null, если локализованное имя не существует.</returns>
         protected override string GetLocalizedString(string value)
         {
-            try
-            {
-                return Resources.ResourceManager.GetString(value);
-            }
-            catch
-            {
-                return null;
-            }
+            return Resources.ResourceManager.GetString(value);
         }
         #endregion
     }

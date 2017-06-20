@@ -39,7 +39,7 @@ namespace CellularAutomaton.Core.Rules
         /// <exception cref="ArgumentNullException">Параметр <paramref name="pastFiled"/> имеет значение <b>null</b>.</exception>
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "y")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "x")]
-        int TransformCell(IField pastFiled, int x, int y, int statesCount);
+        int TransformCell(IReadOnlyField pastFiled, int x, int y, int statesCount);
         #endregion
     }
 }

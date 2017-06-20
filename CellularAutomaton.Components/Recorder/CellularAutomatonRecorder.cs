@@ -6,7 +6,7 @@
 // File          : CellularAutomatonRecorder.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 18.06.2017 12:21
-// Last Revision : 19.06.2017 20:42
+// Last Revision : 20.06.2017 22:43
 // Description   : 
 #endregion
 
@@ -68,16 +68,16 @@ namespace CellularAutomaton.Components.Recorder
             innerRules.CollectionChanged += InnerRules_CollectionChanged;
             Rules = innerRules;
 
-            SizeFieldWidthMin = Convert.ToInt16(Resources.SizeFieldWidthMinDefValue);
-            SizeFieldHeightMin = Convert.ToInt16(Resources.SizeFieldHeightMinDefValue);
-            SizeFieldWidthMax = Convert.ToInt16(Resources.SizeFieldWidthMaxDefValue);
-            SizeFieldHeightMax = Convert.ToInt16(Resources.SizeFieldHeightMaxDefValue);
-            SizeFieldWidthValue = Convert.ToInt16(Resources.SizeFieldWidthValueDefValue);
-            SizeFieldHeightValue = Convert.ToInt16(Resources.SizeFieldHeightValueDefValue);
+            SizeFieldWidthMin = Convert.ToInt16(Resources.SizeFieldWidthMinDefValue, CultureInfo.CurrentCulture);
+            SizeFieldHeightMin = Convert.ToInt16(Resources.SizeFieldHeightMinDefValue, CultureInfo.CurrentCulture);
+            SizeFieldWidthMax = Convert.ToInt16(Resources.SizeFieldWidthMaxDefValue, CultureInfo.CurrentCulture);
+            SizeFieldHeightMax = Convert.ToInt16(Resources.SizeFieldHeightMaxDefValue, CultureInfo.CurrentCulture);
+            SizeFieldWidthValue = Convert.ToInt16(Resources.SizeFieldWidthValueDefValue, CultureInfo.CurrentCulture);
+            SizeFieldHeightValue = Convert.ToInt16(Resources.SizeFieldHeightValueDefValue, CultureInfo.CurrentCulture);
 
-            DencityMin = Convert.ToInt16(Resources.DencityMinDefValue);
-            DencityMax = Convert.ToInt16(Resources.DencityMaxDefValue);
-            DencityValue = Convert.ToInt16(Resources.DencityValueDefValue);
+            DencityMin = Convert.ToInt16(Resources.DencityMinDefValue, CultureInfo.CurrentCulture);
+            DencityMax = Convert.ToInt16(Resources.DencityMaxDefValue, CultureInfo.CurrentCulture);
+            DencityValue = Convert.ToInt16(Resources.DencityValueDefValue, CultureInfo.CurrentCulture);
 
             StatesCountMin = Core.CellularAutomaton.StatesNumberMin;
             StatesCountMax = Core.CellularAutomaton.StatesNumberMax;
@@ -132,25 +132,26 @@ namespace CellularAutomaton.Components.Recorder
         /// <returns>Имя файла, в который необходимо сохранить запись.</returns>
         private string SaveRecordDlg()
         {
-            using (SaveFileDialog svfDlg = new SaveFileDialog
+            using (SaveFileDialog svfDlg = new SaveFileDialog())
             {
-                CheckFileExists = false,
-                CheckPathExists = true,
-                ValidateNames = true,
+                svfDlg.CheckFileExists = false;
+                svfDlg.CheckPathExists = true;
+                svfDlg.ValidateNames = true;
 
-                AddExtension = true,
-                DereferenceLinks = true,
-                RestoreDirectory = true,
-                OverwritePrompt = true,
+                svfDlg.AddExtension = true;
+                svfDlg.DereferenceLinks = true;
+                svfDlg.RestoreDirectory = true;
+                svfDlg.OverwritePrompt = true;
 
-                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                svfDlg.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
-                Title = Resources.SaveFileDialogRecordTitle,
-                FileName = Resources.SaveFileDialogRecordDefFileName,
-                DefaultExt = Resources.SaveFileDialogRecordExt,
-                Filter = Resources.SaveFileDialogRecordFilter
-            })
+                svfDlg.Title = Resources.SaveFileDialogRecordTitle;
+                svfDlg.FileName = Resources.SaveFileDialogRecordDefFileName;
+                svfDlg.DefaultExt = Resources.SaveFileDialogRecordExt;
+                svfDlg.Filter = Resources.SaveFileDialogRecordFilter;
+
                 return FileName = svfDlg.ShowDialog() == DialogResult.OK ? svfDlg.FileName : FileName;
+            }
         }
         #endregion
 
