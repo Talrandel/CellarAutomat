@@ -18,7 +18,7 @@ using CellularAutomaton.Core;
 namespace CellularAutomaton.Components.Player
 {
     /// <summary>
-    /// Интерфейс проигрывателя записей работы клеточного автомата.
+    /// Определеят методы управления проигрывателем записей работы клеточного автомата.
     /// </summary>
     public interface IPlayer
     {

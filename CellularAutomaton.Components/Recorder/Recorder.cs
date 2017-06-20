@@ -151,7 +151,7 @@ namespace CellularAutomaton.Components.Recorder
         /// <param name="field">Визуализируемое поле клеточного автомата.</param>
         /// <returns>Визуализированное поле.</returns>
         /// <exception cref="ArgumentNullException">Параметр <paramref name="field"/> имеет значение <b>null</b>.</exception>
-        public Bitmap DrawingFromField(Field field)
+        public Bitmap DrawingFromField(IReadOnlyField field)
         {
             if (field == null)
                 throw new ArgumentNullException(nameof(field));

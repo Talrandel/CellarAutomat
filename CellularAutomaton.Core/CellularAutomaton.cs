@@ -6,7 +6,7 @@
 // File          : CellularAutomaton.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 17.06.2017 17:27
-// Last Revision : 20.06.2017 17:32
+// Last Revision : 20.06.2017 21:02
 // Description   : 
 #endregion
 
@@ -101,7 +101,7 @@ namespace CellularAutomaton.Core
         /// <summary>
         /// Возвращает текущее поле.
         /// </summary>
-        public Field CurrentField => _currentField;
+        public IReadOnlyField CurrentField => _currentField;
         #endregion
 
         #region Constructors
@@ -257,7 +257,7 @@ namespace CellularAutomaton.Core
         {
             for (int i = 0; i < _pastField.Height; i++)
                 for (int j = 0; j < _pastField.Width; j++)
-                    CurrentField[i, j] = Rule.TransformCell(_pastField, i, j, StatesCount);
+                    _currentField[i, j] = Rule.TransformCell(_pastField, i, j, StatesCount);
         }
 
         /// <summary>

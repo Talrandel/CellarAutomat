@@ -16,7 +16,7 @@ using System.Diagnostics.CodeAnalysis;
 namespace CellularAutomaton.Components.Recorder
 {
     /// <summary>
-    /// Интерфейс регистратора, позволяющего записывать функциорирование клеточного автомата.
+    /// Определяет методы управления регистратором, позволяющим записывать функционирование клеточного автомата.
     /// </summary>
     public interface IRecorder
     {

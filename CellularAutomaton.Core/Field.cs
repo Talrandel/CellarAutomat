@@ -6,7 +6,7 @@
 // File          : Field.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 16.06.2017 13:14
-// Last Revision : 17.06.2017 16:31
+// Last Revision : 20.06.2017 20:52
 // Description   : 
 #endregion
 
@@ -23,54 +23,14 @@ namespace CellularAutomaton.Core
     /// <summary>
     /// Представляет поле клеточного автомата.
     /// </summary>
-    public class Field : IEquatable<Field>
+    public class Field : IEquatable<Field>, IField, IReadOnlyField
     {
         #region Fields
         /// <summary>
         /// Поле.
         /// </summary>
-        [SuppressMessage("Microsoft.Performance", "CA1814:PreferJaggedArraysOverMultidimensional",
-            MessageId = "Member")]
+        [SuppressMessage("Microsoft.Performance", "CA1814:PreferJaggedArraysOverMultidimensional", MessageId = "Member")]
         private readonly int[,] _cells;
-
-        /// <summary>
-        /// Высота поля.
-        /// </summary>
-        private readonly int _height;
-
-        /// <summary>
-        /// Ширина поля.
-        /// </summary>
-        private readonly int _width;
-        #endregion
-
-        #region Properties
-        /// <summary>
-        /// Возвращает ширину поля.
-        /// </summary>
-        public int Width => _width;
-
-        /// <summary>
-        /// Возвращает высоту поля.
-        /// </summary>
-        public int Height => _height;
-        #endregion
-
-        #region Indexers
-        /// <summary>
-        /// Возвращает или задаёт значение клетки расположенной по заданным координатам.
-        /// </summary>
-        /// <param name="x">Координата по оси X клетки.</param>
-        /// <param name="y">Координата по оси Y клетки.</param>
-        /// <returns>Значение клетки.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1023:IndexersShouldNotBeMultidimensional")]
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "y")]
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "x")]
-        public int this[int x, int y]
-        {
-            get { return _cells[x, y]; }
-            set { _cells[x, y] = value; }
-        }
         #endregion
 
         #region Constructors
@@ -98,8 +58,8 @@ namespace CellularAutomaton.Core
                     string.Format(CultureInfo.CurrentCulture, Resources.Ex__Высота_поля__0__меньше_нуля_, nameof(height)));
             }
 
-            _width = width;
-            _height = height;
+            Width = width;
+            Height = height;
             _cells = new int[height, width];
         }
         #endregion
@@ -115,9 +75,9 @@ namespace CellularAutomaton.Core
             if (other == null)
                 return false;
 
-            for (int i = 0; i < _height; i++)
+            for (int i = 0; i < Height; i++)
             {
-                for (int j = 0; j < _width; j++)
+                for (int j = 0; j < Width; j++)
                     if (this[i, j] != other[i, j])
                         return false;
             }
@@ -126,7 +86,68 @@ namespace CellularAutomaton.Core
         }
         #endregion
 
-        #region Members
+        #region IField Members
+        /// <summary>
+        /// Возвращает или задаёт значение клетки расположенной по заданным координатам.
+        /// </summary>
+        /// <param name="x">Координата по оси X клетки.</param>
+        /// <param name="y">Координата по оси Y клетки.</param>
+        /// <returns>Значение клетки.</returns>
+        [SuppressMessage("Microsoft.Design", "CA1023:IndexersShouldNotBeMultidimensional")]
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "y")]
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "x")]
+        public int this[int x, int y]
+        {
+            get { return _cells[x, y]; }
+            set { _cells[x, y] = value; }
+        }
+
+        /// <summary>
+        /// Задаёт начальные состояния клеток на поле.
+        /// </summary>
+        /// <param name="statesNumber">Количество состояний клетки.</param>
+        /// <param name="density">Плотность распределения живых клеток на поле [0; 100].</param>
+        /// <exception cref="ArgumentOutOfRangeException">Величина плотности распределения живых клеток на поле должна лежать в интервале [0; 100].</exception>
+        public void SetStartValues(int statesNumber, byte density)
+        {
+            if (100 < density)
+                throw new ArgumentOutOfRangeException(nameof(density), density, Resources.Ex__DensityOutOfRange);
+
+            Random rnd = new Random();
+
+            // Сбросить состояние клеток.
+            if (density == 0)
+            {
+                for (int i = 0; i < Height; i++)
+                    for (int j = 0; j < Width; j++)
+                        _cells[i, j] = 0;
+            }
+            else
+            {
+                for (int i = 0; i < Height; i++)
+                {
+                    for (int j = 0; j < Width; j++)
+                        if (rnd.Next(0, 101) > density)
+                            _cells[i, j] = rnd.Next(1, statesNumber);
+                        else
+                            _cells[i, j] = 0;
+                    //cells[i, j] = rand.Next(0, statesNumber);
+                }
+            }
+        }
+        #endregion
+
+        #region IReadOnlyField Members
+        /// <summary>
+        /// Возвращает ширину поля.
+        /// </summary>
+        public int Width { get; }
+
+        /// <summary>
+        /// Возвращает высоту поля.
+        /// </summary>
+        public int Height { get; }
+
         /// <summary>
         /// Возвращает состояние клетки расположенной в заданном направлении относительно клетки заданной координатами.
         /// </summary>
@@ -164,7 +185,7 @@ namespace CellularAutomaton.Core
                     x--;
                     y++;
 
-                    if ((0 <= x) && (y < _width))
+                    if ((0 <= x) && (y < Width))
                         state = this[x, y];
                     break;
                 }
@@ -172,7 +193,7 @@ namespace CellularAutomaton.Core
                 {
                     y++;
 
-                    if (y < _width)
+                    if (y < Width)
                         state = this[x, y];
                     break;
                 }
@@ -181,7 +202,7 @@ namespace CellularAutomaton.Core
                     x++;
                     y++;
 
-                    if ((x < _height) && (y < _width))
+                    if ((x < Height) && (y < Width))
                         state = this[x, y];
                     break;
                 }
@@ -189,7 +210,7 @@ namespace CellularAutomaton.Core
                 {
                     x++;
 
-                    if (x < _height)
+                    if (x < Height)
                         state = this[x, y];
                     break;
                 }
@@ -198,7 +219,7 @@ namespace CellularAutomaton.Core
                     x++;
                     y--;
 
-                    if ((x < _height) && (0 <= y))
+                    if ((x < Height) && (0 <= y))
                         state = this[x, y];
                     break;
                 }
@@ -224,6 +245,27 @@ namespace CellularAutomaton.Core
         }
 
         /// <summary>
+        /// Осуществляет копирование текущего поля в заданное.
+        /// </summary>
+        /// <param name="other">Поле, в которое осуществляется копирование.</param>
+        /// <exception cref="ArgumentNullException">Параметр <paramref name="other"/> имеет значение <b>null</b>.</exception>
+        [SuppressMessage("Microsoft.Design", "CA1062:Проверить аргументы или открытые методы", MessageId = "0")]
+        [SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference", MessageId = "0#")]
+        public void Copy(ref Field other)
+        {
+            if (other == null)
+                throw new ArgumentNullException(nameof(other));
+
+            for (int i = 0; i < Height; i++)
+            {
+                for (int j = 0; j < Width; j++)
+                    other[i, j] = this[i, j];
+            }
+        }
+        #endregion
+
+        #region Members
+        /// <summary>
         /// Получить количество живых соседей в окрестности Мура для клетки с координатами.
         /// </summary>
         /// <param name="x">Координата по оси X клетки.</param>
@@ -242,7 +284,7 @@ namespace CellularAutomaton.Core
                     if (i == y && j == x)
                         continue;
 
-                    if (0 <= i && i <= _height && 0 <= j && j <= _width && _cells[i, j] != 0)
+                    if (0 <= i && i <= Height && 0 <= j && j <= Width && _cells[i, j] != 0)
                         count++;
                 }
             }
@@ -343,61 +385,9 @@ namespace CellularAutomaton.Core
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "x")]
         public IEnumerable<int> GetNeighborsInTwoDirections(int x, int y)
         {
-            int[] tempArray = {GetCellAtDirection(x, y, Directions.West), GetCellAtDirection(x, y, Directions.East)};
+            int[] tempArray = { GetCellAtDirection(x, y, Directions.West), GetCellAtDirection(x, y, Directions.East) };
 
             return tempArray.Where(cell => cell != -1);
-        }
-
-        /// <summary>
-        /// Осуществляет копирование текущего поля в заданное.
-        /// </summary>
-        /// <param name="other">Поле, в которое осуществляется копирование.</param>
-        /// <exception cref="ArgumentNullException">Параметр <paramref name="other"/> имеет значение <b>null</b>.</exception>
-        [SuppressMessage("Microsoft.Design", "CA1062:Проверить аргументы или открытые методы", MessageId = "0")]
-        [SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference", MessageId = "0#")]
-        public void Copy(ref Field other)
-        {
-            if (other == null)
-                throw new ArgumentNullException(nameof(other));
-
-            for (int i = 0; i < _height; i++)
-            {
-                for (int j = 0; j < _width; j++)
-                    other[i, j] = this[i, j];
-            }
-        }
-
-        /// <summary>
-        /// Задаёт начальные состояния клеток на поле.
-        /// </summary>
-        /// <param name="statesNumber">Количество состояний клетки.</param>
-        /// <param name="density">Плотность распределения живых клеток на поле [0; 100].</param>
-        public void SetStartValues(int statesNumber, byte density)
-        {
-            if (100 < density)
-                density = 100;
-
-            Random rnd = new Random();
-
-            // Сбросить состояние клеток.
-            if (density == 0)
-            {
-                for (int i = 0; i < _height; i++)
-                    for (int j = 0; j < _width; j++)
-                        _cells[i, j] = 0;
-            }
-            else
-            {
-                for (int i = 0; i < _height; i++)
-                {
-                    for (int j = 0; j < _width; j++)
-                        if (rnd.Next(0, 101) > density)
-                            _cells[i, j] = rnd.Next(1, statesNumber);
-                        else
-                            _cells[i, j] = 0;
-                    //cells[i, j] = rand.Next(0, statesNumber);
-                }
-            }
         }
         #endregion
     }

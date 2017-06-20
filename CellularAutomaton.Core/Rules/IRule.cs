@@ -6,7 +6,7 @@
 // File          : IRule.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 16.06.2017 13:14
-// Last Revision : 17.06.2017 14:14
+// Last Revision : 20.06.2017 21:14
 // Description   : 
 #endregion
 
@@ -16,7 +16,7 @@ using System.Diagnostics.CodeAnalysis;
 namespace CellularAutomaton.Core.Rules
 {
     /// <summary>
-    /// Интерфейс описания правила функционирования клеточного автомата.
+    /// Определяет описания правила функционирования клеточного автомата.
     /// </summary>
     public interface IRule
     {
