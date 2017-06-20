@@ -153,4 +153,16 @@
   <data name="Rule_VenusSurface_Name" xml:space="preserve">
     <value>Поверхность Венеры</value>
   </data>
+    <data name="Ex__DensityOutOfRange" xml:space="preserve">
+    <value>Величина плотности распределения живых клеток на поле должна лежать в интервале [0; 100].</value>
+  </data>
+    <data name="Ex__StatesCountOutOfRange" xml:space="preserve">
+    <value>Количество состояний клетки клеточного автомата должно лежать в интервале [{0}; {1}].</value>
+  </data>
+    <data name="Ex__Значение_параметра__0__меньше__1__" xml:space="preserve">
+    <value>Значение параметра {0} меньше {1}.</value>
+  </data>
+    <data name="Ex__Record.CopyTo_ArgumentException" xml:space="preserve">
+    <value>Количество элементов в записи превышает доступное место, начиная с индекса {0} до конца массива назначения {1}</value>
+  </data>
 </root>

@@ -119,7 +119,7 @@ namespace CellularAutomaton.Components.Recorder
         /// <exception cref="ArgumentException">Имя файла не задано, пустое или состоит из одних пробелов.</exception>
         public void Save(string fileName)
         {
-            Stop();
+            Stop();            
             _record.Save(fileName);
         }
 
@@ -142,7 +142,7 @@ namespace CellularAutomaton.Components.Recorder
         /// <param name="e">Информация о событии.</param>
         private void CellularAutomatonGenerationChanged(object sender, EventArgs e)
         {
-            _record.Rec.Add(DrawingFromField(_ca.CurrentField));
+            _record.Add(DrawingFromField(_ca.CurrentField));
         }
 
         /// <summary>

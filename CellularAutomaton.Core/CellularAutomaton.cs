@@ -5,13 +5,15 @@
 // Language      : C# 6.0
 // File          : CellularAutomaton.cs
 // Author        : Антипкин С.С., Макаров Е.А.
-// Created       : 16.06.2017 13:14
-// Last Revision : 17.06.2017 16:30
+// Created       : 17.06.2017 17:27
+// Last Revision : 20.06.2017 17:32
 // Description   : 
 #endregion
 
 using System;
+using System.Globalization;
 
+using CellularAutomaton.Core.Properties;
 using CellularAutomaton.Core.Rules;
 
 namespace CellularAutomaton.Core
@@ -67,16 +69,27 @@ namespace CellularAutomaton.Core
         /// <summary>
         /// Возвращает или задаёт количество состояний клетки клеточного автомата.
         /// </summary>
+        /// <exception cref="ArgumentOutOfRangeException">Количество состояний клетки клеточного автомата должно лежать в интервале [<see cref="StatesNumberMin"/>; <see cref="StatesNumberMax"/>].</exception>
         // ReSharper disable once MemberCanBePrivate.Global
         public int StatesCount
         {
             get { return _statesCount; }
             set
             {
-                if (value <= 0)
-                    _statesCount = StatesNumberMin;
-                else
-                    _statesCount = StatesNumberMax < value ? StatesNumberMax : value;
+                if ((value < StatesNumberMin) ||
+                    (StatesNumberMax < value))
+                {
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        value,
+                        string.Format(
+                            CultureInfo.CurrentCulture,
+                            Resources.Ex__StatesCountOutOfRange,
+                            nameof(StatesNumberMin),
+                            nameof(StatesNumberMax)));
+                }
+
+                _statesCount = value;
             }
         }
 
@@ -150,6 +163,7 @@ namespace CellularAutomaton.Core
         ///     <para>-- или --</para>
         ///     <para>Параметр <paramref name="createdField"/> имеет значение <b>null</b>.</para>
         /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">Величина плотности распределения живых клеток на поле должна лежать в интервале [0; 100].</exception>
         public CellularAutomaton(IRule rule, Field createdField, int statesCount, byte density) :
             this(rule, createdField, statesCount)
         {
@@ -170,6 +184,7 @@ namespace CellularAutomaton.Core
         ///     <para>-- или --</para>
         ///     <para>Высота поля <paramref name="heidhtField"/> меньше нуля.</para>
         /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">Величина плотности распределения живых клеток на поле должна лежать в интервале [0; 100].</exception>
         public CellularAutomaton(IRule rule, int widthField, int heidhtField, int statesCount, byte density) :
             this(rule, new Field(widthField, heidhtField), statesCount, density) { }
         #endregion
@@ -193,6 +208,8 @@ namespace CellularAutomaton.Core
         /// </summary>
         public void Processing()
         {
+            // TODO: Добавить асинхронный метод.
+
             for (;;)
             {
                 NextGeneration();
@@ -215,10 +232,11 @@ namespace CellularAutomaton.Core
         /// Устанавливает плотность распределения клеток на поле.
         /// </summary>
         /// <param name="density">Плотность распределения живых клеток на поле [0; 100].</param>
+        /// <exception cref="ArgumentOutOfRangeException">Величина плотности распределения живых клеток на поле должна лежать в интервале [0; 100].</exception>
         public void SetDensityForField(byte density)
         {
             if (100 < density)
-                density = 100;
+                throw new ArgumentOutOfRangeException(nameof(density), density, Resources.Ex__DensityOutOfRange);
 
             _pastField.SetStartValues(StatesCount, density);
         }

@@ -67,7 +67,7 @@ namespace CellularAutomaton.Components.Player
         /// <summary>
         /// Возвращает число кадров в записи.
         /// </summary>
-        public int GetFrames => _record.Rec.Count;
+        public int GetFrames => _record.Count;
         #endregion
 
         #region Constructors
@@ -351,7 +351,7 @@ namespace CellularAutomaton.Components.Player
         /// </summary>
         private void GetRecordEnumerator()
         {
-            _recordEnumerator = _record.Rec.GetEnumerator();
+            _recordEnumerator = _record.GetEnumerator();
         }
         #endregion
     }

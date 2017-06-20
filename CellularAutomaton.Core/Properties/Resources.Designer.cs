@@ -70,11 +70,47 @@ namespace CellularAutomaton.Core.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Величина плотности распределения живых клеток на поле должна лежать в интервале [0; 100]..
+        /// </summary>
+        internal static string Ex__DensityOutOfRange {
+            get {
+                return ResourceManager.GetString("Ex__DensityOutOfRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Количество элементов в записи превышает доступное место, начиная с индекса {0} до конца массива назначения {1}.
+        /// </summary>
+        internal static string Ex__Record_CopyTo_ArgumentException {
+            get {
+                return ResourceManager.GetString("Ex__Record.CopyTo_ArgumentException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Количество состояний клетки клеточного автомата должно лежать в интервале [{0}; {1}]..
+        /// </summary>
+        internal static string Ex__StatesCountOutOfRange {
+            get {
+                return ResourceManager.GetString("Ex__StatesCountOutOfRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Высота поля {0} меньше нуля..
         /// </summary>
         internal static string Ex__Высота_поля__0__меньше_нуля_ {
             get {
                 return ResourceManager.GetString("Ex__Высота_поля__0__меньше_нуля_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Значение параметра {0} меньше {1}..
+        /// </summary>
+        internal static string Ex__Значение_параметра__0__меньше__1__ {
+            get {
+                return ResourceManager.GetString("Ex__Значение_параметра__0__меньше__1__", resourceCulture);
             }
         }
         
