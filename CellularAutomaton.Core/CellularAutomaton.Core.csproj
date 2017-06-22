@@ -53,6 +53,7 @@
     <Compile Include="Directions.cs" />
     <Compile Include="IField.cs" />
     <Compile Include="IReadOnlyField.cs" />
+    <Compile Include="IReadOnlyRecord.cs" />
     <Compile Include="Record.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>

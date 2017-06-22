@@ -64,12 +64,24 @@ namespace CellularAutomaton.Components.Recorder
         [EditorBrowsable(EditorBrowsableState.Never)]
         public IList<IRule> Rules { get; private set; }
 
+        /// <summary>
+        /// Регистратор функционирования клеточного автомата.
+        /// </summary>
         private IRecorder _recorder;
 
+        /// <summary>
+        /// Событие сохранения записи функционирования клеточного автомата.
+        /// </summary>
         public event EventHandler SaveRecord;
 
+        /// <summary>
+        /// Событие начала записи функционирования клеточного автомата.
+        /// </summary>
         public event EventHandler StartRecord;
 
+        /// <summary>
+        /// Событие окончания записи функционирования клеточного автомата.
+        /// </summary>
         public event EventHandler StopRecord;
 
         #endregion
@@ -141,7 +153,7 @@ namespace CellularAutomaton.Components.Recorder
         /// <param name="e">Сведения о событии.</param>
         private void bRecord_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            StartRecordMethod();
         }
 
         /// <summary>
@@ -151,7 +163,7 @@ namespace CellularAutomaton.Components.Recorder
         /// <param name="e">Сведения о событии.</param>
         private void bStop_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            StopRecordMethod();
         }
 
         /// <summary>
@@ -162,7 +174,24 @@ namespace CellularAutomaton.Components.Recorder
         private void bSave_Click(object sender, EventArgs e)
         {
             SaveRecordDlg();
-            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Начать запись функционирования клеточного автомата.
+        /// </summary>
+        private void StartRecordMethod()
+        {
+            _recorder.Record();
+            OnStartRecord();
+        }
+
+        /// <summary>
+        /// Закончить запись функционирования клеточного автомата
+        /// </summary>
+        private void StopRecordMethod()
+        {
+            _recorder.Stop();
+            OnStopRecord();
         }
 
         /// <summary>
@@ -179,6 +208,14 @@ namespace CellularAutomaton.Components.Recorder
         protected virtual void OnStopRecord()
         {
             StopRecord?.Invoke(this, EventArgs.Empty);
+        }
+
+        /// <summary>
+        /// Вызывает событие <see cref="SaveRecord"/>.
+        /// </summary>
+        protected virtual void OnSaveRecord()
+        {
+            SaveRecord?.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>
@@ -205,7 +242,12 @@ namespace CellularAutomaton.Components.Recorder
                 svfDlg.DefaultExt = FileExtension;
                 svfDlg.Filter = FileFilter;
 
-                return FileName = svfDlg.ShowDialog() == DialogResult.OK ? svfDlg.FileName : FileName;
+                if (svfDlg.ShowDialog() == DialogResult.OK)
+                {
+                    FileName = svfDlg.FileName;
+                    OnSaveRecord();
+                }
+                return FileName;
             }
         }
         #endregion
