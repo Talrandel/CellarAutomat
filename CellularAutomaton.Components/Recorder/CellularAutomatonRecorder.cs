@@ -29,14 +29,7 @@ namespace CellularAutomaton.Components.Recorder
     /// </summary>
     public partial class CellularAutomatonRecorder : UserControl
     {
-        #region Events
-        public event EventHandler SaveRecord;
-
-        public event EventHandler StartRecord;
-
-        public event EventHandler StopRecord;
-        #endregion
-
+        #region Properties
         #region Static Fields and Constants
         /// <summary>
         /// Значение по умолчанию свойства <see cref="DencityMax"/>.
@@ -84,10 +77,6 @@ namespace CellularAutomaton.Components.Recorder
         private const short SizeFieldWidthValueDefValue = 100;
         #endregion
 
-        #region Fields
-        private IRecorder _recorder;
-        #endregion
-
         #region Properties
         /// <summary>
         /// Возвращает или задаёт расширение файла в который осуществляется сохранение записи.
@@ -121,7 +110,30 @@ namespace CellularAutomaton.Components.Recorder
         /// </summary>
         [Browsable(false)]
         public IList<IRule> Rules { get; private set; }
+        
+		/// <summary>
+        /// Регистратор функционирования клеточного автомата.
+        /// </summary>
+        private IRecorder _recorder;
+
+        /// <summary>
+        /// Событие сохранения записи функционирования клеточного автомата.
+        /// </summary>
+        public event EventHandler SaveRecord;
+
+        /// <summary>
+        /// Событие начала записи функционирования клеточного автомата.
+        /// </summary>
+        public event EventHandler StartRecord;
+
+        /// <summary>
+        /// Событие окончания записи функционирования клеточного автомата.
+        /// </summary>
+        public event EventHandler StopRecord;
+
         #endregion
+
+#endregion
 
         #region Constructors
         /// <summary>
@@ -170,7 +182,7 @@ namespace CellularAutomaton.Components.Recorder
         /// <param name="e">Сведения о событии.</param>
         private void bRecord_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            StartRecordMethod();
         }
 
         /// <summary>
@@ -180,9 +192,8 @@ namespace CellularAutomaton.Components.Recorder
         /// <param name="e">Сведения о событии.</param>
         private void bSave_Click(object sender, EventArgs e)
         {
-            SaveRecordDlg();
-            throw new NotImplementedException();
-        }
+			SaveRecordDlg();
+		}
 
         /// <summary>
         /// Обработчик события <see cref="Control.Click"/>. Останавливает запись функционирования клеточного автомата.
@@ -191,11 +202,30 @@ namespace CellularAutomaton.Components.Recorder
         /// <param name="e">Сведения о событии.</param>
         private void bStop_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            StopRecordMethod();
         }
 
         /// <summary>
-        /// Устанавливает значения свойств по умолчанию.
+        /// Вызывает событие <see cref="StartRecord"/>.
+        /// Начать запись функционирования клеточного автомата.
+        /// </summary>
+        private void StartRecordMethod()
+        {
+            _recorder.Record();
+            OnStartRecord();
+        }
+
+        /// <summary>
+        /// Закончить запись функционирования клеточного автомата
+        /// </summary>
+        private void StopRecordMethod()
+        {
+            _recorder.Stop();
+            OnStopRecord();
+        } 
+             
+        /// <summary>
+        /// 
         /// </summary>
         private void InitializeProperties()
         {
@@ -235,6 +265,14 @@ namespace CellularAutomaton.Components.Recorder
         }
 
         /// <summary>
+        /// Вызывает событие <see cref="SaveRecord"/>.
+        /// </summary>
+        protected virtual void OnSaveRecord()
+        {
+            SaveRecord?.Invoke(this, EventArgs.Empty);
+        }
+
+        /// <summary>
         /// Отображает диалог выбора расположения для охранения файла с записью работы клеточного автомата.
         /// </summary>
         /// <returns>Имя файла, в который необходимо сохранить запись.</returns>
@@ -258,7 +296,12 @@ namespace CellularAutomaton.Components.Recorder
                 svfDlg.DefaultExt = FileExtension;
                 svfDlg.Filter = FileFilter;
 
-                return FileName = svfDlg.ShowDialog() == DialogResult.OK ? svfDlg.FileName : FileName;
+                if (svfDlg.ShowDialog() == DialogResult.OK)
+                {
+                    FileName = svfDlg.FileName;
+                    OnSaveRecord();
+                }
+                return FileName;
             }
         }
         #endregion
