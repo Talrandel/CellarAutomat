@@ -119,10 +119,10 @@ namespace CellularAutomaton.Components.Player
         }
 
         /// <summary>
-        /// Возвращает объект реализующий интерфейс <see cref="IPlayer"/> которым осуществляется управление.
+        /// Возвращает или задаёт объект реализующий интерфейс <see cref="IPlayer"/> которым осуществляется управление.
         /// </summary>
         [Browsable(false)]
-        public IPlayer Player { get; }
+        public IPlayer Player { get; set; }
         #endregion
 
         #region Constructors
