@@ -143,11 +143,38 @@ namespace CellularAutomaton.Components.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Приостановить воспроизведение записи..
+        /// </summary>
+        internal static string PlayerController__SetToolTip__bPause {
+            get {
+                return ResourceManager.GetString("PlayerController__SetToolTip__bPause", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Начать воспроизведение записи..
+        /// </summary>
+        internal static string PlayerController__SetToolTip__bPlay {
+            get {
+                return ResourceManager.GetString("PlayerController__SetToolTip__bPlay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Останавливает воспроизведение записи..
+        /// </summary>
+        internal static string PlayerController__SetToolTip__bStop {
+            get {
+                return ResourceManager.GetString("PlayerController__SetToolTip__bStop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на {0}/{1}.
         /// </summary>
-        internal static string PlayerController__SetToolTipFinder {
+        internal static string PlayerController__SetToolTip__Finder {
             get {
-                return ResourceManager.GetString("PlayerController__SetToolTipFinder", resourceCulture);
+                return ResourceManager.GetString("PlayerController__SetToolTip__Finder", resourceCulture);
             }
         }
         

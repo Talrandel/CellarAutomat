@@ -6,7 +6,7 @@
 // File          : Player.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 18.06.2017 12:46
-// Last Revision : 22.06.2017 12:44
+// Last Revision : 22.06.2017 17:55
 // Description   : 
 #endregion
 
@@ -41,6 +41,11 @@ namespace CellularAutomaton.Components.Player
         /// Объект <see cref="Timer"/> управляющий сменой кадров.
         /// </summary>
         private readonly Timer _timer;
+
+        /// <summary>
+        /// Номер текущего кадра записи.
+        /// </summary>
+        private short _currenFrame;
 
         /// <summary>
         /// True, если освобождение ресурсов осуществлялось, иначе false.
@@ -90,7 +95,7 @@ namespace CellularAutomaton.Components.Player
             _bufGrContext.MaximumBuffer = rec.Size;
 
             _timer = new Timer();
-            _timer.Elapsed += Reproduce;
+            _timer.Elapsed += TimerElapsed;
         }
         #endregion
 
@@ -106,6 +111,11 @@ namespace CellularAutomaton.Components.Player
         #endregion
 
         #region IPlayer Members
+        /// <summary>
+        /// Происходит при смене кадра.
+        /// </summary>
+        public event EventHandler<ChangeFrameEventArgs> ChangeFrame;
+
         /// <summary>
         /// Возвращает воспроизводимую запись.
         /// </summary>
@@ -127,7 +137,9 @@ namespace CellularAutomaton.Components.Player
             {
                 if (value <= 0)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), value,
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        value,
                         Resources.Ex__Число_кадров_в_минуту_не_может_быть_равной_нулю_величиной_);
                 }
 
@@ -140,9 +152,17 @@ namespace CellularAutomaton.Components.Player
         }
 
         /// <summary>
-        /// Возвращает номер текущего воспроизводимого кадра записи.
+        /// Возвращает номер текущего кадра записи.
         /// </summary>
-        public short CurrenFrame { get; private set; }
+        public short CurrenFrame
+        {
+            get { return _currenFrame; }
+            private set
+            {
+                _currenFrame = value;
+                OnChangeFrame(new ChangeFrameEventArgs(value));
+            }
+        }
 
         /// <summary>
         /// Происходит при начале воспроизведения.
@@ -226,12 +246,14 @@ namespace CellularAutomaton.Components.Player
         public void Rewind(short frame)
         {
             bool isFastRewind = (frame - CurrenFrame == 1) && (frame <= GetFrames); // Возможна быстрая перемотка?
+            bool isNotRewind = (frame == CurrenFrame); // Нет необходимости в перемотке?
 
-            if (isFastRewind)
+            if (isFastRewind || isNotRewind)
                 StopNoReset();
             else
                 Stop();
 
+            // TODO: Может быть стоит сначала проверять?
             if (frame < 0)
             {
                 throw new ArgumentOutOfRangeException(nameof(frame), frame,
@@ -246,12 +268,15 @@ namespace CellularAutomaton.Components.Player
 
             CurrenFrame = frame;
 
-            if (isFastRewind)
-                _recordEnumerator.MoveNext();
-            else
+            if (!isNotRewind)
             {
-                for (int i = 0; i < CurrenFrame; i++) // Перейти к указанному кадру.
+                if (isFastRewind)
                     _recordEnumerator.MoveNext();
+                else
+                {
+                    for (int i = 0; i < CurrenFrame; i++) // Перейти к указанному кадру.
+                        _recordEnumerator.MoveNext();
+                }
             }
         }
 
@@ -272,19 +297,6 @@ namespace CellularAutomaton.Components.Player
         #endregion
 
         #region Members
-        /// <summary>
-        /// Останавливает воспроизведение без перемотки в начало записи.
-        /// </summary>
-        private void StopNoReset()
-        {
-            if (State != StatePlayer.Stop)
-            {
-                State = StatePlayer.Stop;
-                OnStopPlay();
-                _timer.Stop();
-            }
-        }
-
         /// <summary>
         /// Освобождает все ресурсы, используемые текущим объектом <see cref="Player"/>.
         /// </summary>
@@ -307,19 +319,20 @@ namespace CellularAutomaton.Components.Player
         }
 
         /// <summary>
-        /// Обработчик события <see cref="Timer.Elapsed"/>. Передаёт текущий кадр в буфер <see cref="_bufGr"/> для отображения.
+        /// Вызывает событие <see cref="ChangeFrame"/>.
         /// </summary>
-        /// <param name="sender">Источник события.</param>
-        /// <param name="e">Сведения о событии <see cref="Timer.Elapsed"/>.</param>
-        private void Reproduce(object sender, ElapsedEventArgs e)
+        /// <param name="e">Объект <see cref="ChangeFrameEventArgs"/> представляющий данные о событии.</param>
+        protected virtual void OnChangeFrame(ChangeFrameEventArgs e)
         {
-            _bufGr.Graphics.DrawImage(_recordEnumerator.Current, _bufGrContext.MaximumBuffer.Width, _bufGrContext.MaximumBuffer.Height);
-            _bufGr.Render();
+            ChangeFrame?.Invoke(this, e);
+        }
 
-            CurrenFrame++;
-
-            if (!_recordEnumerator.MoveNext()) // Не достигнут конец записи?
-                Stop();
+        /// <summary>
+        /// Вызывает событие <see cref="PausePlay"/>.
+        /// </summary>
+        protected virtual void OnPausePlay()
+        {
+            PausePlay?.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>
@@ -339,19 +352,40 @@ namespace CellularAutomaton.Components.Player
         }
 
         /// <summary>
-        /// Вызывает событие <see cref="PausePlay"/>.
-        /// </summary>
-        protected virtual void OnPausePlay()
-        {
-            PausePlay?.Invoke(this, EventArgs.Empty);
-        }
-
-        /// <summary>
         /// Возвращает перечислитель для записи <see cref="Record"/>.
         /// </summary>
         private void GetRecordEnumerator()
         {
             _recordEnumerator = Record.GetEnumerator();
+        }
+
+        /// <summary>
+        /// Останавливает воспроизведение без перемотки в начало записи.
+        /// </summary>
+        private void StopNoReset()
+        {
+            if (State != StatePlayer.Stop)
+            {
+                State = StatePlayer.Stop;
+                OnStopPlay();
+                _timer.Stop();
+            }
+        }
+
+        /// <summary>
+        /// Обработчик события <see cref="Timer.Elapsed"/>. Передаёт текущий кадр в буфер <see cref="_bufGr"/> для отображения.
+        /// </summary>
+        /// <param name="sender">Источник события.</param>
+        /// <param name="e">Сведения о событии <see cref="Timer.Elapsed"/>.</param>
+        private void TimerElapsed(object sender, ElapsedEventArgs e)
+        {
+            _bufGr.Graphics.DrawImage(_recordEnumerator.Current, _bufGrContext.MaximumBuffer.Width, _bufGrContext.MaximumBuffer.Height);
+            _bufGr.Render();
+
+            CurrenFrame++;
+
+            if (!_recordEnumerator.MoveNext()) // Не достигнут конец записи?
+                Stop();
         }
         #endregion
     }

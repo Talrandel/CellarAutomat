@@ -174,7 +174,16 @@
   <data name="SizeFieldWidthValueDefValue" xml:space="preserve">
     <value>100</value>
   </data>
-    <data name="PlayerController__SetToolTipFinder" xml:space="preserve">
+    <data name="PlayerController__SetToolTip__Finder" xml:space="preserve">
     <value>{0}/{1}</value>
+  </data>
+    <data name="PlayerController__SetToolTip__bPlay" xml:space="preserve">
+    <value>Начать воспроизведение записи.</value>
+  </data>
+    <data name="PlayerController__SetToolTip__bPause" xml:space="preserve">
+    <value>Приостановить воспроизведение записи.</value>
+  </data>
+    <data name="PlayerController__SetToolTip__bStop" xml:space="preserve">
+    <value>Останавливает воспроизведение записи.</value>
   </data>
 </root>
