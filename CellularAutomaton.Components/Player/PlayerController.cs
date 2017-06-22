@@ -70,6 +70,9 @@ namespace CellularAutomaton.Components.Player
         /// <summary>
         /// Возвращает или задаёт число на которое перемещается ползунок по шкале поиска при щелчке мыши по элементу управления или нажатию клавиш PAGE UP, PAGE DOWN.
         /// </summary>
+        /// <remarks>
+        ///     <b>Значение по умолчанию - 5.</b>
+        /// </remarks>
         [DefaultValue(FinderLargeChangeDefValue)]
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
@@ -84,6 +87,9 @@ namespace CellularAutomaton.Components.Player
         /// <summary>
         /// Возвращает или задаёт число на которое перемещается ползунок по шкале поиска при прокрутке колёсика мыши или нажатия клавиш LEFT, RIGHT, UP, DOWN.
         /// </summary>
+        /// <remarks>
+        ///     <b>Значение по умолчанию - 1.</b>
+        /// </remarks>
         [DefaultValue(FinderSmallChangeDefValue)]
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
@@ -98,6 +104,9 @@ namespace CellularAutomaton.Components.Player
         /// <summary>
         /// Возвращает или задаёт интервал между отметками на шкале поиска.
         /// </summary>
+        /// <remarks>
+        ///     <b>Значение по умолчанию - 1.</b>
+        /// </remarks>
         [DefaultValue(FinderTickFrequencyDefValue)]
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
