@@ -40,21 +40,56 @@ namespace CellularAutomaton.Components.Recorder
         public string FileName { get; set; }
 
         /// <summary>
+        /// Возвращает или задаёт расширение файла в который осуществляется сохранение записи.
+        /// </summary>
+        [Browsable(true)]
+        [EditorBrowsable(EditorBrowsableState.Always)]
+        [SRCategory("CatData")]
+        [SRDescription(nameof(FileExtension) + SRDescriptionAttribute.Suffix)]
+        public string FileExtension { get; set; }
+
+        /// <summary>
+        /// Возвращает или задаёт фильтр???.
+        /// </summary>
+        [Browsable(true)]
+        [EditorBrowsable(EditorBrowsableState.Always)]
+        [SRCategory("CatData")]
+        [SRDescription(nameof(FileFilter) + SRDescriptionAttribute.Suffix)]
+        public string FileFilter { get; set; }
+
+        /// <summary>
         /// Возвращает коллекцию правил построения клеточных автоматов.
         /// </summary>
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public IList<IRule> Rules { get; private set; }
+
+        private IRecorder _recorder;
+
+        public event EventHandler SaveRecord;
+
+        public event EventHandler StartRecord;
+
+        public event EventHandler StopRecord;
+
         #endregion
 
         #region Constructors
         /// <summary>
         /// Инициализирует новый экземплр класса <see cref="CellularAutomatonRecorder"/>.
         /// </summary>
-        public CellularAutomatonRecorder()
+        protected CellularAutomatonRecorder()
         {
             InitializeComponent();
             InitializeProperties();
+        }
+        /// <summary>
+        /// Инициализирует новый экземпляр класса <see cref="CellularAutomatonRecorder"/> с заданной реализацией <see cref="IRecorder"/>.
+        /// </summary>
+        /// <param name="recorder">Реализация регистратора.</param>
+        public CellularAutomatonRecorder(IRecorder recorder) : this()
+        {
+            _recorder = recorder;
         }
         #endregion
 
@@ -82,6 +117,10 @@ namespace CellularAutomaton.Components.Recorder
             StatesCountMin = Core.CellularAutomaton.StatesNumberMin;
             StatesCountMax = Core.CellularAutomaton.StatesNumberMax;
             StatesCountValue = Core.CellularAutomaton.StatesNumberMin;
+
+            FileName = Resources.SaveFileDialogRecordDefFileName;
+            FileExtension = Resources.SaveFileDialogRecordExt;
+            FileFilter = Resources.SaveFileDialogRecordFilter;
         }
 
         /// <summary>
@@ -127,6 +166,22 @@ namespace CellularAutomaton.Components.Recorder
         }
 
         /// <summary>
+        /// Вызывает событие <see cref="StartRecord"/>.
+        /// </summary>
+        protected virtual void OnStartRecord()
+        {
+            StartRecord?.Invoke(this, EventArgs.Empty);
+        }
+
+        /// <summary>
+        /// Вызывает событие <see cref="StopRecord"/>.
+        /// </summary>
+        protected virtual void OnStopRecord()
+        {
+            StopRecord?.Invoke(this, EventArgs.Empty);
+        }
+
+        /// <summary>
         /// Отображает диалог выбора расположения для охранения файла с записью работы клеточного автомата.
         /// </summary>
         /// <returns>Имя файла, в который необходимо сохранить запись.</returns>
@@ -146,9 +201,9 @@ namespace CellularAutomaton.Components.Recorder
                 svfDlg.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
                 svfDlg.Title = Resources.SaveFileDialogRecordTitle;
-                svfDlg.FileName = Resources.SaveFileDialogRecordDefFileName;
-                svfDlg.DefaultExt = Resources.SaveFileDialogRecordExt;
-                svfDlg.Filter = Resources.SaveFileDialogRecordFilter;
+                svfDlg.FileName = FileName;
+                svfDlg.DefaultExt = FileExtension;
+                svfDlg.Filter = FileFilter;
 
                 return FileName = svfDlg.ShowDialog() == DialogResult.OK ? svfDlg.FileName : FileName;
             }

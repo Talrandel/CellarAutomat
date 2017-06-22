@@ -16,7 +16,7 @@ using CellarAutomatForm.Presenter;
 
 namespace CellarAutomatForm
 {
-    public partial class MainForm : Form, IViewMainForm
+    public partial class MainForm : Form
     {
         #region Fields
         /// <summary>
