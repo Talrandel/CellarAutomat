@@ -60,6 +60,7 @@
     <Compile Include="Player\PlayerController.Designer.cs">
       <DependentUpon>PlayerController.cs</DependentUpon>
     </Compile>
+    <Compile Include="Player\ChangeFrameEventArgs.cs" />
     <Compile Include="Player\StatePlayer.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>

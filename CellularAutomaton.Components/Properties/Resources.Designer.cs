@@ -61,29 +61,173 @@ namespace CellularAutomaton.Components.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на 100.
+        ///   Ищет локализованную строку, похожую на Максимальная плотность распределения клеток на поле клеточного автомата..
         /// </summary>
-        internal static string DencityMaxDefValue {
+        internal static string CellularAutomatonRecorder__DencityMaxDescr {
             get {
-                return ResourceManager.GetString("DencityMaxDefValue", resourceCulture);
+                return ResourceManager.GetString("CellularAutomatonRecorder__DencityMaxDescr", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на 0.
+        ///   Ищет локализованную строку, похожую на Минимальная плотность распределения клеток на поле клеточного автомата..
         /// </summary>
-        internal static string DencityMinDefValue {
+        internal static string CellularAutomatonRecorder__DencityMinDescr {
             get {
-                return ResourceManager.GetString("DencityMinDefValue", resourceCulture);
+                return ResourceManager.GetString("CellularAutomatonRecorder__DencityMinDescr", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на 50.
+        ///   Ищет локализованную строку, похожую на Плотность рапределения клеток на поле клеточного автомата..
         /// </summary>
-        internal static string DencityValueDefValue {
+        internal static string CellularAutomatonRecorder__DencityValueDescr {
             get {
-                return ResourceManager.GetString("DencityValueDefValue", resourceCulture);
+                return ResourceManager.GetString("CellularAutomatonRecorder__DencityValueDescr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Расширение файла в который осуществляется сохранение записи..
+        /// </summary>
+        internal static string CellularAutomatonRecorder__FileExtensionDescr {
+            get {
+                return ResourceManager.GetString("CellularAutomatonRecorder__FileExtensionDescr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Фильтр имён файлов в диалоговом окне &quot;Сохранить как...&quot;..
+        /// </summary>
+        internal static string CellularAutomatonRecorder__FileFilterDescr {
+            get {
+                return ResourceManager.GetString("CellularAutomatonRecorder__FileFilterDescr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Имя файла в который осуществляется сохранение записи..
+        /// </summary>
+        internal static string CellularAutomatonRecorder__FileNameDescr {
+            get {
+                return ResourceManager.GetString("CellularAutomatonRecorder__FileNameDescr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на record.
+        /// </summary>
+        internal static string CellularAutomatonRecorder__SaveFileDialogRecordDefFileName {
+            get {
+                return ResourceManager.GetString("CellularAutomatonRecorder__SaveFileDialogRecordDefFileName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на bin.
+        /// </summary>
+        internal static string CellularAutomatonRecorder__SaveFileDialogRecordExt {
+            get {
+                return ResourceManager.GetString("CellularAutomatonRecorder__SaveFileDialogRecordExt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Двоичные файлы (*.bin)|*.bin.
+        /// </summary>
+        internal static string CellularAutomatonRecorder__SaveFileDialogRecordFilter {
+            get {
+                return ResourceManager.GetString("CellularAutomatonRecorder__SaveFileDialogRecordFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Сохранить запись как....
+        /// </summary>
+        internal static string CellularAutomatonRecorder__SaveFileDialogRecordTitle {
+            get {
+                return ResourceManager.GetString("CellularAutomatonRecorder__SaveFileDialogRecordTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Максимальная высота поля клеточного автомата..
+        /// </summary>
+        internal static string CellularAutomatonRecorder__SizeFieldHeightMaxDescr {
+            get {
+                return ResourceManager.GetString("CellularAutomatonRecorder__SizeFieldHeightMaxDescr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Минимальная высота поля клеточного автомата..
+        /// </summary>
+        internal static string CellularAutomatonRecorder__SizeFieldHeightMinDescr {
+            get {
+                return ResourceManager.GetString("CellularAutomatonRecorder__SizeFieldHeightMinDescr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Высота поля клеточного автомата..
+        /// </summary>
+        internal static string CellularAutomatonRecorder__SizeFieldHeightValueDescr {
+            get {
+                return ResourceManager.GetString("CellularAutomatonRecorder__SizeFieldHeightValueDescr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Максимальная ширина поля клеточного автомата..
+        /// </summary>
+        internal static string CellularAutomatonRecorder__SizeFieldWidthMaxDescr {
+            get {
+                return ResourceManager.GetString("CellularAutomatonRecorder__SizeFieldWidthMaxDescr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Минимальная ширина поля клеточного автомата..
+        /// </summary>
+        internal static string CellularAutomatonRecorder__SizeFieldWidthMinDescr {
+            get {
+                return ResourceManager.GetString("CellularAutomatonRecorder__SizeFieldWidthMinDescr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Ширина поля клеточного автомата..
+        /// </summary>
+        internal static string CellularAutomatonRecorder__SizeFieldWidthValueDescr {
+            get {
+                return ResourceManager.GetString("CellularAutomatonRecorder__SizeFieldWidthValueDescr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Максимальное число состояний клетки клеточного автомата..
+        /// </summary>
+        internal static string CellularAutomatonRecorder__StatesCountMaxDescr {
+            get {
+                return ResourceManager.GetString("CellularAutomatonRecorder__StatesCountMaxDescr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Минимальное число состояний клетки клеточного автомата..
+        /// </summary>
+        internal static string CellularAutomatonRecorder__StatesCountMinDescr {
+            get {
+                return ResourceManager.GetString("CellularAutomatonRecorder__StatesCountMinDescr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Число состояний клетки клеточного автомата..
+        /// </summary>
+        internal static string CellularAutomatonRecorder__StatesCountValueDescr {
+            get {
+                return ResourceManager.GetString("CellularAutomatonRecorder__StatesCountValueDescr", resourceCulture);
             }
         }
         
@@ -143,101 +287,74 @@ namespace CellularAutomaton.Components.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Число на которое перемещается ползунок по шкале поиска при щелчке мыши по элементу управления или нажатию клавиш PAGE UP, PAGE DOWN..
+        /// </summary>
+        internal static string PlayerController__FinderLargeChangeDescr {
+            get {
+                return ResourceManager.GetString("PlayerController__FinderLargeChangeDescr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Число на которое перемещается ползунок по шкале поиска при прокрутке колёсика мыши или нажатия клавиш LEFT, RIGHT, UP, DOWN..
+        /// </summary>
+        internal static string PlayerController__FinderSmallChangeDescr {
+            get {
+                return ResourceManager.GetString("PlayerController__FinderSmallChangeDescr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Интервал между отметками на шкале поиска..
+        /// </summary>
+        internal static string PlayerController__FinderTickFrequencyDescr {
+            get {
+                return ResourceManager.GetString("PlayerController__FinderTickFrequencyDescr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на {0}/{1}.
         /// </summary>
-        internal static string PlayerController__SetToolTipFinder {
+        internal static string PlayerController__SetToolTip__Finder {
             get {
-                return ResourceManager.GetString("PlayerController__SetToolTipFinder", resourceCulture);
+                return ResourceManager.GetString("PlayerController__SetToolTip__Finder", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на record.
+        ///   Ищет локализованную строку, похожую на Приостановить воспроизведение записи..
         /// </summary>
-        internal static string SaveFileDialogRecordDefFileName {
+        internal static string PlayerController__SetToolTip__Pause {
             get {
-                return ResourceManager.GetString("SaveFileDialogRecordDefFileName", resourceCulture);
+                return ResourceManager.GetString("PlayerController__SetToolTip__Pause", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на bin.
+        ///   Ищет локализованную строку, похожую на Начать воспроизведение записи..
         /// </summary>
-        internal static string SaveFileDialogRecordExt {
+        internal static string PlayerController__SetToolTip__Play {
             get {
-                return ResourceManager.GetString("SaveFileDialogRecordExt", resourceCulture);
+                return ResourceManager.GetString("PlayerController__SetToolTip__Play", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Двоичные файлы (*.bin)|*.bin.
+        ///   Ищет локализованную строку, похожую на Останавливает воспроизведение записи..
         /// </summary>
-        internal static string SaveFileDialogRecordFilter {
+        internal static string PlayerController__SetToolTip__Stop {
             get {
-                return ResourceManager.GetString("SaveFileDialogRecordFilter", resourceCulture);
+                return ResourceManager.GetString("PlayerController__SetToolTip__Stop", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Сохранить запись как....
+        ///   Ищет локализованную строку, похожую на Not found localized string &apos;{0}&apos;.
         /// </summary>
-        internal static string SaveFileDialogRecordTitle {
+        internal static string SR_Attribute__NotFoundLocalizedString {
             get {
-                return ResourceManager.GetString("SaveFileDialogRecordTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на 500.
-        /// </summary>
-        internal static string SizeFieldHeightMaxDefValue {
-            get {
-                return ResourceManager.GetString("SizeFieldHeightMaxDefValue", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на 50.
-        /// </summary>
-        internal static string SizeFieldHeightMinDefValue {
-            get {
-                return ResourceManager.GetString("SizeFieldHeightMinDefValue", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на 100.
-        /// </summary>
-        internal static string SizeFieldHeightValueDefValue {
-            get {
-                return ResourceManager.GetString("SizeFieldHeightValueDefValue", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на 500.
-        /// </summary>
-        internal static string SizeFieldWidthMaxDefValue {
-            get {
-                return ResourceManager.GetString("SizeFieldWidthMaxDefValue", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на 50.
-        /// </summary>
-        internal static string SizeFieldWidthMinDefValue {
-            get {
-                return ResourceManager.GetString("SizeFieldWidthMinDefValue", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на 100.
-        /// </summary>
-        internal static string SizeFieldWidthValueDefValue {
-            get {
-                return ResourceManager.GetString("SizeFieldWidthValueDefValue", resourceCulture);
+                return ResourceManager.GetString("SR_Attribute__NotFoundLocalizedString", resourceCulture);
             }
         }
     }

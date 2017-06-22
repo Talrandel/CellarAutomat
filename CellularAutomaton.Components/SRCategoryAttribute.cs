@@ -5,8 +5,8 @@
 // Language      : C# 6.0
 // File          : SRCategoryAttribute.cs
 // Author        : Антипкин С.С., Макаров Е.А.
-// Created       : 18.06.2017 12:11
-// Last Revision : 18.06.2017 15:51
+// Created       : 22.06.2017 20:47
+// Last Revision : 22.06.2017 21:44
 // Description   : 
 #endregion
 
@@ -41,7 +41,9 @@ namespace CellularAutomaton.Components
         /// <returns>Локализованное имя категории или значение null, если локализованное имя не существует.</returns>
         protected override string GetLocalizedString(string value)
         {
-            return Resources.ResourceManager.GetString(value);
+            return Resources.ResourceManager.GetString(value) 
+                ?? base.GetLocalizedString(value) 
+                ?? string.Format(Resources.SR_Attribute__NotFoundLocalizedString, value);
         }
         #endregion
     }

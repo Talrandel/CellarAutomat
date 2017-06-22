@@ -15,6 +15,9 @@ using System.Windows.Forms;
 
 namespace CellularAutomaton.Components.Player
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public partial class CellularAutomatonPlayer : UserControl
     {
         #region Properties
@@ -25,8 +28,8 @@ namespace CellularAutomaton.Components.Player
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [RefreshProperties(RefreshProperties.Repaint)]
-        [SRCategory("CatBehavior")]
-        [SRDescription(nameof(SizeMode) + SRDescriptionAttribute.Suffix)]
+        [SRCategory("Behavior")]
+        [SRDescription(nameof(CellularAutomatonPlayer) + "__" +nameof(SizeMode) + SRDescriptionAttribute.Suffix)]
         public PictureBoxSizeMode SizeMode
         {
             // TODO: Хорошо бы заменить а своё перечисление.

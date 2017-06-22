@@ -135,46 +135,85 @@
   <data name="Ex__Число_кадров_в_минуту_не_может_быть_равной_нулю_величиной_" xml:space="preserve">
     <value>Число кадров в минуту не может быть равной нулю величиной.</value>
   </data>
-  <data name="SaveFileDialogRecordExt" xml:space="preserve">
+  <data name="CellularAutomatonRecorder__SaveFileDialogRecordExt" xml:space="preserve">
     <value>bin</value>
   </data>
-  <data name="SaveFileDialogRecordFilter" xml:space="preserve">
+  <data name="CellularAutomatonRecorder__SaveFileDialogRecordFilter" xml:space="preserve">
     <value>Двоичные файлы (*.bin)|*.bin</value>
   </data>
-  <data name="SaveFileDialogRecordTitle" xml:space="preserve">
+  <data name="CellularAutomatonRecorder__SaveFileDialogRecordTitle" xml:space="preserve">
     <value>Сохранить запись как...</value>
   </data>
-  <data name="SaveFileDialogRecordDefFileName" xml:space="preserve">
+  <data name="CellularAutomatonRecorder__SaveFileDialogRecordDefFileName" xml:space="preserve">
     <value>record</value>
   </data>
-  <data name="DencityMaxDefValue" xml:space="preserve">
-    <value>100</value>
-  </data>
-  <data name="DencityMinDefValue" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="DencityValueDefValue" xml:space="preserve">
-    <value>50</value>
-  </data>
-  <data name="SizeFieldHeightMaxDefValue" xml:space="preserve">
-    <value>500</value>
-  </data>
-  <data name="SizeFieldHeightMinDefValue" xml:space="preserve">
-    <value>50</value>
-  </data>
-  <data name="SizeFieldHeightValueDefValue" xml:space="preserve">
-    <value>100</value>
-  </data>
-  <data name="SizeFieldWidthMaxDefValue" xml:space="preserve">
-    <value>500</value>
-  </data>
-  <data name="SizeFieldWidthMinDefValue" xml:space="preserve">
-    <value>50</value>
-  </data>
-  <data name="SizeFieldWidthValueDefValue" xml:space="preserve">
-    <value>100</value>
-  </data>
-    <data name="PlayerController__SetToolTipFinder" xml:space="preserve">
+  <data name="PlayerController__SetToolTip__Finder" xml:space="preserve">
     <value>{0}/{1}</value>
+  </data>
+  <data name="PlayerController__SetToolTip__Play" xml:space="preserve">
+    <value>Начать воспроизведение записи.</value>
+  </data>
+  <data name="PlayerController__SetToolTip__Pause" xml:space="preserve">
+    <value>Приостановить воспроизведение записи.</value>
+  </data>
+  <data name="PlayerController__SetToolTip__Stop" xml:space="preserve">
+    <value>Останавливает воспроизведение записи.</value>
+  </data>
+  <data name="CellularAutomatonRecorder__FileExtensionDescr" xml:space="preserve">
+    <value>Расширение файла в который осуществляется сохранение записи.</value>
+  </data>
+  <data name="CellularAutomatonRecorder__FileFilterDescr" xml:space="preserve">
+    <value>Фильтр имён файлов в диалоговом окне "Сохранить как...".</value>
+  </data>
+  <data name="CellularAutomatonRecorder__FileNameDescr" xml:space="preserve">
+    <value>Имя файла в который осуществляется сохранение записи.</value>
+  </data>
+  <data name="PlayerController__FinderLargeChangeDescr" xml:space="preserve">
+    <value>Число на которое перемещается ползунок по шкале поиска при щелчке мыши по элементу управления или нажатию клавиш PAGE UP, PAGE DOWN.</value>
+  </data>
+  <data name="PlayerController__FinderSmallChangeDescr" xml:space="preserve">
+    <value>Число на которое перемещается ползунок по шкале поиска при прокрутке колёсика мыши или нажатия клавиш LEFT, RIGHT, UP, DOWN.</value>
+  </data>
+  <data name="PlayerController__FinderTickFrequencyDescr" xml:space="preserve">
+    <value>Интервал между отметками на шкале поиска.</value>
+  </data>
+  <data name="SR_Attribute__NotFoundLocalizedString" xml:space="preserve">
+    <value>Not found localized string '{0}'</value>
+  </data>
+  <data name="CellularAutomatonRecorder__DencityMaxDescr" xml:space="preserve">
+    <value>Максимальная плотность распределения клеток на поле клеточного автомата.</value>
+  </data>
+  <data name="CellularAutomatonRecorder__DencityMinDescr" xml:space="preserve">
+    <value>Минимальная плотность распределения клеток на поле клеточного автомата.</value>
+  </data>
+  <data name="CellularAutomatonRecorder__DencityValueDescr" xml:space="preserve">
+    <value>Плотность рапределения клеток на поле клеточного автомата.</value>
+  </data>
+  <data name="CellularAutomatonRecorder__SizeFieldHeightMaxDescr" xml:space="preserve">
+    <value>Максимальная высота поля клеточного автомата.</value>
+  </data>
+  <data name="CellularAutomatonRecorder__SizeFieldHeightMinDescr" xml:space="preserve">
+    <value>Минимальная высота поля клеточного автомата.</value>
+  </data>
+  <data name="CellularAutomatonRecorder__SizeFieldHeightValueDescr" xml:space="preserve">
+    <value>Высота поля клеточного автомата.</value>
+  </data>
+  <data name="CellularAutomatonRecorder__SizeFieldWidthMaxDescr" xml:space="preserve">
+    <value>Максимальная ширина поля клеточного автомата.</value>
+  </data>
+  <data name="CellularAutomatonRecorder__SizeFieldWidthMinDescr" xml:space="preserve">
+    <value>Минимальная ширина поля клеточного автомата.</value>
+  </data>
+  <data name="CellularAutomatonRecorder__SizeFieldWidthValueDescr" xml:space="preserve">
+    <value>Ширина поля клеточного автомата.</value>
+  </data>
+  <data name="CellularAutomatonRecorder__StatesCountMaxDescr" xml:space="preserve">
+    <value>Максимальное число состояний клетки клеточного автомата.</value>
+  </data>
+  <data name="CellularAutomatonRecorder__StatesCountMinDescr" xml:space="preserve">
+    <value>Минимальное число состояний клетки клеточного автомата.</value>
+  </data>
+  <data name="CellularAutomatonRecorder__StatesCountValueDescr" xml:space="preserve">
+    <value>Число состояний клетки клеточного автомата.</value>
   </data>
 </root>
