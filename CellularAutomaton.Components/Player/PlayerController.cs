@@ -6,7 +6,7 @@
 // File          : PlayerController.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 20.06.2017 23:22
-// Last Revision : 22.06.2017 19:49
+// Last Revision : 22.06.2017 20:36
 // Description   : 
 #endregion
 
@@ -19,7 +19,6 @@ using CellularAutomaton.Components.Properties;
 
 namespace CellularAutomaton.Components.Player
 {
-    // TODO: Добавить задание свойств tBFinder: Min, Max, TickFrequency.
     /// <summary>
     /// Представляет элемент управления проигрывателем.
     /// </summary>
@@ -28,6 +27,23 @@ namespace CellularAutomaton.Components.Player
     /// </remarks>
     public partial class PlayerController : UserControl
     {
+        #region Static Fields and Constants
+        /// <summary>
+        /// Значение по умолчанию свойства <see cref="FinderLargeChange"/>.
+        /// </summary>
+        private const short FinderLargeChangeDefValue = 5;
+
+        /// <summary>
+        /// Значение по умолчанию свойства <see cref="FinderSmallChange"/>.
+        /// </summary>
+        private const short FinderSmallChangeDefValue = 1;
+
+        /// <summary>
+        /// Значение по умолчанию свойства <see cref="FinderTickFrequency"/>.
+        /// </summary>
+        private const short FinderTickFrequencyDefValue = 1;
+        #endregion
+
         #region Fields
         /// <summary>
         /// Представляет метод обрабатывающий событие <see cref="IPlayer.PausePlay"/>.
@@ -54,6 +70,7 @@ namespace CellularAutomaton.Components.Player
         /// <summary>
         /// Возвращает или задаёт число на которое перемещается ползунок по шкале поиска при щелчке мыши по элементу управления или нажатию клавиш PAGE UP, PAGE DOWN.
         /// </summary>
+        [DefaultValue(FinderLargeChangeDefValue)]
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [SRCategory("CatBehavior")]
@@ -67,6 +84,7 @@ namespace CellularAutomaton.Components.Player
         /// <summary>
         /// Возвращает или задаёт число на которое перемещается ползунок по шкале поиска при прокрутке колёсика мыши или нажатия клавиш LEFT, RIGHT, UP, DOWN.
         /// </summary>
+        [DefaultValue(FinderSmallChangeDefValue)]
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [SRCategory("CatBehavior")]
@@ -80,6 +98,7 @@ namespace CellularAutomaton.Components.Player
         /// <summary>
         /// Возвращает или задаёт интервал между отметками на шкале поиска.
         /// </summary>
+        [DefaultValue(FinderTickFrequencyDefValue)]
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [SRCategory("CatAppearance")]
@@ -93,6 +112,7 @@ namespace CellularAutomaton.Components.Player
         /// <summary>
         /// Возвращает объект реализующий интерфейс <see cref="IPlayer"/> которым осуществляется управление.
         /// </summary>
+        [Browsable(false)]
         public IPlayer Player { get; }
         #endregion
 
@@ -108,6 +128,10 @@ namespace CellularAutomaton.Components.Player
             InitializeComponent();
             InitializeToolTip();
             InitializeAction();
+
+            FinderLargeChange = FinderLargeChangeDefValue;
+            FinderSmallChange = FinderSmallChangeDefValue;
+            FinderTickFrequency = FinderTickFrequencyDefValue;
         }
 
         /// <summary>

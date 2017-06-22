@@ -5,8 +5,8 @@
 // Language      : C# 6.0
 // File          : CellularAutomatonRecorder.cs
 // Author        : Антипкин С.С., Макаров Е.А.
-// Created       : 18.06.2017 12:21
-// Last Revision : 20.06.2017 22:43
+// Created       : 22.06.2017 14:17
+// Last Revision : 22.06.2017 20:26
 // Description   : 
 #endregion
 
@@ -29,16 +29,66 @@ namespace CellularAutomaton.Components.Recorder
     /// </summary>
     public partial class CellularAutomatonRecorder : UserControl
     {
-        #region Properties
-        /// <summary>
-        /// Возвращает или задаёт имя файла в который осуществляется сохранение записи.
-        /// </summary>
-        [Browsable(true)]
-        [EditorBrowsable(EditorBrowsableState.Always)]
-        [SRCategory("CatData")]
-        [SRDescription(nameof(FileName) + SRDescriptionAttribute.Suffix)]
-        public string FileName { get; set; }
+        #region Events
+        public event EventHandler SaveRecord;
 
+        public event EventHandler StartRecord;
+
+        public event EventHandler StopRecord;
+        #endregion
+
+        #region Static Fields and Constants
+        /// <summary>
+        /// Значение по умолчанию свойства <see cref="DencityMax"/>.
+        /// </summary>
+        private const short DencityMaxDefValue = 100;
+
+        /// <summary>
+        /// Значение по умолчанию свойства <see cref="DencityMin"/>.
+        /// </summary>
+        private const short DencityMinDefValue = 0;
+
+        /// <summary>
+        /// Значение по умолчанию свойства <see cref="DencityValue"/>.
+        /// </summary>
+        private const short DencityValueDefValue = 50;
+
+        /// <summary>
+        /// Значение по умолчанию свойства <see cref="SizeFieldHeightMax"/>.
+        /// </summary>
+        private const short SizeFieldHeightMaxDefValue = 500;
+
+        /// <summary>
+        /// Значение по умолчанию свойства <see cref="SizeFieldHeightMin"/>.
+        /// </summary>
+        private const short SizeFieldHeightMinDefValue = 50;
+
+        /// <summary>
+        /// Значение по умолчанию свойства <see cref="SizeFieldHeightValue"/>.
+        /// </summary>
+        private const short SizeFieldHeightValueDefValue = 100;
+
+        /// <summary>
+        /// Значение по умолчанию свойства <see cref="SizeFieldWidthMax"/>.
+        /// </summary>
+        private const short SizeFieldWidthMaxDefValue = 500;
+
+        /// <summary>
+        /// Значение по умолчанию свойства <see cref="SizeFieldWidthMin"/>.
+        /// </summary>
+        private const short SizeFieldWidthMinDefValue = 50;
+
+        /// <summary>
+        /// Значение по умолчанию свойства <see cref="SizeFieldWidthValue"/>.
+        /// </summary>
+        private const short SizeFieldWidthValueDefValue = 100;
+        #endregion
+
+        #region Fields
+        private IRecorder _recorder;
+        #endregion
+
+        #region Properties
         /// <summary>
         /// Возвращает или задаёт расширение файла в который осуществляется сохранение записи.
         /// </summary>
@@ -58,31 +108,35 @@ namespace CellularAutomaton.Components.Recorder
         public string FileFilter { get; set; }
 
         /// <summary>
+        /// Возвращает или задаёт имя файла в который осуществляется сохранение записи.
+        /// </summary>
+        [Browsable(true)]
+        [EditorBrowsable(EditorBrowsableState.Always)]
+        [SRCategory("CatData")]
+        [SRDescription(nameof(FileName) + SRDescriptionAttribute.Suffix)]
+        public string FileName { get; set; }
+
+        /// <summary>
         /// Возвращает коллекцию правил построения клеточных автоматов.
         /// </summary>
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public IList<IRule> Rules { get; private set; }
-
-        private IRecorder _recorder;
-
-        public event EventHandler SaveRecord;
-
-        public event EventHandler StartRecord;
-
-        public event EventHandler StopRecord;
-
         #endregion
 
         #region Constructors
         /// <summary>
         /// Инициализирует новый экземплр класса <see cref="CellularAutomatonRecorder"/>.
         /// </summary>
-        protected CellularAutomatonRecorder()
+        /// <remarks>
+        /// <b>Используется для поддержки конструктора.</b> В своих разработках используйте перегрузку <see cref="CellularAutomatonRecorder(IRecorder)"/>.
+        /// </remarks>
+        public CellularAutomatonRecorder()
         {
             InitializeComponent();
             InitializeProperties();
         }
+
         /// <summary>
         /// Инициализирует новый экземпляр класса <see cref="CellularAutomatonRecorder"/> с заданной реализацией <see cref="IRecorder"/>.
         /// </summary>
@@ -95,6 +149,53 @@ namespace CellularAutomaton.Components.Recorder
 
         #region Members
         /// <summary>
+        /// Вызывает событие <see cref="StartRecord"/>.
+        /// </summary>
+        protected virtual void OnStartRecord()
+        {
+            StartRecord?.Invoke(this, EventArgs.Empty);
+        }
+
+        /// <summary>
+        /// Вызывает событие <see cref="StopRecord"/>.
+        /// </summary>
+        protected virtual void OnStopRecord()
+        {
+            StopRecord?.Invoke(this, EventArgs.Empty);
+        }
+
+        /// <summary>
+        /// Обработчик события <see cref="Control.Click"/>. Начинает запись функционирования клеточного автомата.
+        /// </summary>
+        /// <param name="sender">Источник события.</param>
+        /// <param name="e">Сведения о событии.</param>
+        private void bRecord_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Обработчик события <see cref="Control.Click"/>. Сохраняет запись функционирования клеточного автомата в файл.
+        /// </summary>
+        /// <param name="sender">Источник события.</param>
+        /// <param name="e">Сведения о событии.</param>
+        private void bSave_Click(object sender, EventArgs e)
+        {
+            SaveRecordDlg();
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Обработчик события <see cref="Control.Click"/>. Останавливает запись функционирования клеточного автомата.
+        /// </summary>
+        /// <param name="sender">Источник события.</param>
+        /// <param name="e">Сведения о событии.</param>
+        private void bStop_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
         /// Устанавливает значения свойств по умолчанию.
         /// </summary>
         private void InitializeProperties()
@@ -103,16 +204,16 @@ namespace CellularAutomaton.Components.Recorder
             innerRules.CollectionChanged += InnerRules_CollectionChanged;
             Rules = innerRules;
 
-            SizeFieldWidthMin = Convert.ToInt16(Resources.CellularAutomatonRecorder__SizeFieldWidthMinDefValue, CultureInfo.CurrentCulture);
-            SizeFieldHeightMin = Convert.ToInt16(Resources.CellularAutomatonRecorder__SizeFieldHeightMinDefValue, CultureInfo.CurrentCulture);
-            SizeFieldWidthMax = Convert.ToInt16(Resources.CellularAutomatonRecorder__SizeFieldWidthMaxDefValue, CultureInfo.CurrentCulture);
-            SizeFieldHeightMax = Convert.ToInt16(Resources.CellularAutomatonRecorder__SizeFieldHeightMaxDefValue, CultureInfo.CurrentCulture);
-            SizeFieldWidthValue = Convert.ToInt16(Resources.CellularAutomatonRecorder__SizeFieldWidthValueDefValue, CultureInfo.CurrentCulture);
-            SizeFieldHeightValue = Convert.ToInt16(Resources.CellularAutomatonRecorder__SizeFieldHeightValueDefValue, CultureInfo.CurrentCulture);
+            SizeFieldWidthMin = SizeFieldWidthMinDefValue;
+            SizeFieldHeightMin = SizeFieldHeightMinDefValue;
+            SizeFieldWidthMax = SizeFieldWidthMaxDefValue;
+            SizeFieldHeightMax = SizeFieldHeightMaxDefValue;
+            SizeFieldWidthValue = SizeFieldWidthValueDefValue;
+            SizeFieldHeightValue = SizeFieldHeightValueDefValue;
 
-            DencityMin = Convert.ToInt16(Resources.CellularAutomatonRecorder__DencityMinDefValue, CultureInfo.CurrentCulture);
-            DencityMax = Convert.ToInt16(Resources.CellularAutomatonRecorder__DencityMaxDefValue, CultureInfo.CurrentCulture);
-            DencityValue = Convert.ToInt16(Resources.CellularAutomatonRecorder__DencityValueDefValue, CultureInfo.CurrentCulture);
+            DencityMin = DencityMinDefValue;
+            DencityMax = DencityMaxDefValue;
+            DencityValue = DencityValueDefValue;
 
             StatesCountMin = Core.CellularAutomaton.StatesNumberMin;
             StatesCountMax = Core.CellularAutomaton.StatesNumberMax;
@@ -132,53 +233,6 @@ namespace CellularAutomaton.Components.Recorder
         {
             cBCellularAutomatonRules.Items.Clear();
             cBCellularAutomatonRules.Items.AddRange(Rules.Select(item => item.Name).ToArray<object>());
-        }
-
-        /// <summary>
-        /// Обработчик события <see cref="Control.Click"/>. Начинает запись функционирования клеточного автомата.
-        /// </summary>
-        /// <param name="sender">Источник события.</param>
-        /// <param name="e">Сведения о событии.</param>
-        private void bRecord_Click(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Обработчик события <see cref="Control.Click"/>. Останавливает запись функционирования клеточного автомата.
-        /// </summary>
-        /// <param name="sender">Источник события.</param>
-        /// <param name="e">Сведения о событии.</param>
-        private void bStop_Click(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Обработчик события <see cref="Control.Click"/>. Сохраняет запись функционирования клеточного автомата в файл.
-        /// </summary>
-        /// <param name="sender">Источник события.</param>
-        /// <param name="e">Сведения о событии.</param>
-        private void bSave_Click(object sender, EventArgs e)
-        {
-            SaveRecordDlg();
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Вызывает событие <see cref="StartRecord"/>.
-        /// </summary>
-        protected virtual void OnStartRecord()
-        {
-            StartRecord?.Invoke(this, EventArgs.Empty);
-        }
-
-        /// <summary>
-        /// Вызывает событие <see cref="StopRecord"/>.
-        /// </summary>
-        protected virtual void OnStopRecord()
-        {
-            StopRecord?.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>
@@ -219,7 +273,7 @@ namespace CellularAutomaton.Components.Recorder
         ///     <b>Значение по умолчанию - 50.</b>
         /// </remarks>
         /// <exception cref="ArgumentOutOfRangeException">Значение '<see cref="SizeFieldWidthMin"/>' должно лежать в диапазоне от 0 до '<see cref="SizeFieldWidthMax"/>'.</exception>
-        [DefaultValue(50)]
+        [DefaultValue(SizeFieldWidthMinDefValue)]
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [RefreshProperties(RefreshProperties.All)]
@@ -250,7 +304,7 @@ namespace CellularAutomaton.Components.Recorder
         ///     <b>Значение по умолчанию - 500.</b>
         /// </remarks>
         /// <exception cref="ArgumentOutOfRangeException">Значение '<see cref="SizeFieldWidthMax"/>' не должно быть меньше '<see cref="SizeFieldWidthMin"/>'.</exception>
-        [DefaultValue(500)]
+        [DefaultValue(SizeFieldWidthMaxDefValue)]
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [RefreshProperties(RefreshProperties.All)]
@@ -280,7 +334,7 @@ namespace CellularAutomaton.Components.Recorder
         ///     <b>Значение по умолчанию - 100.</b>
         /// </remarks>
         /// <exception cref="ArgumentOutOfRangeException">Значение '<see cref="SizeFieldHeightValue"/>' должно лежать в диапазоне от '<see cref="SizeFieldHeightMin"/>' до '<see cref="SizeFieldHeightMax"/>'.</exception>
-        [DefaultValue(100)]
+        [DefaultValue(SizeFieldWidthValueDefValue)]
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [RefreshProperties(RefreshProperties.All)]
@@ -313,7 +367,7 @@ namespace CellularAutomaton.Components.Recorder
         ///     <b>Значение по умолчанию - 50.</b>
         /// </remarks>
         /// <exception cref="ArgumentOutOfRangeException">Значение '<see cref="SizeFieldHeightMin"/>' должно лежать в диапазоне от 0 до '<see cref="SizeFieldHeightMax"/>'.</exception>
-        [DefaultValue(50)]
+        [DefaultValue(SizeFieldHeightMinDefValue)]
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [RefreshProperties(RefreshProperties.All)]
@@ -344,7 +398,7 @@ namespace CellularAutomaton.Components.Recorder
         ///     <b>Значение по умолчанию - 500.</b>
         /// </remarks>
         /// <exception cref="ArgumentOutOfRangeException">Значение '<see cref="SizeFieldHeightMax"/>' не должно быть меньше '<see cref="SizeFieldHeightMin"/>'.</exception>
-        [DefaultValue(500)]
+        [DefaultValue(SizeFieldHeightMaxDefValue)]
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [RefreshProperties(RefreshProperties.All)]
@@ -374,7 +428,7 @@ namespace CellularAutomaton.Components.Recorder
         ///     <b>Значение по умолчанию - 100.</b>
         /// </remarks>
         /// <exception cref="ArgumentOutOfRangeException">Значение '<see cref="SizeFieldHeightValue"/>' должно лежать в диапазоне от '<see cref="SizeFieldHeightMin"/>' до '<see cref="SizeFieldHeightMax"/>'.</exception>
-        [DefaultValue(100)]
+        [DefaultValue(SizeFieldHeightValueDefValue)]
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [RefreshProperties(RefreshProperties.All)]
@@ -408,7 +462,7 @@ namespace CellularAutomaton.Components.Recorder
         ///     <b>Значение по умолчанию - 0.</b>
         /// </remarks>
         /// <exception cref="ArgumentOutOfRangeException">Значение '<see cref="DencityMin"/>' должно лежать в диапазоне от 0 до '<see cref="DencityMax"/>'.</exception>
-        [DefaultValue(0)]
+        [DefaultValue(DencityMinDefValue)]
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [RefreshProperties(RefreshProperties.All)]
@@ -439,7 +493,7 @@ namespace CellularAutomaton.Components.Recorder
         ///     <b>Значение по умолчанию - 100.</b>
         /// </remarks>
         /// <exception cref="ArgumentOutOfRangeException">Значение '<see cref="DencityMax"/>' должно лежать в интервале от '<see cref="DencityMin"/>' до 100.</exception>
-        [DefaultValue(100)]
+        [DefaultValue(DencityMaxDefValue)]
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [RefreshProperties(RefreshProperties.All)]
@@ -470,7 +524,7 @@ namespace CellularAutomaton.Components.Recorder
         ///     <b>Значение по умолчанию - 50.</b>
         /// </remarks>
         /// <exception cref="ArgumentOutOfRangeException">Значение '<see cref="DencityValue"/>' должно лежать в диапазоне от '<see cref="DencityMin"/>' до '<see cref="DencityMax"/>'.</exception>
-        [DefaultValue(50)]
+        [DefaultValue(DencityValueDefValue)]
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [RefreshProperties(RefreshProperties.All)]

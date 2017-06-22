@@ -147,33 +147,6 @@
   <data name="CellularAutomatonRecorder__SaveFileDialogRecordDefFileName" xml:space="preserve">
     <value>record</value>
   </data>
-  <data name="CellularAutomatonRecorder__DencityMaxDefValue" xml:space="preserve">
-    <value>100</value>
-  </data>
-  <data name="CellularAutomatonRecorder__DencityMinDefValue" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="CellularAutomatonRecorder__DencityValueDefValue" xml:space="preserve">
-    <value>50</value>
-  </data>
-  <data name="CellularAutomatonRecorder__SizeFieldHeightMaxDefValue" xml:space="preserve">
-    <value>500</value>
-  </data>
-  <data name="CellularAutomatonRecorder__SizeFieldHeightMinDefValue" xml:space="preserve">
-    <value>50</value>
-  </data>
-  <data name="CellularAutomatonRecorder__SizeFieldHeightValueDefValue" xml:space="preserve">
-    <value>100</value>
-  </data>
-  <data name="CellularAutomatonRecorder__SizeFieldWidthMaxDefValue" xml:space="preserve">
-    <value>500</value>
-  </data>
-  <data name="CellularAutomatonRecorder__SizeFieldWidthMinDefValue" xml:space="preserve">
-    <value>50</value>
-  </data>
-  <data name="CellularAutomatonRecorder__SizeFieldWidthValueDefValue" xml:space="preserve">
-    <value>100</value>
-  </data>
   <data name="PlayerController__SetToolTip__Finder" xml:space="preserve">
     <value>{0}/{1}</value>
   </data>

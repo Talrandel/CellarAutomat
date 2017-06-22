@@ -61,33 +61,6 @@ namespace CellularAutomaton.Components.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на 100.
-        /// </summary>
-        internal static string CellularAutomatonRecorder__DencityMaxDefValue {
-            get {
-                return ResourceManager.GetString("CellularAutomatonRecorder__DencityMaxDefValue", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на 0.
-        /// </summary>
-        internal static string CellularAutomatonRecorder__DencityMinDefValue {
-            get {
-                return ResourceManager.GetString("CellularAutomatonRecorder__DencityMinDefValue", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на 50.
-        /// </summary>
-        internal static string CellularAutomatonRecorder__DencityValueDefValue {
-            get {
-                return ResourceManager.GetString("CellularAutomatonRecorder__DencityValueDefValue", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Ищет локализованную строку, похожую на Расширение файла в который осуществляется сохранение записи..
         /// </summary>
         internal static string CellularAutomatonRecorder__FileExtensionDescr {
@@ -147,60 +120,6 @@ namespace CellularAutomaton.Components.Properties {
         internal static string CellularAutomatonRecorder__SaveFileDialogRecordTitle {
             get {
                 return ResourceManager.GetString("CellularAutomatonRecorder__SaveFileDialogRecordTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на 500.
-        /// </summary>
-        internal static string CellularAutomatonRecorder__SizeFieldHeightMaxDefValue {
-            get {
-                return ResourceManager.GetString("CellularAutomatonRecorder__SizeFieldHeightMaxDefValue", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на 50.
-        /// </summary>
-        internal static string CellularAutomatonRecorder__SizeFieldHeightMinDefValue {
-            get {
-                return ResourceManager.GetString("CellularAutomatonRecorder__SizeFieldHeightMinDefValue", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на 100.
-        /// </summary>
-        internal static string CellularAutomatonRecorder__SizeFieldHeightValueDefValue {
-            get {
-                return ResourceManager.GetString("CellularAutomatonRecorder__SizeFieldHeightValueDefValue", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на 500.
-        /// </summary>
-        internal static string CellularAutomatonRecorder__SizeFieldWidthMaxDefValue {
-            get {
-                return ResourceManager.GetString("CellularAutomatonRecorder__SizeFieldWidthMaxDefValue", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на 50.
-        /// </summary>
-        internal static string CellularAutomatonRecorder__SizeFieldWidthMinDefValue {
-            get {
-                return ResourceManager.GetString("CellularAutomatonRecorder__SizeFieldWidthMinDefValue", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на 100.
-        /// </summary>
-        internal static string CellularAutomatonRecorder__SizeFieldWidthValueDefValue {
-            get {
-                return ResourceManager.GetString("CellularAutomatonRecorder__SizeFieldWidthValueDefValue", resourceCulture);
             }
         }
         
