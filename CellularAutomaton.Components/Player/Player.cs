@@ -6,7 +6,7 @@
 // File          : Player.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 18.06.2017 12:46
-// Last Revision : 19.06.2017 23:38
+// Last Revision : 22.06.2017 12:44
 // Description   : 
 #endregion
 
@@ -53,11 +53,6 @@ namespace CellularAutomaton.Components.Player
         private byte _framesPerMinute;
 
         /// <summary>
-        /// Воспроизводимая запись.
-        /// </summary>
-        private Record _record;
-
-        /// <summary>
         /// Перечислитель для записи
         /// </summary>
         private IEnumerator<Bitmap> _recordEnumerator;
@@ -67,7 +62,7 @@ namespace CellularAutomaton.Components.Player
         /// <summary>
         /// Возвращает число кадров в записи.
         /// </summary>
-        public int GetFrames => _record.Count;
+        public int GetFrames => Record.Count;
         #endregion
 
         #region Constructors
@@ -111,6 +106,11 @@ namespace CellularAutomaton.Components.Player
         #endregion
 
         #region IPlayer Members
+        /// <summary>
+        /// Возвращает воспроизводимую запись.
+        /// </summary>
+        public Record Record { get; private set; }
+
         /// <summary>
         /// Возвращает состояние проигрывателя.
         /// </summary>
@@ -170,7 +170,7 @@ namespace CellularAutomaton.Components.Player
             if (rec == null)
                 throw new ArgumentNullException(nameof(rec));
 
-            _record = rec;
+            Record = rec;
             GetRecordEnumerator();
         }
 
@@ -182,7 +182,7 @@ namespace CellularAutomaton.Components.Player
         public void Load(string fileName)
         {
             Stop();
-            _record.Load(fileName);
+            Record.Load(fileName);
             GetRecordEnumerator();
         }
 
@@ -347,11 +347,11 @@ namespace CellularAutomaton.Components.Player
         }
 
         /// <summary>
-        /// Возвращает перечислитель для записи <see cref="_record"/>.
+        /// Возвращает перечислитель для записи <see cref="Record"/>.
         /// </summary>
         private void GetRecordEnumerator()
         {
-            _recordEnumerator = _record.GetEnumerator();
+            _recordEnumerator = Record.GetEnumerator();
         }
         #endregion
     }

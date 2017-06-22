@@ -6,7 +6,7 @@
 // File          : IPlayer.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 18.06.2017 12:46
-// Last Revision : 18.06.2017 12:46
+// Last Revision : 22.06.2017 12:41
 // Description   : 
 #endregion
 
@@ -37,6 +37,11 @@ namespace CellularAutomaton.Components.Player
         /// Возвращает номер текущего кадра в записи.
         /// </summary>
         short CurrenFrame { get; }
+
+        /// <summary>
+        /// Возвращает воспроизводимую запись.
+        /// </summary>
+        Record Record { get; }
         #endregion
 
         #region Members

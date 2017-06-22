@@ -174,4 +174,7 @@
   <data name="SizeFieldWidthValueDefValue" xml:space="preserve">
     <value>100</value>
   </data>
+    <data name="PlayerController__SetToolTipFinder" xml:space="preserve">
+    <value>{0}/{1}</value>
+  </data>
 </root>
