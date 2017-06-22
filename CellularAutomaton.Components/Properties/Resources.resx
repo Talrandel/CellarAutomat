@@ -177,4 +177,43 @@
   <data name="PlayerController__FinderTickFrequencyDescr" xml:space="preserve">
     <value>Интервал между отметками на шкале поиска.</value>
   </data>
+  <data name="SR_Attribute__NotFoundLocalizedString" xml:space="preserve">
+    <value>Not found localized string '{0}'</value>
+  </data>
+  <data name="CellularAutomatonRecorder__DencityMaxDescr" xml:space="preserve">
+    <value>Максимальная плотность распределения клеток на поле клеточного автомата.</value>
+  </data>
+  <data name="CellularAutomatonRecorder__DencityMinDescr" xml:space="preserve">
+    <value>Минимальная плотность распределения клеток на поле клеточного автомата.</value>
+  </data>
+  <data name="CellularAutomatonRecorder__DencityValueDescr" xml:space="preserve">
+    <value>Плотность рапределения клеток на поле клеточного автомата.</value>
+  </data>
+  <data name="CellularAutomatonRecorder__SizeFieldHeightMaxDescr" xml:space="preserve">
+    <value>Максимальная высота поля клеточного автомата.</value>
+  </data>
+  <data name="CellularAutomatonRecorder__SizeFieldHeightMinDescr" xml:space="preserve">
+    <value>Минимальная высота поля клеточного автомата.</value>
+  </data>
+  <data name="CellularAutomatonRecorder__SizeFieldHeightValueDescr" xml:space="preserve">
+    <value>Высота поля клеточного автомата.</value>
+  </data>
+  <data name="CellularAutomatonRecorder__SizeFieldWidthMaxDescr" xml:space="preserve">
+    <value>Максимальная ширина поля клеточного автомата.</value>
+  </data>
+  <data name="CellularAutomatonRecorder__SizeFieldWidthMinDescr" xml:space="preserve">
+    <value>Минимальная ширина поля клеточного автомата.</value>
+  </data>
+  <data name="CellularAutomatonRecorder__SizeFieldWidthValueDescr" xml:space="preserve">
+    <value>Ширина поля клеточного автомата.</value>
+  </data>
+  <data name="CellularAutomatonRecorder__StatesCountMaxDescr" xml:space="preserve">
+    <value>Максимальное число состояний клетки клеточного автомата.</value>
+  </data>
+  <data name="CellularAutomatonRecorder__StatesCountMinDescr" xml:space="preserve">
+    <value>Минимальное число состояний клетки клеточного автомата.</value>
+  </data>
+  <data name="CellularAutomatonRecorder__StatesCountValueDescr" xml:space="preserve">
+    <value>Число состояний клетки клеточного автомата.</value>
+  </data>
 </root>

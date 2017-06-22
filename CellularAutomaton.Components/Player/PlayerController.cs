@@ -73,7 +73,7 @@ namespace CellularAutomaton.Components.Player
         [DefaultValue(FinderLargeChangeDefValue)]
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
-        [SRCategory("CatBehavior")]
+        [SRCategory("Behavior")]
         [SRDescription(nameof(PlayerController) + "__" + nameof(FinderLargeChange) + SRDescriptionAttribute.Suffix)]
         public short FinderLargeChange
         {
@@ -87,7 +87,7 @@ namespace CellularAutomaton.Components.Player
         [DefaultValue(FinderSmallChangeDefValue)]
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
-        [SRCategory("CatBehavior")]
+        [SRCategory("Behavior")]
         [SRDescription(nameof(PlayerController) + "__" + nameof(FinderSmallChange) + SRDescriptionAttribute.Suffix)]
         public short FinderSmallChange
         {
@@ -101,7 +101,7 @@ namespace CellularAutomaton.Components.Player
         [DefaultValue(FinderTickFrequencyDefValue)]
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
-        [SRCategory("CatAppearance")]
+        [SRCategory("Appearance")]
         [SRDescription(nameof(PlayerController) + "__" + nameof(FinderTickFrequency) + SRDescriptionAttribute.Suffix)]
         public short FinderTickFrequency
         {

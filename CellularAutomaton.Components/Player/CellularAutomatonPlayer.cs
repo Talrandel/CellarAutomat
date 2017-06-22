@@ -28,7 +28,7 @@ namespace CellularAutomaton.Components.Player
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [RefreshProperties(RefreshProperties.Repaint)]
-        [SRCategory("CatBehavior")]
+        [SRCategory("Behavior")]
         [SRDescription(nameof(CellularAutomatonPlayer) + "__" +nameof(SizeMode) + SRDescriptionAttribute.Suffix)]
         public PictureBoxSizeMode SizeMode
         {

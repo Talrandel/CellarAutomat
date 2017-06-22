@@ -94,7 +94,7 @@ namespace CellularAutomaton.Components.Recorder
         /// </summary>
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
-        [SRCategory("CatData")]
+        [SRCategory("Data")]
         [SRDescription(nameof(CellularAutomatonRecorder) + "__" + nameof(FileExtension) + SRDescriptionAttribute.Suffix)]
         public string FileExtension { get; set; }
 
@@ -103,7 +103,7 @@ namespace CellularAutomaton.Components.Recorder
         /// </summary>
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
-        [SRCategory("CatData")]
+        [SRCategory("Data")]
         [SRDescription(nameof(CellularAutomatonRecorder) + "__" + nameof(FileFilter) + SRDescriptionAttribute.Suffix)]
         public string FileFilter { get; set; }
 
@@ -112,7 +112,7 @@ namespace CellularAutomaton.Components.Recorder
         /// </summary>
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
-        [SRCategory("CatData")]
+        [SRCategory("Data")]
         [SRDescription(nameof(CellularAutomatonRecorder) + "__" + nameof(FileName) + SRDescriptionAttribute.Suffix)]
         public string FileName { get; set; }
 
@@ -120,7 +120,6 @@ namespace CellularAutomaton.Components.Recorder
         /// Возвращает коллекцию правил построения клеточных автоматов.
         /// </summary>
         [Browsable(false)]
-        [EditorBrowsable(EditorBrowsableState.Never)]
         public IList<IRule> Rules { get; private set; }
         #endregion
 
@@ -277,8 +276,8 @@ namespace CellularAutomaton.Components.Recorder
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [RefreshProperties(RefreshProperties.All)]
-        [SRCategory("SizeField")]
-        [SRDescription(nameof(SizeFieldWidthMin) + SRDescriptionAttribute.Suffix)]
+        [SRCategory("Data")]
+        [SRDescription(nameof(CellularAutomatonRecorder) + "__" + nameof(SizeFieldWidthMin) + SRDescriptionAttribute.Suffix)]
         public short SizeFieldWidthMin
         {
             get { return Convert.ToInt16(nUDWidth.Minimum); }
@@ -308,8 +307,8 @@ namespace CellularAutomaton.Components.Recorder
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [RefreshProperties(RefreshProperties.All)]
-        [SRCategory("SizeField")]
-        [SRDescription(nameof(SizeFieldWidthMax) + SRDescriptionAttribute.Suffix)]
+        [SRCategory("Data")]
+        [SRDescription(nameof(CellularAutomatonRecorder) + "__" + nameof(SizeFieldWidthMax) + SRDescriptionAttribute.Suffix)]
         public short SizeFieldWidthMax
         {
             get { return Convert.ToInt16(nUDWidth.Maximum); }
@@ -338,8 +337,8 @@ namespace CellularAutomaton.Components.Recorder
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [RefreshProperties(RefreshProperties.All)]
-        [SRCategory("SizeField")]
-        [SRDescription(nameof(SizeFieldWidthValue) + SRDescriptionAttribute.Suffix)]
+        [SRCategory("Data")]
+        [SRDescription(nameof(CellularAutomatonRecorder) + "__" + nameof(SizeFieldWidthValue) + SRDescriptionAttribute.Suffix)]
         public short SizeFieldWidthValue
         {
             get { return Convert.ToInt16(nUDWidth.Value); }
@@ -371,8 +370,8 @@ namespace CellularAutomaton.Components.Recorder
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [RefreshProperties(RefreshProperties.All)]
-        [SRCategory("SizeField")]
-        [SRDescription(nameof(SizeFieldHeightMin) + SRDescriptionAttribute.Suffix)]
+        [SRCategory("Data")]
+        [SRDescription(nameof(CellularAutomatonRecorder) + "__" + nameof(SizeFieldHeightMin) + SRDescriptionAttribute.Suffix)]
         public short SizeFieldHeightMin
         {
             get { return Convert.ToInt16(nUDHeight.Minimum); }
@@ -402,8 +401,8 @@ namespace CellularAutomaton.Components.Recorder
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [RefreshProperties(RefreshProperties.All)]
-        [SRCategory("SizeField")]
-        [SRDescription(nameof(SizeFieldHeightMax) + SRDescriptionAttribute.Suffix)]
+        [SRCategory("Data")]
+        [SRDescription(nameof(CellularAutomatonRecorder) + "__" + nameof(SizeFieldHeightMax) + SRDescriptionAttribute.Suffix)]
         public short SizeFieldHeightMax
         {
             get { return Convert.ToInt16(nUDHeight.Maximum); }
@@ -432,8 +431,8 @@ namespace CellularAutomaton.Components.Recorder
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [RefreshProperties(RefreshProperties.All)]
-        [SRCategory("SizeField")]
-        [SRDescription(nameof(SizeFieldHeightValue) + SRDescriptionAttribute.Suffix)]
+        [SRCategory("Data")]
+        [SRDescription(nameof(CellularAutomatonRecorder) + "__" + nameof(SizeFieldHeightValue) + SRDescriptionAttribute.Suffix)]
         public short SizeFieldHeightValue
         {
             get { return Convert.ToInt16(nUDHeight.Value); }
@@ -466,8 +465,8 @@ namespace CellularAutomaton.Components.Recorder
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [RefreshProperties(RefreshProperties.All)]
-        [SRCategory("Dencity")]
-        [SRDescription(nameof(DencityMin) + SRDescriptionAttribute.Suffix)]
+        [SRCategory("Data")]
+        [SRDescription(nameof(CellularAutomatonRecorder) + "__" + nameof(DencityMin) + SRDescriptionAttribute.Suffix)]
         public short DencityMin
         {
             get { return Convert.ToInt16(nUDDencity.Minimum); }
@@ -497,8 +496,8 @@ namespace CellularAutomaton.Components.Recorder
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [RefreshProperties(RefreshProperties.All)]
-        [SRCategory("Dencity")]
-        [SRDescription(nameof(DencityMax) + SRDescriptionAttribute.Suffix)]
+        [SRCategory("Data")]
+        [SRDescription(nameof(CellularAutomatonRecorder) + "__" + nameof(DencityMax) + SRDescriptionAttribute.Suffix)]
         public short DencityMax
         {
             get { return Convert.ToInt16(nUDDencity.Maximum); }
@@ -528,8 +527,8 @@ namespace CellularAutomaton.Components.Recorder
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [RefreshProperties(RefreshProperties.All)]
-        [SRCategory("Dencity")]
-        [SRDescription(nameof(DencityValue) + SRDescriptionAttribute.Suffix)]
+        [SRCategory("Data")]
+        [SRDescription(nameof(CellularAutomatonRecorder) + "__" + nameof(DencityValue) + SRDescriptionAttribute.Suffix)]
         public short DencityValue
         {
             get { return Convert.ToInt16(nUDDencity.Value); }
@@ -557,12 +556,12 @@ namespace CellularAutomaton.Components.Recorder
         ///     <b>Значение по умолчанию - <see cref="CellularAutomaton.Core.CellularAutomaton.StatesNumberMin"/>.</b>
         /// </remarks>
         /// <exception cref="ArgumentOutOfRangeException">Значение '<see cref="StatesCountMin"/>' должно лежать в диапазоне от <see cref="CellularAutomaton.Core.CellularAutomaton.StatesNumberMin"/> до '<see cref="StatesCountMax"/>'.</exception>
-        [DefaultValue(Core.CellularAutomaton.StatesNumberMin)]
+        [DefaultValue((short)Core.CellularAutomaton.StatesNumberMin)]
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [RefreshProperties(RefreshProperties.All)]
-        [SRCategory("StatesCount")]
-        [SRDescription(nameof(StatesCountMin) + SRDescriptionAttribute.Suffix)]
+        [SRCategory("Data")]
+        [SRDescription(nameof(CellularAutomatonRecorder) + "__" + nameof(StatesCountMin) + SRDescriptionAttribute.Suffix)]
         public short StatesCountMin
         {
             get { return Convert.ToInt16(nUDStatesCount.Minimum); }
@@ -588,12 +587,12 @@ namespace CellularAutomaton.Components.Recorder
         ///     <b>Значение по умолчанию - <see cref="CellularAutomaton.Core.CellularAutomaton.StatesNumberMax"/>.</b>
         /// </remarks>
         /// <exception cref="ArgumentOutOfRangeException">Значение '<see cref="StatesCountMax"/>' должно лежать в интервале от '<see cref="StatesCountMin"/>' до <see cref="CellularAutomaton.Core.CellularAutomaton.StatesNumberMax"/>.</exception>
-        [DefaultValue(Core.CellularAutomaton.StatesNumberMax)]
+        [DefaultValue((short)Core.CellularAutomaton.StatesNumberMax)]
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [RefreshProperties(RefreshProperties.All)]
-        [SRCategory("StatesCount")]
-        [SRDescription(nameof(StatesCountMax) + SRDescriptionAttribute.Suffix)]
+        [SRCategory("Data")]
+        [SRDescription(nameof(CellularAutomatonRecorder) + "__" + nameof(StatesCountMax) + SRDescriptionAttribute.Suffix)]
         public short StatesCountMax
         {
             get { return Convert.ToInt16(nUDStatesCount.Maximum); }
@@ -619,12 +618,12 @@ namespace CellularAutomaton.Components.Recorder
         ///     <b>Значение по умолчанию - <see cref="CellularAutomaton.Core.CellularAutomaton.StatesNumberMin"/>.</b>
         /// </remarks>
         /// <exception cref="ArgumentOutOfRangeException">Значение '<see cref="StatesCountValue"/>' должно лежать в диапазоне от '<see cref="StatesCountMin"/>' до '<see cref="StatesCountMax"/>'.</exception>
-        [DefaultValue(Core.CellularAutomaton.StatesNumberMin)]
+        [DefaultValue((short)Core.CellularAutomaton.StatesNumberMin)]
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [RefreshProperties(RefreshProperties.All)]
-        [SRCategory("StatesCount")]
-        [SRDescription(nameof(StatesCountValue) + SRDescriptionAttribute.Suffix)]
+        [SRCategory("Data")]
+        [SRDescription(nameof(CellularAutomatonRecorder) + "__" + nameof(StatesCountValue) + SRDescriptionAttribute.Suffix)]
         public short StatesCountValue
         {
             get { return Convert.ToInt16(nUDStatesCount.Value); }

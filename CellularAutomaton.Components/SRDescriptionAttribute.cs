@@ -6,7 +6,7 @@
 // File          : SRDescriptionAttribute.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 18.06.2017 12:11
-// Last Revision : 20.06.2017 22:55
+// Last Revision : 22.06.2017 21:46
 // Description   : 
 #endregion
 
@@ -51,7 +51,8 @@ namespace CellularAutomaton.Components
                 if (!_isLoaded) // Локализованная строка не загружена из ресурсов?
                 {
                     _isLoaded = true;
-                    DescriptionValue = Resources.ResourceManager.GetString(base.Description);
+                    DescriptionValue = Resources.ResourceManager.GetString(base.Description) 
+                        ?? string.Format(Resources.SR_Attribute__NotFoundLocalizedString, base.Description);
                 }
 
                 return DescriptionValue;
