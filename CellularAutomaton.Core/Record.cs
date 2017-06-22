@@ -23,6 +23,7 @@ using CellularAutomaton.Core.Properties;
 
 namespace CellularAutomaton.Core
 {
+    // TODO: Добавить реализацию интерфейса IReadOnlyRecord.
     /// <summary>
     /// Представляет запись функционирования клеточного автомата.
     /// </summary>

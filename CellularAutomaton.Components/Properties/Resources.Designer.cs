@@ -143,6 +143,15 @@ namespace CellularAutomaton.Components.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на {0}/{1}.
+        /// </summary>
+        internal static string PlayerController__SetToolTipFinder {
+            get {
+                return ResourceManager.GetString("PlayerController__SetToolTipFinder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на record.
         /// </summary>
         internal static string SaveFileDialogRecordDefFileName {
