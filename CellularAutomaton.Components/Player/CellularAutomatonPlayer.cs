@@ -15,6 +15,9 @@ using System.Windows.Forms;
 
 namespace CellularAutomaton.Components.Player
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public partial class CellularAutomatonPlayer : UserControl
     {
         #region Properties

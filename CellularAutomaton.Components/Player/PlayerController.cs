@@ -6,11 +6,12 @@
 // File          : PlayerController.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 20.06.2017 23:22
-// Last Revision : 22.06.2017 19:27
+// Last Revision : 22.06.2017 19:49
 // Description   : 
 #endregion
 
 using System;
+using System.ComponentModel;
 using System.Globalization;
 using System.Windows.Forms;
 
@@ -50,6 +51,45 @@ namespace CellularAutomaton.Components.Player
         #endregion
 
         #region Properties
+        /// <summary>
+        /// Возвращает или задаёт число на которое перемещается ползунок по шкале поиска при щелчке мыши по элементу управления или нажатию клавиш PAGE UP, PAGE DOWN.
+        /// </summary>
+        [Browsable(true)]
+        [EditorBrowsable(EditorBrowsableState.Always)]
+        [SRCategory("CatBehavior")]
+        [SRDescription(nameof(FinderLargeChange) + SRDescriptionAttribute.Suffix)]
+        public short FinderLargeChange
+        {
+            get { return (short)tBFinder.LargeChange; }
+            set { tBFinder.LargeChange = value; }
+        }
+
+        /// <summary>
+        /// Возвращает или задаёт число на которое перемещается ползунок по шкале поиска при прокрутке колёсика мыши или нажатия клавиш LEFT, RIGHT, UP, DOWN.
+        /// </summary>
+        [Browsable(true)]
+        [EditorBrowsable(EditorBrowsableState.Always)]
+        [SRCategory("CatBehavior")]
+        [SRDescription(nameof(FinderSmallChange) + SRDescriptionAttribute.Suffix)]
+        public short FinderSmallChange
+        {
+            get { return (short)tBFinder.SmallChange; }
+            set { tBFinder.SmallChange = value; }
+        }
+
+        /// <summary>
+        /// Возвращает или задаёт интервал между отметками на шкале поиска.
+        /// </summary>
+        [Browsable(true)]
+        [EditorBrowsable(EditorBrowsableState.Always)]
+        [SRCategory("CatAppearance")]
+        [SRDescription(nameof(FinderTickFrequency) + SRDescriptionAttribute.Suffix)]
+        public short FinderTickFrequency
+        {
+            get { return (short)tBFinder.TickFrequency; }
+            set { tBFinder.TickFrequency = value; }
+        }
+
         /// <summary>
         /// Возвращает объект реализующий интерфейс <see cref="IPlayer"/> которым осуществляется управление.
         /// </summary>
@@ -158,9 +198,9 @@ namespace CellularAutomaton.Components.Player
         {
             SetToolTiptBFinder();
 
-            toolTip.SetToolTip(bPlay, Resources.PlayerController__SetToolTip__bPlay);
-            toolTip.SetToolTip(bPause, Resources.PlayerController__SetToolTip__bPause);
-            toolTip.SetToolTip(bStop, Resources.PlayerController__SetToolTip__bStop);
+            toolTip.SetToolTip(bPlay, Resources.PlayerController__SetToolTip__Play);
+            toolTip.SetToolTip(bPause, Resources.PlayerController__SetToolTip__Pause);
+            toolTip.SetToolTip(bStop, Resources.PlayerController__SetToolTip__Stop);
         }
 
         /// <summary>

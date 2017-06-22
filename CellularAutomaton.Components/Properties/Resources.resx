@@ -135,55 +135,73 @@
   <data name="Ex__Число_кадров_в_минуту_не_может_быть_равной_нулю_величиной_" xml:space="preserve">
     <value>Число кадров в минуту не может быть равной нулю величиной.</value>
   </data>
-  <data name="SaveFileDialogRecordExt" xml:space="preserve">
+  <data name="CellularAutomatonRecorder__SaveFileDialogRecordExt" xml:space="preserve">
     <value>bin</value>
   </data>
-  <data name="SaveFileDialogRecordFilter" xml:space="preserve">
+  <data name="CellularAutomatonRecorder__SaveFileDialogRecordFilter" xml:space="preserve">
     <value>Двоичные файлы (*.bin)|*.bin</value>
   </data>
-  <data name="SaveFileDialogRecordTitle" xml:space="preserve">
+  <data name="CellularAutomatonRecorder__SaveFileDialogRecordTitle" xml:space="preserve">
     <value>Сохранить запись как...</value>
   </data>
-  <data name="SaveFileDialogRecordDefFileName" xml:space="preserve">
+  <data name="CellularAutomatonRecorder__SaveFileDialogRecordDefFileName" xml:space="preserve">
     <value>record</value>
   </data>
-  <data name="DencityMaxDefValue" xml:space="preserve">
+  <data name="CellularAutomatonRecorder__DencityMaxDefValue" xml:space="preserve">
     <value>100</value>
   </data>
-  <data name="DencityMinDefValue" xml:space="preserve">
+  <data name="CellularAutomatonRecorder__DencityMinDefValue" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="DencityValueDefValue" xml:space="preserve">
+  <data name="CellularAutomatonRecorder__DencityValueDefValue" xml:space="preserve">
     <value>50</value>
   </data>
-  <data name="SizeFieldHeightMaxDefValue" xml:space="preserve">
+  <data name="CellularAutomatonRecorder__SizeFieldHeightMaxDefValue" xml:space="preserve">
     <value>500</value>
   </data>
-  <data name="SizeFieldHeightMinDefValue" xml:space="preserve">
+  <data name="CellularAutomatonRecorder__SizeFieldHeightMinDefValue" xml:space="preserve">
     <value>50</value>
   </data>
-  <data name="SizeFieldHeightValueDefValue" xml:space="preserve">
+  <data name="CellularAutomatonRecorder__SizeFieldHeightValueDefValue" xml:space="preserve">
     <value>100</value>
   </data>
-  <data name="SizeFieldWidthMaxDefValue" xml:space="preserve">
+  <data name="CellularAutomatonRecorder__SizeFieldWidthMaxDefValue" xml:space="preserve">
     <value>500</value>
   </data>
-  <data name="SizeFieldWidthMinDefValue" xml:space="preserve">
+  <data name="CellularAutomatonRecorder__SizeFieldWidthMinDefValue" xml:space="preserve">
     <value>50</value>
   </data>
-  <data name="SizeFieldWidthValueDefValue" xml:space="preserve">
+  <data name="CellularAutomatonRecorder__SizeFieldWidthValueDefValue" xml:space="preserve">
     <value>100</value>
   </data>
-    <data name="PlayerController__SetToolTip__Finder" xml:space="preserve">
+  <data name="PlayerController__SetToolTip__Finder" xml:space="preserve">
     <value>{0}/{1}</value>
   </data>
-    <data name="PlayerController__SetToolTip__bPlay" xml:space="preserve">
+  <data name="PlayerController__SetToolTip__Play" xml:space="preserve">
     <value>Начать воспроизведение записи.</value>
   </data>
-    <data name="PlayerController__SetToolTip__bPause" xml:space="preserve">
+  <data name="PlayerController__SetToolTip__Pause" xml:space="preserve">
     <value>Приостановить воспроизведение записи.</value>
   </data>
-    <data name="PlayerController__SetToolTip__bStop" xml:space="preserve">
+  <data name="PlayerController__SetToolTip__Stop" xml:space="preserve">
     <value>Останавливает воспроизведение записи.</value>
+  </data>
+  <data name="CellularAutomatonRecorder__FileExtensionDescr" xml:space="preserve">
+    <value>Расширение файла в который осуществляется сохранение записи.</value>
+  </data>
+  <data name="CellularAutomatonRecorder__FileFilterDescr" xml:space="preserve">
+    <value>Фильтр имён файлов в диалоговом окне "Сохранить как...".</value>
+  </data>
+  <data name="CellularAutomatonRecorder__FileNameDescr" xml:space="preserve">
+    <value>Имя файла в который осуществляется сохранение записи.</value>
+  </data>
+  <data name="PlayerController__FinderLargeChangeDescr" xml:space="preserve">
+    <value>Число на которое перемещается ползунок по шкале поиска при щелчке мыши по элементу управления или нажатию клавиш PAGE UP, PAGE DOWN.</value>
+  </data>
+  <data name="PlayerController__FinderSmallChangeDescr" xml:space="preserve">
+    <value>Число на которое перемещается ползунок по шкале поиска при прокрутке колёсика мыши или нажатия клавиш LEFT, RIGHT, UP, DOWN.</value>
+  </data>
+  <data name="PlayerController__FinderTickFrequencyDescr" xml:space="preserve">
+    <value>Интервал между отметками на шкале поиска.</value>
   </data>
 </root>

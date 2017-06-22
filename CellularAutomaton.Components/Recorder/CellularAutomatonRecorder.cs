@@ -49,7 +49,7 @@ namespace CellularAutomaton.Components.Recorder
         public string FileExtension { get; set; }
 
         /// <summary>
-        /// Возвращает или задаёт фильтр???.
+        /// Возвращает или задаёт фильтр имён файлов в диалоговом окне "Сохранить как...".
         /// </summary>
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
@@ -103,24 +103,24 @@ namespace CellularAutomaton.Components.Recorder
             innerRules.CollectionChanged += InnerRules_CollectionChanged;
             Rules = innerRules;
 
-            SizeFieldWidthMin = Convert.ToInt16(Resources.SizeFieldWidthMinDefValue, CultureInfo.CurrentCulture);
-            SizeFieldHeightMin = Convert.ToInt16(Resources.SizeFieldHeightMinDefValue, CultureInfo.CurrentCulture);
-            SizeFieldWidthMax = Convert.ToInt16(Resources.SizeFieldWidthMaxDefValue, CultureInfo.CurrentCulture);
-            SizeFieldHeightMax = Convert.ToInt16(Resources.SizeFieldHeightMaxDefValue, CultureInfo.CurrentCulture);
-            SizeFieldWidthValue = Convert.ToInt16(Resources.SizeFieldWidthValueDefValue, CultureInfo.CurrentCulture);
-            SizeFieldHeightValue = Convert.ToInt16(Resources.SizeFieldHeightValueDefValue, CultureInfo.CurrentCulture);
+            SizeFieldWidthMin = Convert.ToInt16(Resources.CellularAutomatonRecorder__SizeFieldWidthMinDefValue, CultureInfo.CurrentCulture);
+            SizeFieldHeightMin = Convert.ToInt16(Resources.CellularAutomatonRecorder__SizeFieldHeightMinDefValue, CultureInfo.CurrentCulture);
+            SizeFieldWidthMax = Convert.ToInt16(Resources.CellularAutomatonRecorder__SizeFieldWidthMaxDefValue, CultureInfo.CurrentCulture);
+            SizeFieldHeightMax = Convert.ToInt16(Resources.CellularAutomatonRecorder__SizeFieldHeightMaxDefValue, CultureInfo.CurrentCulture);
+            SizeFieldWidthValue = Convert.ToInt16(Resources.CellularAutomatonRecorder__SizeFieldWidthValueDefValue, CultureInfo.CurrentCulture);
+            SizeFieldHeightValue = Convert.ToInt16(Resources.CellularAutomatonRecorder__SizeFieldHeightValueDefValue, CultureInfo.CurrentCulture);
 
-            DencityMin = Convert.ToInt16(Resources.DencityMinDefValue, CultureInfo.CurrentCulture);
-            DencityMax = Convert.ToInt16(Resources.DencityMaxDefValue, CultureInfo.CurrentCulture);
-            DencityValue = Convert.ToInt16(Resources.DencityValueDefValue, CultureInfo.CurrentCulture);
+            DencityMin = Convert.ToInt16(Resources.CellularAutomatonRecorder__DencityMinDefValue, CultureInfo.CurrentCulture);
+            DencityMax = Convert.ToInt16(Resources.CellularAutomatonRecorder__DencityMaxDefValue, CultureInfo.CurrentCulture);
+            DencityValue = Convert.ToInt16(Resources.CellularAutomatonRecorder__DencityValueDefValue, CultureInfo.CurrentCulture);
 
             StatesCountMin = Core.CellularAutomaton.StatesNumberMin;
             StatesCountMax = Core.CellularAutomaton.StatesNumberMax;
             StatesCountValue = Core.CellularAutomaton.StatesNumberMin;
 
-            FileName = Resources.SaveFileDialogRecordDefFileName;
-            FileExtension = Resources.SaveFileDialogRecordExt;
-            FileFilter = Resources.SaveFileDialogRecordFilter;
+            FileName = Resources.CellularAutomatonRecorder__SaveFileDialogRecordDefFileName;
+            FileExtension = Resources.CellularAutomatonRecorder__SaveFileDialogRecordExt;
+            FileFilter = Resources.CellularAutomatonRecorder__SaveFileDialogRecordFilter;
         }
 
         /// <summary>
@@ -200,7 +200,7 @@ namespace CellularAutomaton.Components.Recorder
 
                 svfDlg.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
-                svfDlg.Title = Resources.SaveFileDialogRecordTitle;
+                svfDlg.Title = Resources.CellularAutomatonRecorder__SaveFileDialogRecordTitle;
                 svfDlg.FileName = FileName;
                 svfDlg.DefaultExt = FileExtension;
                 svfDlg.Filter = FileFilter;

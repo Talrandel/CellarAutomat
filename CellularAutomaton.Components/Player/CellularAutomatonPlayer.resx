@@ -133,7 +133,7 @@
     <value>3, 3</value>
   </data>
   <data name="pBMain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>375, 181</value>
+    <value>504, 181</value>
   </data>
   <data name="pBMain.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -150,31 +150,31 @@
   <data name="&gt;&gt;pBMain.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="playerController1.AutoSize" type="System.Boolean, mscorlib">
+  <data name="playerController.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="playerController1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="playerController.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="playerController1.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="playerController.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 190</value>
   </data>
-  <data name="playerController1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>375, 80</value>
+  <data name="playerController.Size" type="System.Drawing.Size, System.Drawing">
+    <value>504, 80</value>
   </data>
-  <data name="playerController1.TabIndex" type="System.Int32, mscorlib">
+  <data name="playerController.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;playerController1.Name" xml:space="preserve">
-    <value>playerController1</value>
+  <data name="&gt;&gt;playerController.Name" xml:space="preserve">
+    <value>playerController</value>
   </data>
-  <data name="&gt;&gt;playerController1.Type" xml:space="preserve">
-    <value>CellularAutomaton.Components.Player.PlayerController, CellularAutomaton.Components, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f5a8aba279c662bd</value>
+  <data name="&gt;&gt;playerController.Type" xml:space="preserve">
+    <value>CellularAutomaton.Components.Player.PlayerController, CellularAutomaton.Components, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;playerController1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;playerController.Parent" xml:space="preserve">
     <value>tLPMain</value>
   </data>
-  <data name="&gt;&gt;playerController1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;playerController.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="tLPMain.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -187,7 +187,7 @@
     <value>2</value>
   </data>
   <data name="tLPMain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>381, 273</value>
+    <value>510, 273</value>
   </data>
   <data name="tLPMain.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -205,7 +205,7 @@
     <value>0</value>
   </data>
   <data name="tLPMain.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="pBMain" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="playerController1" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="Percent,100,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="pBMain" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="playerController" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="Percent,100,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -217,7 +217,7 @@
     <value>True</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>381, 273</value>
+    <value>510, 273</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>CellularAutomatonPlayer</value>
