@@ -95,7 +95,7 @@ namespace CellularAutomaton.Components.Recorder
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [SRCategory("CatData")]
-        [SRDescription(nameof(FileExtension) + SRDescriptionAttribute.Suffix)]
+        [SRDescription(nameof(CellularAutomatonRecorder) + "__" + nameof(FileExtension) + SRDescriptionAttribute.Suffix)]
         public string FileExtension { get; set; }
 
         /// <summary>
@@ -104,7 +104,7 @@ namespace CellularAutomaton.Components.Recorder
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [SRCategory("CatData")]
-        [SRDescription(nameof(FileFilter) + SRDescriptionAttribute.Suffix)]
+        [SRDescription(nameof(CellularAutomatonRecorder) + "__" + nameof(FileFilter) + SRDescriptionAttribute.Suffix)]
         public string FileFilter { get; set; }
 
         /// <summary>
@@ -113,7 +113,7 @@ namespace CellularAutomaton.Components.Recorder
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [SRCategory("CatData")]
-        [SRDescription(nameof(FileName) + SRDescriptionAttribute.Suffix)]
+        [SRDescription(nameof(CellularAutomatonRecorder) + "__" + nameof(FileName) + SRDescriptionAttribute.Suffix)]
         public string FileName { get; set; }
 
         /// <summary>

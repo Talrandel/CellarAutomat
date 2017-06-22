@@ -29,7 +29,7 @@ namespace CellularAutomaton.Components.Player
         [EditorBrowsable(EditorBrowsableState.Always)]
         [RefreshProperties(RefreshProperties.Repaint)]
         [SRCategory("CatBehavior")]
-        [SRDescription(nameof(SizeMode) + SRDescriptionAttribute.Suffix)]
+        [SRDescription(nameof(CellularAutomatonPlayer) + "__" +nameof(SizeMode) + SRDescriptionAttribute.Suffix)]
         public PictureBoxSizeMode SizeMode
         {
             // TODO: Хорошо бы заменить а своё перечисление.
