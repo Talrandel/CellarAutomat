@@ -6,7 +6,7 @@
 // File          : PlayerController.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 20.06.2017 23:22
-// Last Revision : 22.06.2017 20:36
+// Last Revision : 23.06.2017 11:34
 // Description   : 
 #endregion
 
@@ -49,6 +49,11 @@ namespace CellularAutomaton.Components.Player
         /// Представляет метод обрабатывающий событие <see cref="IPlayer.PausePlay"/>.
         /// </summary>
         private Action _paused;
+
+        /// <summary>
+        /// Объект реализующий интерфейс <see cref="IPlayer"/> которым осуществляется управление.
+        /// </summary>
+        private IPlayer _player;
 
         /// <summary>
         /// Представляет метод обновляющий значение свойства <see cref="TrackBar.Value"/> элемента управления <see cref="tBFinder"/>.
@@ -121,26 +126,40 @@ namespace CellularAutomaton.Components.Player
         /// <summary>
         /// Возвращает или задаёт объект реализующий интерфейс <see cref="IPlayer"/> которым осуществляется управление.
         /// </summary>
+        /// <exception cref="ArgumentNullException">Параметр <paramref name="value"/> имеет значение <b>null</b>.</exception>
         [Browsable(false)]
-        public IPlayer Player { get; set; }
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public IPlayer Player
+        {
+            get { return _player; }
+            set
+            {
+                if (value == null)
+                    throw new ArgumentNullException(nameof(value));
+
+                _player = value;
+
+                _player.ChangeFrame += PlayerChangeFrame;
+                _player.StartPlay += PlayerStartPlay;
+                _player.PausePlay += PlayerPausePlay;
+                _player.StopPlay += PlayerStopPlay;
+
+                tBFinder.Maximum = _player.Record.Count;
+            }
+        }
         #endregion
 
         #region Constructors
         /// <summary>
         /// Инициализирует новый экземпляр класса <see cref="PlayerController"/>.
         /// </summary>
-        /// <remarks>
-        /// <b>Используется для поддержки конструктора.</b> В своих разработках используйте перегрузку <see cref="PlayerController(IPlayer)"/>.
-        /// </remarks>
         public PlayerController()
         {
             InitializeComponent();
             InitializeToolTip();
             InitializeAction();
-
-            FinderLargeChange = FinderLargeChangeDefValue;
-            FinderSmallChange = FinderSmallChangeDefValue;
-            FinderTickFrequency = FinderTickFrequencyDefValue;
+            InitializeProperties();
         }
 
         /// <summary>
@@ -153,13 +172,7 @@ namespace CellularAutomaton.Components.Player
             if (player == null)
                 throw new ArgumentNullException(nameof(player));
 
-            player.ChangeFrame += PlayerChangeFrame;
-            player.StartPlay += PlayerStartPlay;
-            player.PausePlay += PlayerPausePlay;
-            player.StopPlay += PlayerStopPlay;
             Player = player;
-
-            tBFinder.Maximum = player.Record.Count;
         }
         #endregion
 
@@ -192,7 +205,6 @@ namespace CellularAutomaton.Components.Player
         private void bStop_Click(object sender, EventArgs e)
         {
             Player.Stop();
-            tBFinder.Value = Player.CurrenFrame;
         }
 
         /// <summary>
@@ -221,7 +233,18 @@ namespace CellularAutomaton.Components.Player
                 bPlay.Enabled = true;
                 bPause.Enabled = false;
                 bStop.Enabled = false;
+                tBFinder.Value = Player.CurrenFrame;
             });
+        }
+
+        /// <summary>
+        /// Устанавливает значения свойств по умолчанию.
+        /// </summary>
+        private void InitializeProperties()
+        {
+            FinderLargeChange = FinderLargeChangeDefValue;
+            FinderSmallChange = FinderSmallChangeDefValue;
+            FinderTickFrequency = FinderTickFrequencyDefValue;
         }
 
         /// <summary>

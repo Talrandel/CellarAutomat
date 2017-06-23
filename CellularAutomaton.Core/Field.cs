@@ -6,7 +6,7 @@
 // File          : Field.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 16.06.2017 13:14
-// Last Revision : 20.06.2017 22:24
+// Last Revision : 23.06.2017 13:27
 // Description   : 
 #endregion
 
@@ -21,11 +21,11 @@ namespace CellularAutomaton.Core
     /// <summary>
     /// Представляет поле клеточного автомата.
     /// </summary>
-    public class Field : IEquatable<Field>, IField, IReadOnlyField
+    public class Field : IField, IReadOnlyField
     {
         #region Fields
         /// <summary>
-        /// Поле.
+        /// Внутреннее представление поля.
         /// </summary>
         [SuppressMessage("Microsoft.Performance", "CA1814:PreferJaggedArraysOverMultidimensional", MessageId = "Member")]
         private readonly int[,] _cells;
@@ -62,13 +62,13 @@ namespace CellularAutomaton.Core
         }
         #endregion
 
-        #region IEquatable<Field> Members
+        #region IField Members
         /// <summary>
         /// Проверяет равенство заданного поля текущему.
         /// </summary>
         /// <param name="other">Сравниваемое поле.</param>
         /// <returns>True - поля идентичны, иначе false.</returns>
-        public bool Equals(Field other)
+        public bool Equals(IField other)
         {
             if (other == null)
                 return false;
@@ -82,9 +82,7 @@ namespace CellularAutomaton.Core
 
             return true;
         }
-        #endregion
 
-        #region IField Members
         /// <summary>
         /// Возвращает или задаёт значение клетки расположенной по заданным координатам.
         /// </summary>
@@ -252,7 +250,7 @@ namespace CellularAutomaton.Core
         /// <exception cref="ArgumentNullException">Параметр <paramref name="other"/> имеет значение <b>null</b>.</exception>
         [SuppressMessage("Microsoft.Design", "CA1062:Проверить аргументы или открытые методы", MessageId = "0")]
         [SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference", MessageId = "0#")]
-        public void Copy(ref Field other)
+        public void Copy(ref IField other)
         {
             if (other == null)
                 throw new ArgumentNullException(nameof(other));

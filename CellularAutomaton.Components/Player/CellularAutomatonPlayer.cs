@@ -6,7 +6,7 @@
 // File          : CellularAutomatonPlayer.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 18.06.2017 15:54
-// Last Revision : 22.06.2017 23:14
+// Last Revision : 23.06.2017 12:04
 // Description   : 
 #endregion
 
@@ -21,11 +21,21 @@ namespace CellularAutomaton.Components.Player
     /// </summary>
     public partial class CellularAutomatonPlayer : UserControl
     {
+        #region Fields
+        /// <summary>
+        /// Объект реализующий интерфейс <see cref="IPlayer"/>, который осуществляет воспроизведение записи.
+        /// </summary>
+        private readonly Player _player;
+        #endregion
+
         #region Properties
         /// <summary>
         /// Возвращает объект реализующий интерфейс <see cref="IPlayer"/>, который осуществляет воспроизведение записи.
         /// </summary>
-        public IPlayer Player { get; }
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public IPlayer Player => _player;
 
         /// <summary>
         /// Возвращает или задаёт режим размещения изображения.
@@ -48,16 +58,16 @@ namespace CellularAutomaton.Components.Player
         /// <summary>
         /// Инициализирует новый экземпляр класса <see cref="CellularAutomatonPlayer"/>.
         /// </summary>
-        /// <remarks>
-        /// <b>Используется для поддержки конструктора.</b> В своих разработках используйте перегрузку <see cref="PlayerController(IPlayer)"/>.
-        /// </remarks>
         public CellularAutomatonPlayer()
         {
             InitializeComponent();
             InitializeProperties();
 
-            Player = new Player(pBMain.CreateGraphics(), new Rectangle(0, 0, pBMain.Size.Width, pBMain.Size.Height));
-            playerController.Player = Player;
+            _player = new Player(
+                pBMain.CreateGraphics(),
+                new Rectangle(0, 0, pBMain.Size.Width, pBMain.Size.Height));
+
+            playerController.Player = _player;
         }
         #endregion
 

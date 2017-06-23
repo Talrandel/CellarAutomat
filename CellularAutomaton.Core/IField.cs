@@ -6,19 +6,32 @@
 // File          : IField.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 20.06.2017 20:20
-// Last Revision : 20.06.2017 21:14
+// Last Revision : 23.06.2017 13:27
 // Description   : 
 #endregion
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace CellularAutomaton.Core
 {
     /// <summary>
     /// Определяет методы используемые для управления полями клеточных автоматов.
     /// </summary>
-    public interface IField
+    public interface IField : IEquatable<IField>
     {
+        #region Properties
+        /// <summary>
+        /// Возвращает высоту поля.
+        /// </summary>
+        int Height { get; }
+
+        /// <summary>
+        /// Возвращает ширину поля.
+        /// </summary>
+        int Width { get; }
+        #endregion
+
         #region Indexers
         /// <summary>
         /// Возвращает или задаёт значение клетки расположенной по заданным координатам.
@@ -26,13 +39,33 @@ namespace CellularAutomaton.Core
         /// <param name="x">Координата по оси X клетки.</param>
         /// <param name="y">Координата по оси Y клетки.</param>
         /// <returns>Значение клетки.</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1023:IndexersShouldNotBeMultidimensional")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "y")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "x")]
+        [SuppressMessage("Microsoft.Design", "CA1023:IndexersShouldNotBeMultidimensional")]
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "y")]
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "x")]
         int this[int x, int y] { get; set; }
         #endregion
 
         #region Members
+        /// <summary>
+        /// Осуществляет копирование текущего поля в заданное.
+        /// </summary>
+        /// <param name="other">Поле, в которое осуществляется копирование.</param>
+        /// <exception cref="ArgumentNullException">Параметр <paramref name="other"/> имеет значение <b>null</b>.</exception>
+        [SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference", MessageId = "0#")]
+        void Copy(ref IField other);
+
+        /// <summary>
+        /// Возвращает состояние клетки расположенной в заданном направлении относительно клетки заданной координатами.
+        /// </summary>
+        /// <param name="x">Координата по оси X клетки.</param>
+        /// <param name="y">Координата по оси Y клетки.</param>
+        /// <param name="direction">Направление движения.</param>
+        /// <returns>Состояние клетки.</returns>
+        /// <exception cref="ArgumentOutOfRangeException">Недопустимое значение параметра <paramref name="direction"/>.</exception>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "y")]
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "x")]
+        int GetCellAtDirection(int x, int y, Directions direction);
+
         /// <summary>
         /// Задаёт начальные состояния клеток на поле.
         /// </summary>

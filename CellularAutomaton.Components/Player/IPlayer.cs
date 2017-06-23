@@ -58,7 +58,7 @@ namespace CellularAutomaton.Components.Player
         /// <summary>
         /// Возвращает воспроизводимую запись.
         /// </summary>
-        Record Record { get; }
+        IReadOnlyRecord Record { get; }
 
         /// <summary>
         /// Возвращает состояние проигрывателя.

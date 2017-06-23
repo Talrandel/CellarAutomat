@@ -6,7 +6,7 @@
 // File          : Record.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 18.06.2017 12:18
-// Last Revision : 20.06.2017 20:11
+// Last Revision : 23.06.2017 15:18
 // Description   : 
 #endregion
 
@@ -23,13 +23,12 @@ using CellularAutomaton.Core.Properties;
 
 namespace CellularAutomaton.Core
 {
-    // TODO: Добавить реализацию интерфейса IReadOnlyRecord.
     /// <summary>
     /// Представляет запись функционирования клеточного автомата.
     /// </summary>
     [Serializable]
     [DebuggerDisplay("Count = {" + nameof(Count) + "}")]
-    public class Record : ICollection<Bitmap>, IReadOnlyCollection<Bitmap>
+    public class Record : IRecord, IReadOnlyRecord
     {
         #region Fields
         /// <summary>
@@ -49,7 +48,59 @@ namespace CellularAutomaton.Core
         private int _statesCount;
         #endregion
 
-        #region Properties
+        #region Constructors
+        /// <summary>
+        /// Инициализирует новый пустой экземпляр класса <see cref="Record"/>.
+        /// </summary>
+        public Record()
+        {
+            _rec = new LinkedList<Bitmap>();
+            _bf = new BinaryFormatter();
+        }
+
+        /// <summary>
+        /// Инициализирует новый экземпляр класса <see cref="Record"/> заданным именем правила поведения и количеством состояний клетки.
+        /// </summary>
+        /// <param name="nameRule">Название правила поведения клеточного автомата.</param>
+        /// <param name="statesCount">Количество состояний клетки клеточного автомата.</param>
+        public Record(string nameRule, int statesCount) : this()
+        {
+            Rule = nameRule;
+            StatesCount = statesCount;
+        }
+
+        /// <summary>
+        /// Инициализирует новый экземпляр класса <see cref="Record"/> данными экземпляра класса <see cref="CellularAutomaton"/>.
+        /// </summary>
+        /// <param name="ca">Экземпляр класса <see cref="CellularAutomaton"/> данными которого инициализируется этот экземпляр.</param>
+        /// <exception cref="ArgumentNullException">Параметр <paramref name="ca"/> имеет значение <b>null</b>.</exception>
+        public Record(CellularAutomaton ca) : this()
+        {
+            if (ca == null)
+                throw new ArgumentNullException(nameof(ca));
+
+            Rule = ca.Rule.Name;
+            StatesCount = ca.StatesCount;
+        }
+
+        /// <summary>
+        /// Инициализирует новый экземпляр класса <see cref="Record"/> данными объекта реализующего интерфейс <see cref="IRecord"/>.
+        /// </summary>
+        /// <param name="record">Экземпляр объекта реализующего интерфейс <see cref="IRecord"/> данными которого инициализируется этот экземпляр.</param>
+        /// <exception cref="ArgumentNullException">Параметр <paramref name="record"/> имеет значение <b>null</b>.</exception>
+        public Record(IRecord record) : this()
+        {
+            if (record == null)
+                throw new ArgumentNullException(nameof(record));
+
+            Rule = record.Rule;
+            StatesCount = record.StatesCount;
+            foreach (Bitmap bitmap in record)
+                _rec.AddLast(bitmap);
+        }
+        #endregion
+
+        #region IRecord Members
         /// <summary>
         /// Возвращает или задаёт название правила поведения клеточного автомата.
         /// </summary>
@@ -80,34 +131,7 @@ namespace CellularAutomaton.Core
                 _statesCount = value;
             }
         }
-        #endregion
 
-        #region Constructors
-        /// <summary>
-        /// Инициализирует новый пустой экземпляр класса <see cref="Record"/>.
-        /// </summary>
-        public Record()
-        {
-            _rec = new LinkedList<Bitmap>();
-            _bf = new BinaryFormatter();
-        }
-
-        /// <summary>
-        /// Инициализирует новый экземпляр класса <see cref="Record"/> данными экземпляра класса <see cref="CellularAutomaton"/>.
-        /// </summary>
-        /// <param name="ca">Экземпляр класса <see cref="CellularAutomaton"/> данными которого инициализируется этот экземпляр.</param>
-        /// <exception cref="ArgumentNullException">Параметр <paramref name="ca"/> имеет значение <b>null</b>.</exception>
-        public Record(CellularAutomaton ca) : this()
-        {
-            if (ca == null)
-                throw new ArgumentNullException(nameof(ca));
-
-            Rule = ca.Rule.Name;
-            StatesCount = ca.StatesCount;
-        }
-        #endregion
-
-        #region ICollection<Bitmap> Members
         /// <summary>
         /// Возвращает число кадров в записи.
         /// </summary>
@@ -123,8 +147,12 @@ namespace CellularAutomaton.Core
         /// Добавляет новый кадр в конец записи.
         /// </summary>
         /// <param name="item">Добавляемый кадр.</param>
+        /// <exception cref="ArgumentNullException">Параметр <paramref name="item"/> имеет значение <b>null</b>.</exception>
         public void Add(Bitmap item)
         {
+            if (item == null)
+                throw new ArgumentNullException(nameof(item));
+
             _rec.AddLast(item);
         }
 
@@ -214,9 +242,7 @@ namespace CellularAutomaton.Core
         {
             return _rec.GetEnumerator();
         }
-        #endregion
 
-        #region Members
         /// <summary>
         /// Сохраняет запись в указанный файл.
         /// </summary>
@@ -256,6 +282,15 @@ namespace CellularAutomaton.Core
                 Rule = loadedRec.Rule;
                 StatesCount = loadedRec.StatesCount;
             }
+        }
+
+        /// <summary>
+        /// Создает новый объект, являющийся копией текущего экземпляра.
+        /// </summary>
+        /// <returns>Новый объект, являющийся копией этого экземпляра.</returns>
+        public object Clone()
+        {
+            return new Record(this);
         }
         #endregion
     }

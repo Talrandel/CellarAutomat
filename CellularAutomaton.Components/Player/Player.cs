@@ -6,7 +6,7 @@
 // File          : Player.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 18.06.2017 12:46
-// Last Revision : 22.06.2017 17:55
+// Last Revision : 23.06.2017 11:58
 // Description   : 
 #endregion
 
@@ -14,6 +14,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
+using System.Globalization;
 using System.Timers;
 
 using CellularAutomaton.Components.Properties;
@@ -58,7 +59,12 @@ namespace CellularAutomaton.Components.Player
         private byte _framesPerMinute;
 
         /// <summary>
-        /// Перечислитель для записи
+        /// Воспроизводимая запись.
+        /// </summary>
+        private IRecord _record;
+
+        /// <summary>
+        /// Перечислитель записи.
         /// </summary>
         private IEnumerator<Bitmap> _recordEnumerator;
         #endregion
@@ -96,6 +102,8 @@ namespace CellularAutomaton.Components.Player
 
             _timer = new Timer();
             _timer.Elapsed += TimerElapsed;
+
+            FramesPerMinute = Convert.ToByte(Resources.Player__FramesPerMinuteDefValue, CultureInfo.CurrentCulture);
         }
         #endregion
 
@@ -119,7 +127,7 @@ namespace CellularAutomaton.Components.Player
         /// <summary>
         /// Возвращает воспроизводимую запись.
         /// </summary>
-        public Record Record { get; private set; }
+        public IReadOnlyRecord Record => (IReadOnlyRecord)_record;
 
         /// <summary>
         /// Возвращает состояние проигрывателя.
@@ -129,7 +137,10 @@ namespace CellularAutomaton.Components.Player
         /// <summary>
         /// Возвращает или задаёт число кадров в минуту.
         /// </summary>
-        /// <exception cref="ArgumentOutOfRangeException">Число кадров в минуту не может равной нулю величиной.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">Число кадров в минуту не может быть равной нулю величиной.</exception>
+        /// <remarks>
+        ///     <b>Значение по умолчанию - 2.</b>
+        /// </remarks>
         public byte FramesPerMinute
         {
             get { return _framesPerMinute; }
@@ -190,7 +201,7 @@ namespace CellularAutomaton.Components.Player
             if (rec == null)
                 throw new ArgumentNullException(nameof(rec));
 
-            Record = rec;
+            _record = rec;
             GetRecordEnumerator();
         }
 
@@ -202,7 +213,7 @@ namespace CellularAutomaton.Components.Player
         public void Load(string fileName)
         {
             Stop();
-            Record.Load(fileName);
+            _record.Load(fileName);
             GetRecordEnumerator();
         }
 

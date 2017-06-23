@@ -12,6 +12,7 @@
 
 using System;
 using System.ComponentModel;
+using System.Globalization;
 
 using CellularAutomaton.Components.Properties;
 
@@ -43,7 +44,7 @@ namespace CellularAutomaton.Components
         {
             return Resources.ResourceManager.GetString(value) 
                 ?? base.GetLocalizedString(value) 
-                ?? string.Format(Resources.SR_Attribute__NotFoundLocalizedString, value);
+                ?? string.Format(CultureInfo.CurrentCulture, Resources.SR_Attribute__NotFoundLocalizedString, value);
         }
         #endregion
     }

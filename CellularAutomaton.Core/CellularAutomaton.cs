@@ -41,12 +41,12 @@ namespace CellularAutomaton.Core
         /// <summary>
         /// Поле клеточного автомата на текущей итерации.
         /// </summary>
-        private readonly Field _currentField;
+        private readonly IField _currentField;
 
         /// <summary>
         /// Поле клеточного автомата на прошлой итерации.
         /// </summary>
-        private Field _pastField;
+        private IField _pastField;
 
         /// <summary>
         /// Количество состояний клетки клеточного автомата.
@@ -101,7 +101,7 @@ namespace CellularAutomaton.Core
         /// <summary>
         /// Возвращает текущее поле.
         /// </summary>
-        public IReadOnlyField CurrentField => _currentField;
+        public IReadOnlyField CurrentField => (IReadOnlyField)_currentField;
         #endregion
 
         #region Constructors
@@ -116,7 +116,7 @@ namespace CellularAutomaton.Core
         ///     <para>-- или --</para>
         ///     <para>Параметр <paramref name="createdField"/> имеет значение <b>null</b>.</para>
         /// </exception>
-        public CellularAutomaton(IRule rule, Field createdField, int statesCount)
+        public CellularAutomaton(IRule rule, IField createdField, int statesCount)
         {
             if (rule == null)
                 throw new ArgumentNullException(nameof(rule));
@@ -164,7 +164,7 @@ namespace CellularAutomaton.Core
         ///     <para>Параметр <paramref name="createdField"/> имеет значение <b>null</b>.</para>
         /// </exception>
         /// <exception cref="ArgumentOutOfRangeException">Величина плотности распределения живых клеток на поле должна лежать в интервале [0; 100].</exception>
-        public CellularAutomaton(IRule rule, Field createdField, int statesCount, byte density) :
+        public CellularAutomaton(IRule rule, IField createdField, int statesCount, byte density) :
             this(rule, createdField, statesCount)
         {
             SetDensityForField(density);

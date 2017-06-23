@@ -216,4 +216,7 @@
   <data name="CellularAutomatonRecorder__StatesCountValueDescr" xml:space="preserve">
     <value>Число состояний клетки клеточного автомата.</value>
   </data>
+  <data name="Player__FramesPerMinuteDefValue" xml:space="preserve">
+    <value>2</value>
+  </data>
 </root>

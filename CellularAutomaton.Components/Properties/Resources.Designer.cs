@@ -287,6 +287,15 @@ namespace CellularAutomaton.Components.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на 2.
+        /// </summary>
+        internal static string Player__FramesPerMinuteDefValue {
+            get {
+                return ResourceManager.GetString("Player__FramesPerMinuteDefValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Число на которое перемещается ползунок по шкале поиска при щелчке мыши по элементу управления или нажатию клавиш PAGE UP, PAGE DOWN..
         /// </summary>
         internal static string PlayerController__FinderLargeChangeDescr {

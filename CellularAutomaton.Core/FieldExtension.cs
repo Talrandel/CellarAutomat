@@ -6,7 +6,7 @@
 // File          : FieldExtension.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 20.06.2017 22:09
-// Last Revision : 20.06.2017 22:20
+// Last Revision : 23.06.2017 13:29
 // Description   : 
 #endregion
 
@@ -18,7 +18,7 @@ using System.Linq;
 namespace CellularAutomaton.Core
 {
     /// <summary>
-    /// Предоставляет набор методов расширения для работы с объектом реализующим интерфейс <see cref="IReadOnlyField"/>.
+    /// Предоставляет набор методов расширения для работы с объектом реализующим интерфейс <see cref="IField"/>.
     /// </summary>
     public static class FieldExtension
     {
@@ -26,14 +26,14 @@ namespace CellularAutomaton.Core
         /// <summary>
         /// Получить количество живых соседей в окрестности Мура для клетки с координатами.
         /// </summary>
-        /// <param name="source">Объек <see cref="IReadOnlyField"/> в котором производится вычисление характеристики.</param>
+        /// <param name="source">Объек <see cref="IField"/> в котором производится вычисление характеристики.</param>
         /// <param name="x">Координата по оси X клетки.</param>
         /// <param name="y">Координата по оси Y клетки.</param>
         /// <returns>Количество живых соседей для выбранной клетки.</returns>
         /// <exception cref="ArgumentNullException">Параметр <paramref name="source"/> имеет значение <b>null</b>.</exception>
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "y")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "x")]
-        public static int GetLiveNeighborCount(this IReadOnlyField source, int x, int y)
+        public static int GetLiveNeighborCount(this IField source, int x, int y)
         {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
@@ -74,14 +74,14 @@ namespace CellularAutomaton.Core
         /// <summary>
         /// Получить число живых соседей в окрестности Фон Неймана для клетки с координатами.
         /// </summary>
-        /// <param name="source">Объек <see cref="IReadOnlyField"/> в котором производится вычисление характеристики.</param>
+        /// <param name="source">Объек <see cref="IField"/> в котором производится вычисление характеристики.</param>
         /// <param name="x">Координата по оси X клетки.</param>
         /// <param name="y">Координата по оси Y клетки.</param>
         /// <returns>Количество живых соседей для выбранной клетки.</returns>
         /// <exception cref="ArgumentNullException">Параметр <paramref name="source"/> имеет значение <b>null</b>.</exception>
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "y")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "x")]
-        public static int GetLiveNeighborCountNeiman(this IReadOnlyField source, int x, int y)
+        public static int GetLiveNeighborCountNeiman(this IField source, int x, int y)
         {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
@@ -100,14 +100,14 @@ namespace CellularAutomaton.Core
         /// <summary>
         /// Получить список соседей в окрестности Мура для клетки с координатами.
         /// </summary>
-        /// <param name="source">Объек <see cref="IReadOnlyField"/> в котором производится вычисление характеристики.</param>
+        /// <param name="source">Объек <see cref="IField"/> в котором производится вычисление характеристики.</param>
         /// <param name="x">Координата по оси X клетки.</param>
         /// <param name="y">Координата по оси Y клетки.</param>
         /// <returns>Список существующих соседей для клетки с заданными координатами.</returns>
         /// <exception cref="ArgumentNullException">Параметр <paramref name="source"/> имеет значение <b>null</b>.</exception>
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "y")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "x")]
-        public static IEnumerable<int> GetNeighborsInAllDirections(this IReadOnlyField source, int x, int y)
+        public static IEnumerable<int> GetNeighborsInAllDirections(this IField source, int x, int y)
         {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
@@ -130,14 +130,14 @@ namespace CellularAutomaton.Core
         /// <summary>
         /// Получить список соседей в окрестности Фон Неймана для клетки с координатами.
         /// </summary>
-        /// <param name="source">Объек <see cref="IReadOnlyField"/> в котором производится вычисление характеристики.</param>
+        /// <param name="source">Объек <see cref="IField"/> в котором производится вычисление характеристики.</param>
         /// <param name="x">Координата по оси X клетки.</param>
         /// <param name="y">Координата по оси Y клетки.</param>
         /// <returns>Список существующих соседей для клетки с заданными координатами.</returns>
         /// <exception cref="ArgumentNullException">Параметр <paramref name="source"/> имеет значение <b>null</b>.</exception>
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "y")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "x")]
-        public static IEnumerable<int> GetNeighborsInFourDirections(this IReadOnlyField source, int x, int y)
+        public static IEnumerable<int> GetNeighborsInFourDirections(this IField source, int x, int y)
         {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
@@ -156,14 +156,14 @@ namespace CellularAutomaton.Core
         /// <summary>
         /// Получить список соседей в двух направлениях (на западе и востоке) для клетки с координатами.
         /// </summary>
-        /// <param name="source">Объек <see cref="IReadOnlyField"/> в котором производится вычисление характеристики.</param>
+        /// <param name="source">Объек <see cref="IField"/> в котором производится вычисление характеристики.</param>
         /// <param name="x">Координата по оси X клетки.</param>
         /// <param name="y">Координата по оси Y клетки.</param>
         /// <returns>Список существующих соседей для клетки с заданными координатами.</returns>
         /// <exception cref="ArgumentNullException">Параметр <paramref name="source"/> имеет значение <b>null</b>.</exception>
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "y")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "x")]
-        public static IEnumerable<int> GetNeighborsInTwoDirections(this IReadOnlyField source, int x, int y)
+        public static IEnumerable<int> GetNeighborsInTwoDirections(this IField source, int x, int y)
         {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
