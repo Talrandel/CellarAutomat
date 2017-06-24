@@ -219,4 +219,7 @@
   <data name="Player__FramesPerMinuteDefValue" xml:space="preserve">
     <value>2</value>
   </data>
+    <data name="Ex__Не_задана_запись_для_воспроизведения_" xml:space="preserve">
+    <value>Не задана запись для воспроизведения.</value>
+  </data>
 </root>

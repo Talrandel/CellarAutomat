@@ -6,7 +6,7 @@
 // File          : Field.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 16.06.2017 13:14
-// Last Revision : 23.06.2017 13:27
+// Last Revision : 24.06.2017 19:19
 // Description   : 
 #endregion
 
@@ -72,7 +72,7 @@ namespace CellularAutomaton.Core
         {
             if (other == null)
                 return false;
-
+            // TODO: Попробовать применить перечисление для ускорения вычислений.
             for (int i = 0; i < Height; i++)
             {
                 for (int j = 0; j < Width; j++)

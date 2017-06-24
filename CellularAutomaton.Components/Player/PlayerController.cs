@@ -6,7 +6,7 @@
 // File          : PlayerController.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 20.06.2017 23:22
-// Last Revision : 23.06.2017 11:34
+// Last Revision : 24.06.2017 23:12
 // Description   : 
 #endregion
 
@@ -127,6 +127,7 @@ namespace CellularAutomaton.Components.Player
         /// Возвращает или задаёт объект реализующий интерфейс <see cref="IPlayer"/> которым осуществляется управление.
         /// </summary>
         /// <exception cref="ArgumentNullException">Параметр <paramref name="value"/> имеет значение <b>null</b>.</exception>
+        /// <exception cref="ArgumentException">Не задана запись для воспроизведения.</exception>
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -137,6 +138,13 @@ namespace CellularAutomaton.Components.Player
             {
                 if (value == null)
                     throw new ArgumentNullException(nameof(value));
+
+                if (_player.Record == null)
+                {
+                    throw new ArgumentException(
+                        Resources.Ex__Не_задана_запись_для_воспроизведения_,
+                        nameof(value));
+                }
 
                 _player = value;
 
@@ -233,7 +241,7 @@ namespace CellularAutomaton.Components.Player
                 bPlay.Enabled = true;
                 bPause.Enabled = false;
                 bStop.Enabled = false;
-                tBFinder.Value = Player.CurrenFrame;
+                tBFinder.Value = Player==null?0:Player.CurrenFrame;
             });
         }
 

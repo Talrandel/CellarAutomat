@@ -278,6 +278,15 @@ namespace CellularAutomaton.Components.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Не задана запись для воспроизведения..
+        /// </summary>
+        internal static string Ex__Не_задана_запись_для_воспроизведения_ {
+            get {
+                return ResourceManager.GetString("Ex__Не_задана_запись_для_воспроизведения_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Число кадров в минуту не может быть равной нулю величиной..
         /// </summary>
         internal static string Ex__Число_кадров_в_минуту_не_может_быть_равной_нулю_величиной_ {

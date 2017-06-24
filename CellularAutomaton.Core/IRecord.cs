@@ -6,7 +6,7 @@
 // File          : IRecord.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 23.06.2017 10:56
-// Last Revision : 23.06.2017 11:04
+// Last Revision : 24.06.2017 18:54
 // Description   : 
 #endregion
 
@@ -23,15 +23,24 @@ namespace CellularAutomaton.Core
     {
         #region Properties
         /// <summary>
-        /// Возвращает или задаёт название правила поведения клеточного автомата.
+        /// Возвращает размеры поля клеточного автомата.
         /// </summary>
-        string Rule { get; set; }
+        Size FieldSize { get; }
 
         /// <summary>
-        /// Возвращает или задаёт количество состояний клетки клеточного автомата.
+        /// Возвращает число поколений.
         /// </summary>
-        /// <exception cref="ArgumentOutOfRangeException">Количество состояний клетки клеточного автомата должно лежать в интервале [<see cref="CellularAutomaton.StatesNumberMin"/>; <see cref="CellularAutomaton.StatesNumberMax"/>].</exception>
-        int StatesCount { get; set; }
+        int Generation { get; }
+
+        /// <summary>
+        /// Возвращает название правила поведения клеточного автомата.
+        /// </summary>
+        string Rule { get; }
+
+        /// <summary>
+        /// Возвращает количество состояний клетки клеточного автомата.
+        /// </summary>
+        int StatesCount { get; }
         #endregion
 
         #region Members

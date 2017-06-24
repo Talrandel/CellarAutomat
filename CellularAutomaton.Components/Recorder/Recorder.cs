@@ -6,12 +6,14 @@
 // File          : Recorder.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 18.06.2017 12:44
-// Last Revision : 18.06.2017 12:51
+// Last Revision : 24.06.2017 19:19
 // Description   : 
 #endregion
 
 using System;
 using System.Drawing;
+using System.Threading;
+using System.Threading.Tasks;
 
 using CellularAutomaton.Core;
 
@@ -20,7 +22,7 @@ namespace CellularAutomaton.Components.Recorder
     /// <summary>
     /// Представляет регистратор функционирования клеточного автомата.
     /// </summary>
-    public class Recorder : IRecorder
+    public class Recorder : IRecorder, IDisposable
     {
         #region Fields
         /// <summary>
@@ -34,9 +36,23 @@ namespace CellularAutomaton.Components.Recorder
         private readonly ConvertPointValueToColor _colorize;
 
         /// <summary>
+        /// </summary>
+        private readonly CancellationTokenSource _cts;
+
+        /// <summary>
         /// Запись функционирования клеточного автомата.
         /// </summary>
-        private readonly Record _record;
+        private readonly IRecord _record;
+
+        /// <summary>
+        /// True, если освобождение ресурсов осуществлялось, иначе false.
+        /// </summary>
+        private bool _disposed;
+
+        /// <summary>
+        /// Задача в которой выполняется расчёт поведения клеточного автомата.
+        /// </summary>
+        private Task _task;
         #endregion
 
         #region Constructors
@@ -53,8 +69,10 @@ namespace CellularAutomaton.Components.Recorder
             _ca = ca;
             _ca.GenerationChanged += CellularAutomatonGenerationChanged;
 
-            _record = new Record();
+            _record = new Record(ca);
             _colorize = PointValueToColor;
+
+            _cts = new CancellationTokenSource();
         }
 
         /// <summary>
@@ -76,7 +94,23 @@ namespace CellularAutomaton.Components.Recorder
         }
         #endregion
 
+        #region IDisposable Members
+        /// <summary>
+        /// Освобождает все ресурсы занимаемые <see cref="Recorder"/>.
+        /// </summary>
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+        #endregion
+
         #region IRecorder Members
+        /// <summary>
+        /// Возвращает число кадров в записи.
+        /// </summary>
+        public int RecordCount => _record.Count;
+
         /// <summary>
         /// Возвращает состояние регистратора.
         /// </summary>
@@ -85,16 +119,22 @@ namespace CellularAutomaton.Components.Recorder
         /// <summary>
         /// Начинает запись.
         /// </summary>
-        public void Record()
+        public async void Record()
         {
             if (State != StateRecorder.Record)
             {
+                Stop();
                 State = StateRecorder.Record;
-                _ca.Stop = false;
+
+                _record.Clear();
 
                 OnStartRecord();
-
-                _ca.Processing();
+                try
+                {
+                    _task = _ca.ProcessingAsync(_cts.Token);
+                    await _task;
+                }
+                catch (OperationCanceledException) { }
             }
         }
 
@@ -106,7 +146,13 @@ namespace CellularAutomaton.Components.Recorder
             if (State != StateRecorder.Stop)
             {
                 State = StateRecorder.Stop;
-                _ca.Stop = true;
+                _cts.Cancel();
+
+                try
+                {
+                    _task.Wait();
+                }
+                catch (AggregateException e) when (e.GetBaseException() is OperationCanceledException) { }
 
                 OnStopRecord();
             }
@@ -119,7 +165,7 @@ namespace CellularAutomaton.Components.Recorder
         /// <exception cref="ArgumentException">Имя файла не задано, пустое или состоит из одних пробелов.</exception>
         public void Save(string fileName)
         {
-            Stop();            
+            Stop();
             _record.Save(fileName);
         }
 
@@ -135,16 +181,6 @@ namespace CellularAutomaton.Components.Recorder
         #endregion
 
         #region Members
-        /// <summary>
-        /// Обработчик события <see cref="Core.CellularAutomaton.GenerationChanged"/>. Создаёт и сохраняет новый кадр в записи.
-        /// </summary>
-        /// <param name="sender">Источник события.</param>
-        /// <param name="e">Информация о событии.</param>
-        private void CellularAutomatonGenerationChanged(object sender, EventArgs e)
-        {
-            _record.Add(DrawingFromField(_ca.CurrentField));
-        }
-
         /// <summary>
         /// Создаёт рисунок из поля клеточного автомата.
         /// </summary>
@@ -177,6 +213,47 @@ namespace CellularAutomaton.Components.Recorder
                 bitmap?.Dispose();
                 throw;
             }
+        }
+
+        /// <summary>
+        /// Освобождает все ресурсы, используемые текущим объектом <see cref="Recorder"/>.
+        /// </summary>
+        /// <param name="disposing">True - освободить управляемые и неуправляемые ресурсы; false освободить только неуправляемые ресурсы.</param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (_disposed)
+                return;
+
+            if (disposing)
+                _cts?.Dispose();
+
+            _disposed = true;
+        }
+
+        /// <summary>
+        /// Вызывает событие <see cref="StartRecord"/>.
+        /// </summary>
+        protected virtual void OnStartRecord()
+        {
+            StartRecord?.Invoke(this, EventArgs.Empty);
+        }
+
+        /// <summary>
+        /// Вызывает событие <see cref="StopRecord"/>.
+        /// </summary>
+        protected virtual void OnStopRecord()
+        {
+            StopRecord?.Invoke(this, EventArgs.Empty);
+        }
+
+        /// <summary>
+        /// Обработчик события <see cref="Core.CellularAutomaton.GenerationChanged"/>. Создаёт и сохраняет новый кадр в записи.
+        /// </summary>
+        /// <param name="sender">Источник события.</param>
+        /// <param name="e">Информация о событии.</param>
+        private void CellularAutomatonGenerationChanged(object sender, EventArgs e)
+        {
+            _record.Add(DrawingFromField(_ca.CurrentField));
         }
 
         /// <summary>
@@ -223,22 +300,6 @@ namespace CellularAutomaton.Components.Recorder
                 default:
                     return Color.Black;
             }
-        }
-
-        /// <summary>
-        /// Вызывает событие <see cref="StartRecord"/>.
-        /// </summary>
-        protected virtual void OnStartRecord()
-        {
-            StartRecord?.Invoke(this, EventArgs.Empty);
-        }
-
-        /// <summary>
-        /// Вызывает событие <see cref="StopRecord"/>.
-        /// </summary>
-        protected virtual void OnStopRecord()
-        {
-            StopRecord?.Invoke(this, EventArgs.Empty);
         }
         #endregion
     }

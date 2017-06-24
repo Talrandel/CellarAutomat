@@ -13,9 +13,10 @@
         /// <param name="disposing">истинно, если управляемый ресурс должен быть удален; иначе ложно.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
+            if (disposing)
             {
-                components.Dispose();
+                _saveFileDialog?.Dispose();
+                components?.Dispose();
             }
             base.Dispose(disposing);
         }
@@ -28,6 +29,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CellularAutomatonRecorder));
             this.tLPMain = new System.Windows.Forms.TableLayoutPanel();
             this.gBSettings = new System.Windows.Forms.GroupBox();
@@ -47,6 +49,7 @@
             this.bRecord = new System.Windows.Forms.Button();
             this.bStop = new System.Windows.Forms.Button();
             this.bSave = new System.Windows.Forms.Button();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.tLPMain.SuspendLayout();
             this.gBSettings.SuspendLayout();
             this.tLPSettings.SuspendLayout();
@@ -221,5 +224,6 @@
         private System.Windows.Forms.Button bSave;
         private System.Windows.Forms.Button bStop;
         private System.Windows.Forms.Button bRecord;
+        private System.Windows.Forms.ToolTip toolTip;
     }
 }

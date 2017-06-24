@@ -30,14 +30,6 @@ namespace CellularAutomaton.Components.Player
 
         #region Properties
         /// <summary>
-        /// Возвращает объект реализующий интерфейс <see cref="IPlayer"/>, который осуществляет воспроизведение записи.
-        /// </summary>
-        [Browsable(false)]
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public IPlayer Player => _player;
-
-        /// <summary>
         /// Возвращает или задаёт режим размещения изображения.
         /// </summary>
         [DefaultValue(PictureBoxSizeMode.CenterImage)]

@@ -6,7 +6,7 @@
 // File          : CellularAutomatonRecorder.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 22.06.2017 23:25
-// Last Revision : 24.06.2017 9:29
+// Last Revision : 24.06.2017 15:27
 // Description   : 
 #endregion
 
@@ -17,6 +17,8 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using CellularAutomaton.Components.Properties;
@@ -78,24 +80,14 @@ namespace CellularAutomaton.Components.Recorder
 
         #region Fields
         /// <summary>
-        /// Представляет метод подготавливающий компонент к использованию.
-        /// </summary>
-        private Action _isEmpty;
-
-        /// <summary>
         /// Объект реализующий интерфейс <see cref="IRecorder"/>, которым осуществляется управление.
         /// </summary>
         private IRecorder _recorder;
 
         /// <summary>
-        /// Представляет метод обрабатывающий событие <see cref="IRecorder.StartRecord"/>.
+        /// Экземпляр класса <see cref="SaveFileDialog"/> - окно сохранения файла с записью.
         /// </summary>
-        private Action _started;
-
-        /// <summary>
-        /// Представляет метод обрабатывающий событие <see cref="IRecorder.StopRecord"/>.
-        /// </summary>
-        private Action _stoped;
+        private SaveFileDialog _saveFileDialog;
         #endregion
 
         #region Properties
@@ -567,7 +559,6 @@ namespace CellularAutomaton.Components.Recorder
         {
             InitializeComponent();
             InitializeProperties();
-            InitializeAction();
         }
         #endregion
 
@@ -580,7 +571,7 @@ namespace CellularAutomaton.Components.Recorder
         private void bRecord_Click(object sender, EventArgs e)
         {
             InitializeRecorder();
-            Invoke(new Action(() => _recorder.Record()));
+            _recorder.Record();
         }
 
         /// <summary>
@@ -590,7 +581,8 @@ namespace CellularAutomaton.Components.Recorder
         /// <param name="e">Сведения о событии.</param>
         private void bSave_Click(object sender, EventArgs e)
         {
-            _recorder.Save(SaveRecordDlg());
+            if (ShowSaveFileDialog())
+                _recorder.Save(FileName);
         }
 
         /// <summary>
@@ -610,50 +602,16 @@ namespace CellularAutomaton.Components.Recorder
         /// <param name="e">Сведения о событии.</param>
         private void CellularAutomatonRecorder_Load(object sender, EventArgs e)
         {
-            Invoke(_stoped);
-            Invoke(_isEmpty);
+            Stoped();
+            CheckIsStart();
         }
 
         /// <summary>
-        /// Инициализирует <see cref="Recorder"/> заданными параметрами.
+        /// Проверяет заданы ли все необходимые для функционирования свойства.
         /// </summary>
-        private void InitializeRecorder()
+        private void CheckIsStart()
         {
-            Core.CellularAutomaton ca = new Core.CellularAutomaton(
-                Rules[cBCellularAutomatonRules.SelectedIndex],
-                (int)nUDWidth.Value,
-                (int)nUDHeight.Value,
-                (int)nUDStatesCount.Value,
-                (byte)nUDDencity.Value);
-
-            _recorder = new Recorder(ca);
-
-            _recorder.StartRecord += Recorder_StartRecord;
-            _recorder.StopRecord += Recorder_StopRecord;
-        }
-
-        /// <summary>
-        /// Инициализирует делегаты обновления состояния пользовательского интерфейса.
-        /// </summary>
-        private void InitializeAction()
-        {
-            _started = (() =>
-            {
-                bRecord.Enabled = false;
-                bStop.Enabled = true;
-                bSave.Enabled = false;
-                gBSettings.Enabled = false;
-            });
-
-            _stoped = (() =>
-            {
-                bRecord.Enabled = true;
-                bStop.Enabled = false;
-                bSave.Enabled = true && (_recorder != null);
-                gBSettings.Enabled = true;
-            });
-
-            _isEmpty = (() => Enabled = 0 < Rules.Count);
+            Enabled = 0 < Rules.Count;
         }
 
         /// <summary>
@@ -686,6 +644,31 @@ namespace CellularAutomaton.Components.Recorder
         }
 
         /// <summary>
+        /// Инициализирует <see cref="Recorder"/> заданными параметрами.
+        /// </summary>
+        private void InitializeRecorder()
+        {
+            // TODO: Можно сделать лучше освобождение памяти после _recorder?
+            if (_recorder != null)
+            {
+                _recorder = null;
+                GC.Collect();
+            }
+
+            Core.CellularAutomaton ca = new Core.CellularAutomaton(
+                Rules[cBCellularAutomatonRules.SelectedIndex],
+                (int)nUDWidth.Value,
+                (int)nUDHeight.Value,
+                (int)nUDStatesCount.Value,
+                (byte)nUDDencity.Value);
+
+            _recorder = new Recorder(ca);
+
+            _recorder.StartRecord += Recorder_StartRecord;
+            _recorder.StopRecord += Recorder_StopRecord;
+        }
+
+        /// <summary>
         /// Обработчик события <see cref="ObservableCollection{T}.CollectionChanged"/>. Актуализирует состояние <see cref="cBCellularAutomatonRules"/>.
         /// </summary>
         /// <param name="sender">Источник события.</param>
@@ -700,8 +683,13 @@ namespace CellularAutomaton.Components.Recorder
                 cBCellularAutomatonRules.SelectedIndex = 0;
             }
             else
-                Invoke(_isEmpty);
+                CheckIsStart();
         }
+
+        /// <summary>
+        /// Предсталяет метод обрабатывающий действия возникающие при начале записи <see cref="Started"/>.
+        /// </summary>
+        private Action _started;
 
         /// <summary>
         /// Обработчик события <see cref="IRecorder.StartRecord"/>.
@@ -710,7 +698,7 @@ namespace CellularAutomaton.Components.Recorder
         /// <param name="e">Сведения о событии.</param>
         private void Recorder_StartRecord(object sender, EventArgs e)
         {
-            Invoke(_started);
+            Invoke(_started = _started ?? Started);
         }
 
         /// <summary>
@@ -720,37 +708,63 @@ namespace CellularAutomaton.Components.Recorder
         /// <param name="e">Сведения о событии.</param>
         private void Recorder_StopRecord(object sender, EventArgs e)
         {
-            Invoke(_stoped);
+            Stoped();
         }
 
         /// <summary>
         /// Отображает диалог выбора расположения для сохранения файла с записью работы клеточного автомата.
         /// </summary>
-        /// <returns>Имя файла, в который необходимо сохранить запись.</returns>
-        private string SaveRecordDlg()
+        /// <returns><b>True</b>, если пользователь нажал кнопку "Сохранить", иначе <b>false</b>.</returns>
+        private bool ShowSaveFileDialog()
         {
-            using (SaveFileDialog svfDlg = new SaveFileDialog())
+            if (_saveFileDialog == null)
             {
-                svfDlg.CheckFileExists = false;
-                svfDlg.CheckPathExists = true;
-                svfDlg.ValidateNames = true;
-
-                svfDlg.AddExtension = true;
-                svfDlg.DereferenceLinks = true;
-                svfDlg.RestoreDirectory = true;
-                svfDlg.OverwritePrompt = true;
-
-                svfDlg.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-
-                svfDlg.Title = Resources.CellularAutomatonRecorder__SaveFileDialogRecordTitle;
-                svfDlg.FileName = FileName;
-                svfDlg.DefaultExt = FileExtension;
-                svfDlg.Filter = FileFilter;
-
-                if (svfDlg.ShowDialog() == DialogResult.OK)
-                    FileName = svfDlg.FileName;
-                return FileName;
+                _saveFileDialog = new SaveFileDialog
+                {
+                    CheckFileExists = false,
+                    CheckPathExists = true,
+                    ValidateNames = true,
+                    AddExtension = true,
+                    DereferenceLinks = true,
+                    RestoreDirectory = true,
+                    OverwritePrompt = true,
+                    InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                    Title = Resources.CellularAutomatonRecorder__SaveFileDialogRecordTitle,
+                    FileName = FileName,
+                    DefaultExt = FileExtension,
+                    Filter = FileFilter
+                };
             }
+
+            if (_saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                FileName = _saveFileDialog.FileName;
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Обрабатывает действия возникающие при остановке записи.
+        /// </summary>
+        private void Started()
+        {
+            bRecord.Enabled = false;
+            bStop.Enabled = true;
+            bSave.Enabled = false;
+            gBSettings.Enabled = false;
+        }
+
+        /// <summary>
+        /// Обрабатывает действия возникающие при начале записи.
+        /// </summary>
+        private void Stoped()
+        {
+            bRecord.Enabled = true;
+            bStop.Enabled = false;
+            bSave.Enabled = _recorder != null;
+            gBSettings.Enabled = true;
         }
         #endregion
     }

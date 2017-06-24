@@ -6,7 +6,7 @@
 // File          : IReadOnlyRecord.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 22.06.2017 23:25
-// Last Revision : 23.06.2017 10:59
+// Last Revision : 24.06.2017 18:54
 // Description   : 
 #endregion
 
@@ -22,6 +22,16 @@ namespace CellularAutomaton.Core
     public interface IReadOnlyRecord : IReadOnlyCollection<Bitmap>, ICloneable
     {
         #region Properties
+        /// <summary>
+        /// Возвращает размеры поля клеточного автомата.
+        /// </summary>
+        Size FieldSize { get; }
+
+        /// <summary>
+        /// Возвращает число поколений.
+        /// </summary>
+        int Generation { get; }
+
         /// <summary>
         /// Возвращает название правила поведения клеточного автомата.
         /// </summary>

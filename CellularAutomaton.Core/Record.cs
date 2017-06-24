@@ -6,7 +6,7 @@
 // File          : Record.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 18.06.2017 12:18
-// Last Revision : 23.06.2017 15:18
+// Last Revision : 24.06.2017 21:14
 // Description   : 
 #endregion
 
@@ -41,11 +41,6 @@ namespace CellularAutomaton.Core
         /// Внутренняя структура содержащая данные записи.
         /// </summary>
         private LinkedList<Bitmap> _rec;
-
-        /// <summary>
-        /// Количество состояний клетки клеточного автомата.
-        /// </summary>
-        private int _statesCount;
         #endregion
 
         #region Constructors
@@ -63,10 +58,68 @@ namespace CellularAutomaton.Core
         /// </summary>
         /// <param name="nameRule">Название правила поведения клеточного автомата.</param>
         /// <param name="statesCount">Количество состояний клетки клеточного автомата.</param>
-        public Record(string nameRule, int statesCount) : this()
+        /// <param name="fieldSize">Размеры поля клеточного автомата.</param>
+        /// <param name="generation">Число поколений клеточного автомата.</param>
+        /// <exception cref="ArgumentOutOfRangeException">
+        ///     <para>Количество состояний клетки клеточного автомата должно лежать в интервале [<see cref="CellularAutomaton.StatesNumberMin"/>; <see cref="CellularAutomaton.StatesNumberMax"/>].</para>
+        ///     <para>-- или --</para>
+        ///     <para>Ширина поля <paramref name="fieldSize"/> меньше нуля.</para>
+        ///     <para>-- или --</para>
+        ///     <para>Высота поля <paramref name="fieldSize"/> меньше нуля.</para>
+        ///     <para>-- или --</para>
+        ///     <para>Значение параметра <paramref name="generation"/> меньше 0.</para>
+        /// </exception>
+        public Record(string nameRule, int statesCount, Size fieldSize, int generation) : this()
         {
+            if ((statesCount < CellularAutomaton.StatesNumberMin) ||
+                (CellularAutomaton.StatesNumberMax < statesCount))
+            {
+                throw new ArgumentOutOfRangeException(
+                    nameof(statesCount),
+                    statesCount,
+                    string.Format(
+                        CultureInfo.CurrentCulture,
+                        Resources.Ex__StatesCountOutOfRange,
+                        nameof(CellularAutomaton.StatesNumberMin),
+                        nameof(CellularAutomaton.StatesNumberMax)));
+            }
+
+            if (fieldSize.Width < 0)
+            {
+                throw new ArgumentOutOfRangeException(
+                    nameof(fieldSize),
+                    string.Format(
+                        CultureInfo.CurrentCulture,
+                        Resources.Ex__Ширина_поля__0__меньше_нуля_,
+                        nameof(fieldSize)));
+            }
+
+            if (fieldSize.Height < 0)
+            {
+                throw new ArgumentOutOfRangeException(
+                    nameof(fieldSize),
+                    string.Format(
+                        CultureInfo.CurrentCulture,
+                        Resources.Ex__Высота_поля__0__меньше_нуля_,
+                        nameof(fieldSize)));
+            }
+
+            if (generation < 0)
+            {
+                throw new ArgumentOutOfRangeException(
+                    nameof(generation),
+                    generation,
+                    string.Format(
+                        CultureInfo.CurrentCulture,
+                        Resources.Ex__Значение_параметра__0__меньше__1__,
+                        nameof(generation),
+                        0));
+            }
+
             Rule = nameRule;
             StatesCount = statesCount;
+            FieldSize = fieldSize;
+            Generation = generation;
         }
 
         /// <summary>
@@ -81,6 +134,8 @@ namespace CellularAutomaton.Core
 
             Rule = ca.Rule.Name;
             StatesCount = ca.StatesCount;
+            FieldSize = new Size(ca.CurrentField.Width, ca.CurrentField.Height);
+            Generation = ca.Generation;
         }
 
         /// <summary>
@@ -95,6 +150,9 @@ namespace CellularAutomaton.Core
 
             Rule = record.Rule;
             StatesCount = record.StatesCount;
+            FieldSize = record.FieldSize;
+            Generation = record.Generation;
+
             foreach (Bitmap bitmap in record)
                 _rec.AddLast(bitmap);
         }
@@ -102,35 +160,14 @@ namespace CellularAutomaton.Core
 
         #region IRecord Members
         /// <summary>
-        /// Возвращает или задаёт название правила поведения клеточного автомата.
+        /// Возвращает название правила поведения клеточного автомата.
         /// </summary>
-        public string Rule { get; set; }
+        public string Rule { get; private set; }
 
         /// <summary>
-        /// Возвращает или задаёт количество состояний клетки клеточного автомата.
+        /// Возвращает количество состояний клетки клеточного автомата.
         /// </summary>
-        /// <exception cref="ArgumentOutOfRangeException">Количество состояний клетки клеточного автомата должно лежать в интервале [<see cref="CellularAutomaton.StatesNumberMin"/>; <see cref="CellularAutomaton.StatesNumberMax"/>].</exception>
-        public int StatesCount
-        {
-            get { return _statesCount; }
-            set
-            {
-                if ((value < CellularAutomaton.StatesNumberMin) ||
-                    (CellularAutomaton.StatesNumberMax < value))
-                {
-                    throw new ArgumentOutOfRangeException(
-                        nameof(value),
-                        value,
-                        string.Format(
-                            CultureInfo.CurrentCulture,
-                            Resources.Ex__StatesCountOutOfRange,
-                            nameof(CellularAutomaton.StatesNumberMin),
-                            nameof(CellularAutomaton.StatesNumberMax)));
-                }
-
-                _statesCount = value;
-            }
-        }
+        public int StatesCount { get; private set; }
 
         /// <summary>
         /// Возвращает число кадров в записи.
@@ -142,6 +179,16 @@ namespace CellularAutomaton.Core
         /// </summary>
         /// <return></return>
         public bool IsReadOnly => ((ICollection<Bitmap>)_rec).IsReadOnly;
+
+        /// <summary>
+        /// Возвращает размеры поля клеточного автомата.
+        /// </summary>
+        public Size FieldSize { get; private set; }
+
+        /// <summary>
+        /// Возвращает число поколений.
+        /// </summary>
+        public int Generation { get; private set; }
 
         /// <summary>
         /// Добавляет новый кадр в конец записи.

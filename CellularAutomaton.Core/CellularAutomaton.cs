@@ -6,12 +6,14 @@
 // File          : CellularAutomaton.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 17.06.2017 17:27
-// Last Revision : 24.06.2017 9:20
+// Last Revision : 24.06.2017 22:32
 // Description   : 
 #endregion
 
 using System;
 using System.Globalization;
+using System.Threading;
+using System.Threading.Tasks;
 
 using CellularAutomaton.Core.Properties;
 using CellularAutomaton.Core.Rules;
@@ -51,6 +53,26 @@ namespace CellularAutomaton.Core
         private readonly IField _currentField;
 
         /// <summary>
+        /// Представляет, вызываемый при отправке сообщения в контекст синхронизации <see cref="_synchronizationContext"/>.
+        /// </summary>
+        private readonly SendOrPostCallback _invokeHandlers;
+
+        /// <summary>
+        /// Объект синхронизации.
+        /// </summary>
+        private readonly object _lockObj = new object();
+
+        /// <summary>
+        /// Контекст синхронизации.
+        /// </summary>
+        private readonly SynchronizationContext _synchronizationContext;
+
+        /// <summary>
+        /// Токен отмены.
+        /// </summary>
+        private CancellationToken _ct;
+
+        /// <summary>
         /// Поле клеточного автомата на прошлой итерации.
         /// </summary>
         private IField _pastField;
@@ -59,6 +81,8 @@ namespace CellularAutomaton.Core
         /// Количество состояний клетки клеточного автомата.
         /// </summary>
         private int _statesCount;
+
+        private bool _stop;
         #endregion
 
         #region Properties
@@ -108,7 +132,15 @@ namespace CellularAutomaton.Core
         /// <summary>
         /// Возвращает или задаёт флаг остановки работы клеточного автомата.
         /// </summary>
-        public bool Stop { get; set; }
+        public bool Stop
+        {
+            get { return _stop; }
+            set
+            {
+                lock (_lockObj)
+                    _stop = value;
+            }
+        }
         #endregion
 
         #region Constructors
@@ -122,7 +154,7 @@ namespace CellularAutomaton.Core
         ///     <para>-- или --</para>
         ///     <para>Параметр <paramref name="createdField"/> имеет значение <b>null</b>.</para>
         /// </exception>
-        public CellularAutomaton(IRule rule, IField createdField) : 
+        public CellularAutomaton(IRule rule, IField createdField) :
             this(rule, createdField, StatesNumberMin) { }
 
         /// <summary>
@@ -151,6 +183,9 @@ namespace CellularAutomaton.Core
             StatesCount = statesCount;
 
             Stop = false;
+
+            _synchronizationContext = new SynchronizationContext();
+            _invokeHandlers = state => OnGenerationChanged();
 
             Initialize();
         }
@@ -224,24 +259,33 @@ namespace CellularAutomaton.Core
         /// </summary>
         public void Processing()
         {
-            // TODO: Добавить асинхронный метод.
+            Stop = false;
 
-            for (;;)
+            while (true)
             {
+                // TODO: Заменить на InnerProcessingAsync(), убрать Stop заменив на CancellationToken.
                 NextGeneration();
                 OnGenerationChanged();
 
-                if (_pastField.Equals(CurrentField))
+                if (Stop || _pastField.Equals(CurrentField))
                 {
                     Stop = true;
                     break;
                 }
 
-                if (Stop)
-                    break;
-
                 CurrentField.Copy(ref _pastField);
             }
+        }
+
+        /// <summary>
+        /// Осуществляет асинхронный расчёт поведения клеточного автомата.
+        /// </summary>
+        /// <param name="ct">Токен отмены, который должен использоваться для отмены работы.</param>
+        /// <exception cref="OperationCanceledException">Операция вычисления отменена.</exception>
+        public Task ProcessingAsync(CancellationToken ct)
+        {
+            _ct = ct;
+            return Task.Run(new Action(InnerProcessingAsync), ct);
         }
 
         /// <summary>
@@ -263,6 +307,33 @@ namespace CellularAutomaton.Core
         protected virtual void OnGenerationChanged()
         {
             GenerationChanged?.Invoke(this, EventArgs.Empty);
+        }
+
+        /// <summary>
+        /// <b>Внутренний метод.</b> Осуществляет вычисления при асинхронном расчёте поведения клеточного автомата.
+        /// </summary>
+        /// <exception cref="OperationCanceledException">Операция вычисления отменена.</exception>
+        private void InnerProcessingAsync()
+        {
+            Stop = false;
+
+            while (true)
+            {
+                NextGeneration();
+
+                // TODO: Проверить работоспособность Async варианта и перейти на него.
+                //OnGenerationChanged();
+                _synchronizationContext.Post(_invokeHandlers, null);
+
+                if (_ct.IsCancellationRequested || _pastField.Equals(CurrentField))
+                {
+                    Stop = true;
+                    _ct.ThrowIfCancellationRequested();
+                    break;
+                }
+
+                CurrentField.Copy(ref _pastField);
+            }
         }
 
         /// <summary>
