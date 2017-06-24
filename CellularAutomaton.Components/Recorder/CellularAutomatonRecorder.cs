@@ -6,7 +6,7 @@
 // File          : CellularAutomatonRecorder.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 22.06.2017 23:25
-// Last Revision : 23.06.2017 12:24
+// Last Revision : 24.06.2017 9:29
 // Description   : 
 #endregion
 
@@ -78,7 +78,12 @@ namespace CellularAutomaton.Components.Recorder
 
         #region Fields
         /// <summary>
-        /// Объект реализующий интерфейс <see cref="IRecorder"/> которым осуществляется управление.
+        /// Представляет метод подготавливающий компонент к использованию.
+        /// </summary>
+        private Action _isEmpty;
+
+        /// <summary>
+        /// Объект реализующий интерфейс <see cref="IRecorder"/>, которым осуществляется управление.
         /// </summary>
         private IRecorder _recorder;
 
@@ -226,27 +231,6 @@ namespace CellularAutomaton.Components.Recorder
         [SRCategory("Data")]
         [SRDescription(nameof(CellularAutomatonRecorder) + "__" + nameof(FileName) + SRDescriptionAttribute.Suffix)]
         public string FileName { get; set; }
-
-        /// <summary>
-        /// Возвращает или задаёт объект реализующий интерфейс <see cref="IRecorder"/> которым осуществляется управление.
-        /// </summary>
-        /// <exception cref="ArgumentNullException">Параметр <paramref name="value"/> имеет значение <b>null</b>.</exception>
-        [Browsable(false)]
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public IRecorder Recorder
-        {
-            get { return _recorder; }
-            set
-            {
-                if (value == null)
-                    throw new ArgumentNullException(nameof(value));
-
-                _recorder = value;
-                _recorder.StartRecord += Recorder_StartRecord;
-                _recorder.StopRecord += Recorder_StopRecord;
-            }
-        }
 
         /// <summary>
         /// Возвращает коллекцию правил построения клеточных автоматов.
@@ -585,19 +569,6 @@ namespace CellularAutomaton.Components.Recorder
             InitializeProperties();
             InitializeAction();
         }
-
-        /// <summary>
-        /// Инициализирует новый экземпляр класса <see cref="CellularAutomatonRecorder"/> с заданной реализацией <see cref="IRecorder"/>.
-        /// </summary>
-        /// <param name="recorder">Реализация регистратора.</param>
-        /// <exception cref="ArgumentNullException">Параметр <paramref name="recorder"/> имеет значение <b>null</b>.</exception>
-        public CellularAutomatonRecorder(IRecorder recorder) : this()
-        {
-            if (recorder == null)
-                throw new ArgumentNullException(nameof(recorder));
-
-            _recorder = recorder;
-        }
         #endregion
 
         #region Members
@@ -608,7 +579,8 @@ namespace CellularAutomaton.Components.Recorder
         /// <param name="e">Сведения о событии.</param>
         private void bRecord_Click(object sender, EventArgs e)
         {
-            Recorder.Record();
+            InitializeRecorder();
+            Invoke(new Action(() => _recorder.Record()));
         }
 
         /// <summary>
@@ -618,7 +590,7 @@ namespace CellularAutomaton.Components.Recorder
         /// <param name="e">Сведения о событии.</param>
         private void bSave_Click(object sender, EventArgs e)
         {
-            Recorder.Save(SaveRecordDlg());
+            _recorder.Save(SaveRecordDlg());
         }
 
         /// <summary>
@@ -628,7 +600,36 @@ namespace CellularAutomaton.Components.Recorder
         /// <param name="e">Сведения о событии.</param>
         private void bStop_Click(object sender, EventArgs e)
         {
-            Recorder.Stop();
+            _recorder.Stop();
+        }
+
+        /// <summary>
+        /// Обработчик события <see cref="UserControl.Load"/>. Приводит компонент в начальное состояние.
+        /// </summary>
+        /// <param name="sender">Источник события.</param>
+        /// <param name="e">Сведения о событии.</param>
+        private void CellularAutomatonRecorder_Load(object sender, EventArgs e)
+        {
+            Invoke(_stoped);
+            Invoke(_isEmpty);
+        }
+
+        /// <summary>
+        /// Инициализирует <see cref="Recorder"/> заданными параметрами.
+        /// </summary>
+        private void InitializeRecorder()
+        {
+            Core.CellularAutomaton ca = new Core.CellularAutomaton(
+                Rules[cBCellularAutomatonRules.SelectedIndex],
+                (int)nUDWidth.Value,
+                (int)nUDHeight.Value,
+                (int)nUDStatesCount.Value,
+                (byte)nUDDencity.Value);
+
+            _recorder = new Recorder(ca);
+
+            _recorder.StartRecord += Recorder_StartRecord;
+            _recorder.StopRecord += Recorder_StopRecord;
         }
 
         /// <summary>
@@ -641,14 +642,18 @@ namespace CellularAutomaton.Components.Recorder
                 bRecord.Enabled = false;
                 bStop.Enabled = true;
                 bSave.Enabled = false;
+                gBSettings.Enabled = false;
             });
 
             _stoped = (() =>
             {
                 bRecord.Enabled = true;
                 bStop.Enabled = false;
-                bSave.Enabled = true;
+                bSave.Enabled = true && (_recorder != null);
+                gBSettings.Enabled = true;
             });
+
+            _isEmpty = (() => Enabled = 0 < Rules.Count);
         }
 
         /// <summary>
@@ -688,7 +693,14 @@ namespace CellularAutomaton.Components.Recorder
         private void InnerRules_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             cBCellularAutomatonRules.Items.Clear();
-            cBCellularAutomatonRules.Items.AddRange(Rules.Select(item => item.Name).ToArray<object>());
+
+            if (0 < Rules.Count)
+            {
+                cBCellularAutomatonRules.Items.AddRange(Rules.Select(item => item.Name).ToArray<object>());
+                cBCellularAutomatonRules.SelectedIndex = 0;
+            }
+            else
+                Invoke(_isEmpty);
         }
 
         /// <summary>

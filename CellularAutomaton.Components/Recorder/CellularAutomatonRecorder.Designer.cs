@@ -182,6 +182,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tLPMain);
             this.Name = "CellularAutomatonRecorder";
+            this.Load += new System.EventHandler(this.CellularAutomatonRecorder_Load);
             this.tLPMain.ResumeLayout(false);
             this.tLPMain.PerformLayout();
             this.gBSettings.ResumeLayout(false);

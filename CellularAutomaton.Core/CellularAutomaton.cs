@@ -6,7 +6,7 @@
 // File          : CellularAutomaton.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 17.06.2017 17:27
-// Last Revision : 20.06.2017 21:02
+// Last Revision : 24.06.2017 9:20
 // Description   : 
 #endregion
 
@@ -23,6 +23,13 @@ namespace CellularAutomaton.Core
     /// </summary>
     public class CellularAutomaton
     {
+        #region Events
+        /// <summary>
+        /// Событие смены поколения.
+        /// </summary>
+        public event EventHandler GenerationChanged;
+        #endregion
+
         #region Static Fields and Constants
         /// <summary>
         /// Максимальное количество состояний клетоки.
@@ -56,15 +63,20 @@ namespace CellularAutomaton.Core
 
         #region Properties
         /// <summary>
-        /// Правило работы клеточного автомата.
+        /// Возвращает текущее поле.
+        /// </summary>
+        public IReadOnlyField CurrentField => (IReadOnlyField)_currentField;
+
+        /// <summary>
+        /// Возвращает номер поколения.
+        /// </summary>
+        public int Generation { get; private set; }
+
+        /// <summary>
+        /// Возвращает правило работы клеточного автомата.
         /// </summary>
         // ReSharper disable once MemberCanBePrivate.Global
         public IRule Rule { get; }
-
-        /// <summary>
-        /// Возвращает или задаёт флаг остановки работы клеточного автомата.
-        /// </summary>
-        public bool Stop { get; set; }
 
         /// <summary>
         /// Возвращает или задаёт количество состояний клетки клеточного автомата.
@@ -94,17 +106,25 @@ namespace CellularAutomaton.Core
         }
 
         /// <summary>
-        /// Возвращает номер поколения.
+        /// Возвращает или задаёт флаг остановки работы клеточного автомата.
         /// </summary>
-        public int Generation { get; private set; }
-
-        /// <summary>
-        /// Возвращает текущее поле.
-        /// </summary>
-        public IReadOnlyField CurrentField => (IReadOnlyField)_currentField;
+        public bool Stop { get; set; }
         #endregion
 
         #region Constructors
+        /// <summary>
+        /// Инициализирует новый экземпляр класса <see cref="CellularAutomaton"/> заданными: правилом работы, полем и минимальным количеством состояний клетки <see cref="StatesNumberMin"/>.
+        /// </summary>
+        /// <param name="rule">Правило работы клеточного автомата.</param>
+        /// <param name="createdField">Поле клеточного автомата.</param>
+        /// <exception cref="ArgumentNullException">
+        ///     <para>Параметр <paramref name="rule"/> имеет значение <b>null</b>.</para>
+        ///     <para>-- или --</para>
+        ///     <para>Параметр <paramref name="createdField"/> имеет значение <b>null</b>.</para>
+        /// </exception>
+        public CellularAutomaton(IRule rule, IField createdField) : 
+            this(rule, createdField, StatesNumberMin) { }
+
         /// <summary>
         /// Инициализирует новый экземпляр класса <see cref="CellularAutomaton"/> заданными: правилом работы, полем и количеством состояний клетки.
         /// </summary>
@@ -191,16 +211,12 @@ namespace CellularAutomaton.Core
 
         #region Members
         /// <summary>
-        /// Событие смены поколения.
+        /// Инициализирует новый клеточный автомат.
         /// </summary>
-        public event EventHandler GenerationChanged;
-
-        /// <summary>
-        /// Вызывает событие <see cref="GenerationChanged"/>.
-        /// </summary>
-        protected virtual void OnGenerationChanged()
+        public void Initialize()
         {
-            GenerationChanged?.Invoke(this, EventArgs.Empty);
+            _pastField.SetStartValues(StatesCount, 0);
+            Generation = 0;
         }
 
         /// <summary>
@@ -242,6 +258,14 @@ namespace CellularAutomaton.Core
         }
 
         /// <summary>
+        /// Вызывает событие <see cref="GenerationChanged"/>.
+        /// </summary>
+        protected virtual void OnGenerationChanged()
+        {
+            GenerationChanged?.Invoke(this, EventArgs.Empty);
+        }
+
+        /// <summary>
         /// Осуществляет переход к следующему поколению.
         /// </summary>
         private void NextGeneration()
@@ -258,15 +282,6 @@ namespace CellularAutomaton.Core
             for (int i = 0; i < _pastField.Height; i++)
                 for (int j = 0; j < _pastField.Width; j++)
                     _currentField[i, j] = Rule.TransformCell(_pastField, i, j, StatesCount);
-        }
-
-        /// <summary>
-        /// Инициализирует новый клеточный автомат.
-        /// </summary>
-        public void Initialize()
-        {
-            _pastField.SetStartValues(StatesCount, 0);
-            Generation = 0;
         }
         #endregion
     }
