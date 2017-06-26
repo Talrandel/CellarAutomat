@@ -147,8 +147,7 @@ namespace CellularAutomaton.Components.Recorder
             get { return Convert.ToByte(nUDDencity.Minimum); }
             set
             {
-                if (value < 0 ||
-                    DencityMax < value)
+                if (DencityMax < value)
                 {
                     throw new ArgumentOutOfRangeException(
                         nameof(value),
