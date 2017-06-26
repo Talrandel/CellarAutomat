@@ -93,7 +93,7 @@ namespace CellularAutomaton.Components.Player
         /// Осуществляет переход к указаннному кадру записи.
         /// </summary>
         /// <param name="frame">Номер кадра.</param>
-        void Rewind(short frame);
+        void Rewind(int frame);
 
         /// <summary>
         /// Останавливает воспроизведение и переходит в начало записи.

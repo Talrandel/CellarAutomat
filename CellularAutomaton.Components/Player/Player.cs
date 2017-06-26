@@ -247,7 +247,7 @@ namespace CellularAutomaton.Components.Player
         ///     <para>-- или --</para>
         ///     <para>Выполнена попытка перехода к кадру номер которого больше, чем кадров в текущей записи.</para>
         /// </exception>
-        public void Rewind(short frame)
+        public void Rewind(int frame)
         {
             bool isFastRewind = (frame - CurrenFrame == 1) && (frame <= _record.Count); // Возможна быстрая перемотка?
             bool isNotRewind = (frame == CurrenFrame); // Нет необходимости в перемотке?

@@ -6,7 +6,7 @@
 // File          : CellularAutomatonPlayer.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 18.06.2017 15:54
-// Last Revision : 23.06.2017 12:04
+// Last Revision : 26.06.2017 23:04
 // Description   : 
 #endregion
 
@@ -32,17 +32,16 @@ namespace CellularAutomaton.Components.Player
         /// <summary>
         /// Возвращает или задаёт режим размещения изображения.
         /// </summary>
-        [DefaultValue(PictureBoxSizeMode.CenterImage)]
+        [DefaultValue(PictureSizeMode.CenterImage)]
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [RefreshProperties(RefreshProperties.Repaint)]
         [SRCategory("Behavior")]
         [SRDescription(nameof(CellularAutomatonPlayer) + "__" + nameof(SizeMode) + SRDescriptionAttribute.Suffix)]
-        public PictureBoxSizeMode SizeMode
+        public PictureSizeMode SizeMode
         {
-            // TODO: Хорошо бы заменить на своё перечисление.
-            get { return pBMain.SizeMode; }
-            set { pBMain.SizeMode = value; }
+            get { return (PictureSizeMode)pBMain.SizeMode; }
+            set { pBMain.SizeMode = (PictureBoxSizeMode)value; }
         }
         #endregion
 
@@ -71,7 +70,7 @@ namespace CellularAutomaton.Components.Player
         {
             // TODO: Вынести в ресурсы.
 
-            SizeMode = PictureBoxSizeMode.CenterImage;
+            SizeMode = PictureSizeMode.CenterImage;
         }
         #endregion
     }

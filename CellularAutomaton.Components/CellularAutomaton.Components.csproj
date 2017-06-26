@@ -53,6 +53,7 @@
       <DependentUpon>CellularAutomatonPlayer.cs</DependentUpon>
     </Compile>
     <Compile Include="Player\IPlayer.cs" />
+    <Compile Include="Player\PictureSizeMode.cs" />
     <Compile Include="Player\Player.cs" />
     <Compile Include="Player\PlayerController.cs">
       <SubType>UserControl</SubType>
