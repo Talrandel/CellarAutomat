@@ -120,6 +120,7 @@ namespace CellularAutomaton.Core
             }
             else
             {
+                // TODO: проверить корректность функционирования плотности поля?
                 for (int i = 0; i < Height; i++)
                 {
                     for (int j = 0; j < Width; j++)

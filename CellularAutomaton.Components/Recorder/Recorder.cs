@@ -195,6 +195,7 @@ namespace CellularAutomaton.Components.Recorder
             int width = field.Width;
             int height = field.Height;
 
+            // TODO: добавить блокировку изображения - отдельный проект LockImage
             Bitmap bitmap = null;
             try
             {
@@ -263,6 +264,7 @@ namespace CellularAutomaton.Components.Recorder
         /// <returns>Цвет соответствующий состоянию клетки.</returns>
         private static Color PointValueToColor(int value)
         {
+            // TODO: заменить на функцию задания цвета?
             switch (value)
             {
                 case 0:

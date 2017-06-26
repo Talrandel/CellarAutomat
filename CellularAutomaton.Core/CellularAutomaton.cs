@@ -82,6 +82,9 @@ namespace CellularAutomaton.Core
         /// </summary>
         private int _statesCount;
 
+        /// <summary>
+        /// TODO: выкинуть _stop
+        /// </summary>
         private bool _stop;
         #endregion
 
