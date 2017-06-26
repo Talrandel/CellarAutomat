@@ -91,6 +91,15 @@ namespace CellularAutomaton.Components.Recorder
         #endregion
 
         #region Properties
+
+        /// <summary>
+        /// Возвращает количество кадров в записи.
+        /// </summary>
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public int FramesCount => _recorder.RecordCount; 
+
         /// <summary>
         /// Возвращает или задаёт максимальную плотность распределения клеток на поле клеточного автомата.
         /// </summary>
