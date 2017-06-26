@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using CellularAutomaton.Core.Rules;
+
 namespace CellarAutomatForm
 {
     public partial class MainForm : Form
@@ -15,6 +17,8 @@ namespace CellarAutomatForm
         public MainForm()
         {
             InitializeComponent();
+
+            cellularAutomatonRecorder1.Rules.Add(new Life());
         }
     }
 }

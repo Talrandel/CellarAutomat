@@ -170,18 +170,18 @@ namespace CellularAutomaton.Components.Player
             InitializeProperties();
         }
 
-        /// <summary>
-        /// Инициализирует новый экземпляр класса <see cref="PlayerController"/> заданным объектом реализующим интерфейс <see cref="IPlayer"/>.
-        /// </summary>
-        /// <param name="player">Экземпляр объекта реализующего интерфейс <see cref="IPlayer"/>.</param>
-        /// <exception cref="ArgumentNullException">Параметр <paramref name="player"/> имеет значение <b>null</b>.</exception>
-        public PlayerController(IPlayer player) : this()
-        {
-            if (player == null)
-                throw new ArgumentNullException(nameof(player));
+        ///// <summary>
+        ///// Инициализирует новый экземпляр класса <see cref="PlayerController"/> заданным объектом реализующим интерфейс <see cref="IPlayer"/>.
+        ///// </summary>
+        ///// <param name="player">Экземпляр объекта реализующего интерфейс <see cref="IPlayer"/>.</param>
+        ///// <exception cref="ArgumentNullException">Параметр <paramref name="player"/> имеет значение <b>null</b>.</exception>
+        //public PlayerController(IPlayer player) : this()
+        //{
+        //    if (player == null)
+        //        throw new ArgumentNullException(nameof(player));
 
-            Player = player;
-        }
+        //    Player = player;
+        //}
         #endregion
 
         #region Members
@@ -241,7 +241,7 @@ namespace CellularAutomaton.Components.Player
                 bPlay.Enabled = true;
                 bPause.Enabled = false;
                 bStop.Enabled = false;
-                tBFinder.Value = Player==null?0:Player.CurrenFrame;
+                tBFinder.Value = Player.CurrenFrame;
             });
         }
 

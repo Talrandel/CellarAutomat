@@ -34,6 +34,7 @@
             this.tLPMain = new System.Windows.Forms.TableLayoutPanel();
             this.pBMain = new System.Windows.Forms.PictureBox();
             this.playerController = new CellularAutomaton.Components.Player.PlayerController();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tLPMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pBMain)).BeginInit();
             this.SuspendLayout();
@@ -43,6 +44,7 @@
             resources.ApplyResources(this.tLPMain, "tLPMain");
             this.tLPMain.Controls.Add(this.pBMain, 0, 0);
             this.tLPMain.Controls.Add(this.playerController, 0, 1);
+            this.tLPMain.Controls.Add(this.tableLayoutPanel1, 0, 2);
             this.tLPMain.Name = "tLPMain";
             // 
             // pBMain
@@ -55,6 +57,11 @@
             // 
             resources.ApplyResources(this.playerController, "playerController");
             this.playerController.Name = "playerController";
+            // 
+            // tableLayoutPanel1
+            // 
+            resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // CellularAutomatonPlayer
             // 
@@ -76,5 +83,6 @@
         private System.Windows.Forms.TableLayoutPanel tLPMain;
         private System.Windows.Forms.PictureBox pBMain;
         private PlayerController playerController;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
     }
 }
