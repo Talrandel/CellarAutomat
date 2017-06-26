@@ -6,7 +6,7 @@
 // File          : Player.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 18.06.2017 12:46
-// Last Revision : 23.06.2017 11:58
+// Last Revision : 27.06.2017 0:26
 // Description   : 
 #endregion
 
@@ -233,12 +233,15 @@ namespace CellularAutomaton.Components.Player
             if (_record == null)
                 throw new ArgumentException(Resources.Ex__RecordNotLoaded, nameof(Record));
 
-            if (State != StatePlayer.Play)
+            if (0 < _record.Count) // Есть кадры для воспроизведения?
             {
-                State = StatePlayer.Play;
-                OnStartPlay();
+                if (State != StatePlayer.Play)
+                {
+                    State = StatePlayer.Play;
+                    OnStartPlay();
 
-                _timer.Start();
+                    _timer.Start();
+                }
             }
         }
 
