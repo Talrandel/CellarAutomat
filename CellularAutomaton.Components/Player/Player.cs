@@ -227,8 +227,12 @@ namespace CellularAutomaton.Components.Player
         /// <summary>
         /// Начинает воспроизведение записи с текущей позиции записи.
         /// </summary>
+        /// <exception cref="ArgumentException">Не загружена запись для воспроизведения.</exception>
         public void Play()
         {
+            if (_record == null)
+                throw new ArgumentException(Resources.Ex__RecordNotLoaded, nameof(Record));
+
             if (State != StatePlayer.Play)
             {
                 State = StatePlayer.Play;

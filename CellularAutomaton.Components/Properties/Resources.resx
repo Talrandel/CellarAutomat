@@ -222,4 +222,7 @@
     <data name="Ex__Не_задана_запись_для_воспроизведения_" xml:space="preserve">
     <value>Не задана запись для воспроизведения.</value>
   </data>
+    <data name="Ex__RecordNotLoaded" xml:space="preserve">
+    <value>Не загружена запись для воспроизведения.</value>
+  </data>
 </root>

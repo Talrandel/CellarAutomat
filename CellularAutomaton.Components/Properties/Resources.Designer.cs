@@ -232,6 +232,15 @@ namespace CellularAutomaton.Components.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Не загружена запись для воспроизведения..
+        /// </summary>
+        internal static string Ex__RecordNotLoaded {
+            get {
+                return ResourceManager.GetString("Ex__RecordNotLoaded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Выполнена попытка перехода к кадру номер которого больше, чем кадров в текущей записи..
         /// </summary>
         internal static string Ex__Выполнена_попытка_перехода_к_кадру_номер_которого_больше__чем_кадров_в_текущей_записи_ {

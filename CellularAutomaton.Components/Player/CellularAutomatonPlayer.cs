@@ -60,6 +60,7 @@ namespace CellularAutomaton.Components.Player
             _player = new Player(
                 pBMain.CreateGraphics(),
                 new Rectangle(0, 0, pBMain.Size.Width, pBMain.Size.Height));
+            _player.Load(new Core.Record()); // Загрузка пустой записи.
 
             playerController.Player = _player;
         }
