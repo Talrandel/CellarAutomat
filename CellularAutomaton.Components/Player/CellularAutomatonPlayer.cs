@@ -21,6 +21,9 @@ namespace CellularAutomaton.Components.Player
     /// </summary>
     public partial class CellularAutomatonPlayer : UserControl
     {
+        // TODO: добавить NUD - скорость воспроизведения
+        // TODO: добавить кнопку "Загрузить запись"
+
         #region Fields
         /// <summary>
         /// Объект реализующий интерфейс <see cref="IPlayer"/>, который осуществляет воспроизведение записи.
