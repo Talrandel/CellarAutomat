@@ -6,7 +6,7 @@
 // File          : CellularAutomatonRecorder.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 22.06.2017 23:25
-// Last Revision : 24.06.2017 15:27
+// Last Revision : 26.06.2017 20:43
 // Description   : 
 #endregion
 
@@ -17,8 +17,6 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using CellularAutomaton.Components.Properties;
@@ -88,6 +86,11 @@ namespace CellularAutomaton.Components.Recorder
         /// Экземпляр класса <see cref="SaveFileDialog"/> - окно сохранения файла с записью.
         /// </summary>
         private SaveFileDialog _saveFileDialog;
+
+        /// <summary>
+        /// Предсталяет метод обрабатывающий действия возникающие при начале записи <see cref="Started"/>.
+        /// </summary>
+        private Action _started;
         #endregion
 
         #region Properties
@@ -564,6 +567,23 @@ namespace CellularAutomaton.Components.Recorder
 
         #region Members
         /// <summary>
+        /// Сохраняет запись в файл с именем <see cref="FileName"/>.
+        /// </summary>
+        public void Save()
+        {
+            _recorder.Save(FileName);
+        }
+
+        /// <summary>
+        /// Сохраняет запись в файл с указанным именем.
+        /// </summary>
+        /// <param name="fileName">Имя файла в который будет сохранена запись.</param>
+        public void Save(string fileName)
+        {
+            _recorder.Save(fileName);
+        }
+
+        /// <summary>
         /// Обработчик события <see cref="Control.Click"/>. Начинает запись функционирования клеточного автомата.
         /// </summary>
         /// <param name="sender">Источник события.</param>
@@ -582,7 +602,7 @@ namespace CellularAutomaton.Components.Recorder
         private void bSave_Click(object sender, EventArgs e)
         {
             if (ShowSaveFileDialog())
-                _recorder.Save(FileName);
+                Save();
         }
 
         /// <summary>
@@ -685,11 +705,6 @@ namespace CellularAutomaton.Components.Recorder
             else
                 CheckIsStart();
         }
-
-        /// <summary>
-        /// Предсталяет метод обрабатывающий действия возникающие при начале записи <see cref="Started"/>.
-        /// </summary>
-        private Action _started;
 
         /// <summary>
         /// Обработчик события <see cref="IRecorder.StartRecord"/>.
