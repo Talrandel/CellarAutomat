@@ -48,7 +48,7 @@ namespace CellularAutomaton.Components.Player
         /// <summary>
         /// Возвращает номер текущего кадра записи.
         /// </summary>
-        short CurrenFrame { get; }
+        int CurrenFrame { get; }
 
         /// <summary>
         /// Возвращает или задаёт скорость воспроизведения (кадры в минуту).

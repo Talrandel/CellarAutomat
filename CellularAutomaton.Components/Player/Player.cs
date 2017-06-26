@@ -46,7 +46,7 @@ namespace CellularAutomaton.Components.Player
         /// <summary>
         /// Номер текущего кадра записи.
         /// </summary>
-        private short _currenFrame;
+        private int _currenFrame;
 
         /// <summary>
         /// True, если освобождение ресурсов осуществлялось, иначе false.
@@ -67,13 +67,6 @@ namespace CellularAutomaton.Components.Player
         /// Перечислитель записи.
         /// </summary>
         private IEnumerator<Bitmap> _recordEnumerator;
-        #endregion
-
-        #region Properties
-        /// <summary>
-        /// Возвращает число кадров в записи.
-        /// </summary>
-        public int GetFrames => Record.Count;
         #endregion
 
         #region Constructors
@@ -165,7 +158,7 @@ namespace CellularAutomaton.Components.Player
         /// <summary>
         /// Возвращает номер текущего кадра записи.
         /// </summary>
-        public short CurrenFrame
+        public int CurrenFrame
         {
             get { return _currenFrame; }
             private set
@@ -256,7 +249,7 @@ namespace CellularAutomaton.Components.Player
         /// </exception>
         public void Rewind(short frame)
         {
-            bool isFastRewind = (frame - CurrenFrame == 1) && (frame <= GetFrames); // Возможна быстрая перемотка?
+            bool isFastRewind = (frame - CurrenFrame == 1) && (frame <= _record.Count); // Возможна быстрая перемотка?
             bool isNotRewind = (frame == CurrenFrame); // Нет необходимости в перемотке?
 
             if (isFastRewind || isNotRewind)
@@ -271,7 +264,7 @@ namespace CellularAutomaton.Components.Player
                     Resources.Ex__Выполнена_попытка_перехода_к_кадру_с_отрицательным_индексом_);
             }
 
-            if (GetFrames < frame)
+            if (_record.Count < frame)
             {
                 throw new ArgumentOutOfRangeException(nameof(frame), frame,
                     Resources.Ex__Выполнена_попытка_перехода_к_кадру_номер_которого_больше__чем_кадров_в_текущей_записи_);

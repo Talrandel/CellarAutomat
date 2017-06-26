@@ -6,7 +6,7 @@
 // File          : CellularAutomatonRecorder.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 22.06.2017 23:25
-// Last Revision : 24.06.2017 15:27
+// Last Revision : 26.06.2017 20:43
 // Description   : 
 #endregion
 
@@ -17,8 +17,6 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using CellularAutomaton.Components.Properties;
@@ -35,17 +33,17 @@ namespace CellularAutomaton.Components.Recorder
         /// <summary>
         /// Значение по умолчанию свойства <see cref="DencityMax"/>.
         /// </summary>
-        private const short DencityMaxDefValue = 100;
+        private const byte DencityMaxDefValue = 100;
 
         /// <summary>
         /// Значение по умолчанию свойства <see cref="DencityMin"/>.
         /// </summary>
-        private const short DencityMinDefValue = 0;
+        private const byte DencityMinDefValue = 0;
 
         /// <summary>
         /// Значение по умолчанию свойства <see cref="DencityValue"/>.
         /// </summary>
-        private const short DencityValueDefValue = 50;
+        private const byte DencityValueDefValue = 50;
 
         /// <summary>
         /// Значение по умолчанию свойства <see cref="SizeFieldHeightMax"/>.
@@ -88,6 +86,11 @@ namespace CellularAutomaton.Components.Recorder
         /// Экземпляр класса <see cref="SaveFileDialog"/> - окно сохранения файла с записью.
         /// </summary>
         private SaveFileDialog _saveFileDialog;
+
+        /// <summary>
+        /// Предсталяет метод обрабатывающий действия возникающие при начале записи <see cref="Started"/>.
+        /// </summary>
+        private Action _started;
         #endregion
 
         #region Properties
@@ -113,9 +116,9 @@ namespace CellularAutomaton.Components.Recorder
         [RefreshProperties(RefreshProperties.All)]
         [SRCategory("Data")]
         [SRDescription(nameof(CellularAutomatonRecorder) + "__" + nameof(DencityMax) + SRDescriptionAttribute.Suffix)]
-        public short DencityMax
+        public byte DencityMax
         {
-            get { return Convert.ToInt16(nUDDencity.Maximum); }
+            get { return Convert.ToByte(nUDDencity.Maximum); }
             set
             {
                 if (value < DencityMin ||
@@ -148,13 +151,12 @@ namespace CellularAutomaton.Components.Recorder
         [RefreshProperties(RefreshProperties.All)]
         [SRCategory("Data")]
         [SRDescription(nameof(CellularAutomatonRecorder) + "__" + nameof(DencityMin) + SRDescriptionAttribute.Suffix)]
-        public short DencityMin
+        public byte DencityMin
         {
-            get { return Convert.ToInt16(nUDDencity.Minimum); }
+            get { return Convert.ToByte(nUDDencity.Minimum); }
             set
             {
-                if (value < 0 ||
-                    DencityMax < value)
+                if (DencityMax < value)
                 {
                     throw new ArgumentOutOfRangeException(
                         nameof(value),
@@ -183,9 +185,9 @@ namespace CellularAutomaton.Components.Recorder
         [RefreshProperties(RefreshProperties.All)]
         [SRCategory("Data")]
         [SRDescription(nameof(CellularAutomatonRecorder) + "__" + nameof(DencityValue) + SRDescriptionAttribute.Suffix)]
-        public short DencityValue
+        public byte DencityValue
         {
-            get { return Convert.ToInt16(nUDDencity.Value); }
+            get { return Convert.ToByte(nUDDencity.Value); }
             set
             {
                 if (value < DencityMin ||
@@ -573,6 +575,23 @@ namespace CellularAutomaton.Components.Recorder
 
         #region Members
         /// <summary>
+        /// Сохраняет запись в файл с именем <see cref="FileName"/>.
+        /// </summary>
+        public void Save()
+        {
+            _recorder.Save(FileName);
+        }
+
+        /// <summary>
+        /// Сохраняет запись в файл с указанным именем.
+        /// </summary>
+        /// <param name="fileName">Имя файла в который будет сохранена запись.</param>
+        public void Save(string fileName)
+        {
+            _recorder.Save(fileName);
+        }
+
+        /// <summary>
         /// Обработчик события <see cref="Control.Click"/>. Начинает запись функционирования клеточного автомата.
         /// </summary>
         /// <param name="sender">Источник события.</param>
@@ -591,7 +610,7 @@ namespace CellularAutomaton.Components.Recorder
         private void bSave_Click(object sender, EventArgs e)
         {
             if (ShowSaveFileDialog())
-                _recorder.Save(FileName);
+                Save();
         }
 
         /// <summary>
@@ -666,10 +685,10 @@ namespace CellularAutomaton.Components.Recorder
 
             Core.CellularAutomaton ca = new Core.CellularAutomaton(
                 Rules[cBCellularAutomatonRules.SelectedIndex],
-                (int)nUDWidth.Value,
-                (int)nUDHeight.Value,
-                (int)nUDStatesCount.Value,
-                (byte)nUDDencity.Value);
+                SizeFieldWidthValue,
+                SizeFieldHeightValue,
+                StatesCountValue,
+                DencityValue);
 
             _recorder = new Recorder(ca);
 
@@ -694,11 +713,6 @@ namespace CellularAutomaton.Components.Recorder
             else
                 CheckIsStart();
         }
-
-        /// <summary>
-        /// Предсталяет метод обрабатывающий действия возникающие при начале записи <see cref="Started"/>.
-        /// </summary>
-        private Action _started;
 
         /// <summary>
         /// Обработчик события <see cref="IRecorder.StartRecord"/>.
