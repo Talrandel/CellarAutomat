@@ -23,7 +23,7 @@ namespace CellularAutomaton.Components.Player
         /// <summary>
         /// Возвращает номер отображаемого кадра.
         /// </summary>
-        public short ReproducedFrame { get; }
+        public int ReproducedFrame { get; }
         #endregion
 
         #region Constructors
@@ -31,7 +31,7 @@ namespace CellularAutomaton.Components.Player
         /// Инициализирует новый экземпляр класса <see cref="ChangeFrameEventArgs"/> заданным номером кадра.
         /// </summary>
         /// <param name="frame">Номер воспроизводимого кадра.</param>
-        internal ChangeFrameEventArgs(short frame)
+        internal ChangeFrameEventArgs(int frame)
         {
             ReproducedFrame = frame;
         }

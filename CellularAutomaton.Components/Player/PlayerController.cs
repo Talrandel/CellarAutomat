@@ -6,7 +6,7 @@
 // File          : PlayerController.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 20.06.2017 23:22
-// Last Revision : 24.06.2017 23:12
+// Last Revision : 26.06.2017 20:50
 // Description   : 
 #endregion
 
@@ -19,6 +19,7 @@ using CellularAutomaton.Components.Properties;
 
 namespace CellularAutomaton.Components.Player
 {
+    // TODO: выяснить необходимость Action.
     /// <summary>
     /// Представляет элемент управления проигрывателем.
     /// </summary>
@@ -69,6 +70,11 @@ namespace CellularAutomaton.Components.Player
         /// Представляет метод обрабатывающий событие <see cref="IPlayer.StopPlay"/>.
         /// </summary>
         private Action _stoped;
+
+        /// <summary>
+        /// Номер текущего кадра.
+        /// </summary>
+        private int _currentFrame;
         #endregion
 
         #region Properties
@@ -139,7 +145,7 @@ namespace CellularAutomaton.Components.Player
                 if (value == null)
                     throw new ArgumentNullException(nameof(value));
 
-                if (_player.Record == null)
+                if (value.Record == null)
                 {
                     throw new ArgumentException(
                         Resources.Ex__Не_задана_запись_для_воспроизведения_,
@@ -169,19 +175,6 @@ namespace CellularAutomaton.Components.Player
             InitializeAction();
             InitializeProperties();
         }
-
-        ///// <summary>
-        ///// Инициализирует новый экземпляр класса <see cref="PlayerController"/> заданным объектом реализующим интерфейс <see cref="IPlayer"/>.
-        ///// </summary>
-        ///// <param name="player">Экземпляр объекта реализующего интерфейс <see cref="IPlayer"/>.</param>
-        ///// <exception cref="ArgumentNullException">Параметр <paramref name="player"/> имеет значение <b>null</b>.</exception>
-        //public PlayerController(IPlayer player) : this()
-        //{
-        //    if (player == null)
-        //        throw new ArgumentNullException(nameof(player));
-
-        //    Player = player;
-        //}
         #endregion
 
         #region Members
@@ -216,11 +209,19 @@ namespace CellularAutomaton.Components.Player
         }
 
         /// <summary>
+        /// Проверяет заданы ли все необходимые для функционирования свойства.
+        /// </summary>
+        private void CheckIsStart()
+        {
+            Enabled = Player?.Record != null;
+        }
+
+        /// <summary>
         /// Инициализирует делегаты обновления состояния пользовательского интерфейса.
         /// </summary>
         private void InitializeAction()
         {
-            _setValueFinder = (e => tBFinder.Value = e);
+            _setValueFinder = (e => tBFinder.Value = _currentFrame = e);
 
             _started = (() =>
             {
@@ -278,6 +279,16 @@ namespace CellularAutomaton.Components.Player
         }
 
         /// <summary>
+        /// Обработчик события <see cref="UserControl.Load"/>. Приводит компонент в начальное состояние.
+        /// </summary>
+        /// <param name="sender">Источник события.</param>
+        /// <param name="e">Сведения о событии.</param>
+        private void PlayerController_Load(object sender, EventArgs e)
+        {
+            CheckIsStart();
+        }
+
+        /// <summary>
         /// Обработчик события <see cref="IPlayer.PausePlay"/>.
         /// </summary>
         /// <param name="sender">Источник события.</param>
@@ -330,9 +341,19 @@ namespace CellularAutomaton.Components.Player
         {
             if (tBFinder.Value != Player.CurrenFrame)
             {
+                // TODO: Возможно, могут быть проблемы с UI из-за комбинирования Stop и Play.
                 Player.Rewind((short)tBFinder.Value);
                 Player.Play();
             }
+        }
+
+        /// <summary>
+        /// Возвращает или задаёт номер текущего кадра.
+        /// </summary>
+        public int CurrentFrame
+        {
+            get { return _currentFrame; }
+            set { _currentFrame = value; }
         }
 
         /// <summary>

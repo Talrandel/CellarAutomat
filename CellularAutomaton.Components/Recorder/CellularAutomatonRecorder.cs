@@ -33,17 +33,17 @@ namespace CellularAutomaton.Components.Recorder
         /// <summary>
         /// Значение по умолчанию свойства <see cref="DencityMax"/>.
         /// </summary>
-        private const short DencityMaxDefValue = 100;
+        private const byte DencityMaxDefValue = 100;
 
         /// <summary>
         /// Значение по умолчанию свойства <see cref="DencityMin"/>.
         /// </summary>
-        private const short DencityMinDefValue = 0;
+        private const byte DencityMinDefValue = 0;
 
         /// <summary>
         /// Значение по умолчанию свойства <see cref="DencityValue"/>.
         /// </summary>
-        private const short DencityValueDefValue = 50;
+        private const byte DencityValueDefValue = 50;
 
         /// <summary>
         /// Значение по умолчанию свойства <see cref="SizeFieldHeightMax"/>.
@@ -107,9 +107,9 @@ namespace CellularAutomaton.Components.Recorder
         [RefreshProperties(RefreshProperties.All)]
         [SRCategory("Data")]
         [SRDescription(nameof(CellularAutomatonRecorder) + "__" + nameof(DencityMax) + SRDescriptionAttribute.Suffix)]
-        public short DencityMax
+        public byte DencityMax
         {
-            get { return Convert.ToInt16(nUDDencity.Maximum); }
+            get { return Convert.ToByte(nUDDencity.Maximum); }
             set
             {
                 if (value < DencityMin ||
@@ -142,9 +142,9 @@ namespace CellularAutomaton.Components.Recorder
         [RefreshProperties(RefreshProperties.All)]
         [SRCategory("Data")]
         [SRDescription(nameof(CellularAutomatonRecorder) + "__" + nameof(DencityMin) + SRDescriptionAttribute.Suffix)]
-        public short DencityMin
+        public byte DencityMin
         {
-            get { return Convert.ToInt16(nUDDencity.Minimum); }
+            get { return Convert.ToByte(nUDDencity.Minimum); }
             set
             {
                 if (value < 0 ||
@@ -177,9 +177,9 @@ namespace CellularAutomaton.Components.Recorder
         [RefreshProperties(RefreshProperties.All)]
         [SRCategory("Data")]
         [SRDescription(nameof(CellularAutomatonRecorder) + "__" + nameof(DencityValue) + SRDescriptionAttribute.Suffix)]
-        public short DencityValue
+        public byte DencityValue
         {
-            get { return Convert.ToInt16(nUDDencity.Value); }
+            get { return Convert.ToByte(nUDDencity.Value); }
             set
             {
                 if (value < DencityMin ||
@@ -677,10 +677,10 @@ namespace CellularAutomaton.Components.Recorder
 
             Core.CellularAutomaton ca = new Core.CellularAutomaton(
                 Rules[cBCellularAutomatonRules.SelectedIndex],
-                (int)nUDWidth.Value,
-                (int)nUDHeight.Value,
-                (int)nUDStatesCount.Value,
-                (byte)nUDDencity.Value);
+                SizeFieldWidthValue,
+                SizeFieldHeightValue,
+                StatesCountValue,
+                DencityValue);
 
             _recorder = new Recorder(ca);
 
