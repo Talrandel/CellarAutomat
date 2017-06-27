@@ -323,6 +323,8 @@ namespace CellularAutomaton.Components.Player
         /// </summary>
         private void InitializeProperties()
         {
+            FramesPerMinuteValue = Player.FramesPerMinuteValueDefValue;
+
             FinderLargeChange = FinderLargeChangeDefValue;
             FinderSmallChange = FinderSmallChangeDefValue;
             FinderTickFrequency = FinderTickFrequencyDefValue;

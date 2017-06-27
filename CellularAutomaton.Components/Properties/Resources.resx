@@ -258,4 +258,7 @@
   <data name="CellularAutomatonPlayer__SizeModeDescr" xml:space="preserve">
     <value>Режим размещения изображения.</value>
   </data>
+  <data name="PlayerController__FramesPerMinuteValueDescr" xml:space="preserve">
+    <value>Скорость воспроизведения записи (кадры в минуту) функционирования клеточного автомата.</value>
+  </data>
 </root>

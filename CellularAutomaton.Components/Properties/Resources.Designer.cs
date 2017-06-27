@@ -476,6 +476,15 @@ namespace CellularAutomaton.Components.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Скорость воспроизведения записи (кадры в минуту) функционирования клеточного автомата..
+        /// </summary>
+        internal static string PlayerController__FramesPerMinuteValueDescr {
+            get {
+                return ResourceManager.GetString("PlayerController__FramesPerMinuteValueDescr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на {0}/{1}.
         /// </summary>
         internal static string PlayerController__SetToolTip__Finder {
