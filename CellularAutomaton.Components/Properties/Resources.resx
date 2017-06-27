@@ -249,4 +249,7 @@
   <data name="CellularAutomatonPlayer__OpenFileDialogRecordFilter" xml:space="preserve">
     <value>Двоичные файлы (*.bin)|*.bin</value>
   </data>
+  <data name="CellularAutomatonPlayer__OpenFileDialogRecordTitle" xml:space="preserve">
+    <value>Открыть запись</value>
+  </data>
 </root>

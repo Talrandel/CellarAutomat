@@ -24,14 +24,14 @@ namespace CellularAutomaton.Components
     /// <remarks>От стандартного атрибута <see cref="CategoryAttribute"/> отличается поиском в локальном хранилище локализованных строк.</remarks>
     [AttributeUsage(AttributeTargets.All)]
     // ReSharper disable once InconsistentNaming
-    internal sealed class SRCategoryAttribute : CategoryAttribute
+    internal sealed class CACategoryAttribute : CategoryAttribute
     {
         #region Constructors
         /// <summary>
-        /// Инициализирует новый экземпляр класса <see cref="SRCategoryAttribute"/> заданным именем категории.
+        /// Инициализирует новый экземпляр класса <see cref="CACategoryAttribute"/> заданным именем категории.
         /// </summary>
         /// <param name="category">Имя категории.</param>
-        public SRCategoryAttribute(string category) : base(category) { }
+        public CACategoryAttribute(string category) : base(category) { }
         #endregion
 
         #region Members

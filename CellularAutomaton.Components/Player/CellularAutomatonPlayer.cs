@@ -46,8 +46,8 @@ namespace CellularAutomaton.Components.Player
         /// </summary>
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
-        [SRCategory("Data")]
-        [SRDescription(nameof(CellularAutomatonPlayer) + "__" + nameof(FileExtension) + SRDescriptionAttribute.Suffix)]
+        [CACategory("Data")]
+        [CADescription(nameof(CellularAutomatonPlayer) + "__" + nameof(FileExtension) + CADescriptionAttribute.Suffix)]
         public string FileExtension { get; set; }
 
         /// <summary>
@@ -55,8 +55,8 @@ namespace CellularAutomaton.Components.Player
         /// </summary>
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
-        [SRCategory("Data")]
-        [SRDescription(nameof(CellularAutomatonPlayer) + "__" + nameof(FileFilter) + SRDescriptionAttribute.Suffix)]
+        [CACategory("Data")]
+        [CADescription(nameof(CellularAutomatonPlayer) + "__" + nameof(FileFilter) + CADescriptionAttribute.Suffix)]
         public string FileFilter { get; set; }
 
         /// <summary>
@@ -64,8 +64,8 @@ namespace CellularAutomaton.Components.Player
         /// </summary>
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
-        [SRCategory("Data")]
-        [SRDescription(nameof(CellularAutomatonPlayer) + "__" + nameof(FileName) + SRDescriptionAttribute.Suffix)]
+        [CACategory("Data")]
+        [CADescription(nameof(CellularAutomatonPlayer) + "__" + nameof(FileName) + CADescriptionAttribute.Suffix)]
         public string FileName { get; set; }
 
         /// <summary>
@@ -79,11 +79,11 @@ namespace CellularAutomaton.Components.Player
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [RefreshProperties(RefreshProperties.All)]
-        [SRCategory("Data")]
-        [SRDescription(nameof(CellularAutomatonPlayer) + "__" + nameof(FramesPerMinuteMax) + SRDescriptionAttribute.Suffix)]
+        [CACategory("Data")]
+        [CADescription(nameof(CellularAutomatonPlayer) + "__" + nameof(FramesPerMinuteMax) + CADescriptionAttribute.Suffix)]
         public short FramesPerMinuteMax
         {
-            get { return Convert.ToByte(nUDFPM.Maximum); }
+            get { return Convert.ToByte(nUDFramesPerMinute.Maximum); }
             set
             {
                 if (value < FramesPerMinuteMin ||
@@ -99,7 +99,7 @@ namespace CellularAutomaton.Components.Player
                             nameof(FramesPerMinuteMin), 0));
                 }
 
-                nUDFPM.Maximum = value;
+                nUDFramesPerMinute.Maximum = value;
             }
         }
 
@@ -114,11 +114,11 @@ namespace CellularAutomaton.Components.Player
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [RefreshProperties(RefreshProperties.All)]
-        [SRCategory("Data")]
-        [SRDescription(nameof(CellularAutomatonPlayer) + "__" + nameof(FramesPerMinuteMin) + SRDescriptionAttribute.Suffix)]
+        [CACategory("Data")]
+        [CADescription(nameof(CellularAutomatonPlayer) + "__" + nameof(FramesPerMinuteMin) + CADescriptionAttribute.Suffix)]
         public short FramesPerMinuteMin
         {
-            get { return Convert.ToByte(nUDFPM.Minimum); }
+            get { return Convert.ToByte(nUDFramesPerMinute.Minimum); }
             set
             {
                 if (FramesPerMinuteMax < value)
@@ -133,7 +133,7 @@ namespace CellularAutomaton.Components.Player
                             nameof(FramesPerMinuteMax)));
                 }
 
-                nUDFPM.Minimum = value;
+                nUDFramesPerMinute.Minimum = value;
             }
         }
 
@@ -148,11 +148,11 @@ namespace CellularAutomaton.Components.Player
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [RefreshProperties(RefreshProperties.All)]
-        [SRCategory("Data")]
-        [SRDescription(nameof(CellularAutomatonPlayer) + "__" + nameof(FramesPerMinuteValue) + SRDescriptionAttribute.Suffix)]
+        [CACategory("Data")]
+        [CADescription(nameof(CellularAutomatonPlayer) + "__" + nameof(FramesPerMinuteValue) + CADescriptionAttribute.Suffix)]
         public short FramesPerMinuteValue
         {
-            get { return Convert.ToByte(nUDFPM.Value); }
+            get { return Convert.ToByte(nUDFramesPerMinute.Value); }
             set
             {
                 if (value < FramesPerMinuteMin ||
@@ -169,7 +169,7 @@ namespace CellularAutomaton.Components.Player
                             nameof(FramesPerMinuteMax)));
                 }
 
-                nUDFPM.Value = value;
+                nUDFramesPerMinute.Value = value;
             }
         }
 
@@ -180,8 +180,8 @@ namespace CellularAutomaton.Components.Player
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [RefreshProperties(RefreshProperties.Repaint)]
-        [SRCategory("Behavior")]
-        [SRDescription(nameof(CellularAutomatonPlayer) + "__" + nameof(SizeMode) + SRDescriptionAttribute.Suffix)]
+        [CACategory("Behavior")]
+        [CADescription(nameof(CellularAutomatonPlayer) + "__" + nameof(SizeMode) + CADescriptionAttribute.Suffix)]
         public PictureSizeMode SizeMode
         {
             get { return (PictureSizeMode)pBMain.SizeMode; }
@@ -198,7 +198,9 @@ namespace CellularAutomaton.Components.Player
             InitializeComponent();
             InitializeProperties();
 
-            playerController.InitializePlayer(pBMain.CreateGraphics(), new Rectangle(0, 0, pBMain.Size.Width, pBMain.Size.Height));
+            playerController.InitializePlayer(
+                pBMain.CreateGraphics(),
+                new Rectangle(0, 0, pBMain.Size.Width, pBMain.Size.Height));
         }
         #endregion
 
@@ -219,15 +221,11 @@ namespace CellularAutomaton.Components.Player
         /// </summary>
         private void InitializeProperties()
         {
-            // TODO: Вынести в ресурсы.
-
             SizeMode = PictureSizeMode.CenterImage;
 
             FramesPerMinuteMin = FramesPerMinuteMinDefValue;
             FramesPerMinuteMax = Player.FramesPerMinuteMaxDefValue;
             FramesPerMinuteValue = Player.FramesPerMinuteValueDefValue;
-
-            // BUG: заменить save на open в ресурсах для fileName, fileExtension, fileFilter
 
             FileName = Resources.CellularAutomatonPlayer__OpenFileDialogRecordDefFileName;
             FileExtension = Resources.CellularAutomatonPlayer__OpenFileDialogRecordExt;
@@ -251,8 +249,8 @@ namespace CellularAutomaton.Components.Player
                     DereferenceLinks = true,
                     RestoreDirectory = true,
                     InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-                    // BUG: заменить title на OpenFileDialog
-                    Title = Resources.CellularAutomatonRecorder__SaveFileDialogRecordTitle,
+
+                    Title = Resources.CellularAutomatonPlayer__OpenFileDialogRecordTitle,
                     FileName = FileName,
                     DefaultExt = FileExtension,
                     Filter = FileFilter

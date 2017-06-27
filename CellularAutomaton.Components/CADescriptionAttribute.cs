@@ -24,7 +24,7 @@ namespace CellularAutomaton.Components
     /// <remarks>От стандартного атрибута <see cref="DescriptionAttribute"/> отличается поиском в локальном хранилище локализованных строк.</remarks>
     [AttributeUsage(AttributeTargets.All)]
     // ReSharper disable once InconsistentNaming
-    internal sealed class SRDescriptionAttribute : DescriptionAttribute
+    internal sealed class CADescriptionAttribute : DescriptionAttribute
     {
         #region Static Fields and Constants
         /// <summary>
@@ -63,10 +63,10 @@ namespace CellularAutomaton.Components
 
         #region Constructors
         /// <summary>
-        /// Инициализирует новый экземпляр класса <see cref="SRDescriptionAttribute"/> с указанным описанием.
+        /// Инициализирует новый экземпляр класса <see cref="CADescriptionAttribute"/> с указанным описанием.
         /// </summary>
         /// <param name="description">Текст описания.</param>
-        public SRDescriptionAttribute(string description) : base(description) { }
+        public CADescriptionAttribute(string description) : base(description) { }
         #endregion
     }
 }

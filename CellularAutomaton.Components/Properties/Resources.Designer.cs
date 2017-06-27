@@ -142,6 +142,15 @@ namespace CellularAutomaton.Components.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Открыть запись.
+        /// </summary>
+        internal static string CellularAutomatonPlayer__OpenFileDialogRecordTitle {
+            get {
+                return ResourceManager.GetString("CellularAutomatonPlayer__OpenFileDialogRecordTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Максимальная плотность распределения клеток на поле клеточного автомата..
         /// </summary>
         internal static string CellularAutomatonRecorder__DencityMaxDescr {

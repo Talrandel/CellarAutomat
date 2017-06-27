@@ -5,18 +5,19 @@
 // Language      : C# 6.0
 // File          : PlayerController.cs
 // Author        : Антипкин С.С., Макаров Е.А.
-// Created       : 20.06.2017 23:22
-// Last Revision : 27.06.2017 0:34
+// Created       : 27.06.2017 13:41
+// Last Revision : 27.06.2017 16:49
 // Description   : 
 #endregion
 
 using System;
 using System.ComponentModel;
+using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
 
 using CellularAutomaton.Components.Properties;
-using System.Drawing;
+using CellularAutomaton.Core;
 
 namespace CellularAutomaton.Components.Player
 {
@@ -55,6 +56,11 @@ namespace CellularAutomaton.Components.Player
         private Action _paused;
 
         /// <summary>
+        /// Объект <see cref="Player"/>, которым осуществляется управление.
+        /// </summary>
+        private Player _player;
+
+        /// <summary>
         /// Представляет метод обновляющий значение свойства <see cref="TrackBar.Value"/> элемента управления <see cref="tBFinder"/>.
         /// </summary>
         private Action<short> _setValueFinder;
@@ -68,14 +74,17 @@ namespace CellularAutomaton.Components.Player
         /// Представляет метод обрабатывающий событие <see cref="IPlayer.StopPlay"/>.
         /// </summary>
         private Action _stoped;
-
-        /// <summary>
-        /// Номер текущего кадра.
-        /// </summary>
-        private int _currentFrame;
         #endregion
 
         #region Properties
+        /// <summary>
+        /// Возвращает имя файла, из которого осуществляется загрузка записи.
+        /// </summary>
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public string FileName { get; private set; }
+
         /// <summary>
         /// Возвращает или задаёт число на которое перемещается ползунок по шкале поиска при щелчке мыши по элементу управления или нажатию клавиш PAGE UP, PAGE DOWN.
         /// </summary>
@@ -85,8 +94,8 @@ namespace CellularAutomaton.Components.Player
         [DefaultValue(FinderLargeChangeDefValue)]
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
-        [SRCategory("Behavior")]
-        [SRDescription(nameof(PlayerController) + "__" + nameof(FinderLargeChange) + SRDescriptionAttribute.Suffix)]
+        [CACategory("Behavior")]
+        [CADescription(nameof(PlayerController) + "__" + nameof(FinderLargeChange) + CADescriptionAttribute.Suffix)]
         public short FinderLargeChange
         {
             get { return (short)tBFinder.LargeChange; }
@@ -102,8 +111,8 @@ namespace CellularAutomaton.Components.Player
         [DefaultValue(FinderSmallChangeDefValue)]
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
-        [SRCategory("Behavior")]
-        [SRDescription(nameof(PlayerController) + "__" + nameof(FinderSmallChange) + SRDescriptionAttribute.Suffix)]
+        [CACategory("Behavior")]
+        [CADescription(nameof(PlayerController) + "__" + nameof(FinderSmallChange) + CADescriptionAttribute.Suffix)]
         public short FinderSmallChange
         {
             get { return (short)tBFinder.SmallChange; }
@@ -119,18 +128,13 @@ namespace CellularAutomaton.Components.Player
         [DefaultValue(FinderTickFrequencyDefValue)]
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
-        [SRCategory("Appearance")]
-        [SRDescription(nameof(PlayerController) + "__" + nameof(FinderTickFrequency) + SRDescriptionAttribute.Suffix)]
+        [CACategory("Appearance")]
+        [CADescription(nameof(PlayerController) + "__" + nameof(FinderTickFrequency) + CADescriptionAttribute.Suffix)]
         public short FinderTickFrequency
         {
             get { return (short)tBFinder.TickFrequency; }
             set { tBFinder.TickFrequency = value; }
         }
-
-        /// <summary>
-        /// Объект <see cref="Player"/>, которым осуществляется управление.
-        /// </summary>
-        private Player _player;
         #endregion
 
         #region Constructors
@@ -147,6 +151,47 @@ namespace CellularAutomaton.Components.Player
         #endregion
 
         #region Members
+        /// <summary>
+        /// Инициализирует <see cref="Player"/> заданным полотном и размером области для вывода изображения.
+        /// </summary>
+        /// <param name="e">Поверхность рисования GDI+ на которую осуществляется вывод изображения.</param>
+        /// <param name="rec">Размеры области на которую осуществяется вывод изображения.</param>
+        /// <exception cref="ArgumentNullException">Параметр <paramref name="e"/> имеет значение <b>null</b>.</exception>
+        /// <exception cref="ArgumentException">Значение высоты или ширины размера меньше или равно нулю.</exception>
+        public void InitializePlayer(Graphics e, Rectangle rec)
+        {
+            _player = new Player(e, rec);
+            _player.Load(new Record()); // Загрузка пустой записи.
+
+            _player.ChangeFrame += PlayerChangeFrame;
+            _player.StartPlay += PlayerStartPlay;
+            _player.PausePlay += PlayerPausePlay;
+            _player.StopPlay += PlayerStopPlay;
+
+            tBFinder.Maximum = _player.Record.Count;
+        }
+
+        /// <summary>
+        /// Загрузка записи функционирования клеточного автомата из файла заданного свойством <see cref="FileName"/>.
+        /// </summary>
+        public void LoadRecord()
+        {
+            _player.Load(FileName);
+            CheckIsStart();
+        }
+
+        /// <summary>
+        /// Загрузка записи функционирования клеточного автомата из файла с заданным именем.
+        /// </summary>
+        /// <param name="fileName">Имя файла, из которого осуществляется загрузка записи функционирования клеточного автомата.</param>
+        public void LoadRecord(string fileName)
+        {
+            _player.Load(fileName);
+            FileName = fileName;
+
+            CheckIsStart();
+        }
+
         /// <summary>
         /// Обработчик события <see cref="Control.Click"/>. Приостанавливает воспроизведение записи.
         /// </summary>
@@ -191,7 +236,7 @@ namespace CellularAutomaton.Components.Player
         /// </summary>
         private void InitializeAction()
         {
-            _setValueFinder = (e => tBFinder.Value = _currentFrame = e);
+            _setValueFinder = (e => tBFinder.Value = e);
 
             _started = (() =>
             {
@@ -217,26 +262,6 @@ namespace CellularAutomaton.Components.Player
         }
 
         /// <summary>
-        /// Инициализирует <see cref="Player"/> заданным полотном и размером области для вывода изображения.
-        /// </summary>
-        /// <param name="e">Поверхность рисования GDI+ на которую осуществляется вывод изображения.</param>
-        /// <param name="rec">Размеры области на которую осуществяется вывод изображения.</param>
-        /// <exception cref="ArgumentNullException">Параметр <paramref name="e"/> имеет значение <b>null</b>.</exception>
-        /// <exception cref="ArgumentException">Значение высоты или ширины размера меньше или равно нулю.</exception>
-        public void InitializePlayer(Graphics e, Rectangle rec)
-        {
-            _player = new Player(e, rec);
-            _player.Load(new Core.Record()); // Загрузка пустой записи.
-
-            _player.ChangeFrame += PlayerChangeFrame;
-            _player.StartPlay += PlayerStartPlay;
-            _player.PausePlay += PlayerPausePlay;
-            _player.StopPlay += PlayerStopPlay;
-
-            tBFinder.Maximum = _player.Record.Count;
-        }
-
-        /// <summary>
         /// Устанавливает значения свойств по умолчанию.
         /// </summary>
         private void InitializeProperties()
@@ -244,10 +269,6 @@ namespace CellularAutomaton.Components.Player
             FinderLargeChange = FinderLargeChangeDefValue;
             FinderSmallChange = FinderSmallChangeDefValue;
             FinderTickFrequency = FinderTickFrequencyDefValue;
-
-            // BUG: заменить save на open в ресурсах для fileName
-
-            FileName = Resources.CellularAutomatonRecorder__SaveFileDialogRecordDefFileName;
         }
 
         /// <summary>
@@ -267,34 +288,6 @@ namespace CellularAutomaton.Components.Player
         /// </summary>
         /// <returns><b>True</b>, если запись содержит данные, иначе <b>false</b>.</returns>
         private bool IsEmptyRecord() => _player?.Record != null ? 0 < _player.Record.Count : false;
-
-        /// <summary>
-        /// Возвращает имя файла, из которого осуществляется загрузка записи.
-        /// </summary>
-        [Browsable(false)]
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public string FileName { get; private set; }
-
-        /// <summary>
-        /// Загрузка записи функционирования клеточного автомата из файла с названием по умолчанию.
-        /// </summary>
-        public void LoadRecord()
-        {
-            _player.Load(FileName);
-            CheckIsStart();
-        }
-
-        /// <summary>
-        /// Загрузка записи функционирования клеточного автомата из файла с заданным названием.
-        /// </summary>
-        /// <param name="fileName">Имя файла, из которого осуществляется загрузка записи функционирования клеточного автомата.</param>
-        public void LoadRecord(string fileName)
-        {
-            FileName = fileName;
-            _player.Load(FileName);
-            CheckIsStart();
-        }
 
         /// <summary>
         /// Обработчик события <see cref="IPlayer.ChangeFrame"/>. Обрабатывает переход к следующему кадру.
@@ -357,7 +350,7 @@ namespace CellularAutomaton.Components.Player
                     CultureInfo.CurrentCulture,
                     Resources.PlayerController__SetToolTip__Finder,
                     tBFinder.Value,
-                    _player?.Record.Count ?? 0));
+                    _player?.Record?.Count ?? 0));
         }
 
         /// <summary>
@@ -373,15 +366,6 @@ namespace CellularAutomaton.Components.Player
                 _player.Rewind((short)tBFinder.Value);
                 _player.Play();
             }
-        }
-
-        /// <summary>
-        /// Возвращает или задаёт номер текущего кадра.
-        /// </summary>
-        public int CurrentFrame
-        {
-            get { return _currentFrame; }
-            set { _currentFrame = value; }
         }
 
         /// <summary>

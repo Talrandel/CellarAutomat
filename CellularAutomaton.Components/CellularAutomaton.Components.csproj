@@ -78,8 +78,8 @@
     <Compile Include="Recorder\IRecorder.cs" />
     <Compile Include="Recorder\Recorder.cs" />
     <Compile Include="Recorder\StateRecorder.cs" />
-    <Compile Include="SRCategoryAttribute.cs" />
-    <Compile Include="SRDescriptionAttribute.cs" />
+    <Compile Include="CACategoryAttribute.cs" />
+    <Compile Include="CADescriptionAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
@@ -108,6 +108,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="CellularAutomaton.Components.pfx" />
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

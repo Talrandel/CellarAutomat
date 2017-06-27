@@ -133,7 +133,7 @@
     <value>3, 3</value>
   </data>
   <data name="pBMain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>306, 131</value>
+    <value>410, 289</value>
   </data>
   <data name="pBMain.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -157,10 +157,10 @@
     <value>Fill</value>
   </data>
   <data name="playerController.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 140</value>
+    <value>3, 298</value>
   </data>
   <data name="playerController.Size" type="System.Drawing.Size, System.Drawing">
-    <value>306, 80</value>
+    <value>410, 80</value>
   </data>
   <data name="playerController.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -177,20 +177,110 @@
   <data name="&gt;&gt;playerController.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="tLPPlayerSettings.AutoSize" type="System.Boolean, mscorlib">
+  <data name="tLPFramesPerMinute.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="tLPPlayerSettings.ColumnCount" type="System.Int32, mscorlib">
+  <data name="tLPFramesPerMinute.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
+  </data>
+  <data name="lFramesPerMinute.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lFramesPerMinute.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="lFramesPerMinute.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 0</value>
+  </data>
+  <data name="lFramesPerMinute.Size" type="System.Drawing.Size, System.Drawing">
+    <value>91, 26</value>
+  </data>
+  <data name="lFramesPerMinute.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lFramesPerMinute.Text" xml:space="preserve">
+    <value>Кадров в минуту</value>
+  </data>
+  <data name="lFramesPerMinute.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lFramesPerMinute.Name" xml:space="preserve">
+    <value>lFramesPerMinute</value>
+  </data>
+  <data name="&gt;&gt;lFramesPerMinute.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lFramesPerMinute.Parent" xml:space="preserve">
+    <value>tLPFramesPerMinute</value>
+  </data>
+  <data name="&gt;&gt;lFramesPerMinute.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="nUDFramesPerMinute.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="nUDFramesPerMinute.Location" type="System.Drawing.Point, System.Drawing">
+    <value>208, 3</value>
+  </data>
+  <data name="nUDFramesPerMinute.Size" type="System.Drawing.Size, System.Drawing">
+    <value>199, 20</value>
+  </data>
+  <data name="nUDFramesPerMinute.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;nUDFramesPerMinute.Name" xml:space="preserve">
+    <value>nUDFramesPerMinute</value>
+  </data>
+  <data name="&gt;&gt;nUDFramesPerMinute.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;nUDFramesPerMinute.Parent" xml:space="preserve">
+    <value>tLPFramesPerMinute</value>
+  </data>
+  <data name="&gt;&gt;nUDFramesPerMinute.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tLPFramesPerMinute.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="tLPFramesPerMinute.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 384</value>
+  </data>
+  <data name="tLPFramesPerMinute.RowCount" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tLPFramesPerMinute.Size" type="System.Drawing.Size, System.Drawing">
+    <value>410, 26</value>
+  </data>
+  <data name="tLPFramesPerMinute.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;tLPFramesPerMinute.Name" xml:space="preserve">
+    <value>tLPFramesPerMinute</value>
+  </data>
+  <data name="&gt;&gt;tLPFramesPerMinute.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tLPFramesPerMinute.Parent" xml:space="preserve">
+    <value>tLPMain</value>
+  </data>
+  <data name="&gt;&gt;tLPFramesPerMinute.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="tLPFramesPerMinute.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="lFramesPerMinute" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="nUDFramesPerMinute" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,50,Percent,50" /&gt;&lt;Rows Styles="Percent,50" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="bLoadRecord.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="bLoadRecord.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
   <data name="bLoadRecord.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 29</value>
+    <value>3, 416</value>
   </data>
   <data name="bLoadRecord.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 46</value>
+    <value>410, 23</value>
   </data>
   <data name="bLoadRecord.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -205,97 +295,10 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;bLoadRecord.Parent" xml:space="preserve">
-    <value>tLPPlayerSettings</value>
-  </data>
-  <data name="&gt;&gt;bLoadRecord.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="lFPM.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lFPM.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Left</value>
-  </data>
-  <data name="lFPM.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 0</value>
-  </data>
-  <data name="lFPM.Size" type="System.Drawing.Size, System.Drawing">
-    <value>91, 26</value>
-  </data>
-  <data name="lFPM.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="lFPM.Text" xml:space="preserve">
-    <value>Кадров в минуту</value>
-  </data>
-  <data name="lFPM.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="&gt;&gt;lFPM.Name" xml:space="preserve">
-    <value>lFPM</value>
-  </data>
-  <data name="&gt;&gt;lFPM.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lFPM.Parent" xml:space="preserve">
-    <value>tLPPlayerSettings</value>
-  </data>
-  <data name="&gt;&gt;lFPM.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="nUDFPM.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="nUDFPM.Location" type="System.Drawing.Point, System.Drawing">
-    <value>156, 3</value>
-  </data>
-  <data name="nUDFPM.Size" type="System.Drawing.Size, System.Drawing">
-    <value>147, 20</value>
-  </data>
-  <data name="nUDFPM.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;nUDFPM.Name" xml:space="preserve">
-    <value>nUDFPM</value>
-  </data>
-  <data name="&gt;&gt;nUDFPM.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;nUDFPM.Parent" xml:space="preserve">
-    <value>tLPPlayerSettings</value>
-  </data>
-  <data name="&gt;&gt;nUDFPM.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="tLPPlayerSettings.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="tLPPlayerSettings.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 226</value>
-  </data>
-  <data name="tLPPlayerSettings.RowCount" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="tLPPlayerSettings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>306, 78</value>
-  </data>
-  <data name="tLPPlayerSettings.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;tLPPlayerSettings.Name" xml:space="preserve">
-    <value>tLPPlayerSettings</value>
-  </data>
-  <data name="&gt;&gt;tLPPlayerSettings.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tLPPlayerSettings.Parent" xml:space="preserve">
     <value>tLPMain</value>
   </data>
-  <data name="&gt;&gt;tLPPlayerSettings.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="tLPPlayerSettings.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="bLoadRecord" Row="1" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="lFPM" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="nUDFPM" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,50,Percent,50" /&gt;&lt;Rows Styles="AutoSize,0,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  <data name="&gt;&gt;bLoadRecord.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="tLPMain.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -304,10 +307,10 @@
     <value>0, 0</value>
   </data>
   <data name="tLPMain.RowCount" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="tLPMain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>312, 307</value>
+    <value>416, 442</value>
   </data>
   <data name="tLPMain.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -325,7 +328,7 @@
     <value>0</value>
   </data>
   <data name="tLPMain.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="pBMain" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="playerController" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="tLPPlayerSettings" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="Percent,100,AutoSize,0,Absolute,84" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="pBMain" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="playerController" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="tLPFramesPerMinute" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="bLoadRecord" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="Percent,100,AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -334,7 +337,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>312, 307</value>
+    <value>416, 442</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>CellularAutomatonPlayer</value>
