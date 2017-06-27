@@ -6,7 +6,7 @@
 // File          : PlayerController.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 20.06.2017 23:22
-// Last Revision : 26.06.2017 20:50
+// Last Revision : 27.06.2017 0:34
 // Description   : 
 #endregion
 
@@ -19,7 +19,8 @@ using CellularAutomaton.Components.Properties;
 
 namespace CellularAutomaton.Components.Player
 {
-    // TODO: выяснить необходимость Action.
+    // TODO: Выяснить необходимость Action.
+    // TODO: Добавить контроль над UI в соответствии с состоянием записи.
     /// <summary>
     /// Представляет элемент управления проигрывателем.
     /// </summary>
@@ -213,7 +214,8 @@ namespace CellularAutomaton.Components.Player
         /// </summary>
         private void CheckIsStart()
         {
-            Enabled = Player?.Record != null;
+            Enabled = (Player?.Record != null) && IsEmptyRecord();
+            Invoke(_stoped);
         }
 
         /// <summary>
@@ -267,6 +269,12 @@ namespace CellularAutomaton.Components.Player
             toolTip.SetToolTip(bPause, Resources.PlayerController__SetToolTip__Pause);
             toolTip.SetToolTip(bStop, Resources.PlayerController__SetToolTip__Stop);
         }
+
+        /// <summary>
+        /// Проверяет содержит ли запись данные.
+        /// </summary>
+        /// <returns><b>True</b>, если запись содержит данные, иначе <b>false</b>.</returns>
+        private bool IsEmptyRecord() => 0 < Player.Record.Count; // TODO: Добавить вызов этого метода: Enable = IsEmptyRecord() после загрузки записи.
 
         /// <summary>
         /// Обработчик события <see cref="IPlayer.ChangeFrame"/>. Обрабатывает переход к следующему кадру.
