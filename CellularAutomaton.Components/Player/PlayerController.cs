@@ -20,6 +20,7 @@ using System.Drawing;
 
 namespace CellularAutomaton.Components.Player
 {
+    // TODO: Добавить ToolTip.
     // TODO: Выяснить необходимость Action.
     // TODO: Добавить контроль над UI в соответствии с состоянием записи.
     /// <summary>

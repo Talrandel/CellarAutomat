@@ -20,6 +20,7 @@ using CellularAutomaton.Components.Properties;
 
 namespace CellularAutomaton.Components.Player
 {
+    // TODO: Настроить ToolTip.
     /// <summary>
     /// Представляет элемент управления - проигрыватель.
     /// </summary>
