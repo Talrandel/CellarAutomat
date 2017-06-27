@@ -37,8 +37,10 @@
             this.bPause = new System.Windows.Forms.Button();
             this.bStop = new System.Windows.Forms.Button();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.groupBox = new System.Windows.Forms.GroupBox();
             this.tLPMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tBFinder)).BeginInit();
+            this.groupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // tLPMain
@@ -55,9 +57,11 @@
             this.tLPMain.SetColumnSpan(this.tBFinder, 3);
             this.tBFinder.Cursor = System.Windows.Forms.Cursors.Hand;
             resources.ApplyResources(this.tBFinder, "tBFinder");
+            this.tBFinder.Maximum = 0;
             this.tBFinder.Name = "tBFinder";
             this.tBFinder.TickStyle = System.Windows.Forms.TickStyle.Both;
             this.tBFinder.Scroll += new System.EventHandler(this.tBFinder_Scroll);
+            this.tBFinder.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tBFinder_MouseDown);
             this.tBFinder.MouseUp += new System.Windows.Forms.MouseEventHandler(this.tBFinder_MouseUp);
             // 
             // bPlay
@@ -84,16 +88,25 @@
             this.bStop.UseVisualStyleBackColor = true;
             this.bStop.Click += new System.EventHandler(this.bStop_Click);
             // 
+            // groupBox
+            // 
+            resources.ApplyResources(this.groupBox, "groupBox");
+            this.groupBox.Controls.Add(this.tLPMain);
+            this.groupBox.Name = "groupBox";
+            this.groupBox.TabStop = false;
+            // 
             // PlayerController
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.tLPMain);
+            this.Controls.Add(this.groupBox);
             this.Name = "PlayerController";
             this.Load += new System.EventHandler(this.PlayerController_Load);
             this.tLPMain.ResumeLayout(false);
             this.tLPMain.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tBFinder)).EndInit();
+            this.groupBox.ResumeLayout(false);
+            this.groupBox.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -107,5 +120,6 @@
         private System.Windows.Forms.Button bStop;
         private System.Windows.Forms.TrackBar tBFinder;
         private System.Windows.Forms.ToolTip toolTip;
+        private System.Windows.Forms.GroupBox groupBox;
     }
 }

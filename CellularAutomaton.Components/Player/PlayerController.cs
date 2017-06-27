@@ -6,7 +6,7 @@
 // File          : PlayerController.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 27.06.2017 13:41
-// Last Revision : 27.06.2017 21:03
+// Last Revision : 27.06.2017 22:44
 // Description   : 
 #endregion
 
@@ -78,7 +78,7 @@ namespace CellularAutomaton.Components.Player
         /// <summary>
         /// Представляет метод обновляющий значение свойства <see cref="TrackBar.Value"/> элемента управления <see cref="tBFinder"/>.
         /// </summary>
-        private Action<short> _setValueFinder;
+        private Action<int> _setValueFinder;
 
         /// <summary>
         /// Представляет метод обрабатывающий событие <see cref="IPlayer.StartPlay"/>.
@@ -204,8 +204,6 @@ namespace CellularAutomaton.Components.Player
             _player.StartPlay += PlayerStartPlay;
             _player.PausePlay += PlayerPausePlay;
             _player.StopPlay += PlayerStopPlay;
-
-            tBFinder.Maximum = _player.Record.Count;
         }
 
         /// <summary>
@@ -216,6 +214,8 @@ namespace CellularAutomaton.Components.Player
         {
             _player.Load(FileName);
             CheckIsStart();
+            tBFinder.Maximum = _player.Record.Count;
+            SetToolTiptBFinder();
         }
 
         /// <summary>
@@ -249,7 +249,7 @@ namespace CellularAutomaton.Components.Player
         /// <param name="e">Сведения о событии.</param>
         private void bPause_Click(object sender, EventArgs e)
         {
-            _player.Pause();
+            Pause();
         }
 
         /// <summary>
@@ -287,7 +287,11 @@ namespace CellularAutomaton.Components.Player
         /// </summary>
         private void InitializeAction()
         {
-            _setValueFinder = (e => tBFinder.Value = e);
+            _setValueFinder = (e =>
+            {
+                tBFinder.Value = e;
+                SetToolTiptBFinder();
+            });
 
             _started = (() =>
             {
@@ -312,7 +316,8 @@ namespace CellularAutomaton.Components.Player
                 bPlay.Enabled = true;
                 bPause.Enabled = false;
                 bStop.Enabled = false;
-                tBFinder.Value = _player?.CurrenFrame ?? 0;
+
+                tBFinder.Value = 0;
 
                 OnStopPlay();
             });
@@ -330,6 +335,14 @@ namespace CellularAutomaton.Components.Player
             FinderTickFrequency = FinderTickFrequencyDefValue;
 
             FileName = nameof(FileName);
+        }
+
+        /// <summary>
+        /// Приостанавливает воспроизведение записи.
+        /// </summary>
+        private void Pause()
+        {
+            _player.Pause();
         }
 
         /// <summary>
@@ -392,8 +405,18 @@ namespace CellularAutomaton.Components.Player
                 string.Format(
                     CultureInfo.CurrentCulture,
                     Resources.PlayerController__SetToolTip__Finder,
-                    tBFinder.Value,
-                    _player?.Record?.Count ?? 0));
+                    tBFinder.Value + 1,
+                    _player?.Record?.Count + 1 ?? 0));
+        }
+
+        /// <summary>
+        /// Обработчик события <see cref="Control.MouseDown"/>. Приостанавливает воспроизведение записи.
+        /// </summary>
+        /// <param name="sender">Источник события.</param>
+        /// <param name="e">Сведения о событии.</param>
+        private void tBFinder_MouseDown(object sender, MouseEventArgs e)
+        {
+            Pause();
         }
 
         /// <summary>
@@ -403,12 +426,7 @@ namespace CellularAutomaton.Components.Player
         /// <param name="e">Сведения о событии.</param>
         private void tBFinder_MouseUp(object sender, MouseEventArgs e)
         {
-            if (tBFinder.Value != _player.CurrenFrame)
-            {
-                // TODO: Возможно, могут быть проблемы с UI из-за комбинирования Stop и Play.
-                _player.Rewind(tBFinder.Value);
-                _player.Play();
-            }
+            _player.Rewind(tBFinder.Value);
         }
 
         /// <summary>

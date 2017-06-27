@@ -5,8 +5,8 @@
 // Language      : C# 6.0
 // File          : Record.cs
 // Author        : Антипкин С.С., Макаров Е.А.
-// Created       : 18.06.2017 12:18
-// Last Revision : 24.06.2017 21:14
+// Created       : 27.06.2017 13:41
+// Last Revision : 27.06.2017 23:14
 // Description   : 
 #endregion
 
@@ -119,7 +119,6 @@ namespace CellularAutomaton.Core
             Rule = nameRule;
             StatesCount = statesCount;
             FieldSize = fieldSize;
-            Generation = generation;
         }
 
         /// <summary>
@@ -135,7 +134,6 @@ namespace CellularAutomaton.Core
             Rule = ca.Rule.Name;
             StatesCount = ca.StatesCount;
             FieldSize = new Size(ca.CurrentField.Width, ca.CurrentField.Height);
-            Generation = ca.Generation;
         }
 
         /// <summary>
@@ -151,7 +149,6 @@ namespace CellularAutomaton.Core
             Rule = record.Rule;
             StatesCount = record.StatesCount;
             FieldSize = record.FieldSize;
-            Generation = record.Generation;
 
             foreach (Bitmap bitmap in record)
                 _rec.AddLast(bitmap);
@@ -188,7 +185,7 @@ namespace CellularAutomaton.Core
         /// <summary>
         /// Возвращает число поколений.
         /// </summary>
-        public int Generation { get; private set; }
+        public int Generation => Count;
 
         /// <summary>
         /// Добавляет новый кадр в конец записи.
@@ -328,6 +325,7 @@ namespace CellularAutomaton.Core
                 _rec = loadedRec._rec;
                 Rule = loadedRec.Rule;
                 StatesCount = loadedRec.StatesCount;
+                FieldSize = loadedRec.FieldSize;
             }
         }
 

@@ -6,7 +6,7 @@
 // File          : Player.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 27.06.2017 13:41
-// Last Revision : 27.06.2017 21:03
+// Last Revision : 27.06.2017 23:00
 // Description   : 
 #endregion
 
@@ -108,7 +108,7 @@ namespace CellularAutomaton.Components.Player
             _timer = new Timer();
             _timer.Elapsed += TimerElapsed;
 
-            FramesPerMinute = Convert.ToByte(Resources.Player__FramesPerMinuteDefValue, CultureInfo.CurrentCulture);
+            FramesPerMinute = Convert.ToInt16(Resources.Player__FramesPerMinuteDefValue, CultureInfo.CurrentCulture);
         }
         #endregion
 
@@ -202,16 +202,17 @@ namespace CellularAutomaton.Components.Player
         /// <summary>
         /// Устанавливает указанную запись в проигрыватель.
         /// </summary>
-        /// <param name="rec">Запись для воспроизведения.</param>
+        /// <param name="rec">Объект реализующий интерфейс <see cref="IRecord"/>.</param>
         /// <exception cref="ArgumentNullException">Параметр <paramref name="rec"/> имеет значение <b>null</b>.</exception>
-        public void Load(Record rec)
+        public void Load(IRecord rec)
         {
             Stop();
             if (rec == null)
                 throw new ArgumentNullException(nameof(rec));
 
-            _record = rec;
+            _record = rec; // TODO: (IRecord)rec.Clone()?
             GetRecordEnumerator();
+            MoveNext();
         }
 
         /// <summary>
@@ -224,6 +225,7 @@ namespace CellularAutomaton.Components.Player
             Stop();
             _record.Load(fileName);
             GetRecordEnumerator();
+            MoveNext();
         }
 
         /// <summary>
@@ -272,15 +274,8 @@ namespace CellularAutomaton.Components.Player
         /// </exception>
         public void Rewind(int frame)
         {
-            bool isFastRewind = (frame - CurrenFrame == 1) && (frame <= _record.Count); // Возможна быстрая перемотка?
-            bool isNotRewind = (frame == CurrenFrame); // Нет необходимости в перемотке?
+            Pause();
 
-            if (isFastRewind || isNotRewind)
-                StopNoReset();
-            else
-                Stop();
-
-            // TODO: Может быть стоит сначала проверять?
             if (frame < 0)
             {
                 throw new ArgumentOutOfRangeException(nameof(frame), frame,
@@ -293,18 +288,16 @@ namespace CellularAutomaton.Components.Player
                     Resources.Ex__You_are_attempting_jump_to_frame_number_that_is_larger_than_count_frames_in_current_record_);
             }
 
-            CurrenFrame = frame;
-
-            if (!isNotRewind)
+            if (frame != CurrenFrame) // Необходима перемотка?
             {
-                if (isFastRewind)
-                    _recordEnumerator.MoveNext();
-                else
-                {
-                    for (int i = 0; i < CurrenFrame; i++) // Перейти к указанному кадру.
-                        _recordEnumerator.MoveNext();
-                }
+                if (frame < CurrenFrame) // Необходимо перемотать на предыдущий кадр?
+                    Reset();
+
+                for (int i = CurrenFrame; i < frame; i++) // Перейти к указанному кадру.
+                    MoveNext();
             }
+
+            CurrenFrame = frame;
         }
 
         /// <summary>
@@ -316,8 +309,7 @@ namespace CellularAutomaton.Components.Player
             {
                 State = StatePlayer.Stop;
                 OnStopPlay();
-                CurrenFrame = 0;
-                _recordEnumerator.Reset();
+                Reset();
                 _timer.Stop();
             }
         }
@@ -387,16 +379,22 @@ namespace CellularAutomaton.Components.Player
         }
 
         /// <summary>
-        /// Останавливает воспроизведение без перемотки в начало записи.
+        /// Перемещяет перечислитель к следующему кадру.
         /// </summary>
-        private void StopNoReset()
+        /// <returns><b>True</b>, если перечислитель был успешно перемещен к следующему элементу, иначе <b>false</b>, если был достигнут конец записи.</returns>
+        private bool MoveNext()
         {
-            if (State != StatePlayer.Stop)
-            {
-                State = StatePlayer.Stop;
-                OnStopPlay();
-                _timer.Stop();
-            }
+            return _recordEnumerator.MoveNext();
+        }
+
+        /// <summary>
+        /// Устанавливает перечислитель записи на первый кадр.
+        /// </summary>
+        private void Reset()
+        {
+            CurrenFrame = 0;
+            _recordEnumerator.Reset();
+            MoveNext();
         }
 
         /// <summary>
@@ -409,10 +407,10 @@ namespace CellularAutomaton.Components.Player
             _bufGr.Graphics.DrawImage(_recordEnumerator.Current, _bufGrContext.MaximumBuffer.Width, _bufGrContext.MaximumBuffer.Height);
             _bufGr.Render();
 
-            CurrenFrame++;
-
-            if (!_recordEnumerator.MoveNext()) // Не достигнут конец записи?
+            if (!MoveNext()) // Достигнут конец записи?
                 Stop();
+            else
+                CurrenFrame++;
         }
         #endregion
     }

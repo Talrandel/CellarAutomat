@@ -6,7 +6,7 @@
 // File          : IPlayer.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 27.06.2017 13:41
-// Last Revision : 27.06.2017 21:02
+// Last Revision : 27.06.2017 23:03
 // Description   : 
 #endregion
 
@@ -70,8 +70,8 @@ namespace CellularAutomaton.Components.Player
         /// <summary>
         /// Загружает указанную запись в проигрыватель.
         /// </summary>
-        /// <param name="rec">Запись для воспроизведения.</param>
-        void Load(Record rec);
+        /// <param name="rec">Объект реализующий интерфейс <see cref="IRecord"/>.</param>
+        void Load(IRecord rec);
 
         /// <summary>
         /// Загружает запись из указаннного файла.

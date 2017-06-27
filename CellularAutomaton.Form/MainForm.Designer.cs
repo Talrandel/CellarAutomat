@@ -38,31 +38,31 @@
             this.cellularAutomatonRecorder1.FileExtension = "bin";
             this.cellularAutomatonRecorder1.FileFilter = "Двоичные файлы (*.bin)|*.bin";
             this.cellularAutomatonRecorder1.FileName = "record";
-            this.cellularAutomatonRecorder1.Location = new System.Drawing.Point(12, 12);
+            this.cellularAutomatonRecorder1.Location = new System.Drawing.Point(12, 46);
             this.cellularAutomatonRecorder1.Name = "cellularAutomatonRecorder1";
             this.cellularAutomatonRecorder1.Size = new System.Drawing.Size(256, 239);
-            this.cellularAutomatonRecorder1.TabIndex = 0;
+            this.cellularAutomatonRecorder1.StatesCountMax = 16;
+            this.cellularAutomatonRecorder1.StatesCountMin = 2;
+            this.cellularAutomatonRecorder1.StatesCountValue = 2;
+            this.cellularAutomatonRecorder1.TabIndex = 1;
             // 
             // cellularAutomatonPlayer1
             // 
             this.cellularAutomatonPlayer1.FileExtension = "bin";
             this.cellularAutomatonPlayer1.FileFilter = "Двоичные файлы (*.bin)|*.bin";
             this.cellularAutomatonPlayer1.FileName = "record";
-            this.cellularAutomatonPlayer1.FramesPerMinuteMax = ((byte)(100));
-            this.cellularAutomatonPlayer1.FramesPerMinuteMin = ((byte)(0));
-            this.cellularAutomatonPlayer1.FramesPerMinuteValue = ((byte)(0));
-            this.cellularAutomatonPlayer1.Location = new System.Drawing.Point(339, 68);
+            this.cellularAutomatonPlayer1.Location = new System.Drawing.Point(385, 26);
             this.cellularAutomatonPlayer1.Name = "cellularAutomatonPlayer1";
-            this.cellularAutomatonPlayer1.Size = new System.Drawing.Size(312, 307);
-            this.cellularAutomatonPlayer1.TabIndex = 1;
+            this.cellularAutomatonPlayer1.Size = new System.Drawing.Size(272, 272);
+            this.cellularAutomatonPlayer1.TabIndex = 0;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(828, 403);
-            this.Controls.Add(this.cellularAutomatonPlayer1);
             this.Controls.Add(this.cellularAutomatonRecorder1);
+            this.Controls.Add(this.cellularAutomatonPlayer1);
             this.Name = "MainForm";
             this.Text = "MainForm";
             this.ResumeLayout(false);
@@ -72,7 +72,7 @@
 
         #endregion
 
-        private CellularAutomaton.Components.Recorder.CellularAutomatonRecorder cellularAutomatonRecorder1;
         private CellularAutomaton.Components.Player.CellularAutomatonPlayer cellularAutomatonPlayer1;
+        private CellularAutomaton.Components.Recorder.CellularAutomatonRecorder cellularAutomatonRecorder1;
     }
 }

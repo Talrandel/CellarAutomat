@@ -326,7 +326,7 @@ namespace CellularAutomaton.Core
 
                 // TODO: Проверить работоспособность Async варианта и перейти на него.
                 //OnGenerationChanged();
-                _synchronizationContext.Post(_invokeHandlers, null);
+                _synchronizationContext.Send(_invokeHandlers, null);
 
                 if (_ct.IsCancellationRequested || _pastField.Equals(CurrentField))
                 {
