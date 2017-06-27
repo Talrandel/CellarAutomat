@@ -6,7 +6,7 @@
 // File          : PlayerController.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 20.06.2017 23:22
-// Last Revision : 26.06.2017 22:14
+// Last Revision : 26.06.2017 20:50
 // Description   : 
 #endregion
 
@@ -59,7 +59,7 @@ namespace CellularAutomaton.Components.Player
         /// <summary>
         /// Представляет метод обновляющий значение свойства <see cref="TrackBar.Value"/> элемента управления <see cref="tBFinder"/>.
         /// </summary>
-        private Action<int> _setValueFinder;
+        private Action<short> _setValueFinder;
 
         /// <summary>
         /// Представляет метод обрабатывающий событие <see cref="IPlayer.StartPlay"/>.
@@ -70,6 +70,11 @@ namespace CellularAutomaton.Components.Player
         /// Представляет метод обрабатывающий событие <see cref="IPlayer.StopPlay"/>.
         /// </summary>
         private Action _stoped;
+
+        /// <summary>
+        /// Номер текущего кадра.
+        /// </summary>
+        private int _currentFrame;
         #endregion
 
         #region Properties
@@ -216,7 +221,7 @@ namespace CellularAutomaton.Components.Player
         /// </summary>
         private void InitializeAction()
         {
-            _setValueFinder = (e => tBFinder.Value = e);
+            _setValueFinder = (e => tBFinder.Value = _currentFrame = e);
 
             _started = (() =>
             {
@@ -237,7 +242,7 @@ namespace CellularAutomaton.Components.Player
                 bPlay.Enabled = true;
                 bPause.Enabled = false;
                 bStop.Enabled = false;
-                _setValueFinder(Player.CurrenFrame);
+                tBFinder.Value = Player.CurrenFrame;
             });
         }
 
@@ -337,9 +342,18 @@ namespace CellularAutomaton.Components.Player
             if (tBFinder.Value != Player.CurrenFrame)
             {
                 // TODO: Возможно, могут быть проблемы с UI из-за комбинирования Stop и Play.
-                Player.Rewind(tBFinder.Value);
+                Player.Rewind((short)tBFinder.Value);
                 Player.Play();
             }
+        }
+
+        /// <summary>
+        /// Возвращает или задаёт номер текущего кадра.
+        /// </summary>
+        public int CurrentFrame
+        {
+            get { return _currentFrame; }
+            set { _currentFrame = value; }
         }
 
         /// <summary>

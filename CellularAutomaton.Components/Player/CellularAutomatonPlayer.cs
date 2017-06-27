@@ -6,7 +6,7 @@
 // File          : CellularAutomatonPlayer.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 18.06.2017 15:54
-// Last Revision : 26.06.2017 23:04
+// Last Revision : 23.06.2017 12:04
 // Description   : 
 #endregion
 
@@ -23,6 +23,9 @@ namespace CellularAutomaton.Components.Player
     {
         // TODO: добавить NUD - скорость воспроизведения
         // TODO: добавить кнопку "Загрузить запись"
+        // TODO: NUD - добавить свойства minValue, maxValue, Value по аналогии с рекордером
+        // TODO: загрузить запись - обработчик? По аналогии с рекордером, но openFileDialog
+        // TODO: открыть и открыть КАК
 
         #region Fields
         /// <summary>
@@ -35,16 +38,17 @@ namespace CellularAutomaton.Components.Player
         /// <summary>
         /// Возвращает или задаёт режим размещения изображения.
         /// </summary>
-        [DefaultValue(PictureSizeMode.CenterImage)]
+        [DefaultValue(PictureBoxSizeMode.CenterImage)]
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [RefreshProperties(RefreshProperties.Repaint)]
         [SRCategory("Behavior")]
         [SRDescription(nameof(CellularAutomatonPlayer) + "__" + nameof(SizeMode) + SRDescriptionAttribute.Suffix)]
-        public PictureSizeMode SizeMode
+        public PictureBoxSizeMode SizeMode
         {
-            get { return (PictureSizeMode)pBMain.SizeMode; }
-            set { pBMain.SizeMode = (PictureBoxSizeMode)value; }
+            // TODO: Хорошо бы заменить на своё перечисление.
+            get { return pBMain.SizeMode; }
+            set { pBMain.SizeMode = value; }
         }
         #endregion
 
@@ -73,7 +77,7 @@ namespace CellularAutomaton.Components.Player
         {
             // TODO: Вынести в ресурсы.
 
-            SizeMode = PictureSizeMode.CenterImage;
+            SizeMode = PictureBoxSizeMode.CenterImage;
         }
         #endregion
     }
