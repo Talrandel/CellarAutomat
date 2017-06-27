@@ -115,6 +115,33 @@ namespace CellularAutomaton.Components.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на record.
+        /// </summary>
+        internal static string CellularAutomatonPlayer__OpenFileDialogRecordDefFileName {
+            get {
+                return ResourceManager.GetString("CellularAutomatonPlayer__OpenFileDialogRecordDefFileName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на bin.
+        /// </summary>
+        internal static string CellularAutomatonPlayer__OpenFileDialogRecordExt {
+            get {
+                return ResourceManager.GetString("CellularAutomatonPlayer__OpenFileDialogRecordExt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Двоичные файлы (*.bin)|*.bin.
+        /// </summary>
+        internal static string CellularAutomatonPlayer__OpenFileDialogRecordFilter {
+            get {
+                return ResourceManager.GetString("CellularAutomatonPlayer__OpenFileDialogRecordFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Максимальная плотность распределения клеток на поле клеточного автомата..
         /// </summary>
         internal static string CellularAutomatonRecorder__DencityMaxDescr {
@@ -286,6 +313,15 @@ namespace CellularAutomaton.Components.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Не задана запись для воспроизведения..
+        /// </summary>
+        internal static string Ex__NotSetRecordToPlay {
+            get {
+                return ResourceManager.GetString("Ex__NotSetRecordToPlay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Не загружена запись для воспроизведения..
         /// </summary>
         internal static string Ex__RecordNotLoaded {
@@ -295,57 +331,48 @@ namespace CellularAutomaton.Components.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Выполнена попытка перехода к кадру номер которого больше, чем кадров в текущей записи..
+        ///   Ищет локализованную строку, похожую на Ширина и/или высота области рисования меньше или равна нулю..
         /// </summary>
-        internal static string Ex__Выполнена_попытка_перехода_к_кадру_номер_которого_больше__чем_кадров_в_текущей_записи_ {
+        internal static string Ex__The_width_and_or_height__drawing_area_is_less_than_or_equal_to_zero_ {
             get {
-                return ResourceManager.GetString("Ex__Выполнена_попытка_перехода_к_кадру_номер_которого_больше__чем_кадров_в_текуще" +
-                        "й_записи_", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Выполнена попытка перехода к кадру с отрицательным индексом..
-        /// </summary>
-        internal static string Ex__Выполнена_попытка_перехода_к_кадру_с_отрицательным_индексом_ {
-            get {
-                return ResourceManager.GetString("Ex__Выполнена_попытка_перехода_к_кадру_с_отрицательным_индексом_", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Значение &apos;{0}&apos; должно лежать в диапазоне от &apos;{1}&apos; до &apos;{2}&apos;..
-        /// </summary>
-        internal static string Ex__Значение___0___должно_лежать_в_диапазоне_от___1___до___2___ {
-            get {
-                return ResourceManager.GetString("Ex__Значение___0___должно_лежать_в_диапазоне_от___1___до___2___", resourceCulture);
+                return ResourceManager.GetString("Ex__The_width_and_or_height__drawing_area_is_less_than_or_equal_to_zero_", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Ищет локализованную строку, похожую на Значение &apos;{0}&apos; не должно быть меньше &apos;{1}&apos;..
         /// </summary>
-        internal static string Ex__Значение___0___не_должно_быть_меньше___1___ {
+        internal static string Ex__Value___0___GEQ___1___ {
             get {
-                return ResourceManager.GetString("Ex__Значение___0___не_должно_быть_меньше___1___", resourceCulture);
+                return ResourceManager.GetString("Ex__Value___0___GEQ___1___", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Значение высоты или ширины размера меньше или равно нулю..
+        ///   Ищет локализованную строку, похожую на Значение &apos;{0}&apos; должно лежать в диапазоне от &apos;{1}&apos; до &apos;{2}&apos;..
         /// </summary>
-        internal static string Ex__Значение_высоты_или_ширины_размера_меньше_или_равно_нулю_ {
+        internal static string Ex__Value___0___must_be_between___1___and__2___ {
             get {
-                return ResourceManager.GetString("Ex__Значение_высоты_или_ширины_размера_меньше_или_равно_нулю_", resourceCulture);
+                return ResourceManager.GetString("Ex__Value___0___must_be_between___1___and__2___", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Не задана запись для воспроизведения..
+        ///   Ищет локализованную строку, похожую на Выполнена попытка перехода к кадру номер которого больше, чем кадров в текущей записи..
         /// </summary>
-        internal static string Ex__Не_задана_запись_для_воспроизведения_ {
+        internal static string Ex__You_are_attempting_jump_to_frame_number_that_is_larger_than_count_frames_in_current_record_ {
             get {
-                return ResourceManager.GetString("Ex__Не_задана_запись_для_воспроизведения_", resourceCulture);
+                return ResourceManager.GetString("Ex__You_are_attempting_jump_to_frame_number_that_is_larger_than_count_frames_in_c" +
+                        "urrent_record_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Выполнена попытка перехода к кадру с отрицательным индексом..
+        /// </summary>
+        internal static string Ex__You_are_attempting_to_go_to_frame_with_a_negative_index_ {
+            get {
+                return ResourceManager.GetString("Ex__You_are_attempting_to_go_to_frame_with_a_negative_index_", resourceCulture);
             }
         }
         

@@ -129,7 +129,7 @@ namespace CellularAutomaton.Components.Recorder
                         value,
                         string.Format(
                             CultureInfo.CurrentCulture,
-                            Resources.Ex__Значение___0___должно_лежать_в_диапазоне_от___1___до___2___,
+                            Resources.Ex__Value___0___must_be_between___1___and__2___,
                             nameof(DencityMax),
                             nameof(DencityMin), 0));
                 }
@@ -163,7 +163,7 @@ namespace CellularAutomaton.Components.Recorder
                         value,
                         string.Format(
                             CultureInfo.CurrentCulture,
-                            Resources.Ex__Значение___0___должно_лежать_в_диапазоне_от___1___до___2___,
+                            Resources.Ex__Value___0___must_be_between___1___and__2___,
                             nameof(DencityMin),
                             nameof(DencityMax)));
                 }
@@ -198,7 +198,7 @@ namespace CellularAutomaton.Components.Recorder
                         value,
                         string.Format(
                             CultureInfo.CurrentCulture,
-                            Resources.Ex__Значение___0___должно_лежать_в_диапазоне_от___1___до___2___,
+                            Resources.Ex__Value___0___must_be_between___1___and__2___,
                             nameof(DencityValue),
                             nameof(DencityMin),
                             nameof(DencityMax)));
@@ -268,7 +268,7 @@ namespace CellularAutomaton.Components.Recorder
                         value,
                         string.Format(
                             CultureInfo.CurrentCulture,
-                            Resources.Ex__Значение___0___не_должно_быть_меньше___1___,
+                            Resources.Ex__Value___0___GEQ___1___,
                             nameof(SizeFieldHeightMax),
                             nameof(SizeFieldHeightMin)));
                 }
@@ -303,7 +303,7 @@ namespace CellularAutomaton.Components.Recorder
                         value,
                         string.Format(
                             CultureInfo.CurrentCulture,
-                            Resources.Ex__Значение___0___должно_лежать_в_диапазоне_от___1___до___2___,
+                            Resources.Ex__Value___0___must_be_between___1___and__2___,
                             nameof(SizeFieldHeightMin),
                             nameof(SizeFieldHeightMax)));
                 }
@@ -338,7 +338,7 @@ namespace CellularAutomaton.Components.Recorder
                         value,
                         string.Format(
                             CultureInfo.CurrentCulture,
-                            Resources.Ex__Значение___0___должно_лежать_в_диапазоне_от___1___до___2___,
+                            Resources.Ex__Value___0___must_be_between___1___and__2___,
                             nameof(SizeFieldHeightValue),
                             nameof(SizeFieldHeightMin),
                             nameof(SizeFieldHeightMax)));
@@ -373,7 +373,7 @@ namespace CellularAutomaton.Components.Recorder
                         value,
                         string.Format(
                             CultureInfo.CurrentCulture,
-                            Resources.Ex__Значение___0___не_должно_быть_меньше___1___,
+                            Resources.Ex__Value___0___GEQ___1___,
                             nameof(SizeFieldWidthMax),
                             nameof(SizeFieldWidthMin)));
                 }
@@ -408,7 +408,7 @@ namespace CellularAutomaton.Components.Recorder
                         value,
                         string.Format(
                             CultureInfo.CurrentCulture,
-                            Resources.Ex__Значение___0___должно_лежать_в_диапазоне_от___1___до___2___,
+                            Resources.Ex__Value___0___must_be_between___1___and__2___,
                             nameof(SizeFieldWidthMin),
                             nameof(SizeFieldWidthMax)));
                 }
@@ -443,7 +443,7 @@ namespace CellularAutomaton.Components.Recorder
                         value,
                         string.Format(
                             CultureInfo.CurrentCulture,
-                            Resources.Ex__Значение___0___должно_лежать_в_диапазоне_от___1___до___2___,
+                            Resources.Ex__Value___0___must_be_between___1___and__2___,
                             nameof(SizeFieldWidthValue),
                             nameof(SizeFieldWidthMin),
                             nameof(SizeFieldWidthMax)));
@@ -479,7 +479,7 @@ namespace CellularAutomaton.Components.Recorder
                         value,
                         string.Format(
                             CultureInfo.CurrentCulture,
-                            Resources.Ex__Значение___0___должно_лежать_в_диапазоне_от___1___до___2___,
+                            Resources.Ex__Value___0___must_be_between___1___and__2___,
                             nameof(StatesCountMax),
                             nameof(StatesCountMin),
                             Core.CellularAutomaton.StatesNumberMax));
@@ -515,7 +515,7 @@ namespace CellularAutomaton.Components.Recorder
                         value,
                         string.Format(
                             CultureInfo.CurrentCulture,
-                            Resources.Ex__Значение___0___должно_лежать_в_диапазоне_от___1___до___2___,
+                            Resources.Ex__Value___0___must_be_between___1___and__2___,
                             nameof(StatesCountMin),
                             nameof(Core.CellularAutomaton.StatesNumberMin),
                             nameof(StatesCountMax)));
@@ -551,7 +551,7 @@ namespace CellularAutomaton.Components.Recorder
                         value,
                         string.Format(
                             CultureInfo.CurrentCulture,
-                            Resources.Ex__Значение___0___должно_лежать_в_диапазоне_от___1___до___2___,
+                            Resources.Ex__Value___0___must_be_between___1___and__2___,
                             nameof(StatesCountValue),
                             nameof(StatesCountMin),
                             nameof(StatesCountMax)));

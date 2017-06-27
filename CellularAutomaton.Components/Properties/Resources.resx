@@ -117,20 +117,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Ex__Значение___0___не_должно_быть_меньше___1___" xml:space="preserve">
+  <data name="Ex__Value___0___GEQ___1___" xml:space="preserve">
     <value>Значение '{0}' не должно быть меньше '{1}'.</value>
   </data>
-  <data name="Ex__Значение___0___должно_лежать_в_диапазоне_от___1___до___2___" xml:space="preserve">
+  <data name="Ex__Value___0___must_be_between___1___and__2___" xml:space="preserve">
     <value>Значение '{0}' должно лежать в диапазоне от '{1}' до '{2}'.</value>
   </data>
-  <data name="Ex__Выполнена_попытка_перехода_к_кадру_номер_которого_больше__чем_кадров_в_текущей_записи_" xml:space="preserve">
+  <data name="Ex__You_are_attempting_jump_to_frame_number_that_is_larger_than_count_frames_in_current_record_" xml:space="preserve">
     <value>Выполнена попытка перехода к кадру номер которого больше, чем кадров в текущей записи.</value>
   </data>
-  <data name="Ex__Выполнена_попытка_перехода_к_кадру_с_отрицательным_индексом_" xml:space="preserve">
+  <data name="Ex__You_are_attempting_to_go_to_frame_with_a_negative_index_" xml:space="preserve">
     <value>Выполнена попытка перехода к кадру с отрицательным индексом.</value>
   </data>
-  <data name="Ex__Значение_высоты_или_ширины_размера_меньше_или_равно_нулю_" xml:space="preserve">
-    <value>Значение высоты или ширины размера меньше или равно нулю.</value>
+  <data name="Ex__The_width_and_or_height__drawing_area_is_less_than_or_equal_to_zero_" xml:space="preserve">
+    <value>Ширина и/или высота области рисования меньше или равна нулю.</value>
   </data>
   <data name="CellularAutomatonRecorder__SaveFileDialogRecordExt" xml:space="preserve">
     <value>bin</value>
@@ -216,7 +216,7 @@
   <data name="Player__FramesPerMinuteDefValue" xml:space="preserve">
     <value>60</value>
   </data>
-  <data name="Ex__Не_задана_запись_для_воспроизведения_" xml:space="preserve">
+  <data name="Ex__NotSetRecordToPlay" xml:space="preserve">
     <value>Не задана запись для воспроизведения.</value>
   </data>
   <data name="Ex__RecordNotLoaded" xml:space="preserve">
@@ -239,5 +239,14 @@
   </data>
   <data name="CellularAutomatonPlayer__FramesPerMinuteValueDescr" xml:space="preserve">
     <value>Число кадров в минуту.</value>
+  </data>
+  <data name="CellularAutomatonPlayer__OpenFileDialogRecordDefFileName" xml:space="preserve">
+    <value>record</value>
+  </data>
+  <data name="CellularAutomatonPlayer__OpenFileDialogRecordExt" xml:space="preserve">
+    <value>bin</value>
+  </data>
+  <data name="CellularAutomatonPlayer__OpenFileDialogRecordFilter" xml:space="preserve">
+    <value>Двоичные файлы (*.bin)|*.bin</value>
   </data>
 </root>

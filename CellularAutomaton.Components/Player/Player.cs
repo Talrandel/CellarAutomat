@@ -86,7 +86,7 @@ namespace CellularAutomaton.Components.Player
         /// <param name="e">Поверхность рисования GDI+ на которую осуществляется вывод изображения.</param>
         /// <param name="rec">Размеры области на которую осуществяется вывод изображения.</param>
         /// <exception cref="ArgumentNullException">Параметр <paramref name="e"/> имеет значение <b>null</b>.</exception>
-        /// <exception cref="ArgumentException">Значение высоты или ширины размера меньше или равно нулю.</exception>
+        /// <exception cref="ArgumentException">Ширина и/или высота области рисования меньше или равна нулю.</exception>
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "e")]
         public Player(Graphics e, Rectangle rec)
         {
@@ -96,7 +96,7 @@ namespace CellularAutomaton.Components.Player
             if ((rec.Width == 0) || (rec.Height == 0))
             {
                 throw new ArgumentException(
-                    Resources.Ex__Значение_высоты_или_ширины_размера_меньше_или_равно_нулю_, nameof(rec));
+                    Resources.Ex__The_width_and_or_height__drawing_area_is_less_than_or_equal_to_zero_, nameof(rec));
             }
 
             _bufGrContext = new BufferedGraphicsContext();
@@ -156,7 +156,7 @@ namespace CellularAutomaton.Components.Player
                         value,
                         string.Format(
                             CultureInfo.CurrentCulture,
-                            Resources.Ex__Значение___0___должно_лежать_в_диапазоне_от___1___до___2___,
+                            Resources.Ex__Value___0___must_be_between___1___and__2___,
                             nameof(FramesPerMinute),
                             1, FramesPerMinuteMaxDefValue));
                 }
@@ -282,13 +282,13 @@ namespace CellularAutomaton.Components.Player
             if (frame < 0)
             {
                 throw new ArgumentOutOfRangeException(nameof(frame), frame,
-                    Resources.Ex__Выполнена_попытка_перехода_к_кадру_с_отрицательным_индексом_);
+                    Resources.Ex__You_are_attempting_to_go_to_frame_with_a_negative_index_);
             }
 
             if (_record.Count < frame)
             {
                 throw new ArgumentOutOfRangeException(nameof(frame), frame,
-                    Resources.Ex__Выполнена_попытка_перехода_к_кадру_номер_которого_больше__чем_кадров_в_текущей_записи_);
+                    Resources.Ex__You_are_attempting_jump_to_frame_number_that_is_larger_than_count_frames_in_current_record_);
             }
 
             CurrenFrame = frame;
