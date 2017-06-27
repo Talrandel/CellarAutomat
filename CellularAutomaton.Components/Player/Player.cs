@@ -27,6 +27,16 @@ namespace CellularAutomaton.Components.Player
     /// </summary>
     public class Player : IPlayer, IDisposable
     {
+        /// <summary>
+        /// Максимальное число кадров в минуту.
+        /// </summary>
+        public const short FramesPerMinuteMaxDefValue = 3600;
+
+        /// <summary>
+        /// Значение числа кадров в минуту по умолчанию.
+        /// </summary>
+        public const short FramesPerMinuteValueDefValue = 60;
+
         #region Fields
         /// <summary>
         /// Графический буфер на который осуществляется вывод изображения.
@@ -56,7 +66,7 @@ namespace CellularAutomaton.Components.Player
         /// <summary>
         /// Число кадров в минуту.
         /// </summary>
-        private byte _framesPerMinute;
+        private short _framesPerMinute;
 
         /// <summary>
         /// Воспроизводимая запись.
@@ -130,21 +140,25 @@ namespace CellularAutomaton.Components.Player
         /// <summary>
         /// Возвращает или задаёт число кадров в минуту.
         /// </summary>
-        /// <exception cref="ArgumentOutOfRangeException">Число кадров в минуту не может быть равной нулю величиной.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">Значение <see name="FramesPerMinute"/> должно лежать в диапазоне от 1 до <see name="FramesPerMinuteMaxDefValue"/>.</exception>
         /// <remarks>
-        ///     <b>Значение по умолчанию - 2.</b>
+        ///     <b>Значение по умолчанию - <see name="FramesPerMinuteValueDefValue"/>.</b>
         /// </remarks>
-        public byte FramesPerMinute
+        public short FramesPerMinute
         {
             get { return _framesPerMinute; }
             set
             {
-                if (value <= 0)
+                if (value <= 0 || value > FramesPerMinuteMaxDefValue)
                 {
                     throw new ArgumentOutOfRangeException(
                         nameof(value),
                         value,
-                        Resources.Ex__Число_кадров_в_минуту_не_может_быть_равной_нулю_величиной_);
+                        string.Format(
+                            CultureInfo.CurrentCulture,
+                            Resources.Ex__Значение___0___должно_лежать_в_диапазоне_от___1___до___2___,
+                            nameof(FramesPerMinute),
+                            1, FramesPerMinuteMaxDefValue));
                 }
 
                 _framesPerMinute = value;

@@ -296,16 +296,7 @@ namespace CellularAutomaton.Components.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Число кадров в минуту не может быть равной нулю величиной..
-        /// </summary>
-        internal static string Ex__Число_кадров_в_минуту_не_может_быть_равной_нулю_величиной_ {
-            get {
-                return ResourceManager.GetString("Ex__Число_кадров_в_минуту_не_может_быть_равной_нулю_величиной_", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на 2.
+        ///   Ищет локализованную строку, похожую на 60.
         /// </summary>
         internal static string Player__FramesPerMinuteDefValue {
             get {

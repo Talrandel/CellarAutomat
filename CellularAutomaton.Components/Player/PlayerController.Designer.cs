@@ -13,9 +13,10 @@
         /// <param name="disposing">истинно, если управляемый ресурс должен быть удален; иначе ложно.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
+            if (disposing)
             {
-                components.Dispose();
+                _player?.Dispose();
+                components?.Dispose();
             }
             base.Dispose(disposing);
         }

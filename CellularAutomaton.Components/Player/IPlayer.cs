@@ -53,7 +53,7 @@ namespace CellularAutomaton.Components.Player
         /// <summary>
         /// Возвращает или задаёт скорость воспроизведения (кадры в минуту).
         /// </summary>
-        byte FramesPerMinute { get; set; }
+        short FramesPerMinute { get; set; }
 
         /// <summary>
         /// Возвращает воспроизводимую запись.

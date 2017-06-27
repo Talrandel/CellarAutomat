@@ -132,9 +132,6 @@
   <data name="Ex__Значение_высоты_или_ширины_размера_меньше_или_равно_нулю_" xml:space="preserve">
     <value>Значение высоты или ширины размера меньше или равно нулю.</value>
   </data>
-  <data name="Ex__Число_кадров_в_минуту_не_может_быть_равной_нулю_величиной_" xml:space="preserve">
-    <value>Число кадров в минуту не может быть равной нулю величиной.</value>
-  </data>
   <data name="CellularAutomatonRecorder__SaveFileDialogRecordExt" xml:space="preserve">
     <value>bin</value>
   </data>
@@ -217,12 +214,12 @@
     <value>Число состояний клетки клеточного автомата.</value>
   </data>
   <data name="Player__FramesPerMinuteDefValue" xml:space="preserve">
-    <value>2</value>
+    <value>60</value>
   </data>
-    <data name="Ex__Не_задана_запись_для_воспроизведения_" xml:space="preserve">
+  <data name="Ex__Не_задана_запись_для_воспроизведения_" xml:space="preserve">
     <value>Не задана запись для воспроизведения.</value>
   </data>
-    <data name="Ex__RecordNotLoaded" xml:space="preserve">
+  <data name="Ex__RecordNotLoaded" xml:space="preserve">
     <value>Не загружена запись для воспроизведения.</value>
   </data>
 </root>

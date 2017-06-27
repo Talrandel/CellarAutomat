@@ -16,6 +16,7 @@ using System.Globalization;
 using System.Windows.Forms;
 
 using CellularAutomaton.Components.Properties;
+using System.Drawing;
 
 namespace CellularAutomaton.Components.Player
 {
@@ -51,11 +52,6 @@ namespace CellularAutomaton.Components.Player
         /// Представляет метод обрабатывающий событие <see cref="IPlayer.PausePlay"/>.
         /// </summary>
         private Action _paused;
-
-        /// <summary>
-        /// Объект реализующий интерфейс <see cref="IPlayer"/> которым осуществляется управление.
-        /// </summary>
-        private IPlayer _player;
 
         /// <summary>
         /// Представляет метод обновляющий значение свойства <see cref="TrackBar.Value"/> элемента управления <see cref="tBFinder"/>.
@@ -131,38 +127,9 @@ namespace CellularAutomaton.Components.Player
         }
 
         /// <summary>
-        /// Возвращает или задаёт объект реализующий интерфейс <see cref="IPlayer"/> которым осуществляется управление.
+        /// Объект <see cref="Player"/>, которым осуществляется управление.
         /// </summary>
-        /// <exception cref="ArgumentNullException">Параметр <paramref name="value"/> имеет значение <b>null</b>.</exception>
-        /// <exception cref="ArgumentException">Не задана запись для воспроизведения.</exception>
-        [Browsable(false)]
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public IPlayer Player
-        {
-            get { return _player; }
-            set
-            {
-                if (value == null)
-                    throw new ArgumentNullException(nameof(value));
-
-                if (value.Record == null)
-                {
-                    throw new ArgumentException(
-                        Resources.Ex__Не_задана_запись_для_воспроизведения_,
-                        nameof(value));
-                }
-
-                _player = value;
-
-                _player.ChangeFrame += PlayerChangeFrame;
-                _player.StartPlay += PlayerStartPlay;
-                _player.PausePlay += PlayerPausePlay;
-                _player.StopPlay += PlayerStopPlay;
-
-                tBFinder.Maximum = _player.Record.Count;
-            }
-        }
+        private Player _player;
         #endregion
 
         #region Constructors
@@ -186,7 +153,7 @@ namespace CellularAutomaton.Components.Player
         /// <param name="e">Сведения о событии.</param>
         private void bPause_Click(object sender, EventArgs e)
         {
-            Player.Pause();
+            _player.Pause();
         }
 
         /// <summary>
@@ -196,7 +163,7 @@ namespace CellularAutomaton.Components.Player
         /// <param name="e">Сведения о событии.</param>
         private void bPlay_Click(object sender, EventArgs e)
         {
-            Player.Play();
+            _player.Play();
         }
 
         /// <summary>
@@ -206,7 +173,7 @@ namespace CellularAutomaton.Components.Player
         /// <param name="e">Сведения о событии.</param>
         private void bStop_Click(object sender, EventArgs e)
         {
-            Player.Stop();
+            _player.Stop();
         }
 
         /// <summary>
@@ -214,7 +181,7 @@ namespace CellularAutomaton.Components.Player
         /// </summary>
         private void CheckIsStart()
         {
-            Enabled = (Player?.Record != null) && IsEmptyRecord();
+            Enabled = (_player?.Record != null) && IsEmptyRecord();
             Invoke(_stoped);
         }
 
@@ -244,8 +211,28 @@ namespace CellularAutomaton.Components.Player
                 bPlay.Enabled = true;
                 bPause.Enabled = false;
                 bStop.Enabled = false;
-                tBFinder.Value = Player.CurrenFrame;
+                tBFinder.Value = _player?.CurrenFrame ?? 0;
             });
+        }
+
+        /// <summary>
+        /// Инициализирует <see cref="Player"/> заданным полотном и размером области для вывода изображения.
+        /// </summary>
+        /// <param name="e">Поверхность рисования GDI+ на которую осуществляется вывод изображения.</param>
+        /// <param name="rec">Размеры области на которую осуществяется вывод изображения.</param>
+        /// <exception cref="ArgumentNullException">Параметр <paramref name="e"/> имеет значение <b>null</b>.</exception>
+        /// <exception cref="ArgumentException">Значение высоты или ширины размера меньше или равно нулю.</exception>
+        public void InitializePlayer(Graphics e, Rectangle rec)
+        {
+            _player = new Player(e, rec);
+            _player.Load(new Core.Record()); // Загрузка пустой записи.
+
+            _player.ChangeFrame += PlayerChangeFrame;
+            _player.StartPlay += PlayerStartPlay;
+            _player.PausePlay += PlayerPausePlay;
+            _player.StopPlay += PlayerStopPlay;
+
+            tBFinder.Maximum = _player.Record.Count;
         }
 
         /// <summary>
@@ -256,6 +243,10 @@ namespace CellularAutomaton.Components.Player
             FinderLargeChange = FinderLargeChangeDefValue;
             FinderSmallChange = FinderSmallChangeDefValue;
             FinderTickFrequency = FinderTickFrequencyDefValue;
+
+            // BUG: заменить save на open в ресурсах для fileName
+
+            FileName = Resources.CellularAutomatonRecorder__SaveFileDialogRecordDefFileName;
         }
 
         /// <summary>
@@ -271,10 +262,38 @@ namespace CellularAutomaton.Components.Player
         }
 
         /// <summary>
-        /// Проверяет содержит ли запись данные.
+        /// Проверяет, содержит ли запись данные.
         /// </summary>
         /// <returns><b>True</b>, если запись содержит данные, иначе <b>false</b>.</returns>
-        private bool IsEmptyRecord() => 0 < Player.Record.Count; // TODO: Добавить вызов этого метода: Enable = IsEmptyRecord() после загрузки записи.
+        private bool IsEmptyRecord() => _player?.Record != null ? 0 < _player.Record.Count : false;
+
+        /// <summary>
+        /// Возвращает имя файла, из которого осуществляется загрузка записи.
+        /// </summary>
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public string FileName { get; private set; }
+
+        /// <summary>
+        /// Загрузка записи функционирования клеточного автомата из файла с названием по умолчанию.
+        /// </summary>
+        public void LoadRecord()
+        {
+            _player.Load(FileName);
+            CheckIsStart();
+        }
+
+        /// <summary>
+        /// Загрузка записи функционирования клеточного автомата из файла с заданным названием.
+        /// </summary>
+        /// <param name="fileName">Имя файла, из которого осуществляется загрузка записи функционирования клеточного автомата.</param>
+        public void LoadRecord(string fileName)
+        {
+            FileName = fileName;
+            _player.Load(FileName);
+            CheckIsStart();
+        }
 
         /// <summary>
         /// Обработчик события <see cref="IPlayer.ChangeFrame"/>. Обрабатывает переход к следующему кадру.
@@ -337,7 +356,7 @@ namespace CellularAutomaton.Components.Player
                     CultureInfo.CurrentCulture,
                     Resources.PlayerController__SetToolTip__Finder,
                     tBFinder.Value,
-                    Player?.Record.Count ?? 0));
+                    _player?.Record.Count ?? 0));
         }
 
         /// <summary>
@@ -347,11 +366,11 @@ namespace CellularAutomaton.Components.Player
         /// <param name="e">Сведения о событии.</param>
         private void tBFinder_MouseUp(object sender, MouseEventArgs e)
         {
-            if (tBFinder.Value != Player.CurrenFrame)
+            if (tBFinder.Value != _player.CurrenFrame)
             {
                 // TODO: Возможно, могут быть проблемы с UI из-за комбинирования Stop и Play.
-                Player.Rewind((short)tBFinder.Value);
-                Player.Play();
+                _player.Rewind((short)tBFinder.Value);
+                _player.Play();
             }
         }
 

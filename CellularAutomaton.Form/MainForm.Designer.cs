@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.cellularAutomatonRecorder1 = new CellularAutomaton.Components.Recorder.CellularAutomatonRecorder();
+            this.cellularAutomatonPlayer1 = new CellularAutomaton.Components.Player.CellularAutomatonPlayer();
             this.SuspendLayout();
             // 
             // cellularAutomatonRecorder1
@@ -42,11 +43,25 @@
             this.cellularAutomatonRecorder1.Size = new System.Drawing.Size(256, 239);
             this.cellularAutomatonRecorder1.TabIndex = 0;
             // 
+            // cellularAutomatonPlayer1
+            // 
+            this.cellularAutomatonPlayer1.FileExtension = "bin";
+            this.cellularAutomatonPlayer1.FileFilter = "Двоичные файлы (*.bin)|*.bin";
+            this.cellularAutomatonPlayer1.FileName = "record";
+            this.cellularAutomatonPlayer1.FramesPerMinuteMax = ((byte)(100));
+            this.cellularAutomatonPlayer1.FramesPerMinuteMin = ((byte)(0));
+            this.cellularAutomatonPlayer1.FramesPerMinuteValue = ((byte)(0));
+            this.cellularAutomatonPlayer1.Location = new System.Drawing.Point(339, 68);
+            this.cellularAutomatonPlayer1.Name = "cellularAutomatonPlayer1";
+            this.cellularAutomatonPlayer1.Size = new System.Drawing.Size(312, 307);
+            this.cellularAutomatonPlayer1.TabIndex = 1;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(677, 290);
+            this.ClientSize = new System.Drawing.Size(828, 403);
+            this.Controls.Add(this.cellularAutomatonPlayer1);
             this.Controls.Add(this.cellularAutomatonRecorder1);
             this.Name = "MainForm";
             this.Text = "MainForm";
@@ -58,5 +73,6 @@
         #endregion
 
         private CellularAutomaton.Components.Recorder.CellularAutomatonRecorder cellularAutomatonRecorder1;
+        private CellularAutomaton.Components.Player.CellularAutomatonPlayer cellularAutomatonPlayer1;
     }
 }

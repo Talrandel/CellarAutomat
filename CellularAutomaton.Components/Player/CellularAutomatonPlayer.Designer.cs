@@ -16,7 +16,6 @@
         {
             if (disposing)
             {
-                _player?.Dispose();
                 components?.Dispose();
             }
             base.Dispose(disposing);
@@ -77,6 +76,7 @@
             resources.ApplyResources(this.bLoadRecord, "bLoadRecord");
             this.bLoadRecord.Name = "bLoadRecord";
             this.bLoadRecord.UseVisualStyleBackColor = true;
+            this.bLoadRecord.Click += new System.EventHandler(this.bLoadRecord_Click);
             // 
             // lFPM
             // 
