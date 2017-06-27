@@ -6,7 +6,7 @@
 // File          : PlayerController.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 27.06.2017 13:41
-// Last Revision : 27.06.2017 16:49
+// Last Revision : 27.06.2017 21:03
 // Description   : 
 #endregion
 
@@ -21,9 +21,7 @@ using CellularAutomaton.Core;
 
 namespace CellularAutomaton.Components.Player
 {
-    // TODO: Добавить ToolTip.
     // TODO: Выяснить необходимость Action.
-    // TODO: Добавить контроль над UI в соответствии с состоянием записи.
     /// <summary>
     /// Представляет элемент управления проигрывателем.
     /// </summary>
@@ -32,6 +30,23 @@ namespace CellularAutomaton.Components.Player
     /// </remarks>
     public partial class PlayerController : UserControl
     {
+        #region Events
+        /// <summary>
+        /// Происходит при приостановке воспроизведения.
+        /// </summary>
+        public event EventHandler PausePlay;
+
+        /// <summary>
+        /// Происходит при начале воспроизведения.
+        /// </summary>
+        public event EventHandler StartPlay;
+
+        /// <summary>
+        /// Происходит при окончании воспроизведения.
+        /// </summary>
+        public event EventHandler StopPlay;
+        #endregion
+
         #region Static Fields and Constants
         /// <summary>
         /// Значение по умолчанию свойства <see cref="FinderLargeChange"/>.
@@ -78,12 +93,13 @@ namespace CellularAutomaton.Components.Player
 
         #region Properties
         /// <summary>
-        /// Возвращает имя файла, из которого осуществляется загрузка записи.
+        /// Возвращает или задаёт имя файла, из которого осуществляется загрузка записи.
         /// </summary>
-        [Browsable(false)]
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public string FileName { get; private set; }
+        [Browsable(true)]
+        [EditorBrowsable(EditorBrowsableState.Always)]
+        [CACategory("Data")]
+        [CADescription(nameof(PlayerController) + "__" + nameof(FileName) + CADescriptionAttribute.Suffix)]
+        public string FileName { get; set; }
 
         /// <summary>
         /// Возвращает или задаёт число на которое перемещается ползунок по шкале поиска при щелчке мыши по элементу управления или нажатию клавиш PAGE UP, PAGE DOWN.
@@ -135,6 +151,27 @@ namespace CellularAutomaton.Components.Player
             get { return (short)tBFinder.TickFrequency; }
             set { tBFinder.TickFrequency = value; }
         }
+
+        /// <summary>
+        /// Возвращает или задаёт скорость воспроизведения записи (кадры в минуту) функционирования клеточного автомата.
+        /// </summary>
+        /// <remarks>
+        ///     <b>Значение по умолчанию - <see cref="Player.FramesPerMinuteValueDefValue"/>.</b>
+        /// </remarks>
+        [DefaultValue(Player.FramesPerMinuteValueDefValue)]
+        [Browsable(true)]
+        [EditorBrowsable(EditorBrowsableState.Always)]
+        [CACategory("Appearance")]
+        [CADescription(nameof(PlayerController) + "__" + nameof(FramesPerMinuteValue) + CADescriptionAttribute.Suffix)]
+        public short FramesPerMinuteValue { get; set; }
+
+        /// <summary>
+        /// Возвращает воспроизводимую запись.
+        /// </summary>
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public IReadOnlyRecord Record => _player?.Record;
         #endregion
 
         #region Constructors
@@ -144,7 +181,7 @@ namespace CellularAutomaton.Components.Player
         public PlayerController()
         {
             InitializeComponent();
-            InitializeToolTip();
+            SetToolTiptBFinder();
             InitializeAction();
             InitializeProperties();
         }
@@ -174,6 +211,7 @@ namespace CellularAutomaton.Components.Player
         /// <summary>
         /// Загрузка записи функционирования клеточного автомата из файла заданного свойством <see cref="FileName"/>.
         /// </summary>
+        /// <exception cref="ArgumentException">Имя файла не задано, пустое или состоит из одних пробелов.</exception>
         public void LoadRecord()
         {
             _player.Load(FileName);
@@ -181,15 +219,27 @@ namespace CellularAutomaton.Components.Player
         }
 
         /// <summary>
-        /// Загрузка записи функционирования клеточного автомата из файла с заданным именем.
+        /// Вызывает событие <see cref="PausePlay"/>.
         /// </summary>
-        /// <param name="fileName">Имя файла, из которого осуществляется загрузка записи функционирования клеточного автомата.</param>
-        public void LoadRecord(string fileName)
+        protected virtual void OnPausePlay()
         {
-            _player.Load(fileName);
-            FileName = fileName;
+            PausePlay?.Invoke(this, EventArgs.Empty);
+        }
 
-            CheckIsStart();
+        /// <summary>
+        /// Вызывает событие <see cref="StartPlay"/>.
+        /// </summary>
+        protected virtual void OnStartPlay()
+        {
+            StartPlay?.Invoke(this, EventArgs.Empty);
+        }
+
+        /// <summary>
+        /// Вызывает событие <see cref="StopPlay"/>.
+        /// </summary>
+        protected virtual void OnStopPlay()
+        {
+            StopPlay?.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>
@@ -209,6 +259,7 @@ namespace CellularAutomaton.Components.Player
         /// <param name="e">Сведения о событии.</param>
         private void bPlay_Click(object sender, EventArgs e)
         {
+            _player.FramesPerMinute = FramesPerMinuteValue;
             _player.Play();
         }
 
@@ -227,7 +278,7 @@ namespace CellularAutomaton.Components.Player
         /// </summary>
         private void CheckIsStart()
         {
-            Enabled = (_player?.Record != null) && IsEmptyRecord();
+            Enabled = (_player?.Record != null) && (0 < _player.Record.Count);
             Invoke(_stoped);
         }
 
@@ -243,6 +294,8 @@ namespace CellularAutomaton.Components.Player
                 bPlay.Enabled = false;
                 bPause.Enabled = true;
                 bStop.Enabled = true;
+
+                OnStartPlay();
             });
 
             _paused = (() =>
@@ -250,6 +303,8 @@ namespace CellularAutomaton.Components.Player
                 bPlay.Enabled = true;
                 bPause.Enabled = false;
                 bStop.Enabled = true;
+
+                OnPausePlay();
             });
 
             _stoped = (() =>
@@ -258,6 +313,8 @@ namespace CellularAutomaton.Components.Player
                 bPause.Enabled = false;
                 bStop.Enabled = false;
                 tBFinder.Value = _player?.CurrenFrame ?? 0;
+
+                OnStopPlay();
             });
         }
 
@@ -269,25 +326,9 @@ namespace CellularAutomaton.Components.Player
             FinderLargeChange = FinderLargeChangeDefValue;
             FinderSmallChange = FinderSmallChangeDefValue;
             FinderTickFrequency = FinderTickFrequencyDefValue;
+
+            FileName = nameof(FileName);
         }
-
-        /// <summary>
-        /// Инициализирует тексты подсказок элементов управления.
-        /// </summary>
-        private void InitializeToolTip()
-        {
-            SetToolTiptBFinder();
-
-            toolTip.SetToolTip(bPlay, Resources.PlayerController__SetToolTip__Play);
-            toolTip.SetToolTip(bPause, Resources.PlayerController__SetToolTip__Pause);
-            toolTip.SetToolTip(bStop, Resources.PlayerController__SetToolTip__Stop);
-        }
-
-        /// <summary>
-        /// Проверяет, содержит ли запись данные.
-        /// </summary>
-        /// <returns><b>True</b>, если запись содержит данные, иначе <b>false</b>.</returns>
-        private bool IsEmptyRecord() => _player?.Record != null ? 0 < _player.Record.Count : false;
 
         /// <summary>
         /// Обработчик события <see cref="IPlayer.ChangeFrame"/>. Обрабатывает переход к следующему кадру.
@@ -363,7 +404,7 @@ namespace CellularAutomaton.Components.Player
             if (tBFinder.Value != _player.CurrenFrame)
             {
                 // TODO: Возможно, могут быть проблемы с UI из-за комбинирования Stop и Play.
-                _player.Rewind((short)tBFinder.Value);
+                _player.Rewind(tBFinder.Value);
                 _player.Play();
             }
         }

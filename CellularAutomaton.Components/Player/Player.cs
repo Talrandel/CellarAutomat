@@ -5,8 +5,8 @@
 // Language      : C# 6.0
 // File          : Player.cs
 // Author        : Антипкин С.С., Макаров Е.А.
-// Created       : 18.06.2017 12:46
-// Last Revision : 27.06.2017 0:26
+// Created       : 27.06.2017 13:41
+// Last Revision : 27.06.2017 21:03
 // Description   : 
 #endregion
 
@@ -27,6 +27,7 @@ namespace CellularAutomaton.Components.Player
     /// </summary>
     public class Player : IPlayer, IDisposable
     {
+        #region Static Fields and Constants
         /// <summary>
         /// Максимальное число кадров в минуту.
         /// </summary>
@@ -36,6 +37,7 @@ namespace CellularAutomaton.Components.Player
         /// Значение числа кадров в минуту по умолчанию.
         /// </summary>
         public const short FramesPerMinuteValueDefValue = 60;
+        #endregion
 
         #region Fields
         /// <summary>

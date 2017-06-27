@@ -6,7 +6,7 @@
 // File          : CellularAutomatonPlayer.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 27.06.2017 13:41
-// Last Revision : 27.06.2017 13:42
+// Last Revision : 27.06.2017 21:02
 // Description   : 
 #endregion
 
@@ -17,6 +17,7 @@ using System.Globalization;
 using System.Windows.Forms;
 
 using CellularAutomaton.Components.Properties;
+using CellularAutomaton.Core;
 
 namespace CellularAutomaton.Components.Player
 {
@@ -26,7 +27,39 @@ namespace CellularAutomaton.Components.Player
     /// </summary>
     public partial class CellularAutomatonPlayer : UserControl
     {
+        #region Events
+        /// <summary>
+        /// Происходит при приостановке воспроизведения.
+        /// </summary>
+        public event EventHandler PausePlay;
+
+        /// <summary>
+        /// Происходит при начале воспроизведения.
+        /// </summary>
+        public event EventHandler StartPlay;
+
+        /// <summary>
+        /// Происходит при окончании воспроизведения.
+        /// </summary>
+        public event EventHandler StopPlay;
+        #endregion
+
         #region Static Fields and Constants
+        /// <summary>
+        /// Значение по умолчанию свойства <see cref="FinderLargeChange"/>.
+        /// </summary>
+        private const short FinderLargeChangeDefValue = 5;
+
+        /// <summary>
+        /// Значение по умолчанию свойства <see cref="FinderSmallChange"/>.
+        /// </summary>
+        private const short FinderSmallChangeDefValue = 1;
+
+        /// <summary>
+        /// Значение по умолчанию свойства <see cref="FinderTickFrequency"/>.
+        /// </summary>
+        private const short FinderTickFrequencyDefValue = 1;
+
         /// <summary>
         /// Значение по умолчанию свойства <see cref="FramesPerMinuteMin"/>.
         /// </summary>
@@ -66,10 +99,65 @@ namespace CellularAutomaton.Components.Player
         [EditorBrowsable(EditorBrowsableState.Always)]
         [CACategory("Data")]
         [CADescription(nameof(CellularAutomatonPlayer) + "__" + nameof(FileName) + CADescriptionAttribute.Suffix)]
-        public string FileName { get; set; }
+        public string FileName
+        {
+            get { return playerController.FileName; }
+            set { playerController.FileName = value; }
+        }
 
         /// <summary>
-        /// Возвращает или задаёт максимальное количество кадров в минуту для скорости воспроизведения записи функционирования клеточного автомата.
+        /// Возвращает или задаёт число на которое перемещается ползунок по шкале поиска при щелчке мыши по элементу управления или нажатию клавиш PAGE UP, PAGE DOWN.
+        /// </summary>
+        /// <remarks>
+        ///     <b>Значение по умолчанию - 5.</b>
+        /// </remarks>
+        [DefaultValue(FinderLargeChangeDefValue)]
+        [Browsable(true)]
+        [EditorBrowsable(EditorBrowsableState.Always)]
+        [CACategory("Behavior")]
+        [CADescription(nameof(CellularAutomatonPlayer) + "__" + nameof(FinderLargeChange) + CADescriptionAttribute.Suffix)]
+        public short FinderLargeChange
+        {
+            get { return playerController.FinderLargeChange; }
+            set { playerController.FinderLargeChange = value; }
+        }
+
+        /// <summary>
+        /// Возвращает или задаёт число на которое перемещается ползунок по шкале поиска при прокрутке колёсика мыши или нажатия клавиш LEFT, RIGHT, UP, DOWN.
+        /// </summary>
+        /// <remarks>
+        ///     <b>Значение по умолчанию - 1.</b>
+        /// </remarks>
+        [DefaultValue(FinderSmallChangeDefValue)]
+        [Browsable(true)]
+        [EditorBrowsable(EditorBrowsableState.Always)]
+        [CACategory("Behavior")]
+        [CADescription(nameof(CellularAutomatonPlayer) + "__" + nameof(FinderSmallChange) + CADescriptionAttribute.Suffix)]
+        public short FinderSmallChange
+        {
+            get { return playerController.FinderSmallChange; }
+            set { playerController.FinderSmallChange = value; }
+        }
+
+        /// <summary>
+        /// Возвращает или задаёт интервал между отметками на шкале поиска.
+        /// </summary>
+        /// <remarks>
+        ///     <b>Значение по умолчанию - 1.</b>
+        /// </remarks>
+        [DefaultValue(FinderTickFrequencyDefValue)]
+        [Browsable(true)]
+        [EditorBrowsable(EditorBrowsableState.Always)]
+        [CACategory("Appearance")]
+        [CADescription(nameof(CellularAutomatonPlayer) + "__" + nameof(FinderTickFrequency) + CADescriptionAttribute.Suffix)]
+        public short FinderTickFrequency
+        {
+            get { return playerController.FinderTickFrequency; }
+            set { playerController.FinderTickFrequency = value; }
+        }
+
+        /// <summary>
+        /// Возвращает или задаёт максимальную скорость воспроизведения записи (кадры в минуту) функционирования клеточного автомата.
         /// </summary>
         /// <remarks>
         ///     <b>Значение по умолчанию - <see cref="Player.FramesPerMinuteMaxDefValue"/>.</b>
@@ -83,7 +171,7 @@ namespace CellularAutomaton.Components.Player
         [CADescription(nameof(CellularAutomatonPlayer) + "__" + nameof(FramesPerMinuteMax) + CADescriptionAttribute.Suffix)]
         public short FramesPerMinuteMax
         {
-            get { return Convert.ToByte(nUDFramesPerMinute.Maximum); }
+            get { return Convert.ToInt16(nUDFramesPerMinute.Maximum); }
             set
             {
                 if (value < FramesPerMinuteMin ||
@@ -104,7 +192,7 @@ namespace CellularAutomaton.Components.Player
         }
 
         /// <summary>
-        /// Возвращает или задаёт минимальное количество кадров в минуту для скорости воспроизведения записи функционирования клеточного автомата.
+        /// Возвращает или задаёт минимальную скорость воспроизведения записи (кадры в минуту) функционирования клеточного автомата.
         /// </summary>
         /// <remarks>
         ///     <b>Значение по умолчанию - 1.</b>
@@ -118,7 +206,7 @@ namespace CellularAutomaton.Components.Player
         [CADescription(nameof(CellularAutomatonPlayer) + "__" + nameof(FramesPerMinuteMin) + CADescriptionAttribute.Suffix)]
         public short FramesPerMinuteMin
         {
-            get { return Convert.ToByte(nUDFramesPerMinute.Minimum); }
+            get { return Convert.ToInt16(nUDFramesPerMinute.Minimum); }
             set
             {
                 if (FramesPerMinuteMax < value)
@@ -138,21 +226,21 @@ namespace CellularAutomaton.Components.Player
         }
 
         /// <summary>
-        /// Возвращает или задаёт количество кадров в минуту для скорости воспроизведения записи функционирования клеточного автомата.
+        /// Возвращает или задаёт скорость воспроизведения записи (кадры в минуту) функционирования клеточного автомата.
         /// </summary>
         /// <remarks>
-        ///     <b>Значение по умолчанию - <see cref="Player.FramesPerMinuteMaxDefValue"/>.</b>
+        ///     <b>Значение по умолчанию - <see cref="Player.FramesPerMinuteValueDefValue"/>.</b>
         /// </remarks>
         /// <exception cref="ArgumentOutOfRangeException">Значение '<see cref="FramesPerMinuteValue"/>' должно лежать в диапазоне от '<see cref="FramesPerMinuteMin"/>' до '<see cref="FramesPerMinuteMax"/>'.</exception>
-        [DefaultValue(Player.FramesPerMinuteMaxDefValue)]
+        [DefaultValue(Player.FramesPerMinuteValueDefValue)]
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [RefreshProperties(RefreshProperties.All)]
-        [CACategory("Data")]
+        [CACategory("Appearance")]
         [CADescription(nameof(CellularAutomatonPlayer) + "__" + nameof(FramesPerMinuteValue) + CADescriptionAttribute.Suffix)]
         public short FramesPerMinuteValue
         {
-            get { return Convert.ToByte(nUDFramesPerMinute.Value); }
+            get { return Convert.ToInt16(nUDFramesPerMinute.Value); }
             set
             {
                 if (value < FramesPerMinuteMin ||
@@ -169,9 +257,17 @@ namespace CellularAutomaton.Components.Player
                             nameof(FramesPerMinuteMax)));
                 }
 
-                nUDFramesPerMinute.Value = value;
+                nUDFramesPerMinute.Value = playerController.FramesPerMinuteValue = value;
             }
         }
+
+        /// <summary>
+        /// Возвращает воспроизводимую запись.
+        /// </summary>
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public IReadOnlyRecord Record => playerController?.Record;
 
         /// <summary>
         /// Возвращает или задаёт режим размещения изображения.
@@ -196,15 +292,29 @@ namespace CellularAutomaton.Components.Player
         public CellularAutomatonPlayer()
         {
             InitializeComponent();
-            InitializeProperties();
 
             playerController.InitializePlayer(
                 pBMain.CreateGraphics(),
                 new Rectangle(0, 0, pBMain.Size.Width, pBMain.Size.Height));
+
+            playerController.StartPlay += StartPlay;
+            playerController.PausePlay += PausePlay;
+            playerController.StopPlay += StopPlay;
+
+            InitializeProperties();
         }
         #endregion
 
         #region Members
+        /// <summary>
+        /// Загружает запись из файла с именем заданным в <see cref="FileName"/>.
+        /// </summary>
+        /// <exception cref="ArgumentException">Имя файла не задано, пустое или состоит из одних пробелов.</exception>
+        public void LoadRecord()
+        {
+            playerController.LoadRecord();
+        }
+
         /// <summary>
         /// Обработчик события <see cref="Control.Click"/>. Загружает запись функционирования клеточного автомата из файла.
         /// </summary>
@@ -213,7 +323,7 @@ namespace CellularAutomaton.Components.Player
         private void bLoadRecord_Click(object sender, EventArgs e)
         {
             if (ShowOpenFileDialog())
-                playerController.LoadRecord(FileName);
+                LoadRecord();
         }
 
         /// <summary>
@@ -233,6 +343,16 @@ namespace CellularAutomaton.Components.Player
         }
 
         /// <summary>
+        /// Обработчик события <see cref="NumericUpDown.ValueChanged"/>. Обновляет значение свойства <see cref="PlayerController.FramesPerMinuteValue"/> при задании нового значения посредством элемента управления <see cref="nUDFramesPerMinute"/>.
+        /// </summary>
+        /// <param name="sender">Источник события.</param>
+        /// <param name="e">Сведения о событии.</param>
+        private void nUDFramesPerMinute_ValueChanged(object sender, EventArgs e)
+        {
+            playerController.FramesPerMinuteValue = FramesPerMinuteValue;
+        }
+
+        /// <summary>
         /// Отображает диалог выбора расположения для загрузки файла с записью работы клеточного автомата.
         /// </summary>
         /// <returns><b>True</b>, если пользователь нажал кнопку "Открыть", иначе <b>false</b>.</returns>
@@ -242,7 +362,7 @@ namespace CellularAutomaton.Components.Player
             {
                 _openFileDialog = new OpenFileDialog
                 {
-                    CheckFileExists = false,
+                    CheckFileExists = true,
                     CheckPathExists = true,
                     ValidateNames = true,
                     AddExtension = true,

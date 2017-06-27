@@ -147,15 +147,6 @@
   <data name="PlayerController__SetToolTip__Finder" xml:space="preserve">
     <value>{0}/{1}</value>
   </data>
-  <data name="PlayerController__SetToolTip__Play" xml:space="preserve">
-    <value>Начать воспроизведение записи.</value>
-  </data>
-  <data name="PlayerController__SetToolTip__Pause" xml:space="preserve">
-    <value>Приостановить воспроизведение записи.</value>
-  </data>
-  <data name="PlayerController__SetToolTip__Stop" xml:space="preserve">
-    <value>Останавливает воспроизведение записи.</value>
-  </data>
   <data name="CellularAutomatonRecorder__FileExtensionDescr" xml:space="preserve">
     <value>Расширение файла в который осуществляется сохранение записи.</value>
   </data>
@@ -174,8 +165,8 @@
   <data name="PlayerController__FinderTickFrequencyDescr" xml:space="preserve">
     <value>Интервал между отметками на шкале поиска.</value>
   </data>
-  <data name="SR_Attribute__NotFoundLocalizedString" xml:space="preserve">
-    <value>Not found localized string '{0}'</value>
+  <data name="CA_Attribute__NotFoundLocalizedString" xml:space="preserve">
+    <value>Не найдена локализованная строка '{0}'</value>
   </data>
   <data name="CellularAutomatonRecorder__DencityMaxDescr" xml:space="preserve">
     <value>Максимальная плотность распределения клеток на поле клеточного автомата.</value>
@@ -213,9 +204,6 @@
   <data name="CellularAutomatonRecorder__StatesCountValueDescr" xml:space="preserve">
     <value>Число состояний клетки клеточного автомата.</value>
   </data>
-  <data name="Player__FramesPerMinuteDefValue" xml:space="preserve">
-    <value>60</value>
-  </data>
   <data name="Ex__NotSetRecordToPlay" xml:space="preserve">
     <value>Не задана запись для воспроизведения.</value>
   </data>
@@ -251,5 +239,23 @@
   </data>
   <data name="CellularAutomatonPlayer__OpenFileDialogRecordTitle" xml:space="preserve">
     <value>Открыть запись</value>
+  </data>
+  <data name="PlayerController__FileNameDescr" xml:space="preserve">
+    <value>Имя файла, из которого осуществляется загрузка записи.</value>
+  </data>
+  <data name="Player__FramesPerMinuteDefValue" xml:space="preserve">
+    <value>60</value>
+  </data>
+  <data name="CellularAutomatonPlayer__FinderLargeChangeDescr" xml:space="preserve">
+    <value>Число на которое перемещается ползунок по шкале поиска при щелчке мыши по элементу управления или нажатию клавиш PAGE UP, PAGE DOWN.</value>
+  </data>
+  <data name="CellularAutomatonPlayer__FinderSmallChangeDescr" xml:space="preserve">
+    <value>Число на которое перемещается ползунок по шкале поиска при прокрутке колёсика мыши или нажатия клавиш LEFT, RIGHT, UP, DOWN.</value>
+  </data>
+  <data name="CellularAutomatonPlayer__FinderTickFrequencyDescr" xml:space="preserve">
+    <value>Интервал между отметками на шкале поиска.</value>
+  </data>
+  <data name="CellularAutomatonPlayer__SizeModeDescr" xml:space="preserve">
+    <value>Режим размещения изображения.</value>
   </data>
 </root>

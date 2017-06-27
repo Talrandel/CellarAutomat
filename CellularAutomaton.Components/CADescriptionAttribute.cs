@@ -53,7 +53,7 @@ namespace CellularAutomaton.Components
                 {
                     _isLoaded = true;
                     DescriptionValue = Resources.ResourceManager.GetString(base.Description) 
-                        ?? string.Format(CultureInfo.CurrentCulture, Resources.SR_Attribute__NotFoundLocalizedString, base.Description);
+                        ?? string.Format(CultureInfo.CurrentCulture, Resources.CA_Attribute__NotFoundLocalizedString, base.Description);
                 }
 
                 return DescriptionValue;

@@ -64,6 +64,7 @@
             // 
             resources.ApplyResources(this.bPlay, "bPlay");
             this.bPlay.Name = "bPlay";
+            this.toolTip.SetToolTip(this.bPlay, resources.GetString("bPlay.ToolTip"));
             this.bPlay.UseVisualStyleBackColor = true;
             this.bPlay.Click += new System.EventHandler(this.bPlay_Click);
             // 
@@ -71,6 +72,7 @@
             // 
             resources.ApplyResources(this.bPause, "bPause");
             this.bPause.Name = "bPause";
+            this.toolTip.SetToolTip(this.bPause, resources.GetString("bPause.ToolTip"));
             this.bPause.UseVisualStyleBackColor = true;
             this.bPause.Click += new System.EventHandler(this.bPause_Click);
             // 
@@ -78,6 +80,7 @@
             // 
             resources.ApplyResources(this.bStop, "bStop");
             this.bStop.Name = "bStop";
+            this.toolTip.SetToolTip(this.bStop, resources.GetString("bStop.ToolTip"));
             this.bStop.UseVisualStyleBackColor = true;
             this.bStop.Click += new System.EventHandler(this.bStop_Click);
             // 

@@ -61,6 +61,15 @@ namespace CellularAutomaton.Components.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Не найдена локализованная строка &apos;{0}&apos;.
+        /// </summary>
+        internal static string CA_Attribute__NotFoundLocalizedString {
+            get {
+                return ResourceManager.GetString("CA_Attribute__NotFoundLocalizedString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Расширение файла, из которого осуществляется загрузка записи..
         /// </summary>
         internal static string CellularAutomatonPlayer__FileExtensionDescr {
@@ -84,6 +93,33 @@ namespace CellularAutomaton.Components.Properties {
         internal static string CellularAutomatonPlayer__FileNameDescr {
             get {
                 return ResourceManager.GetString("CellularAutomatonPlayer__FileNameDescr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Число на которое перемещается ползунок по шкале поиска при щелчке мыши по элементу управления или нажатию клавиш PAGE UP, PAGE DOWN..
+        /// </summary>
+        internal static string CellularAutomatonPlayer__FinderLargeChangeDescr {
+            get {
+                return ResourceManager.GetString("CellularAutomatonPlayer__FinderLargeChangeDescr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Число на которое перемещается ползунок по шкале поиска при прокрутке колёсика мыши или нажатия клавиш LEFT, RIGHT, UP, DOWN..
+        /// </summary>
+        internal static string CellularAutomatonPlayer__FinderSmallChangeDescr {
+            get {
+                return ResourceManager.GetString("CellularAutomatonPlayer__FinderSmallChangeDescr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Интервал между отметками на шкале поиска..
+        /// </summary>
+        internal static string CellularAutomatonPlayer__FinderTickFrequencyDescr {
+            get {
+                return ResourceManager.GetString("CellularAutomatonPlayer__FinderTickFrequencyDescr", resourceCulture);
             }
         }
         
@@ -147,6 +183,15 @@ namespace CellularAutomaton.Components.Properties {
         internal static string CellularAutomatonPlayer__OpenFileDialogRecordTitle {
             get {
                 return ResourceManager.GetString("CellularAutomatonPlayer__OpenFileDialogRecordTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Режим размещения изображения..
+        /// </summary>
+        internal static string CellularAutomatonPlayer__SizeModeDescr {
+            get {
+                return ResourceManager.GetString("CellularAutomatonPlayer__SizeModeDescr", resourceCulture);
             }
         }
         
@@ -395,6 +440,15 @@ namespace CellularAutomaton.Components.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Имя файла, из которого осуществляется загрузка записи..
+        /// </summary>
+        internal static string PlayerController__FileNameDescr {
+            get {
+                return ResourceManager.GetString("PlayerController__FileNameDescr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Число на которое перемещается ползунок по шкале поиска при щелчке мыши по элементу управления или нажатию клавиш PAGE UP, PAGE DOWN..
         /// </summary>
         internal static string PlayerController__FinderLargeChangeDescr {
@@ -427,42 +481,6 @@ namespace CellularAutomaton.Components.Properties {
         internal static string PlayerController__SetToolTip__Finder {
             get {
                 return ResourceManager.GetString("PlayerController__SetToolTip__Finder", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Приостановить воспроизведение записи..
-        /// </summary>
-        internal static string PlayerController__SetToolTip__Pause {
-            get {
-                return ResourceManager.GetString("PlayerController__SetToolTip__Pause", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Начать воспроизведение записи..
-        /// </summary>
-        internal static string PlayerController__SetToolTip__Play {
-            get {
-                return ResourceManager.GetString("PlayerController__SetToolTip__Play", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Останавливает воспроизведение записи..
-        /// </summary>
-        internal static string PlayerController__SetToolTip__Stop {
-            get {
-                return ResourceManager.GetString("PlayerController__SetToolTip__Stop", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Not found localized string &apos;{0}&apos;.
-        /// </summary>
-        internal static string SR_Attribute__NotFoundLocalizedString {
-            get {
-                return ResourceManager.GetString("SR_Attribute__NotFoundLocalizedString", resourceCulture);
             }
         }
     }

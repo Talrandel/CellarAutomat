@@ -168,6 +168,12 @@
   <data name="bPlay.Text" xml:space="preserve">
     <value>Воспроизводить</value>
   </data>
+  <metadata name="toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <data name="bPlay.ToolTip" xml:space="preserve">
+    <value>Начать воспроизведение записи.</value>
+  </data>
   <data name="&gt;&gt;bPlay.Name" xml:space="preserve">
     <value>bPlay</value>
   </data>
@@ -198,6 +204,9 @@
   <data name="bPause.Text" xml:space="preserve">
     <value>Приостановить</value>
   </data>
+  <data name="bPause.ToolTip" xml:space="preserve">
+    <value>Приостановить воспроизведение записи.</value>
+  </data>
   <data name="&gt;&gt;bPause.Name" xml:space="preserve">
     <value>bPause</value>
   </data>
@@ -227,6 +236,9 @@
   </data>
   <data name="bStop.Text" xml:space="preserve">
     <value>Остановить</value>
+  </data>
+  <data name="bStop.ToolTip" xml:space="preserve">
+    <value>Останавливает воспроизведение записи.</value>
   </data>
   <data name="&gt;&gt;bStop.Name" xml:space="preserve">
     <value>bStop</value>
@@ -270,9 +282,6 @@
   <data name="tLPMain.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="tBFinder" Row="0" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="bPlay" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="bPause" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="bStop" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,33,33333,Percent,33,33334,Percent,33,33334" /&gt;&lt;Rows Styles="AutoSize,0,Percent,100,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
-  <metadata name="toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>

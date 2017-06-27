@@ -5,8 +5,8 @@
 // Language      : C# 6.0
 // File          : IPlayer.cs
 // Author        : Антипкин С.С., Макаров Е.А.
-// Created       : 18.06.2017 12:46
-// Last Revision : 22.06.2017 15:48
+// Created       : 27.06.2017 13:41
+// Last Revision : 27.06.2017 21:02
 // Description   : 
 #endregion
 
@@ -24,14 +24,14 @@ namespace CellularAutomaton.Components.Player
     {
         #region Events
         /// <summary>
-        /// Происходит при приостановке воспроизведения.
-        /// </summary>
-        event EventHandler PausePlay;
-
-        /// <summary>
         /// Происходит при смене кадра.
         /// </summary>
         event EventHandler<ChangeFrameEventArgs> ChangeFrame;
+
+        /// <summary>
+        /// Происходит при приостановке воспроизведения.
+        /// </summary>
+        event EventHandler PausePlay;
 
         /// <summary>
         /// Происходит при начале воспроизведения.
@@ -77,6 +77,7 @@ namespace CellularAutomaton.Components.Player
         /// Загружает запись из указаннного файла.
         /// </summary>
         /// <param name="fileName">Имя файла содержащего запись для воспроизведения.</param>
+        /// <exception cref="ArgumentException">Имя файла не задано, пустое или состоит из одних пробелов.</exception>
         void Load(string fileName);
 
         /// <summary>

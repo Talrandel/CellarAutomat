@@ -5,8 +5,8 @@
 // Language      : C# 6.0
 // File          : CellularAutomatonRecorder.cs
 // Author        : Антипкин С.С., Макаров Е.А.
-// Created       : 22.06.2017 23:25
-// Last Revision : 26.06.2017 20:43
+// Created       : 27.06.2017 13:41
+// Last Revision : 27.06.2017 21:03
 // Description   : 
 #endregion
 
@@ -24,11 +24,24 @@ using CellularAutomaton.Core.Rules;
 
 namespace CellularAutomaton.Components.Recorder
 {
+    // TODO: Настроить ToolTip.
     /// <summary>
     /// Представляет регистратор функционирования клеточного автомата описываемого <see cref="Core.CellularAutomaton"/>.
     /// </summary>
     public partial class CellularAutomatonRecorder : UserControl
     {
+        #region Events
+        /// <summary>
+        /// Происходит при начале записи.
+        /// </summary>
+        public event EventHandler StartRecord;
+
+        /// <summary>
+        /// Происходит при остановке записи.
+        /// </summary>
+        public event EventHandler StopRecord;
+        #endregion
+
         #region Static Fields and Constants
         /// <summary>
         /// Значение по умолчанию свойства <see cref="DencityMax"/>.
@@ -48,32 +61,32 @@ namespace CellularAutomaton.Components.Recorder
         /// <summary>
         /// Значение по умолчанию свойства <see cref="SizeFieldHeightMax"/>.
         /// </summary>
-        private const short SizeFieldHeightMaxDefValue = 500;
+        private const int SizeFieldHeightMaxDefValue = 500;
 
         /// <summary>
         /// Значение по умолчанию свойства <see cref="SizeFieldHeightMin"/>.
         /// </summary>
-        private const short SizeFieldHeightMinDefValue = 50;
+        private const int SizeFieldHeightMinDefValue = 50;
 
         /// <summary>
         /// Значение по умолчанию свойства <see cref="SizeFieldHeightValue"/>.
         /// </summary>
-        private const short SizeFieldHeightValueDefValue = 100;
+        private const int SizeFieldHeightValueDefValue = 100;
 
         /// <summary>
         /// Значение по умолчанию свойства <see cref="SizeFieldWidthMax"/>.
         /// </summary>
-        private const short SizeFieldWidthMaxDefValue = 500;
+        private const int SizeFieldWidthMaxDefValue = 500;
 
         /// <summary>
         /// Значение по умолчанию свойства <see cref="SizeFieldWidthMin"/>.
         /// </summary>
-        private const short SizeFieldWidthMinDefValue = 50;
+        private const int SizeFieldWidthMinDefValue = 50;
 
         /// <summary>
         /// Значение по умолчанию свойства <see cref="SizeFieldWidthValue"/>.
         /// </summary>
-        private const short SizeFieldWidthValueDefValue = 100;
+        private const int SizeFieldWidthValueDefValue = 100;
         #endregion
 
         #region Fields
@@ -94,15 +107,6 @@ namespace CellularAutomaton.Components.Recorder
         #endregion
 
         #region Properties
-
-        /// <summary>
-        /// Возвращает количество кадров в записи.
-        /// </summary>
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public int FramesCount => _recorder.RecordCount; 
-
         /// <summary>
         /// Возвращает или задаёт максимальную плотность распределения клеток на поле клеточного автомата.
         /// </summary>
@@ -183,7 +187,7 @@ namespace CellularAutomaton.Components.Recorder
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [RefreshProperties(RefreshProperties.All)]
-        [CACategory("Data")]
+        [CACategory("Appearance")]
         [CADescription(nameof(CellularAutomatonRecorder) + "__" + nameof(DencityValue) + CADescriptionAttribute.Suffix)]
         public byte DencityValue
         {
@@ -236,6 +240,14 @@ namespace CellularAutomaton.Components.Recorder
         public string FileName { get; set; }
 
         /// <summary>
+        /// Возвращает количество кадров в записи.
+        /// </summary>
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public int FramesCount => _recorder.RecordCount;
+
+        /// <summary>
         /// Возвращает коллекцию правил построения клеточных автоматов.
         /// </summary>
         [Browsable(false)]
@@ -256,9 +268,9 @@ namespace CellularAutomaton.Components.Recorder
         [RefreshProperties(RefreshProperties.All)]
         [CACategory("Data")]
         [CADescription(nameof(CellularAutomatonRecorder) + "__" + nameof(SizeFieldHeightMax) + CADescriptionAttribute.Suffix)]
-        public short SizeFieldHeightMax
+        public int SizeFieldHeightMax
         {
-            get { return Convert.ToInt16(nUDHeight.Maximum); }
+            get { return Convert.ToInt32(nUDHeight.Maximum); }
             set
             {
                 if (value < SizeFieldHeightMin)
@@ -290,9 +302,9 @@ namespace CellularAutomaton.Components.Recorder
         [RefreshProperties(RefreshProperties.All)]
         [CACategory("Data")]
         [CADescription(nameof(CellularAutomatonRecorder) + "__" + nameof(SizeFieldHeightMin) + CADescriptionAttribute.Suffix)]
-        public short SizeFieldHeightMin
+        public int SizeFieldHeightMin
         {
-            get { return Convert.ToInt16(nUDHeight.Minimum); }
+            get { return Convert.ToInt32(nUDHeight.Minimum); }
             set
             {
                 if (value < 0 ||
@@ -323,11 +335,11 @@ namespace CellularAutomaton.Components.Recorder
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [RefreshProperties(RefreshProperties.All)]
-        [CACategory("Data")]
+        [CACategory("Appearance")]
         [CADescription(nameof(CellularAutomatonRecorder) + "__" + nameof(SizeFieldHeightValue) + CADescriptionAttribute.Suffix)]
-        public short SizeFieldHeightValue
+        public int SizeFieldHeightValue
         {
-            get { return Convert.ToInt16(nUDHeight.Value); }
+            get { return Convert.ToInt32(nUDHeight.Value); }
             set
             {
                 if (value < SizeFieldHeightMin ||
@@ -361,9 +373,9 @@ namespace CellularAutomaton.Components.Recorder
         [RefreshProperties(RefreshProperties.All)]
         [CACategory("Data")]
         [CADescription(nameof(CellularAutomatonRecorder) + "__" + nameof(SizeFieldWidthMax) + CADescriptionAttribute.Suffix)]
-        public short SizeFieldWidthMax
+        public int SizeFieldWidthMax
         {
-            get { return Convert.ToInt16(nUDWidth.Maximum); }
+            get { return Convert.ToInt32(nUDWidth.Maximum); }
             set
             {
                 if (value < SizeFieldWidthMin)
@@ -395,9 +407,9 @@ namespace CellularAutomaton.Components.Recorder
         [RefreshProperties(RefreshProperties.All)]
         [CACategory("Data")]
         [CADescription(nameof(CellularAutomatonRecorder) + "__" + nameof(SizeFieldWidthMin) + CADescriptionAttribute.Suffix)]
-        public short SizeFieldWidthMin
+        public int SizeFieldWidthMin
         {
-            get { return Convert.ToInt16(nUDWidth.Minimum); }
+            get { return Convert.ToInt32(nUDWidth.Minimum); }
             set
             {
                 if (value < 0 ||
@@ -428,11 +440,11 @@ namespace CellularAutomaton.Components.Recorder
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [RefreshProperties(RefreshProperties.All)]
-        [CACategory("Data")]
+        [CACategory("Appearance")]
         [CADescription(nameof(CellularAutomatonRecorder) + "__" + nameof(SizeFieldWidthValue) + CADescriptionAttribute.Suffix)]
-        public short SizeFieldWidthValue
+        public int SizeFieldWidthValue
         {
-            get { return Convert.ToInt16(nUDWidth.Value); }
+            get { return Convert.ToInt32(nUDWidth.Value); }
             set
             {
                 if (value < SizeFieldWidthMin ||
@@ -466,9 +478,9 @@ namespace CellularAutomaton.Components.Recorder
         [RefreshProperties(RefreshProperties.All)]
         [CACategory("Data")]
         [CADescription(nameof(CellularAutomatonRecorder) + "__" + nameof(StatesCountMax) + CADescriptionAttribute.Suffix)]
-        public short StatesCountMax
+        public int StatesCountMax
         {
-            get { return Convert.ToInt16(nUDStatesCount.Maximum); }
+            get { return Convert.ToInt32(nUDStatesCount.Maximum); }
             set
             {
                 if (value < StatesCountMin ||
@@ -502,9 +514,9 @@ namespace CellularAutomaton.Components.Recorder
         [RefreshProperties(RefreshProperties.All)]
         [CACategory("Data")]
         [CADescription(nameof(CellularAutomatonRecorder) + "__" + nameof(StatesCountMin) + CADescriptionAttribute.Suffix)]
-        public short StatesCountMin
+        public int StatesCountMin
         {
-            get { return Convert.ToInt16(nUDStatesCount.Minimum); }
+            get { return Convert.ToInt32(nUDStatesCount.Minimum); }
             set
             {
                 if (value < Core.CellularAutomaton.StatesNumberMin ||
@@ -536,11 +548,11 @@ namespace CellularAutomaton.Components.Recorder
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [RefreshProperties(RefreshProperties.All)]
-        [CACategory("Data")]
+        [CACategory("Appearance")]
         [CADescription(nameof(CellularAutomatonRecorder) + "__" + nameof(StatesCountValue) + CADescriptionAttribute.Suffix)]
-        public short StatesCountValue
+        public int StatesCountValue
         {
-            get { return Convert.ToInt16(nUDStatesCount.Value); }
+            get { return Convert.ToInt32(nUDStatesCount.Value); }
             set
             {
                 if (value < StatesCountMin ||
@@ -577,18 +589,25 @@ namespace CellularAutomaton.Components.Recorder
         /// <summary>
         /// Сохраняет запись в файл с именем <see cref="FileName"/>.
         /// </summary>
-        public void Save()
+        public void SaveRecord()
         {
             _recorder.Save(FileName);
         }
 
         /// <summary>
-        /// Сохраняет запись в файл с указанным именем.
+        /// Вызывает событие <see cref="StartRecord"/>.
         /// </summary>
-        /// <param name="fileName">Имя файла в который будет сохранена запись.</param>
-        public void Save(string fileName)
+        protected virtual void OnStartRecord()
         {
-            _recorder.Save(fileName);
+            StartRecord?.Invoke(this, EventArgs.Empty);
+        }
+
+        /// <summary>
+        /// Вызывает событие <see cref="StopRecord"/>.
+        /// </summary>
+        protected virtual void OnStopRecord()
+        {
+            StopRecord?.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>
@@ -610,7 +629,7 @@ namespace CellularAutomaton.Components.Recorder
         private void bSave_Click(object sender, EventArgs e)
         {
             if (ShowSaveFileDialog())
-                Save();
+                SaveRecord();
         }
 
         /// <summary>
@@ -777,6 +796,8 @@ namespace CellularAutomaton.Components.Recorder
             bStop.Enabled = true;
             bSave.Enabled = false;
             gBSettings.Enabled = false;
+
+            OnStartRecord();
         }
 
         /// <summary>
@@ -788,6 +809,8 @@ namespace CellularAutomaton.Components.Recorder
             bStop.Enabled = false;
             bSave.Enabled = _recorder != null;
             gBSettings.Enabled = true;
+
+            OnStopRecord();
         }
         #endregion
     }

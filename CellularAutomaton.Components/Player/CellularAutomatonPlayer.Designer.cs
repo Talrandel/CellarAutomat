@@ -29,14 +29,16 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CellularAutomatonPlayer));
             this.tLPMain = new System.Windows.Forms.TableLayoutPanel();
             this.pBMain = new System.Windows.Forms.PictureBox();
             this.playerController = new CellularAutomaton.Components.Player.PlayerController();
             this.tLPFramesPerMinute = new System.Windows.Forms.TableLayoutPanel();
-            this.bLoadRecord = new System.Windows.Forms.Button();
             this.lFramesPerMinute = new System.Windows.Forms.Label();
             this.nUDFramesPerMinute = new System.Windows.Forms.NumericUpDown();
+            this.bLoadRecord = new System.Windows.Forms.Button();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.tLPMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pBMain)).BeginInit();
             this.tLPFramesPerMinute.SuspendLayout();
@@ -61,6 +63,7 @@
             // playerController
             // 
             resources.ApplyResources(this.playerController, "playerController");
+            this.playerController.FileName = null;
             this.playerController.Name = "playerController";
             // 
             // tLPFramesPerMinute
@@ -69,13 +72,6 @@
             this.tLPFramesPerMinute.Controls.Add(this.lFramesPerMinute, 0, 0);
             this.tLPFramesPerMinute.Controls.Add(this.nUDFramesPerMinute, 1, 0);
             this.tLPFramesPerMinute.Name = "tLPFramesPerMinute";
-            // 
-            // bLoadRecord
-            // 
-            resources.ApplyResources(this.bLoadRecord, "bLoadRecord");
-            this.bLoadRecord.Name = "bLoadRecord";
-            this.bLoadRecord.UseVisualStyleBackColor = true;
-            this.bLoadRecord.Click += new System.EventHandler(this.bLoadRecord_Click);
             // 
             // lFramesPerMinute
             // 
@@ -86,6 +82,14 @@
             // 
             resources.ApplyResources(this.nUDFramesPerMinute, "nUDFramesPerMinute");
             this.nUDFramesPerMinute.Name = "nUDFramesPerMinute";
+            this.nUDFramesPerMinute.ValueChanged += new System.EventHandler(this.nUDFramesPerMinute_ValueChanged);
+            // 
+            // bLoadRecord
+            // 
+            resources.ApplyResources(this.bLoadRecord, "bLoadRecord");
+            this.bLoadRecord.Name = "bLoadRecord";
+            this.bLoadRecord.UseVisualStyleBackColor = true;
+            this.bLoadRecord.Click += new System.EventHandler(this.bLoadRecord_Click);
             // 
             // CellularAutomatonPlayer
             // 
@@ -98,7 +102,6 @@
             this.tLPMain.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pBMain)).EndInit();
             this.tLPFramesPerMinute.ResumeLayout(false);
-            this.tLPFramesPerMinute.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nUDFramesPerMinute)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -114,5 +117,6 @@
         private System.Windows.Forms.Button bLoadRecord;
         private System.Windows.Forms.Label lFramesPerMinute;
         private System.Windows.Forms.NumericUpDown nUDFramesPerMinute;
+        private System.Windows.Forms.ToolTip toolTip;
     }
 }
