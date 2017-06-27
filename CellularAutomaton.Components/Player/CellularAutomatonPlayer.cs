@@ -62,7 +62,7 @@ namespace CellularAutomaton.Components.Player
         public string FileExtension { get; set; }
 
         /// <summary>
-        /// Возвращает или задаёт фильтр имён файлов в диалоговом окне "Открыть как...".
+        /// Возвращает или задаёт фильтр имён файлов в диалоговом окне "Открыть...".
         /// </summary>
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]

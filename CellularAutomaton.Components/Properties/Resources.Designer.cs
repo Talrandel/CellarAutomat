@@ -61,6 +61,60 @@ namespace CellularAutomaton.Components.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Расширение файла, из которого осуществляется загрузка записи..
+        /// </summary>
+        internal static string CellularAutomatonPlayer__FileExtensionDescr {
+            get {
+                return ResourceManager.GetString("CellularAutomatonPlayer__FileExtensionDescr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Фильтр имён файлов в диалоговом окне &quot;Открыть...&quot;..
+        /// </summary>
+        internal static string CellularAutomatonPlayer__FileFilterDescr {
+            get {
+                return ResourceManager.GetString("CellularAutomatonPlayer__FileFilterDescr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Имя файла, из которого осуществляется загрузка записи..
+        /// </summary>
+        internal static string CellularAutomatonPlayer__FileNameDescr {
+            get {
+                return ResourceManager.GetString("CellularAutomatonPlayer__FileNameDescr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Максимальное число кадров в минуту..
+        /// </summary>
+        internal static string CellularAutomatonPlayer__FramesPerMinuteMaxDescr {
+            get {
+                return ResourceManager.GetString("CellularAutomatonPlayer__FramesPerMinuteMaxDescr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Минимальное число кадров в минуту..
+        /// </summary>
+        internal static string CellularAutomatonPlayer__FramesPerMinuteMinDescr {
+            get {
+                return ResourceManager.GetString("CellularAutomatonPlayer__FramesPerMinuteMinDescr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Число кадров в минуту..
+        /// </summary>
+        internal static string CellularAutomatonPlayer__FramesPerMinuteValueDescr {
+            get {
+                return ResourceManager.GetString("CellularAutomatonPlayer__FramesPerMinuteValueDescr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Максимальная плотность распределения клеток на поле клеточного автомата..
         /// </summary>
         internal static string CellularAutomatonRecorder__DencityMaxDescr {

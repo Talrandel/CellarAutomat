@@ -222,4 +222,22 @@
   <data name="Ex__RecordNotLoaded" xml:space="preserve">
     <value>Не загружена запись для воспроизведения.</value>
   </data>
+  <data name="CellularAutomatonPlayer__FileExtensionDescr" xml:space="preserve">
+    <value>Расширение файла, из которого осуществляется загрузка записи.</value>
+  </data>
+  <data name="CellularAutomatonPlayer__FileFilterDescr" xml:space="preserve">
+    <value>Фильтр имён файлов в диалоговом окне "Открыть...".</value>
+  </data>
+  <data name="CellularAutomatonPlayer__FileNameDescr" xml:space="preserve">
+    <value>Имя файла, из которого осуществляется загрузка записи.</value>
+  </data>
+  <data name="CellularAutomatonPlayer__FramesPerMinuteMaxDescr" xml:space="preserve">
+    <value>Максимальное число кадров в минуту.</value>
+  </data>
+  <data name="CellularAutomatonPlayer__FramesPerMinuteMinDescr" xml:space="preserve">
+    <value>Минимальное число кадров в минуту.</value>
+  </data>
+  <data name="CellularAutomatonPlayer__FramesPerMinuteValueDescr" xml:space="preserve">
+    <value>Число кадров в минуту.</value>
+  </data>
 </root>
