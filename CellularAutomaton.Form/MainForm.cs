@@ -24,6 +24,13 @@ namespace CellarAutomatForm
             InitializeComponent();
 
             cellularAutomatonRecorder1.Rules.Add(new Life());
+            cellularAutomatonRecorder1.Rules.Add(new BelousovZhabotinskyReaction());
+            cellularAutomatonRecorder1.Rules.Add(new MooreCyclic());
+            cellularAutomatonRecorder1.Rules.Add(new MooreSimple());
+            cellularAutomatonRecorder1.Rules.Add(new NeimanCyclic());
+            cellularAutomatonRecorder1.Rules.Add(new NeimanSimple());
+            cellularAutomatonRecorder1.Rules.Add(new OneDimentionalCyclic());
+            cellularAutomatonRecorder1.Rules.Add(new VenusSurface());
         }
         #endregion
     }

@@ -275,8 +275,8 @@ namespace CellularAutomaton.Core
                 NextGeneration();
                 _synchronizationContext.Post(_invokeHandlers, null);
 
-                if (_pastField.Equals(CurrentField))
-                    break;
+                if (_pastField.Equals((IField)CurrentField))
+                    throw new OperationCanceledException();
 
                 _ct.ThrowIfCancellationRequested();
 
