@@ -6,7 +6,7 @@
 // File          : PlayerController.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 27.06.2017 13:41
-// Last Revision : 27.06.2017 22:44
+// Last Revision : 29.06.2017 10:51
 // Description   : 
 #endregion
 
@@ -363,6 +363,16 @@ namespace CellularAutomaton.Components.Player
         private void PlayerController_Load(object sender, EventArgs e)
         {
             CheckIsStart();
+        }
+
+        /// <summary>
+        /// Обработчик события <see cref="Control.Paint"/>. Перерисовывает текущий кадр.
+        /// </summary>
+        /// <param name="sender">Источник события.</param>
+        /// <param name="e">Сведения о событии.</param>
+        private void PlayerController_Paint(object sender, PaintEventArgs e)
+        {
+            _player?.Paint();
         }
 
         /// <summary>

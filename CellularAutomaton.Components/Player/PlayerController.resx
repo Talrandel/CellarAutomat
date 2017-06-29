@@ -133,7 +133,7 @@
     <value>3, 3</value>
   </data>
   <data name="tBFinder.Size" type="System.Drawing.Size, System.Drawing">
-    <value>516, 45</value>
+    <value>332, 45</value>
   </data>
   <data name="tBFinder.TabIndex" type="System.Int32, mscorlib">
     <value>23</value>
@@ -163,7 +163,7 @@
     <value>3, 54</value>
   </data>
   <data name="bPlay.Size" type="System.Drawing.Size, System.Drawing">
-    <value>167, 23</value>
+    <value>106, 23</value>
   </data>
   <data name="bPlay.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -199,10 +199,10 @@
     <value>NoControl</value>
   </data>
   <data name="bPause.Location" type="System.Drawing.Point, System.Drawing">
-    <value>176, 54</value>
+    <value>115, 54</value>
   </data>
   <data name="bPause.Size" type="System.Drawing.Size, System.Drawing">
-    <value>168, 23</value>
+    <value>106, 23</value>
   </data>
   <data name="bPause.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
@@ -235,10 +235,10 @@
     <value>NoControl</value>
   </data>
   <data name="bStop.Location" type="System.Drawing.Point, System.Drawing">
-    <value>350, 54</value>
+    <value>227, 54</value>
   </data>
   <data name="bStop.Size" type="System.Drawing.Size, System.Drawing">
-    <value>169, 23</value>
+    <value>108, 23</value>
   </data>
   <data name="bStop.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
@@ -271,7 +271,7 @@
     <value>2</value>
   </data>
   <data name="tLPMain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>522, 80</value>
+    <value>338, 80</value>
   </data>
   <data name="tLPMain.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -301,7 +301,7 @@
     <value>0, 0</value>
   </data>
   <data name="groupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>528, 99</value>
+    <value>344, 99</value>
   </data>
   <data name="groupBox.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -324,11 +324,8 @@
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
   </data>
-  <data name="$this.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>528, 99</value>
+    <value>344, 99</value>
   </data>
   <data name="&gt;&gt;toolTip.Name" xml:space="preserve">
     <value>toolTip</value>

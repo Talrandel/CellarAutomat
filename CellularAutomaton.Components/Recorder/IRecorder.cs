@@ -18,7 +18,7 @@ namespace CellularAutomaton.Components.Recorder
     /// <summary>
     /// Определяет методы управления регистратором, позволяющим записывать функционирование клеточного автомата.
     /// </summary>
-    public interface IRecorder
+    public interface IRecorder : IDisposable
     {
         #region Events
         ///// <summary>

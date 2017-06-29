@@ -102,6 +102,7 @@
             this.Controls.Add(this.groupBox);
             this.Name = "PlayerController";
             this.Load += new System.EventHandler(this.PlayerController_Load);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.PlayerController_Paint);
             this.tLPMain.ResumeLayout(false);
             this.tLPMain.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tBFinder)).EndInit();

@@ -6,7 +6,7 @@
 // File          : CellularAutomatonPlayer.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 27.06.2017 13:41
-// Last Revision : 27.06.2017 22:05
+// Last Revision : 29.06.2017 11:35
 // Description   : 
 #endregion
 
@@ -60,11 +60,6 @@ namespace CellularAutomaton.Components.Player
         /// Значение по умолчанию свойства <see cref="FinderTickFrequency"/>.
         /// </summary>
         private const short FinderTickFrequencyDefValue = 1;
-
-        /// <summary>
-        /// Значение по умолчанию свойства <see cref="FramesPerMinuteMin"/>.
-        /// </summary>
-        private const short FramesPerMinuteMinDefValue = 1;
         #endregion
 
         #region Fields
@@ -163,7 +158,7 @@ namespace CellularAutomaton.Components.Player
         /// <remarks>
         ///     <b>Значение по умолчанию - <see cref="Player.FramesPerMinuteMaxDefValue"/>.</b>
         /// </remarks>
-        /// <exception cref="ArgumentOutOfRangeException">Значение '<see cref="FramesPerMinuteMax"/>' должно лежать в интервале от '<see cref="FramesPerMinuteMin"/>' до 3600.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">Значение '<see cref="FramesPerMinuteMax"/>' должно лежать в интервале от '<see cref="FramesPerMinuteMin"/>' до '<see cref="Player.FramesPerMinuteMaxDefValue"/>'.</exception>
         [DefaultValue(Player.FramesPerMinuteMaxDefValue)]
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
@@ -176,7 +171,7 @@ namespace CellularAutomaton.Components.Player
             set
             {
                 if (value < FramesPerMinuteMin ||
-                    value < 100)
+                    Player.FramesPerMinuteMaxDefValue < value)
                 {
                     throw new ArgumentOutOfRangeException(
                         nameof(value),
@@ -185,7 +180,8 @@ namespace CellularAutomaton.Components.Player
                             CultureInfo.CurrentCulture,
                             Resources.Ex__Value___0___must_be_between___1___and__2___,
                             nameof(FramesPerMinuteMax),
-                            nameof(FramesPerMinuteMin), 0));
+                            nameof(FramesPerMinuteMin),
+                            Player.FramesPerMinuteMaxDefValue));
                 }
 
                 nUDFramesPerMinute.Maximum = value;
@@ -198,8 +194,8 @@ namespace CellularAutomaton.Components.Player
         /// <remarks>
         ///     <b>Значение по умолчанию - 1.</b>
         /// </remarks>
-        /// <exception cref="ArgumentOutOfRangeException">Значение '<see cref="FramesPerMinuteMin"/>' должно лежать в диапазоне от 1 до '<see cref="FramesPerMinuteMax"/>'.</exception>
-        [DefaultValue(FramesPerMinuteMinDefValue)]
+        /// <exception cref="ArgumentOutOfRangeException">Значение '<see cref="FramesPerMinuteMin"/>' должно лежать в диапазоне от <see cref="Player.FramesPerMinuteMinDefValue"/> до '<see cref="FramesPerMinuteMax"/>'.</exception>
+        [DefaultValue(Player.FramesPerMinuteMinDefValue)]
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [RefreshProperties(RefreshProperties.All)]
@@ -210,7 +206,8 @@ namespace CellularAutomaton.Components.Player
             get { return Convert.ToInt16(nUDFramesPerMinute.Minimum); }
             set
             {
-                if (FramesPerMinuteMax < value)
+                if ((value < Player.FramesPerMinuteMinDefValue) ||
+                    (FramesPerMinuteMax < value))
                 {
                     throw new ArgumentOutOfRangeException(
                         nameof(value),
@@ -219,6 +216,7 @@ namespace CellularAutomaton.Components.Player
                             CultureInfo.CurrentCulture,
                             Resources.Ex__Value___0___must_be_between___1___and__2___,
                             nameof(FramesPerMinuteMin),
+                            Player.FramesPerMinuteMinDefValue,
                             nameof(FramesPerMinuteMax)));
                 }
 
@@ -345,7 +343,7 @@ namespace CellularAutomaton.Components.Player
         {
             SizeMode = PictureSizeMode.CenterImage;
 
-            FramesPerMinuteMin = FramesPerMinuteMinDefValue;
+            FramesPerMinuteMin = Player.FramesPerMinuteMinDefValue;
             FramesPerMinuteMax = Player.FramesPerMinuteMaxDefValue;
             FramesPerMinuteValue = Player.FramesPerMinuteValueDefValue;
 

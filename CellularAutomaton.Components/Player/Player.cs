@@ -6,7 +6,7 @@
 // File          : Player.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 27.06.2017 13:41
-// Last Revision : 27.06.2017 23:00
+// Last Revision : 29.06.2017 11:28
 // Description   : 
 #endregion
 
@@ -32,6 +32,11 @@ namespace CellularAutomaton.Components.Player
         /// Максимальное число кадров в минуту.
         /// </summary>
         public const short FramesPerMinuteMaxDefValue = 3600;
+
+        /// <summary>
+        /// Минимальное число кадров в минуту.
+        /// </summary>
+        public const short FramesPerMinuteMinDefValue = 1;
 
         /// <summary>
         /// Значение числа кадров в минуту по умолчанию.
@@ -142,7 +147,7 @@ namespace CellularAutomaton.Components.Player
         /// <summary>
         /// Возвращает или задаёт число кадров в минуту.
         /// </summary>
-        /// <exception cref="ArgumentOutOfRangeException">Значение <see name="FramesPerMinute"/> должно лежать в диапазоне от 1 до <see name="FramesPerMinuteMaxDefValue"/>.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">Значение <see name="FramesPerMinute"/> должно лежать в диапазоне от <see cref="FramesPerMinuteMinDefValue"/> до <see name="FramesPerMinuteMaxDefValue"/>.</exception>
         /// <remarks>
         ///     <b>Значение по умолчанию - <see name="FramesPerMinuteValueDefValue"/>.</b>
         /// </remarks>
@@ -151,7 +156,8 @@ namespace CellularAutomaton.Components.Player
             get { return _framesPerMinute; }
             set
             {
-                if (value <= 0 || value > FramesPerMinuteMaxDefValue)
+                if ((value < FramesPerMinuteMinDefValue) ||
+                    (FramesPerMinuteMaxDefValue < value))
                 {
                     throw new ArgumentOutOfRangeException(
                         nameof(value),
@@ -160,13 +166,14 @@ namespace CellularAutomaton.Components.Player
                             CultureInfo.CurrentCulture,
                             Resources.Ex__Value___0___must_be_between___1___and__2___,
                             nameof(FramesPerMinute),
-                            1, FramesPerMinuteMaxDefValue));
+                            FramesPerMinuteMinDefValue,
+                            FramesPerMinuteMaxDefValue));
                 }
 
                 _framesPerMinute = value;
 
-                //             1 second =  1 000 milliseconds
-                // 1 minute = 60 second = 60 000 milliseconds
+                //             1 second  =  1 000 milliseconds
+                // 1 minute = 60 seconds = 60 000 milliseconds
                 _timer.Interval = 60000D / value;
             }
         }
@@ -313,6 +320,14 @@ namespace CellularAutomaton.Components.Player
                 _timer.Stop();
             }
         }
+
+        /// <summary>
+        /// Воспроизводит текущий кадр.
+        /// </summary>
+        public void Paint()
+        {
+            _bufGr.Render();
+        }
         #endregion
 
         #region Members
@@ -405,7 +420,7 @@ namespace CellularAutomaton.Components.Player
         private void TimerElapsed(object sender, ElapsedEventArgs e)
         {
             _bufGr.Graphics.DrawImage(_recordEnumerator.Current, _bufGrContext.MaximumBuffer.Width, _bufGrContext.MaximumBuffer.Height);
-            _bufGr.Render();
+            Paint();
 
             if (!MoveNext()) // Достигнут конец записи?
                 Stop();

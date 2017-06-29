@@ -63,7 +63,7 @@
             // playerController
             // 
             resources.ApplyResources(this.playerController, "playerController");
-            this.playerController.FileName = null;
+            this.playerController.FileName = "FileName";
             this.playerController.Name = "playerController";
             // 
             // tLPFramesPerMinute

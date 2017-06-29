@@ -6,7 +6,7 @@
 // File          : CellularAutomatonRecorder.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 27.06.2017 13:41
-// Last Revision : 27.06.2017 21:03
+// Last Revision : 29.06.2017 11:39
 // Description   : 
 #endregion
 
@@ -126,7 +126,7 @@ namespace CellularAutomaton.Components.Recorder
             set
             {
                 if (value < DencityMin ||
-                    value < 100)
+                    100 < value)
                 {
                     throw new ArgumentOutOfRangeException(
                         nameof(value),
@@ -135,7 +135,8 @@ namespace CellularAutomaton.Components.Recorder
                             CultureInfo.CurrentCulture,
                             Resources.Ex__Value___0___must_be_between___1___and__2___,
                             nameof(DencityMax),
-                            nameof(DencityMin), 0));
+                            nameof(DencityMin),
+                            100));
                 }
 
                 nUDDencity.Maximum = value;
@@ -169,6 +170,7 @@ namespace CellularAutomaton.Components.Recorder
                             CultureInfo.CurrentCulture,
                             Resources.Ex__Value___0___must_be_between___1___and__2___,
                             nameof(DencityMin),
+                            0,
                             nameof(DencityMax)));
                 }
 
@@ -240,7 +242,7 @@ namespace CellularAutomaton.Components.Recorder
         public string FileName { get; set; }
 
         /// <summary>
-        /// Возвращает количество кадров в записи.
+        /// Возвращает число кадров в записи.
         /// </summary>
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
@@ -317,6 +319,7 @@ namespace CellularAutomaton.Components.Recorder
                             CultureInfo.CurrentCulture,
                             Resources.Ex__Value___0___must_be_between___1___and__2___,
                             nameof(SizeFieldHeightMin),
+                            0,
                             nameof(SizeFieldHeightMax)));
                 }
 
@@ -422,6 +425,7 @@ namespace CellularAutomaton.Components.Recorder
                             CultureInfo.CurrentCulture,
                             Resources.Ex__Value___0___must_be_between___1___and__2___,
                             nameof(SizeFieldWidthMin),
+                            0,
                             nameof(SizeFieldWidthMax)));
                 }
 
@@ -484,7 +488,7 @@ namespace CellularAutomaton.Components.Recorder
             set
             {
                 if (value < StatesCountMin ||
-                    value < Core.CellularAutomaton.StatesNumberMax)
+                    Core.CellularAutomaton.StatesNumberMax < value)
                 {
                     throw new ArgumentOutOfRangeException(
                         nameof(value),
@@ -698,8 +702,10 @@ namespace CellularAutomaton.Components.Recorder
             // TODO: Можно сделать лучше освобождение памяти после _recorder?
             if (_recorder != null)
             {
+                _recorder.Dispose();
+                //int gen = GC.GetGeneration(_recorder);
                 _recorder = null;
-                GC.Collect();
+                //GC.Collect(gen);
             }
 
             Core.CellularAutomaton ca = new Core.CellularAutomaton(

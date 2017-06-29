@@ -22,7 +22,7 @@ namespace CellularAutomaton.Components.Recorder
     /// <summary>
     /// Представляет регистратор функционирования клеточного автомата.
     /// </summary>
-    public class Recorder : IRecorder, IDisposable
+    public class Recorder : IRecorder
     {
         #region Fields
         /// <summary>
@@ -42,7 +42,7 @@ namespace CellularAutomaton.Components.Recorder
         /// <summary>
         /// Запись функционирования клеточного автомата.
         /// </summary>
-        private readonly IRecord _record;
+        private IRecord _record;
 
         /// <summary>
         /// True, если освобождение ресурсов осуществлялось, иначе false.
@@ -226,7 +226,11 @@ namespace CellularAutomaton.Components.Recorder
                 return;
 
             if (disposing)
+            {
+                _task?.Dispose();
                 _cts?.Dispose();
+                _record.Clear();
+            }
 
             _disposed = true;
         }

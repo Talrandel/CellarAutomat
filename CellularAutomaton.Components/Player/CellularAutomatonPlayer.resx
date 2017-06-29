@@ -128,12 +128,15 @@
   <data name="pBMain.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
+  <data name="pBMain.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="pBMain.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
   </data>
   <data name="pBMain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>307, 193</value>
+    <value>283, 204</value>
   </data>
   <data name="pBMain.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -157,10 +160,10 @@
     <value>Fill</value>
   </data>
   <data name="playerController.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 202</value>
+    <value>3, 213</value>
   </data>
   <data name="playerController.Size" type="System.Drawing.Size, System.Drawing">
-    <value>307, 99</value>
+    <value>283, 99</value>
   </data>
   <data name="playerController.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -185,6 +188,9 @@
   </data>
   <data name="lFramesPerMinute.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Left</value>
+  </data>
+  <data name="lFramesPerMinute.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="lFramesPerMinute.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 0</value>
@@ -217,10 +223,10 @@
     <value>Fill</value>
   </data>
   <data name="nUDFramesPerMinute.Location" type="System.Drawing.Point, System.Drawing">
-    <value>156, 3</value>
+    <value>144, 3</value>
   </data>
   <data name="nUDFramesPerMinute.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 20</value>
+    <value>136, 20</value>
   </data>
   <data name="nUDFramesPerMinute.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -241,13 +247,13 @@
     <value>Fill</value>
   </data>
   <data name="tLPFramesPerMinute.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 307</value>
+    <value>3, 318</value>
   </data>
   <data name="tLPFramesPerMinute.RowCount" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="tLPFramesPerMinute.Size" type="System.Drawing.Size, System.Drawing">
-    <value>307, 26</value>
+    <value>283, 26</value>
   </data>
   <data name="tLPFramesPerMinute.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -273,11 +279,14 @@
   <data name="bLoadRecord.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
+  <data name="bLoadRecord.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="bLoadRecord.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 339</value>
+    <value>3, 350</value>
   </data>
   <data name="bLoadRecord.Size" type="System.Drawing.Size, System.Drawing">
-    <value>307, 23</value>
+    <value>283, 23</value>
   </data>
   <data name="bLoadRecord.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -307,7 +316,7 @@
     <value>4</value>
   </data>
   <data name="tLPMain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 365</value>
+    <value>289, 376</value>
   </data>
   <data name="tLPMain.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -337,7 +346,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 365</value>
+    <value>289, 376</value>
   </data>
   <data name="&gt;&gt;toolTip.Name" xml:space="preserve">
     <value>toolTip</value>

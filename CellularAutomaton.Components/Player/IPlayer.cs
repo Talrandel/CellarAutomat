@@ -6,7 +6,7 @@
 // File          : IPlayer.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 27.06.2017 13:41
-// Last Revision : 27.06.2017 23:03
+// Last Revision : 29.06.2017 10:48
 // Description   : 
 #endregion
 
@@ -79,6 +79,11 @@ namespace CellularAutomaton.Components.Player
         /// <param name="fileName">Имя файла содержащего запись для воспроизведения.</param>
         /// <exception cref="ArgumentException">Имя файла не задано, пустое или состоит из одних пробелов.</exception>
         void Load(string fileName);
+
+        /// <summary>
+        /// Воспроизводит текущий кадр.
+        /// </summary>
+        void Paint();
 
         /// <summary>
         /// Приостанавливает воспроизведение записи.
