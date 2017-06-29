@@ -186,6 +186,12 @@
   <data name="nUDWidth.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
   </data>
+  <metadata name="toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <data name="nUDWidth.ToolTip" xml:space="preserve">
+    <value>Ширина поля клеточного автомата</value>
+  </data>
   <data name="&gt;&gt;nUDWidth.Name" xml:space="preserve">
     <value>nUDWidth</value>
   </data>
@@ -248,6 +254,9 @@
   </data>
   <data name="nUDHeight.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
+  </data>
+  <data name="nUDHeight.ToolTip" xml:space="preserve">
+    <value>Высота поля клеточного автомата</value>
   </data>
   <data name="&gt;&gt;nUDHeight.Name" xml:space="preserve">
     <value>nUDHeight</value>
@@ -348,6 +357,9 @@
   <data name="nUDDencity.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
   </data>
+  <data name="nUDDencity.ToolTip" xml:space="preserve">
+    <value>Плотность распределения клеток на поле клетосного автомата</value>
+  </data>
   <data name="&gt;&gt;nUDDencity.Name" xml:space="preserve">
     <value>nUDDencity</value>
   </data>
@@ -374,6 +386,9 @@
   </data>
   <data name="nUDStatesCount.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
+  </data>
+  <data name="nUDStatesCount.ToolTip" xml:space="preserve">
+    <value>Количество состояний клетки клеточного автомата</value>
   </data>
   <data name="&gt;&gt;nUDStatesCount.Name" xml:space="preserve">
     <value>nUDStatesCount</value>
@@ -434,6 +449,9 @@
   </data>
   <data name="cBCellularAutomatonRules.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
+  </data>
+  <data name="cBCellularAutomatonRules.ToolTip" xml:space="preserve">
+    <value>Правило функционирования клеточного автомата</value>
   </data>
   <data name="&gt;&gt;cBCellularAutomatonRules.Name" xml:space="preserve">
     <value>cBCellularAutomatonRules</value>
@@ -534,6 +552,9 @@
   <data name="bRecord.Text" xml:space="preserve">
     <value>Начать запись</value>
   </data>
+  <data name="bRecord.ToolTip" xml:space="preserve">
+    <value>Начать запись функционирования клеточного автомата</value>
+  </data>
   <data name="&gt;&gt;bRecord.Name" xml:space="preserve">
     <value>bRecord</value>
   </data>
@@ -567,6 +588,9 @@
   <data name="bStop.Text" xml:space="preserve">
     <value>Остановить запись</value>
   </data>
+  <data name="bStop.ToolTip" xml:space="preserve">
+    <value>Остановить запись функционирования клеточного автомата</value>
+  </data>
   <data name="&gt;&gt;bStop.Name" xml:space="preserve">
     <value>bStop</value>
   </data>
@@ -599,6 +623,9 @@
   </data>
   <data name="bSave.Text" xml:space="preserve">
     <value>Сохранить запись</value>
+  </data>
+  <data name="bSave.ToolTip" xml:space="preserve">
+    <value>Сохранить запись функционирования клеточного автомата</value>
   </data>
   <data name="&gt;&gt;bSave.Name" xml:space="preserve">
     <value>bSave</value>
@@ -696,9 +723,6 @@
   <data name="tLPMain.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="gBSettings" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="gBControlButton" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
-  <metadata name="toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>

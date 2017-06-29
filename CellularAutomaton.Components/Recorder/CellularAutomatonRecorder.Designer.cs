@@ -99,6 +99,7 @@
             // 
             resources.ApplyResources(this.nUDWidth, "nUDWidth");
             this.nUDWidth.Name = "nUDWidth";
+            this.toolTip.SetToolTip(this.nUDWidth, resources.GetString("nUDWidth.ToolTip"));
             // 
             // lHeight
             // 
@@ -109,6 +110,7 @@
             // 
             resources.ApplyResources(this.nUDHeight, "nUDHeight");
             this.nUDHeight.Name = "nUDHeight";
+            this.toolTip.SetToolTip(this.nUDHeight, resources.GetString("nUDHeight.ToolTip"));
             // 
             // lDencity
             // 
@@ -124,11 +126,13 @@
             // 
             resources.ApplyResources(this.nUDDencity, "nUDDencity");
             this.nUDDencity.Name = "nUDDencity";
+            this.toolTip.SetToolTip(this.nUDDencity, resources.GetString("nUDDencity.ToolTip"));
             // 
             // nUDStatesCount
             // 
             resources.ApplyResources(this.nUDStatesCount, "nUDStatesCount");
             this.nUDStatesCount.Name = "nUDStatesCount";
+            this.toolTip.SetToolTip(this.nUDStatesCount, resources.GetString("nUDStatesCount.ToolTip"));
             // 
             // lRule
             // 
@@ -141,6 +145,7 @@
             this.cBCellularAutomatonRules.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cBCellularAutomatonRules.FormattingEnabled = true;
             this.cBCellularAutomatonRules.Name = "cBCellularAutomatonRules";
+            this.toolTip.SetToolTip(this.cBCellularAutomatonRules, resources.GetString("cBCellularAutomatonRules.ToolTip"));
             // 
             // gBControlButton
             // 
@@ -161,6 +166,7 @@
             // 
             resources.ApplyResources(this.bRecord, "bRecord");
             this.bRecord.Name = "bRecord";
+            this.toolTip.SetToolTip(this.bRecord, resources.GetString("bRecord.ToolTip"));
             this.bRecord.UseVisualStyleBackColor = true;
             this.bRecord.Click += new System.EventHandler(this.bRecord_Click);
             // 
@@ -168,6 +174,7 @@
             // 
             resources.ApplyResources(this.bStop, "bStop");
             this.bStop.Name = "bStop";
+            this.toolTip.SetToolTip(this.bStop, resources.GetString("bStop.ToolTip"));
             this.bStop.UseVisualStyleBackColor = true;
             this.bStop.Click += new System.EventHandler(this.bStop_Click);
             // 
@@ -176,6 +183,7 @@
             resources.ApplyResources(this.bSave, "bSave");
             this.tLPControlButton.SetColumnSpan(this.bSave, 2);
             this.bSave.Name = "bSave";
+            this.toolTip.SetToolTip(this.bSave, resources.GetString("bSave.ToolTip"));
             this.bSave.UseVisualStyleBackColor = true;
             this.bSave.Click += new System.EventHandler(this.bSave_Click);
             // 

@@ -6,7 +6,7 @@
 // File          : CellularAutomatonRecorder.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 27.06.2017 13:41
-// Last Revision : 29.06.2017 11:39
+// Last Revision : 29.06.2017 12:35
 // Description   : 
 #endregion
 
@@ -24,7 +24,6 @@ using CellularAutomaton.Core.Rules;
 
 namespace CellularAutomaton.Components.Recorder
 {
-    // TODO: Настроить ToolTip.
     /// <summary>
     /// Представляет регистратор функционирования клеточного автомата описываемого <see cref="Core.CellularAutomaton"/>.
     /// </summary>
