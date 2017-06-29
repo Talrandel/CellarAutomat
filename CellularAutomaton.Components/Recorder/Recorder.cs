@@ -5,12 +5,13 @@
 // Language      : C# 6.0
 // File          : Recorder.cs
 // Author        : Антипкин С.С., Макаров Е.А.
-// Created       : 18.06.2017 12:44
-// Last Revision : 24.06.2017 19:19
+// Created       : 27.06.2017 13:41
+// Last Revision : 29.06.2017 22:55
 // Description   : 
 #endregion
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Threading;
 using System.Threading.Tasks;
@@ -40,14 +41,14 @@ namespace CellularAutomaton.Components.Recorder
         private readonly CancellationTokenSource _cts;
 
         /// <summary>
-        /// Запись функционирования клеточного автомата.
-        /// </summary>
-        private IRecord _record;
-
-        /// <summary>
         /// True, если освобождение ресурсов осуществлялось, иначе false.
         /// </summary>
         private bool _disposed;
+
+        /// <summary>
+        /// Запись функционирования клеточного автомата.
+        /// </summary>
+        private readonly IRecord _record;
 
         /// <summary>
         /// Задача в которой выполняется расчёт поведения клеточного автомата.
@@ -94,7 +95,7 @@ namespace CellularAutomaton.Components.Recorder
         }
         #endregion
 
-        #region IDisposable Members
+        #region IRecorder Members
         /// <summary>
         /// Освобождает все ресурсы занимаемые <see cref="Recorder"/>.
         /// </summary>
@@ -103,9 +104,7 @@ namespace CellularAutomaton.Components.Recorder
             Dispose(true);
             GC.SuppressFinalize(this);
         }
-        #endregion
 
-        #region IRecorder Members
         /// <summary>
         /// Возвращает число кадров в записи.
         /// </summary>
@@ -134,7 +133,11 @@ namespace CellularAutomaton.Components.Recorder
                     _task = _ca.ProcessingAsync(_cts.Token);
                     await _task;
                 }
-                catch (OperationCanceledException) { }
+                catch (OperationCanceledException)
+                {
+                    if (!_cts.IsCancellationRequested)
+                        Stop();
+                }
             }
         }
 
@@ -220,7 +223,7 @@ namespace CellularAutomaton.Components.Recorder
         /// Освобождает все ресурсы, используемые текущим объектом <see cref="Recorder"/>.
         /// </summary>
         /// <param name="disposing">True - освободить управляемые и неуправляемые ресурсы; false освободить только неуправляемые ресурсы.</param>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2213:DisposableFieldsShouldBeDisposed", MessageId = "_cts")]
+        [SuppressMessage("Microsoft.Usage", "CA2213:DisposableFieldsShouldBeDisposed", MessageId = "_cts")]
         protected virtual void Dispose(bool disposing)
         {
             if (_disposed)
