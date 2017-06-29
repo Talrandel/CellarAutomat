@@ -5,8 +5,8 @@
 // Language      : C# 6.0
 // File          : Record.cs
 // Author        : Антипкин С.С., Макаров Е.А.
-// Created       : 27.06.2017 13:41
-// Last Revision : 27.06.2017 23:14
+// Created       : 29.06.2017 15:26
+// Last Revision : 29.06.2017 22:33
 // Description   : 
 #endregion
 
@@ -24,6 +24,7 @@ using CellularAutomaton.Core.Properties;
 namespace CellularAutomaton.Core
 {
     // TODO: Оптимизация памяти. В целях оптимизации использования память необходимо реализовать запись и чтение файла записи, а не хранить её всю в памяти.
+    // Так же можно добавить уникальный ИД записи (GUID), что позволит не загружать уже загруженную запись.
     /// <summary>
     /// Представляет запись функционирования клеточного автомата.
     /// </summary>
@@ -32,12 +33,6 @@ namespace CellularAutomaton.Core
     public class Record : IRecord, IReadOnlyRecord
     {
         #region Fields
-        /// <summary>
-        /// Форматтер используемый для сериализации записи.
-        /// </summary>
-        [NonSerialized]
-        private readonly BinaryFormatter _bf;
-
         /// <summary>
         /// Внутренняя структура содержащая данные записи.
         /// </summary>
@@ -51,7 +46,6 @@ namespace CellularAutomaton.Core
         public Record()
         {
             _rec = new LinkedList<Bitmap>();
-            _bf = new BinaryFormatter();
         }
 
         /// <summary>
@@ -303,7 +297,10 @@ namespace CellularAutomaton.Core
             }
 
             using (FileStream fs = File.Create(fileName))
-                _bf.Serialize(fs, this);
+            {
+                BinaryFormatter bf = new BinaryFormatter();
+                bf.Serialize(fs, this);
+            }
         }
 
         /// <summary>
@@ -320,9 +317,19 @@ namespace CellularAutomaton.Core
                     nameof(fileName));
             }
 
+            if (10 < Count)
+            {
+                Clear();
+                GC.Collect();
+            }
+
             using (FileStream fs = File.OpenRead(fileName))
             {
-                Record loadedRec = (Record)_bf.Deserialize(fs);
+                BinaryFormatter bf = new BinaryFormatter();
+                Record loadedRec = bf.Deserialize(fs) as Record;
+                if (loadedRec == null)
+                    throw new ArgumentException("Файл с записью повреждён.", nameof(fileName));
+
                 _rec = loadedRec._rec;
                 Rule = loadedRec.Rule;
                 StatesCount = loadedRec.StatesCount;
