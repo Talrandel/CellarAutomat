@@ -217,7 +217,7 @@ namespace CellularAutomaton.Components.Player
             if (rec == null)
                 throw new ArgumentNullException(nameof(rec));
 
-            _record = rec; // TODO: (IRecord)rec.Clone()?
+            _record = rec;
             GetRecordEnumerator();
             MoveNext();
         }
