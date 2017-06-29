@@ -6,7 +6,7 @@
 // File          : PlayerController.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 27.06.2017 13:41
-// Last Revision : 29.06.2017 12:44
+// Last Revision : 29.06.2017 18:30
 // Description   : 
 #endregion
 
@@ -73,6 +73,11 @@ namespace CellularAutomaton.Components.Player
         /// Представляет метод обновляющий значение свойства <see cref="TrackBar.Value"/> элемента управления <see cref="tBFinder"/>.
         /// </summary>
         private Action<int> _setValueFinder;
+
+        /// <summary>
+        /// Представляет метод, обработчик события <see cref="IPlayer.StopPlay"/>.
+        /// </summary>
+        private Action _stoped;
         #endregion
 
         #region Properties
@@ -271,7 +276,7 @@ namespace CellularAutomaton.Components.Player
         private void CheckIsStart()
         {
             Enabled = (_player?.Record != null) && (0 < _player.Record.Count);
-            Stoped();
+            Invoke(_stoped);
         }
 
         /// <summary>
@@ -283,6 +288,17 @@ namespace CellularAutomaton.Components.Player
             {
                 tBFinder.Value = e;
                 SetToolTiptBFinder();
+            });
+
+            _stoped = (() =>
+            {
+                bPlay.Enabled = true;
+                bPause.Enabled = false;
+                bStop.Enabled = false;
+
+                tBFinder.Value = 0;
+
+                OnStopPlay();
             });
         }
 
@@ -373,7 +389,7 @@ namespace CellularAutomaton.Components.Player
         /// <param name="e">Сведения о событии.</param>
         private void PlayerStopPlay(object sender, EventArgs e)
         {
-            Stoped();
+            Invoke(_stoped);
         }
 
         /// <summary>
@@ -388,20 +404,6 @@ namespace CellularAutomaton.Components.Player
                     Resources.PlayerController__SetToolTip__Finder,
                     tBFinder.Value + 1,
                     _player?.Record?.Count + 1 ?? 0));
-        }
-
-        /// <summary>
-        /// Обработчик события <see cref="IPlayer.StopPlay"/>.
-        /// </summary>
-        private void Stoped()
-        {
-            bPlay.Enabled = true;
-            bPause.Enabled = false;
-            bStop.Enabled = false;
-
-            tBFinder.Value = 0;
-
-            OnStopPlay();
         }
 
         /// <summary>

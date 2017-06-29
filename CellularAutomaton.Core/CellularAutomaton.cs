@@ -5,8 +5,8 @@
 // Language      : C# 6.0
 // File          : CellularAutomaton.cs
 // Author        : Антипкин С.С., Макаров Е.А.
-// Created       : 17.06.2017 17:27
-// Last Revision : 24.06.2017 22:32
+// Created       : 27.06.2017 13:41
+// Last Revision : 29.06.2017 18:52
 // Description   : 
 #endregion
 
@@ -58,11 +58,6 @@ namespace CellularAutomaton.Core
         private readonly SendOrPostCallback _invokeHandlers;
 
         /// <summary>
-        /// Объект синхронизации.
-        /// </summary>
-        private readonly object _lockObj = new object();
-
-        /// <summary>
         /// Контекст синхронизации.
         /// </summary>
         private readonly SynchronizationContext _synchronizationContext;
@@ -81,11 +76,6 @@ namespace CellularAutomaton.Core
         /// Количество состояний клетки клеточного автомата.
         /// </summary>
         private int _statesCount;
-
-        /// <summary>
-        /// TODO: выкинуть _stop
-        /// </summary>
-        private bool _stop;
         #endregion
 
         #region Properties
@@ -131,19 +121,6 @@ namespace CellularAutomaton.Core
                 _statesCount = value;
             }
         }
-
-        /// <summary>
-        /// Возвращает или задаёт флаг остановки работы клеточного автомата.
-        /// </summary>
-        public bool Stop
-        {
-            get { return _stop; }
-            set
-            {
-                lock (_lockObj)
-                    _stop = value;
-            }
-        }
         #endregion
 
         #region Constructors
@@ -185,8 +162,6 @@ namespace CellularAutomaton.Core
             createdField.Copy(ref _currentField);
             StatesCount = statesCount;
 
-            Stop = false;
-
             _synchronizationContext = new SynchronizationContext();
             _invokeHandlers = state => OnGenerationChanged();
 
@@ -225,7 +200,7 @@ namespace CellularAutomaton.Core
         public CellularAutomaton(IRule rule, IField createdField, int statesCount, byte density) :
             this(rule, createdField, statesCount)
         {
-            SetDensityForField(density);
+            SetDensity(density);
         }
 
         /// <summary>
@@ -258,29 +233,6 @@ namespace CellularAutomaton.Core
         }
 
         /// <summary>
-        /// Осуществляет расчёт поведения клеточного автомата.
-        /// </summary>
-        public void Processing()
-        {
-            Stop = false;
-
-            while (true)
-            {
-                // TODO: Заменить на InnerProcessingAsync(), убрать Stop заменив на CancellationToken.
-                NextGeneration();
-                OnGenerationChanged();
-
-                if (Stop || _pastField.Equals(CurrentField))
-                {
-                    Stop = true;
-                    break;
-                }
-
-                CurrentField.Copy(ref _pastField);
-            }
-        }
-
-        /// <summary>
         /// Осуществляет асинхронный расчёт поведения клеточного автомата.
         /// </summary>
         /// <param name="ct">Токен отмены, который должен использоваться для отмены работы.</param>
@@ -296,7 +248,7 @@ namespace CellularAutomaton.Core
         /// </summary>
         /// <param name="density">Плотность распределения живых клеток на поле [0; 100].</param>
         /// <exception cref="ArgumentOutOfRangeException">Величина плотности распределения живых клеток на поле должна лежать в интервале [0; 100].</exception>
-        public void SetDensityForField(byte density)
+        public void SetDensity(byte density)
         {
             if (100 < density)
                 throw new ArgumentOutOfRangeException(nameof(density), density, Resources.Ex__DensityOutOfRange);
@@ -318,22 +270,15 @@ namespace CellularAutomaton.Core
         /// <exception cref="OperationCanceledException">Операция вычисления отменена.</exception>
         private void InnerProcessingAsync()
         {
-            Stop = false;
-
             while (true)
             {
                 NextGeneration();
+                _synchronizationContext.Post(_invokeHandlers, null);
 
-                // TODO: Проверить работоспособность Async варианта и перейти на него.
-                //OnGenerationChanged();
-                _synchronizationContext.Send(_invokeHandlers, null);
-
-                if (_ct.IsCancellationRequested || _pastField.Equals(CurrentField))
-                {
-                    Stop = true;
-                    _ct.ThrowIfCancellationRequested();
+                if (_pastField.Equals(CurrentField))
                     break;
-                }
+
+                _ct.ThrowIfCancellationRequested();
 
                 CurrentField.Copy(ref _pastField);
             }
