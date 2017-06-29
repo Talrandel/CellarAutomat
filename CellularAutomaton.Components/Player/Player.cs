@@ -106,7 +106,7 @@ namespace CellularAutomaton.Components.Player
                     Resources.Ex__The_width_and_or_height__drawing_area_is_less_than_or_equal_to_zero_, nameof(rec));
             }
 
-            _bufGrContext = new BufferedGraphicsContext();
+            _bufGrContext = BufferedGraphicsManager.Current;
             _bufGr = _bufGrContext.Allocate(e, rec);
             _bufGrContext.MaximumBuffer = rec.Size;
 
@@ -419,7 +419,7 @@ namespace CellularAutomaton.Components.Player
         /// <param name="e">Сведения о событии <see cref="Timer.Elapsed"/>.</param>
         private void TimerElapsed(object sender, ElapsedEventArgs e)
         {
-            _bufGr.Graphics.DrawImage(_recordEnumerator.Current, _bufGrContext.MaximumBuffer.Width, _bufGrContext.MaximumBuffer.Height);
+            _bufGr.Graphics.DrawImage(_recordEnumerator.Current, 0, 0);
             Paint();
 
             if (!MoveNext()) // Достигнут конец записи?
