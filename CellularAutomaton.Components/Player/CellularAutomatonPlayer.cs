@@ -6,7 +6,7 @@
 // File          : CellularAutomatonPlayer.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 27.06.2017 13:41
-// Last Revision : 29.06.2017 11:35
+// Last Revision : 29.06.2017 12:27
 // Description   : 
 #endregion
 
@@ -341,7 +341,7 @@ namespace CellularAutomaton.Components.Player
         /// </summary>
         private void InitializeProperties()
         {
-            SizeMode = PictureSizeMode.CenterImage;
+            SizeMode = PictureSizeMode.AutoSize;
 
             FramesPerMinuteMin = Player.FramesPerMinuteMinDefValue;
             FramesPerMinuteMax = Player.FramesPerMinuteMaxDefValue;
@@ -360,6 +360,16 @@ namespace CellularAutomaton.Components.Player
         private void nUDFramesPerMinute_ValueChanged(object sender, EventArgs e)
         {
             playerController.FramesPerMinuteValue = FramesPerMinuteValue;
+        }
+
+        /// <summary>
+        /// Обработчик события <see cref="Control.Paint"/>. Перерисовывает текущий кадр.
+        /// </summary>
+        /// <param name="sender">Источник события.</param>
+        /// <param name="e">Сведения о событии.</param>
+        private void pBMain_Paint(object sender, PaintEventArgs e)
+        {
+            playerController.RepaintCurrentFrame();
         }
 
         /// <summary>

@@ -59,6 +59,7 @@
             resources.ApplyResources(this.pBMain, "pBMain");
             this.pBMain.Name = "pBMain";
             this.pBMain.TabStop = false;
+            this.pBMain.Paint += new System.Windows.Forms.PaintEventHandler(this.pBMain_Paint);
             // 
             // playerController
             // 

@@ -6,7 +6,7 @@
 // File          : PlayerController.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 27.06.2017 13:41
-// Last Revision : 29.06.2017 10:51
+// Last Revision : 29.06.2017 12:27
 // Description   : 
 #endregion
 
@@ -219,6 +219,14 @@ namespace CellularAutomaton.Components.Player
         }
 
         /// <summary>
+        /// Перерисовывает текущий кадр.
+        /// </summary>
+        public void RepaintCurrentFrame()
+        {
+            _player?.Paint();
+        }
+
+        /// <summary>
         /// Вызывает событие <see cref="PausePlay"/>.
         /// </summary>
         protected virtual void OnPausePlay()
@@ -372,7 +380,7 @@ namespace CellularAutomaton.Components.Player
         /// <param name="e">Сведения о событии.</param>
         private void PlayerController_Paint(object sender, PaintEventArgs e)
         {
-            _player?.Paint();
+            RepaintCurrentFrame();
         }
 
         /// <summary>
