@@ -6,7 +6,7 @@
 // File          : CellularAutomatonPlayer.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 27.06.2017 13:41
-// Last Revision : 29.06.2017 12:27
+// Last Revision : 29.06.2017 12:31
 // Description   : 
 #endregion
 
@@ -22,7 +22,6 @@ using CellularAutomaton.Core;
 namespace CellularAutomaton.Components.Player
 {
     // BUG: Найти и устранить причину "чёрного квадрата" вместо воспроизводимой записи. Шаги воспроизведения: Загрузить запись и начать воспроизведение. PS.: В первую очередь необходимо проверить корректность записи, для этого генерируемые кадры заменить статическим изображением. Затем проверить CellularAutomaton.Components.Player.Player также на выводе статического изображения.
-    // TODO: Настроить ToolTip.
     /// <summary>
     /// Представляет элемент управления - проигрыватель.
     /// </summary>

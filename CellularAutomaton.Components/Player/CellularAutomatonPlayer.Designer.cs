@@ -83,12 +83,14 @@
             // 
             resources.ApplyResources(this.nUDFramesPerMinute, "nUDFramesPerMinute");
             this.nUDFramesPerMinute.Name = "nUDFramesPerMinute";
+            this.toolTip.SetToolTip(this.nUDFramesPerMinute, resources.GetString("nUDFramesPerMinute.ToolTip"));
             this.nUDFramesPerMinute.ValueChanged += new System.EventHandler(this.nUDFramesPerMinute_ValueChanged);
             // 
             // bLoadRecord
             // 
             resources.ApplyResources(this.bLoadRecord, "bLoadRecord");
             this.bLoadRecord.Name = "bLoadRecord";
+            this.toolTip.SetToolTip(this.bLoadRecord, resources.GetString("bLoadRecord.ToolTip"));
             this.bLoadRecord.UseVisualStyleBackColor = true;
             this.bLoadRecord.Click += new System.EventHandler(this.bLoadRecord_Click);
             // 
