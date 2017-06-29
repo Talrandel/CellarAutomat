@@ -220,6 +220,7 @@ namespace CellularAutomaton.Components.Recorder
         /// Освобождает все ресурсы, используемые текущим объектом <see cref="Recorder"/>.
         /// </summary>
         /// <param name="disposing">True - освободить управляемые и неуправляемые ресурсы; false освободить только неуправляемые ресурсы.</param>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2213:DisposableFieldsShouldBeDisposed", MessageId = "_cts")]
         protected virtual void Dispose(bool disposing)
         {
             if (_disposed)

@@ -374,34 +374,43 @@ namespace CellularAutomaton.Components.Player
         /// Отображает диалог выбора расположения для загрузки файла с записью работы клеточного автомата.
         /// </summary>
         /// <returns><b>True</b>, если пользователь нажал кнопку "Открыть", иначе <b>false</b>.</returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Ликвидировать объекты перед потерей области")]
         private bool ShowOpenFileDialog()
         {
-            if (_openFileDialog == null)
+            try
             {
-                _openFileDialog = new OpenFileDialog
+                if (_openFileDialog == null)
                 {
-                    CheckFileExists = true,
-                    CheckPathExists = true,
-                    ValidateNames = true,
-                    AddExtension = true,
-                    DereferenceLinks = true,
-                    RestoreDirectory = true,
-                    InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                    _openFileDialog = new OpenFileDialog
+                    {
+                        CheckFileExists = true,
+                        CheckPathExists = true,
+                        ValidateNames = true,
+                        AddExtension = true,
+                        DereferenceLinks = true,
+                        RestoreDirectory = true,
+                        InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
 
-                    Title = Resources.CellularAutomatonPlayer__OpenFileDialogRecordTitle,
-                    FileName = FileName,
-                    DefaultExt = FileExtension,
-                    Filter = FileFilter
-                };
+                        Title = Resources.CellularAutomatonPlayer__OpenFileDialogRecordTitle,
+                        FileName = FileName,
+                        DefaultExt = FileExtension,
+                        Filter = FileFilter
+                    };
+                }
+
+                if (_openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    FileName = _openFileDialog.FileName;
+                    return true;
+                }
+
+                return false;
             }
-
-            if (_openFileDialog.ShowDialog() == DialogResult.OK)
+            catch
             {
-                FileName = _openFileDialog.FileName;
-                return true;
+                _openFileDialog?.Dispose();
+                throw;
             }
-
-            return false;
         }
         #endregion
     }

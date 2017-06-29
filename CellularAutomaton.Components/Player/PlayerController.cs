@@ -184,6 +184,7 @@ namespace CellularAutomaton.Components.Player
         /// <param name="rec">Размеры области на которую осуществяется вывод изображения.</param>
         /// <exception cref="ArgumentNullException">Параметр <paramref name="e"/> имеет значение <b>null</b>.</exception>
         /// <exception cref="ArgumentException">Значение высоты или ширины размера меньше или равно нулю.</exception>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "e")]
         public void InitializePlayer(Graphics e, Rectangle rec)
         {
             _player = new Player(e, rec);

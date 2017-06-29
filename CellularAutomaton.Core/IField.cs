@@ -75,10 +75,10 @@ namespace CellularAutomaton.Core
         /// Задаёт начальные состояния клеток на поле.
         /// </summary>
         /// <param name="statesCountMin">Минимальное число состояний клетки.</param>
-        /// <param name="statesNumber">Количество состояний клетки.</param>
+        /// <param name="statesCount">Количество состояний клетки.</param>
         /// <param name="density">Плотность распределения живых клеток на поле [0; 100].</param>
         /// <exception cref="ArgumentOutOfRangeException">Величина плотности распределения живых клеток на поле должна лежать в интервале [0; 100].</exception>
-        void Initialize(int statesCountMin, int statesNumber, byte density);
+        void Initialize(int statesCountMin, int statesCount, byte density);
         #endregion
     }
 }

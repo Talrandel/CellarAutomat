@@ -11,13 +11,16 @@
         /// Освободить все используемые ресурсы.
         /// </summary>
         /// <param name="disposing">истинно, если управляемый ресурс должен быть удален; иначе ложно.</param>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2213:DisposableFieldsShouldBeDisposed", MessageId = "components")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2213:DisposableFieldsShouldBeDisposed", MessageId = "_player")]
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
+                _openFileDialog?.Dispose();
                 components?.Dispose();
             }
+
             base.Dispose(disposing);
         }
 

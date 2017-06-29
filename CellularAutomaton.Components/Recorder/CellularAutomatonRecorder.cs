@@ -6,7 +6,7 @@
 // File          : CellularAutomatonRecorder.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 27.06.2017 13:41
-// Last Revision : 29.06.2017 12:35
+// Last Revision : 29.06.2017 19:07
 // Description   : 
 #endregion
 
@@ -762,34 +762,43 @@ namespace CellularAutomaton.Components.Recorder
         /// Отображает диалог выбора расположения для сохранения файла с записью работы клеточного автомата.
         /// </summary>
         /// <returns><b>True</b>, если пользователь нажал кнопку "Сохранить", иначе <b>false</b>.</returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Ликвидировать объекты перед потерей области")]
         private bool ShowSaveFileDialog()
         {
-            if (_saveFileDialog == null)
+            try
             {
-                _saveFileDialog = new SaveFileDialog
+                if (_saveFileDialog == null)
                 {
-                    CheckFileExists = false,
-                    CheckPathExists = true,
-                    ValidateNames = true,
-                    AddExtension = true,
-                    DereferenceLinks = true,
-                    RestoreDirectory = true,
-                    OverwritePrompt = true,
-                    InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-                    Title = Resources.CellularAutomatonRecorder__SaveFileDialogRecordTitle,
-                    FileName = FileName,
-                    DefaultExt = FileExtension,
-                    Filter = FileFilter
-                };
-            }
+                    _saveFileDialog = new SaveFileDialog
+                    {
+                        CheckFileExists = false,
+                        CheckPathExists = true,
+                        ValidateNames = true,
+                        AddExtension = true,
+                        DereferenceLinks = true,
+                        RestoreDirectory = true,
+                        OverwritePrompt = true,
+                        InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                        Title = Resources.CellularAutomatonRecorder__SaveFileDialogRecordTitle,
+                        FileName = FileName,
+                        DefaultExt = FileExtension,
+                        Filter = FileFilter
+                    };
+                }
 
-            if (_saveFileDialog.ShowDialog() == DialogResult.OK)
+                if (_saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    FileName = _saveFileDialog.FileName;
+                    return true;
+                }
+
+                return false;
+            }
+            catch
             {
-                FileName = _saveFileDialog.FileName;
-                return true;
+                _saveFileDialog?.Dispose();
+                throw;
             }
-
-            return false;
         }
 
         /// <summary>

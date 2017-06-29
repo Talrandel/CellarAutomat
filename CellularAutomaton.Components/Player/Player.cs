@@ -252,11 +252,11 @@ namespace CellularAutomaton.Components.Player
         /// <summary>
         /// Начинает воспроизведение записи с текущей позиции записи.
         /// </summary>
-        /// <exception cref="ArgumentException">Не загружена запись для воспроизведения.</exception>
+        /// <exception cref="Invalid​Operation​Exception">Не загружена запись для воспроизведения.</exception>
         public void Play()
         {
             if (_record == null)
-                throw new ArgumentException(Resources.Ex__RecordNotLoaded, nameof(Record));
+                throw new Invalid​Operation​Exception(Resources.Ex__RecordNotLoaded);
 
             if (0 < _record.Count) // Есть кадры для воспроизведения?
             {
