@@ -5,8 +5,8 @@
 // Language      : C# 6.0
 // File          : Player.cs
 // Author        : Антипкин С.С., Макаров Е.А.
-// Created       : 27.06.2017 13:41
-// Last Revision : 29.06.2017 11:28
+// Created       : 29.06.2017 18:08
+// Last Revision : 29.06.2017 18:22
 // Description   : 
 #endregion
 
@@ -106,9 +106,9 @@ namespace CellularAutomaton.Components.Player
                     Resources.Ex__The_width_and_or_height__drawing_area_is_less_than_or_equal_to_zero_, nameof(rec));
             }
 
-            _bufGrContext = BufferedGraphicsManager.Current;
-            _bufGr = _bufGrContext.Allocate(e, rec);
+            _bufGrContext = new BufferedGraphicsContext();
             _bufGrContext.MaximumBuffer = rec.Size;
+            _bufGr = _bufGrContext.Allocate(e, rec);
 
             _timer = new Timer();
             _timer.Elapsed += TimerElapsed;
