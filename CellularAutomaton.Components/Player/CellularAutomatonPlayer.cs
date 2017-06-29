@@ -267,6 +267,7 @@ namespace CellularAutomaton.Components.Player
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public IReadOnlyRecord Record => playerController?.Record;
 
+        // BUG: SizeMode. Данный параметр не влияет на отображение, что связано с его особеннностью - рисованием на элементе. Данный параметр, в исходном виде, может применяться только при использовании методов отображения компонента PictureBox (pBMain).
         /// <summary>
         /// Возвращает или задаёт режим размещения изображения.
         /// </summary>
@@ -369,7 +370,7 @@ namespace CellularAutomaton.Components.Player
         /// </summary>
         private void InitializeProperties()
         {
-            SizeMode = PictureSizeMode.AutoSize;
+            SizeMode = PictureSizeMode.CenterImage;
 
             FramesPerMinuteMin = Player.FramesPerMinuteMinDefValue;
             FramesPerMinuteMax = Player.FramesPerMinuteMaxDefValue;
