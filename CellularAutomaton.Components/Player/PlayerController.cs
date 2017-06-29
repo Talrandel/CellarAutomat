@@ -6,7 +6,7 @@
 // File          : PlayerController.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 27.06.2017 13:41
-// Last Revision : 29.06.2017 12:27
+// Last Revision : 29.06.2017 12:44
 // Description   : 
 #endregion
 
@@ -21,7 +21,6 @@ using CellularAutomaton.Core;
 
 namespace CellularAutomaton.Components.Player
 {
-    // TODO: Выяснить необходимость Action.
     /// <summary>
     /// Представляет элемент управления проигрывателем.
     /// </summary>
@@ -66,11 +65,6 @@ namespace CellularAutomaton.Components.Player
 
         #region Fields
         /// <summary>
-        /// Представляет метод обрабатывающий событие <see cref="IPlayer.PausePlay"/>.
-        /// </summary>
-        private Action _paused;
-
-        /// <summary>
         /// Объект <see cref="Player"/>, которым осуществляется управление.
         /// </summary>
         private Player _player;
@@ -79,16 +73,6 @@ namespace CellularAutomaton.Components.Player
         /// Представляет метод обновляющий значение свойства <see cref="TrackBar.Value"/> элемента управления <see cref="tBFinder"/>.
         /// </summary>
         private Action<int> _setValueFinder;
-
-        /// <summary>
-        /// Представляет метод обрабатывающий событие <see cref="IPlayer.StartPlay"/>.
-        /// </summary>
-        private Action _started;
-
-        /// <summary>
-        /// Представляет метод обрабатывающий событие <see cref="IPlayer.StopPlay"/>.
-        /// </summary>
-        private Action _stoped;
         #endregion
 
         #region Properties
@@ -287,7 +271,7 @@ namespace CellularAutomaton.Components.Player
         private void CheckIsStart()
         {
             Enabled = (_player?.Record != null) && (0 < _player.Record.Count);
-            Invoke(_stoped);
+            Stoped();
         }
 
         /// <summary>
@@ -299,35 +283,6 @@ namespace CellularAutomaton.Components.Player
             {
                 tBFinder.Value = e;
                 SetToolTiptBFinder();
-            });
-
-            _started = (() =>
-            {
-                bPlay.Enabled = false;
-                bPause.Enabled = true;
-                bStop.Enabled = true;
-
-                OnStartPlay();
-            });
-
-            _paused = (() =>
-            {
-                bPlay.Enabled = true;
-                bPause.Enabled = false;
-                bStop.Enabled = true;
-
-                OnPausePlay();
-            });
-
-            _stoped = (() =>
-            {
-                bPlay.Enabled = true;
-                bPause.Enabled = false;
-                bStop.Enabled = false;
-
-                tBFinder.Value = 0;
-
-                OnStopPlay();
             });
         }
 
@@ -390,7 +345,11 @@ namespace CellularAutomaton.Components.Player
         /// <param name="e">Сведения о событии.</param>
         private void PlayerPausePlay(object sender, EventArgs e)
         {
-            Invoke(_paused);
+            bPlay.Enabled = true;
+            bPause.Enabled = false;
+            bStop.Enabled = true;
+
+            OnPausePlay();
         }
 
         /// <summary>
@@ -400,7 +359,11 @@ namespace CellularAutomaton.Components.Player
         /// <param name="e">Сведения о событии.</param>
         private void PlayerStartPlay(object sender, EventArgs e)
         {
-            Invoke(_started);
+            bPlay.Enabled = false;
+            bPause.Enabled = true;
+            bStop.Enabled = true;
+
+            OnStartPlay();
         }
 
         /// <summary>
@@ -410,7 +373,7 @@ namespace CellularAutomaton.Components.Player
         /// <param name="e">Сведения о событии.</param>
         private void PlayerStopPlay(object sender, EventArgs e)
         {
-            Invoke(_stoped);
+            Stoped();
         }
 
         /// <summary>
@@ -425,6 +388,20 @@ namespace CellularAutomaton.Components.Player
                     Resources.PlayerController__SetToolTip__Finder,
                     tBFinder.Value + 1,
                     _player?.Record?.Count + 1 ?? 0));
+        }
+
+        /// <summary>
+        /// Обработчик события <see cref="IPlayer.StopPlay"/>.
+        /// </summary>
+        private void Stoped()
+        {
+            bPlay.Enabled = true;
+            bPause.Enabled = false;
+            bStop.Enabled = false;
+
+            tBFinder.Value = 0;
+
+            OnStopPlay();
         }
 
         /// <summary>
