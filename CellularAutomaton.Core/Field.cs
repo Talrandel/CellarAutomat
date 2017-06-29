@@ -5,15 +5,15 @@
 // Language      : C# 6.0
 // File          : Field.cs
 // Author        : Антипкин С.С., Макаров Е.А.
-// Created       : 16.06.2017 13:14
-// Last Revision : 24.06.2017 19:19
+// Created       : 27.06.2017 13:41
+// Last Revision : 29.06.2017 14:28
 // Description   : 
 #endregion
 
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
-
+using System.Runtime.InteropServices;
 using CellularAutomaton.Core.Properties;
 
 namespace CellularAutomaton.Core
@@ -96,41 +96,6 @@ namespace CellularAutomaton.Core
         {
             get { return _cells[x, y]; }
             set { _cells[x, y] = value; }
-        }
-
-        /// <summary>
-        /// Задаёт начальные состояния клеток на поле.
-        /// </summary>
-        /// <param name="statesNumber">Количество состояний клетки.</param>
-        /// <param name="density">Плотность распределения живых клеток на поле [0; 100].</param>
-        /// <exception cref="ArgumentOutOfRangeException">Величина плотности распределения живых клеток на поле должна лежать в интервале [0; 100].</exception>
-        public void SetStartValues(int statesNumber, byte density)
-        {
-            if (100 < density)
-                throw new ArgumentOutOfRangeException(nameof(density), density, Resources.Ex__DensityOutOfRange);
-
-            Random rnd = new Random();
-
-            // Сбросить состояние клеток.
-            if (density == 0)
-            {
-                for (int i = 0; i < Height; i++)
-                    for (int j = 0; j < Width; j++)
-                        _cells[i, j] = 0;
-            }
-            else
-            {
-                // TODO: проверить корректность функционирования плотности поля?
-                for (int i = 0; i < Height; i++)
-                {
-                    for (int j = 0; j < Width; j++)
-                        if (density < rnd.Next(0, 101))
-                            _cells[i, j] = rnd.Next(1, statesNumber);
-                        else
-                            _cells[i, j] = 0;
-                    //cells[i, j] = rand.Next(0, statesNumber);
-                }
-            }
         }
 
         /// <summary>
@@ -260,6 +225,47 @@ namespace CellularAutomaton.Core
             {
                 for (int j = 0; j < Width; j++)
                     other[i, j] = this[i, j];
+            }
+        }
+
+        /// <summary>
+        /// Устанавливает состояние клеток поля по умолчанию.
+        /// </summary>
+        public void Reset()
+        {
+            _cells.Initialize();
+        }
+
+        /// <summary>
+        /// Задаёт начальное состояние клеток на поле.
+        /// </summary>
+        /// <param name="statesCountMin">Минимальное число состояний клетки.</param>
+        /// <param name="statesCount">Количество состояний клетки.</param>
+        /// <param name="density">Плотность распределения живых клеток на поле [0; 100].</param>
+        /// <exception cref="ArgumentOutOfRangeException">Величина плотности распределения живых клеток на поле должна лежать в интервале [0; 100].</exception>
+        public void Initialize(int statesCountMin, int statesCount, byte density)
+        {
+            if (100 < density)
+            {
+                throw new ArgumentOutOfRangeException(
+                    nameof(density),
+                    density,
+                    Resources.Ex__DensityOutOfRange);
+            }
+
+            if (density == 0)
+                Reset();
+            else
+            {
+                Random rnd = new Random();
+                for (int i = 0; i < Height; i++)
+                {
+                    for (int j = 0; j < Width; j++)
+                        if (density < rnd.Next(1, 101))
+                            _cells[i, j] = rnd.Next(statesCountMin, statesCount);
+                        else
+                            _cells[i, j] = 0;
+                }
             }
         }
         #endregion

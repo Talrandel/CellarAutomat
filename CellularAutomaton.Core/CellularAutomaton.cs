@@ -37,13 +37,13 @@ namespace CellularAutomaton.Core
         /// Максимальное количество состояний клетоки.
         /// </summary>
         // ReSharper disable once MemberCanBePrivate.Global
-        public const int StatesNumberMax = 16;
+        public const int StatesCountMax = 16;
 
         /// <summary>
         /// Минимальное количество состояний клетки.
         /// </summary>
         // ReSharper disable once MemberCanBePrivate.Global
-        public const int StatesNumberMin = 2;
+        public const int StatesCountMin = 2;
         #endregion
 
         #region Fields
@@ -108,15 +108,15 @@ namespace CellularAutomaton.Core
         /// <summary>
         /// Возвращает или задаёт количество состояний клетки клеточного автомата.
         /// </summary>
-        /// <exception cref="ArgumentOutOfRangeException">Количество состояний клетки клеточного автомата должно лежать в интервале [<see cref="StatesNumberMin"/>; <see cref="StatesNumberMax"/>].</exception>
+        /// <exception cref="ArgumentOutOfRangeException">Количество состояний клетки клеточного автомата должно лежать в интервале [<see cref="StatesCountMin"/>; <see cref="StatesCountMax"/>].</exception>
         // ReSharper disable once MemberCanBePrivate.Global
         public int StatesCount
         {
             get { return _statesCount; }
             set
             {
-                if ((value < StatesNumberMin) ||
-                    (StatesNumberMax < value))
+                if ((value < StatesCountMin) ||
+                    (StatesCountMax < value))
                 {
                     throw new ArgumentOutOfRangeException(
                         nameof(value),
@@ -124,8 +124,8 @@ namespace CellularAutomaton.Core
                         string.Format(
                             CultureInfo.CurrentCulture,
                             Resources.Ex__StatesCountOutOfRange,
-                            nameof(StatesNumberMin),
-                            nameof(StatesNumberMax)));
+                            nameof(StatesCountMin),
+                            nameof(StatesCountMax)));
                 }
 
                 _statesCount = value;
@@ -148,7 +148,7 @@ namespace CellularAutomaton.Core
 
         #region Constructors
         /// <summary>
-        /// Инициализирует новый экземпляр класса <see cref="CellularAutomaton"/> заданными: правилом работы, полем и минимальным количеством состояний клетки <see cref="StatesNumberMin"/>.
+        /// Инициализирует новый экземпляр класса <see cref="CellularAutomaton"/> заданными: правилом работы, полем и минимальным количеством состояний клетки <see cref="StatesCountMin"/>.
         /// </summary>
         /// <param name="rule">Правило работы клеточного автомата.</param>
         /// <param name="createdField">Поле клеточного автомата.</param>
@@ -158,7 +158,7 @@ namespace CellularAutomaton.Core
         ///     <para>Параметр <paramref name="createdField"/> имеет значение <b>null</b>.</para>
         /// </exception>
         public CellularAutomaton(IRule rule, IField createdField) :
-            this(rule, createdField, StatesNumberMin) { }
+            this(rule, createdField, StatesCountMin) { }
 
         /// <summary>
         /// Инициализирует новый экземпляр класса <see cref="CellularAutomaton"/> заданными: правилом работы, полем и количеством состояний клетки.
@@ -253,7 +253,7 @@ namespace CellularAutomaton.Core
         /// </summary>
         public void Initialize()
         {
-            _pastField.SetStartValues(StatesCount, 0);
+            _pastField.Reset();
             Generation = 0;
         }
 
@@ -301,7 +301,7 @@ namespace CellularAutomaton.Core
             if (100 < density)
                 throw new ArgumentOutOfRangeException(nameof(density), density, Resources.Ex__DensityOutOfRange);
 
-            _pastField.SetStartValues(StatesCount, density);
+            _pastField.Initialize(StatesCountMin, StatesCount, density);
         }
 
         /// <summary>

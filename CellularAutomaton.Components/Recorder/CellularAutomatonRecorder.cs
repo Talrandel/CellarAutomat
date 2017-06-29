@@ -472,10 +472,10 @@ namespace CellularAutomaton.Components.Recorder
         /// Возвращает или задаёт максимальное число состояний клетки клеточного автомата.
         /// </summary>
         /// <remarks>
-        ///     <b>Значение по умолчанию - <see cref="CellularAutomaton.Core.CellularAutomaton.StatesNumberMax"/>.</b>
+        ///     <b>Значение по умолчанию - <see cref="CellularAutomaton.Core.CellularAutomaton.StatesCountMax"/>.</b>
         /// </remarks>
-        /// <exception cref="ArgumentOutOfRangeException">Значение '<see cref="StatesCountMax"/>' должно лежать в интервале от '<see cref="StatesCountMin"/>' до <see cref="CellularAutomaton.Core.CellularAutomaton.StatesNumberMax"/>.</exception>
-        [DefaultValue((short)Core.CellularAutomaton.StatesNumberMax)]
+        /// <exception cref="ArgumentOutOfRangeException">Значение '<see cref="StatesCountMax"/>' должно лежать в интервале от '<see cref="StatesCountMin"/>' до <see cref="CellularAutomaton.Core.CellularAutomaton.StatesCountMax"/>.</exception>
+        [DefaultValue((short)Core.CellularAutomaton.StatesCountMax)]
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [RefreshProperties(RefreshProperties.All)]
@@ -487,7 +487,7 @@ namespace CellularAutomaton.Components.Recorder
             set
             {
                 if (value < StatesCountMin ||
-                    Core.CellularAutomaton.StatesNumberMax < value)
+                    Core.CellularAutomaton.StatesCountMax < value)
                 {
                     throw new ArgumentOutOfRangeException(
                         nameof(value),
@@ -497,7 +497,7 @@ namespace CellularAutomaton.Components.Recorder
                             Resources.Ex__Value___0___must_be_between___1___and__2___,
                             nameof(StatesCountMax),
                             nameof(StatesCountMin),
-                            Core.CellularAutomaton.StatesNumberMax));
+                            Core.CellularAutomaton.StatesCountMax));
                 }
 
                 nUDStatesCount.Maximum = value;
@@ -508,10 +508,10 @@ namespace CellularAutomaton.Components.Recorder
         /// Возвращает или задаёт минимальное число состояний клетки клеточного автомата.
         /// </summary>
         /// <remarks>
-        ///     <b>Значение по умолчанию - <see cref="CellularAutomaton.Core.CellularAutomaton.StatesNumberMin"/>.</b>
+        ///     <b>Значение по умолчанию - <see cref="CellularAutomaton.Core.CellularAutomaton.StatesCountMin"/>.</b>
         /// </remarks>
-        /// <exception cref="ArgumentOutOfRangeException">Значение '<see cref="StatesCountMin"/>' должно лежать в диапазоне от <see cref="CellularAutomaton.Core.CellularAutomaton.StatesNumberMin"/> до '<see cref="StatesCountMax"/>'.</exception>
-        [DefaultValue((short)Core.CellularAutomaton.StatesNumberMin)]
+        /// <exception cref="ArgumentOutOfRangeException">Значение '<see cref="StatesCountMin"/>' должно лежать в диапазоне от <see cref="CellularAutomaton.Core.CellularAutomaton.StatesCountMin"/> до '<see cref="StatesCountMax"/>'.</exception>
+        [DefaultValue((short)Core.CellularAutomaton.StatesCountMin)]
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [RefreshProperties(RefreshProperties.All)]
@@ -522,7 +522,7 @@ namespace CellularAutomaton.Components.Recorder
             get { return Convert.ToInt32(nUDStatesCount.Minimum); }
             set
             {
-                if (value < Core.CellularAutomaton.StatesNumberMin ||
+                if (value < Core.CellularAutomaton.StatesCountMin ||
                     StatesCountMax < value)
                 {
                     throw new ArgumentOutOfRangeException(
@@ -532,7 +532,7 @@ namespace CellularAutomaton.Components.Recorder
                             CultureInfo.CurrentCulture,
                             Resources.Ex__Value___0___must_be_between___1___and__2___,
                             nameof(StatesCountMin),
-                            nameof(Core.CellularAutomaton.StatesNumberMin),
+                            nameof(Core.CellularAutomaton.StatesCountMin),
                             nameof(StatesCountMax)));
                 }
 
@@ -544,10 +544,10 @@ namespace CellularAutomaton.Components.Recorder
         /// Возвращает или задаёт число состояний клетки клеточного автомата.
         /// </summary>
         /// <remarks>
-        ///     <b>Значение по умолчанию - <see cref="CellularAutomaton.Core.CellularAutomaton.StatesNumberMin"/>.</b>
+        ///     <b>Значение по умолчанию - <see cref="CellularAutomaton.Core.CellularAutomaton.StatesCountMin"/>.</b>
         /// </remarks>
         /// <exception cref="ArgumentOutOfRangeException">Значение '<see cref="StatesCountValue"/>' должно лежать в диапазоне от '<see cref="StatesCountMin"/>' до '<see cref="StatesCountMax"/>'.</exception>
-        [DefaultValue((short)Core.CellularAutomaton.StatesNumberMin)]
+        [DefaultValue((short)Core.CellularAutomaton.StatesCountMin)]
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [RefreshProperties(RefreshProperties.All)]
@@ -684,9 +684,9 @@ namespace CellularAutomaton.Components.Recorder
             DencityMax = DencityMaxDefValue;
             DencityValue = DencityValueDefValue;
 
-            StatesCountMin = Core.CellularAutomaton.StatesNumberMin;
-            StatesCountMax = Core.CellularAutomaton.StatesNumberMax;
-            StatesCountValue = Core.CellularAutomaton.StatesNumberMin;
+            StatesCountMin = Core.CellularAutomaton.StatesCountMin;
+            StatesCountMax = Core.CellularAutomaton.StatesCountMax;
+            StatesCountValue = Core.CellularAutomaton.StatesCountMin;
 
             FileName = Resources.CellularAutomatonRecorder__SaveFileDialogRecordDefFileName;
             FileExtension = Resources.CellularAutomatonRecorder__SaveFileDialogRecordExt;

@@ -61,7 +61,7 @@ namespace CellularAutomaton.Core
         /// <param name="fieldSize">Размеры поля клеточного автомата.</param>
         /// <param name="generation">Число поколений клеточного автомата.</param>
         /// <exception cref="ArgumentOutOfRangeException">
-        ///     <para>Количество состояний клетки клеточного автомата должно лежать в интервале [<see cref="CellularAutomaton.StatesNumberMin"/>; <see cref="CellularAutomaton.StatesNumberMax"/>].</para>
+        ///     <para>Количество состояний клетки клеточного автомата должно лежать в интервале [<see cref="CellularAutomaton.StatesCountMin"/>; <see cref="CellularAutomaton.StatesCountMax"/>].</para>
         ///     <para>-- или --</para>
         ///     <para>Ширина поля <paramref name="fieldSize"/> меньше нуля.</para>
         ///     <para>-- или --</para>
@@ -71,8 +71,8 @@ namespace CellularAutomaton.Core
         /// </exception>
         public Record(string nameRule, int statesCount, Size fieldSize, int generation) : this()
         {
-            if ((statesCount < CellularAutomaton.StatesNumberMin) ||
-                (CellularAutomaton.StatesNumberMax < statesCount))
+            if ((statesCount < CellularAutomaton.StatesCountMin) ||
+                (CellularAutomaton.StatesCountMax < statesCount))
             {
                 throw new ArgumentOutOfRangeException(
                     nameof(statesCount),
@@ -80,8 +80,8 @@ namespace CellularAutomaton.Core
                     string.Format(
                         CultureInfo.CurrentCulture,
                         Resources.Ex__StatesCountOutOfRange,
-                        nameof(CellularAutomaton.StatesNumberMin),
-                        nameof(CellularAutomaton.StatesNumberMax)));
+                        nameof(CellularAutomaton.StatesCountMin),
+                        nameof(CellularAutomaton.StatesCountMax)));
             }
 
             if (fieldSize.Width < 0)

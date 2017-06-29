@@ -40,7 +40,7 @@ namespace CellularAutomaton.Core
         /// <summary>
         /// Возвращает количество состояний клетки клеточного автомата.
         /// </summary>
-        /// <exception cref="ArgumentOutOfRangeException">Количество состояний клетки клеточного автомата должно лежать в интервале [<see cref="CellularAutomaton.StatesNumberMin"/>; <see cref="CellularAutomaton.StatesNumberMax"/>].</exception>
+        /// <exception cref="ArgumentOutOfRangeException">Количество состояний клетки клеточного автомата должно лежать в интервале [<see cref="CellularAutomaton.StatesCountMin"/>; <see cref="CellularAutomaton.StatesCountMax"/>].</exception>
         int StatesCount { get; }
         #endregion
 

@@ -5,8 +5,8 @@
 // Language      : C# 6.0
 // File          : IField.cs
 // Author        : Антипкин С.С., Макаров Е.А.
-// Created       : 20.06.2017 20:20
-// Last Revision : 23.06.2017 13:27
+// Created       : 27.06.2017 13:41
+// Last Revision : 29.06.2017 14:28
 // Description   : 
 #endregion
 
@@ -67,12 +67,18 @@ namespace CellularAutomaton.Core
         int GetCellAtDirection(int x, int y, Directions direction);
 
         /// <summary>
+        /// Устанавливает состояние клеток поля по умолчанию.
+        /// </summary>
+        void Reset();
+
+        /// <summary>
         /// Задаёт начальные состояния клеток на поле.
         /// </summary>
+        /// <param name="statesCountMin">Минимальное число состояний клетки.</param>
         /// <param name="statesNumber">Количество состояний клетки.</param>
         /// <param name="density">Плотность распределения живых клеток на поле [0; 100].</param>
         /// <exception cref="ArgumentOutOfRangeException">Величина плотности распределения живых клеток на поле должна лежать в интервале [0; 100].</exception>
-        void SetStartValues(int statesNumber, byte density);
+        void Initialize(int statesCountMin, int statesNumber, byte density);
         #endregion
     }
 }
