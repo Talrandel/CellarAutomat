@@ -385,15 +385,6 @@ namespace CellularAutomaton.Components.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Ширина и/или высота области рисования меньше или равна нулю..
-        /// </summary>
-        internal static string Ex__The_width_and_or_height__drawing_area_is_less_than_or_equal_to_zero_ {
-            get {
-                return ResourceManager.GetString("Ex__The_width_and_or_height__drawing_area_is_less_than_or_equal_to_zero_", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Ищет локализованную строку, похожую на Значение &apos;{0}&apos; не должно быть меньше &apos;{1}&apos;..
         /// </summary>
         internal static string Ex__Value___0___GEQ___1___ {

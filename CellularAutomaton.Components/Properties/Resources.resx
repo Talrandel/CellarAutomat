@@ -129,9 +129,6 @@
   <data name="Ex__You_are_attempting_to_go_to_frame_with_a_negative_index_" xml:space="preserve">
     <value>Выполнена попытка перехода к кадру с отрицательным индексом.</value>
   </data>
-  <data name="Ex__The_width_and_or_height__drawing_area_is_less_than_or_equal_to_zero_" xml:space="preserve">
-    <value>Ширина и/или высота области рисования меньше или равна нулю.</value>
-  </data>
   <data name="CellularAutomatonRecorder__SaveFileDialogRecordExt" xml:space="preserve">
     <value>bin</value>
   </data>

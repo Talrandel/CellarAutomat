@@ -6,13 +6,13 @@
 // File          : CellularAutomatonPlayer.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 27.06.2017 13:41
-// Last Revision : 29.06.2017 18:54
+// Last Revision : 29.06.2017 20:20
 // Description   : 
 #endregion
 
 using System;
 using System.ComponentModel;
-using System.Drawing;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Windows.Forms;
 
@@ -290,9 +290,7 @@ namespace CellularAutomaton.Components.Player
         {
             InitializeComponent();
 
-            playerController.InitializePlayer(
-                pBMain.CreateGraphics(),
-                new Rectangle(0, 0, pBMain.Size.Width, pBMain.Size.Height));
+            playerController.InitializePlayer(pBMain.CreateGraphics());
 
             playerController.StartPlay += StartPlay;
             playerController.StartPlay += ((sender, e) =>
@@ -374,7 +372,7 @@ namespace CellularAutomaton.Components.Player
         /// Отображает диалог выбора расположения для загрузки файла с записью работы клеточного автомата.
         /// </summary>
         /// <returns><b>True</b>, если пользователь нажал кнопку "Открыть", иначе <b>false</b>.</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Ликвидировать объекты перед потерей области")]
+        [SuppressMessage("Microsoft.Reliability", "CA2000:Ликвидировать объекты перед потерей области")]
         private bool ShowOpenFileDialog()
         {
             try

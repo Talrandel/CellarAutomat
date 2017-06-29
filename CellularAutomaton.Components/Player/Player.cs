@@ -6,7 +6,7 @@
 // File          : Player.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 29.06.2017 18:08
-// Last Revision : 29.06.2017 18:22
+// Last Revision : 29.06.2017 20:41
 // Description   : 
 #endregion
 
@@ -46,19 +46,24 @@ namespace CellularAutomaton.Components.Player
 
         #region Fields
         /// <summary>
-        /// Графический буфер на который осуществляется вывод изображения.
-        /// </summary>
-        private readonly Buffered​Graphics _bufGr;
-
-        /// <summary>
         /// Экземпляр класса <see cref="BufferedGraphicsContext"/> управляющий <see cref="_bufGr"/>.
         /// </summary>
         private readonly BufferedGraphicsContext _bufGrContext;
 
         /// <summary>
+        /// Поверхность рисования GDI+ на которую осуществляется вывод изображения.
+        /// </summary>
+        private readonly Graphics _e;
+
+        /// <summary>
         /// Объект <see cref="Timer"/> управляющий сменой кадров.
         /// </summary>
         private readonly Timer _timer;
+
+        /// <summary>
+        /// Графический буфер на который осуществляется вывод изображения.
+        /// </summary>
+        private Buffered​Graphics _bufGr;
 
         /// <summary>
         /// Номер текущего кадра записи.
@@ -91,29 +96,23 @@ namespace CellularAutomaton.Components.Player
         /// Инициализирует новый экземпляр класса <see cref="Player"/>.
         /// </summary>
         /// <param name="e">Поверхность рисования GDI+ на которую осуществляется вывод изображения.</param>
-        /// <param name="rec">Размеры области на которую осуществяется вывод изображения.</param>
         /// <exception cref="ArgumentNullException">Параметр <paramref name="e"/> имеет значение <b>null</b>.</exception>
-        /// <exception cref="ArgumentException">Ширина и/или высота области рисования меньше или равна нулю.</exception>
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "e")]
-        public Player(Graphics e, Rectangle rec)
+        public Player(Graphics e)
         {
             if (e == null)
                 throw new ArgumentNullException(nameof(e));
 
-            if ((rec.Width == 0) || (rec.Height == 0))
-            {
-                throw new ArgumentException(
-                    Resources.Ex__The_width_and_or_height__drawing_area_is_less_than_or_equal_to_zero_, nameof(rec));
-            }
+            _e = e;
 
             _bufGrContext = new BufferedGraphicsContext();
-            _bufGrContext.MaximumBuffer = rec.Size;
-            _bufGr = _bufGrContext.Allocate(e, rec);
 
             _timer = new Timer();
             _timer.Elapsed += TimerElapsed;
 
             FramesPerMinute = Convert.ToInt16(Resources.Player__FramesPerMinuteDefValue, CultureInfo.CurrentCulture);
+
+            Load(new Record());
         }
         #endregion
 
@@ -218,8 +217,7 @@ namespace CellularAutomaton.Components.Player
                 throw new ArgumentNullException(nameof(rec));
 
             _record = rec;
-            GetRecordEnumerator();
-            MoveNext();
+            InitializeNewRecord();
         }
 
         /// <summary>
@@ -231,8 +229,7 @@ namespace CellularAutomaton.Components.Player
         {
             Stop();
             _record.Load(fileName);
-            GetRecordEnumerator();
-            MoveNext();
+            InitializeNewRecord();
         }
 
         /// <summary>
@@ -344,9 +341,10 @@ namespace CellularAutomaton.Components.Player
 
             if (disposing)
             {
+                _timer?.Close();
+                _e?.Dispose();
                 _bufGr?.Dispose();
                 _bufGrContext?.Dispose();
-                _timer?.Close();
             }
 
             _disposed = true;
@@ -386,11 +384,19 @@ namespace CellularAutomaton.Components.Player
         }
 
         /// <summary>
-        /// Возвращает перечислитель для записи <see cref="Record"/>.
+        /// Подготавливает <see cref="Recorder.Recorder"/> к воспроизведению при установке новой записи <see cref="Core.Record"/>.
         /// </summary>
-        private void GetRecordEnumerator()
+        private void InitializeNewRecord()
         {
             _recordEnumerator = Record.GetEnumerator();
+            MoveNext();
+
+            if ((_record.FieldSize.Width != 0) &&
+                (_record.FieldSize.Height != 0))
+                _bufGrContext.MaximumBuffer = _record.FieldSize;
+
+            _bufGr?.Dispose();
+            _bufGr = _bufGrContext.Allocate(_e, new Rectangle(0, 0, _record.FieldSize.Width, _record.FieldSize.Height));
         }
 
         /// <summary>

@@ -6,12 +6,13 @@
 // File          : PlayerController.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 27.06.2017 13:41
-// Last Revision : 29.06.2017 18:30
+// Last Revision : 29.06.2017 20:41
 // Description   : 
 #endregion
 
 using System;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
@@ -181,14 +182,11 @@ namespace CellularAutomaton.Components.Player
         /// Инициализирует <see cref="Player"/> заданным полотном и размером области для вывода изображения.
         /// </summary>
         /// <param name="e">Поверхность рисования GDI+ на которую осуществляется вывод изображения.</param>
-        /// <param name="rec">Размеры области на которую осуществяется вывод изображения.</param>
         /// <exception cref="ArgumentNullException">Параметр <paramref name="e"/> имеет значение <b>null</b>.</exception>
-        /// <exception cref="ArgumentException">Значение высоты или ширины размера меньше или равно нулю.</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "e")]
-        public void InitializePlayer(Graphics e, Rectangle rec)
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "e")]
+        public void InitializePlayer(Graphics e)
         {
-            _player = new Player(e, rec);
-            _player.Load(new Record()); // Загрузка пустой записи.
+            _player = new Player(e);
 
             _player.ChangeFrame += PlayerChangeFrame;
             _player.StartPlay += PlayerStartPlay;
