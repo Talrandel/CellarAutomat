@@ -6,7 +6,7 @@
 // File          : CellularAutomatonRecorder.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 27.06.2017 13:41
-// Last Revision : 29.06.2017 19:07
+// Last Revision : 29.06.2017 21:38
 // Description   : 
 #endregion
 
@@ -15,6 +15,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
@@ -590,11 +591,34 @@ namespace CellularAutomaton.Components.Recorder
 
         #region Members
         /// <summary>
+        /// Начинает запись функционирования клеточного автомата.
+        /// </summary>
+        /// <param name="indexRule">Индекс правила функционирования клеточного автомата заданного в <see cref="Rules"/>.</param>
+        /// <exception cref="InvalidOperationException">Не заданы правила функционирования клеточного автомата в <see cref="Rules"/>.</exception>
+        public void Record(int indexRule)
+        {
+            InitializeRecorder(indexRule);
+            _recorder.Record();
+        }
+
+        /// <summary>
         /// Сохраняет запись в файл с именем <see cref="FileName"/>.
         /// </summary>
+        /// <exception cref="InvalidOperationException">Нет данных для сохранения.</exception>
         public void SaveRecord()
         {
+            if (_recorder == null)
+                throw new InvalidOperationException(Resources.Ex__RecordIsEmpty);
+
             _recorder.Save(FileName);
+        }
+
+        /// <summary>
+        /// Останавливает запись функционирования клеточного автомата.
+        /// </summary>
+        public void Stop()
+        {
+            _recorder?.Stop();
         }
 
         /// <summary>
@@ -620,8 +644,7 @@ namespace CellularAutomaton.Components.Recorder
         /// <param name="e">Сведения о событии.</param>
         private void bRecord_Click(object sender, EventArgs e)
         {
-            InitializeRecorder();
-            _recorder.Record();
+            Record(cBCellularAutomatonRules.SelectedIndex);
         }
 
         /// <summary>
@@ -642,7 +665,7 @@ namespace CellularAutomaton.Components.Recorder
         /// <param name="e">Сведения о событии.</param>
         private void bStop_Click(object sender, EventArgs e)
         {
-            _recorder.Stop();
+            Stop();
         }
 
         /// <summary>
@@ -696,8 +719,19 @@ namespace CellularAutomaton.Components.Recorder
         /// <summary>
         /// Инициализирует <see cref="Recorder"/> заданными параметрами.
         /// </summary>
-        private void InitializeRecorder()
+        /// <param name="indexRule">Индекс правила функционирования клеточного автомата заданного в <see cref="Rules"/>.</param>
+        /// <exception cref="InvalidOperationException">Не заданы правила функционирования клеточного автомата в <see cref="Rules"/>.</exception>
+        private void InitializeRecorder(int indexRule)
         {
+            if (Rules.Count == 0)
+            {
+                throw new InvalidOperationException(
+                    string.Format(
+                        CultureInfo.CurrentCulture,
+                        Resources.Ex__RulesIsEmpty,
+                        nameof(Rules)));
+            }
+
             // TODO: Можно сделать лучше освобождение памяти после _recorder?
             if (_recorder != null)
             {
@@ -708,7 +742,7 @@ namespace CellularAutomaton.Components.Recorder
             }
 
             Core.CellularAutomaton ca = new Core.CellularAutomaton(
-                Rules[cBCellularAutomatonRules.SelectedIndex],
+                Rules[indexRule],
                 SizeFieldWidthValue,
                 SizeFieldHeightValue,
                 StatesCountValue,
@@ -762,7 +796,7 @@ namespace CellularAutomaton.Components.Recorder
         /// Отображает диалог выбора расположения для сохранения файла с записью работы клеточного автомата.
         /// </summary>
         /// <returns><b>True</b>, если пользователь нажал кнопку "Сохранить", иначе <b>false</b>.</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Ликвидировать объекты перед потерей области")]
+        [SuppressMessage("Microsoft.Reliability", "CA2000:Ликвидировать объекты перед потерей области")]
         private bool ShowSaveFileDialog()
         {
             try

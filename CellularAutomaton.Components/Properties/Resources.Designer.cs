@@ -367,6 +367,24 @@ namespace CellularAutomaton.Components.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Текущая запись не содержит данных для воспроизведения..
+        /// </summary>
+        internal static string Ex__CurrentRecordIsEmpty {
+            get {
+                return ResourceManager.GetString("Ex__CurrentRecordIsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Не инициализирован {0}. Для его инициализации вызовите метод {1}..
+        /// </summary>
+        internal static string Ex__NotInitializePlayer {
+            get {
+                return ResourceManager.GetString("Ex__NotInitializePlayer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Не задана запись для воспроизведения..
         /// </summary>
         internal static string Ex__NotSetRecordToPlay {
@@ -376,11 +394,29 @@ namespace CellularAutomaton.Components.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Нет данных для сохранения..
+        /// </summary>
+        internal static string Ex__RecordIsEmpty {
+            get {
+                return ResourceManager.GetString("Ex__RecordIsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Не загружена запись для воспроизведения..
         /// </summary>
         internal static string Ex__RecordNotLoaded {
             get {
                 return ResourceManager.GetString("Ex__RecordNotLoaded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Не заданы правила функционирования клеточного автомата в {0}..
+        /// </summary>
+        internal static string Ex__RulesIsEmpty {
+            get {
+                return ResourceManager.GetString("Ex__RulesIsEmpty", resourceCulture);
             }
         }
         

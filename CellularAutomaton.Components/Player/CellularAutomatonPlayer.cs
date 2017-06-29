@@ -6,13 +6,14 @@
 // File          : CellularAutomatonPlayer.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 27.06.2017 13:41
-// Last Revision : 29.06.2017 20:20
+// Last Revision : 29.06.2017 21:10
 // Description   : 
 #endregion
 
 using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
+using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
 
@@ -319,6 +320,37 @@ namespace CellularAutomaton.Components.Player
         public void LoadRecord()
         {
             playerController.LoadRecord();
+        }
+
+        /// <summary>
+        /// Приостанавливает воспроизведение записи.
+        /// </summary>
+        /// <exception cref="InvalidOperationException">Не инициализирован <see cref="Player"/>. Для его инициализации вызовите метод <see cref="PlayerController.InitializePlayer(Graphics)"/>.</exception>
+        public void Pause()
+        {
+            playerController.Pause();
+        }
+
+        /// <summary>
+        /// Начинает воспроизведение записи.
+        /// </summary>
+        /// <exception cref="InvalidOperationException">
+        ///     <para>Не инициализирован <see cref="Player"/>. Для его инициализации вызовите метод <see cref="PlayerController.InitializePlayer(Graphics)"/>.</para>
+        ///     <para>-- или --</para>
+        ///     <para>Текущая запись не содержит данных для воспроизведения.</para>
+        /// </exception>
+        public void Start()
+        {
+            playerController.Start();
+        }
+
+        /// <summary>
+        /// Останавливает воспроизведение записи.
+        /// </summary>
+        /// <exception cref="InvalidOperationException">Не инициализирован <see cref="Player"/>. Для его инициализации вызовите метод <see cref="PlayerController.InitializePlayer(Graphics)"/>.</exception>
+        public void Stop()
+        {
+            playerController.Stop();
         }
 
         /// <summary>

@@ -258,4 +258,16 @@
   <data name="PlayerController__FramesPerMinuteValueDescr" xml:space="preserve">
     <value>Скорость воспроизведения записи (кадры в минуту) функционирования клеточного автомата.</value>
   </data>
+    <data name="Ex__NotInitializePlayer" xml:space="preserve">
+    <value>Не инициализирован {0}. Для его инициализации вызовите метод {1}.</value>
+  </data>
+    <data name="Ex__CurrentRecordIsEmpty" xml:space="preserve">
+    <value>Текущая запись не содержит данных для воспроизведения.</value>
+  </data>
+    <data name="Ex__RulesIsEmpty" xml:space="preserve">
+    <value>Не заданы правила функционирования клеточного автомата в {0}.</value>
+  </data>
+    <data name="Ex__RecordIsEmpty" xml:space="preserve">
+    <value>Нет данных для сохранения.</value>
+  </data>
 </root>

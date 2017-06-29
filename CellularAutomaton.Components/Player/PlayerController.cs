@@ -6,7 +6,7 @@
 // File          : PlayerController.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 27.06.2017 13:41
-// Last Revision : 29.06.2017 20:41
+// Last Revision : 29.06.2017 21:07
 // Description   : 
 #endregion
 
@@ -179,7 +179,7 @@ namespace CellularAutomaton.Components.Player
 
         #region Members
         /// <summary>
-        /// Инициализирует <see cref="Player"/> заданным полотном и размером области для вывода изображения.
+        /// Инициализирует <see cref="Player"/> заданным полотном.
         /// </summary>
         /// <param name="e">Поверхность рисования GDI+ на которую осуществляется вывод изображения.</param>
         /// <exception cref="ArgumentNullException">Параметр <paramref name="e"/> имеет значение <b>null</b>.</exception>
@@ -207,11 +207,76 @@ namespace CellularAutomaton.Components.Player
         }
 
         /// <summary>
+        /// Приостанавливает воспроизведение записи.
+        /// </summary>
+        /// <exception cref="InvalidOperationException">Не инициализирован <see cref="Player"/>. Для его инициализации вызовите метод <see cref="InitializePlayer(Graphics)"/>.</exception>
+        public void Pause()
+        {
+            if (_player == null)
+            {
+                throw new InvalidOperationException(
+                    string.Format(
+                        CultureInfo.CurrentCulture,
+                        Resources.Ex__NotInitializePlayer,
+                        nameof(Player),
+                        nameof(InitializePlayer)));
+            }
+
+            _player.Pause();
+        }
+
+        /// <summary>
         /// Перерисовывает текущий кадр.
         /// </summary>
         public void RepaintCurrentFrame()
         {
             _player?.Paint();
+        }
+
+        /// <summary>
+        /// Начинает воспроизведение записи.
+        /// </summary>
+        /// <exception cref="InvalidOperationException">
+        ///     <para>Не инициализирован <see cref="Player"/>. Для его инициализации вызовите метод <see cref="InitializePlayer(Graphics)"/>.</para>
+        ///     <para>-- или --</para>
+        ///     <para>Текущая запись не содержит данных для воспроизведения.</para>
+        /// </exception>
+        public void Start()
+        {
+            if (_player == null)
+            {
+                throw new InvalidOperationException(
+                    string.Format(
+                        CultureInfo.CurrentCulture,
+                        Resources.Ex__NotInitializePlayer,
+                        nameof(Player),
+                        nameof(InitializePlayer)));
+            }
+
+            if (_player.Record.Count == 0)
+                throw new InvalidOperationException(Resources.Ex__CurrentRecordIsEmpty);
+
+            _player.FramesPerMinute = FramesPerMinuteValue;
+            _player.Play();
+        }
+
+        /// <summary>
+        /// Останавливает воспроизведение записи.
+        /// </summary>
+        /// <exception cref="InvalidOperationException">Не инициализирован <see cref="Player"/>. Для его инициализации вызовите метод <see cref="InitializePlayer(Graphics)"/>.</exception>
+        public void Stop()
+        {
+            if (_player == null)
+            {
+                throw new InvalidOperationException(
+                    string.Format(
+                        CultureInfo.CurrentCulture,
+                        Resources.Ex__NotInitializePlayer,
+                        nameof(Player),
+                        nameof(InitializePlayer)));
+            }
+
+            _player.Stop();
         }
 
         /// <summary>
@@ -255,8 +320,7 @@ namespace CellularAutomaton.Components.Player
         /// <param name="e">Сведения о событии.</param>
         private void bPlay_Click(object sender, EventArgs e)
         {
-            _player.FramesPerMinute = FramesPerMinuteValue;
-            _player.Play();
+            Start();
         }
 
         /// <summary>
@@ -266,7 +330,7 @@ namespace CellularAutomaton.Components.Player
         /// <param name="e">Сведения о событии.</param>
         private void bStop_Click(object sender, EventArgs e)
         {
-            _player.Stop();
+            Stop();
         }
 
         /// <summary>
@@ -313,14 +377,6 @@ namespace CellularAutomaton.Components.Player
             FinderTickFrequency = FinderTickFrequencyDefValue;
 
             FileName = nameof(FileName);
-        }
-
-        /// <summary>
-        /// Приостанавливает воспроизведение записи.
-        /// </summary>
-        private void Pause()
-        {
-            _player.Pause();
         }
 
         /// <summary>
