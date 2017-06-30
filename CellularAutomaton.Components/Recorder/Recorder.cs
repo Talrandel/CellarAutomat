@@ -6,17 +6,20 @@
 // File          : Recorder.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 27.06.2017 13:41
-// Last Revision : 29.06.2017 22:55
+// Last Revision : 30.06.2017 15:27
 // Description   : 
 #endregion
 
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Threading;
 using System.Threading.Tasks;
 
 using CellularAutomaton.Core;
+
+using FastBitmap;
 
 namespace CellularAutomaton.Components.Recorder
 {
@@ -37,18 +40,29 @@ namespace CellularAutomaton.Components.Recorder
         private readonly ConvertPointValueToColor _colorize;
 
         /// <summary>
+        /// Источник сигнала отмены расчёта функционирования елеточного автомата <see cref="Record"/>.
         /// </summary>
         private readonly CancellationTokenSource _cts;
 
         /// <summary>
-        /// True, если освобождение ресурсов осуществлялось, иначе false.
+        /// Объект блокировки.
         /// </summary>
-        private bool _disposed;
+        private readonly object _lock = new object();
 
         /// <summary>
         /// Запись функционирования клеточного автомата.
         /// </summary>
         private readonly IRecord _record;
+
+        /// <summary>
+        /// <b>True</b>, если освобождение ресурсов осуществлялось, иначе <b>false</b>.
+        /// </summary>
+        private bool _disposed;
+
+        /// <summary>
+        /// Объект <see cref="LockImage"/> предоставляющий методы работы с заблокированным в памяти объектом <see cref="Bitmap"/>.
+        /// </summary>
+        private LockImage _li;
 
         /// <summary>
         /// Задача в которой выполняется расчёт поведения клеточного автомата.
@@ -192,37 +206,42 @@ namespace CellularAutomaton.Components.Recorder
         /// <exception cref="ArgumentNullException">Параметр <paramref name="field"/> имеет значение <b>null</b>.</exception>
         public Bitmap DrawingFromField(IReadOnlyField field)
         {
-            if (field == null)
-                throw new ArgumentNullException(nameof(field));
-
-            int width = field.Width;
-            int height = field.Height;
-
-            // TODO: добавить блокировку изображения - отдельный проект LockImage
-            Bitmap bitmap = null;
-            try
+            lock (_lock)
             {
-                bitmap = new Bitmap(width, height);
+                if (field == null)
+                    throw new ArgumentNullException(nameof(field));
 
-                for (int i = 0; i < width; i++)
+                _li = _li ?? new LockImage();
+                Bitmap bitmap = null;
+                try
                 {
-                    for (int j = 0; j < height; j++)
-                        bitmap.SetPixel(i, j, _colorize(field[i, j]));
-                }
+                    bitmap = new Bitmap(field.Width, field.Height);
 
-                return bitmap;
-            }
-            catch
-            {
-                bitmap?.Dispose();
-                throw;
+                    _li.SetImage(bitmap, ImageLockMode.WriteOnly);
+
+                    for (int i = 0; i < field.Width; i++)
+                    {
+                        for (int j = 0; j < field.Height; j++)
+                            //bitmap.SetPixel(i, j, _colorize(field[i, j]));
+                            _li.SetLockPixel(i, j, _colorize(field[i, j]));
+                    }
+
+                    _li.UnlockImage();
+
+                    return bitmap;
+                }
+                catch
+                {
+                    bitmap?.Dispose();
+                    throw;
+                }
             }
         }
 
         /// <summary>
         /// Освобождает все ресурсы, используемые текущим объектом <see cref="Recorder"/>.
         /// </summary>
-        /// <param name="disposing">True - освободить управляемые и неуправляемые ресурсы; false освободить только неуправляемые ресурсы.</param>
+        /// <param name="disposing"><b>True</b> - освободить управляемые и неуправляемые ресурсы; <b>false</b> освободить только неуправляемые ресурсы.</param>
         [SuppressMessage("Microsoft.Usage", "CA2213:DisposableFieldsShouldBeDisposed", MessageId = "_cts")]
         protected virtual void Dispose(bool disposing)
         {

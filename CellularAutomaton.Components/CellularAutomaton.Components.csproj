@@ -103,6 +103,10 @@
       <Project>{acca44e9-4895-4852-97f2-c6bf4bd588cf}</Project>
       <Name>CellularAutomaton.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FastBitmap\FastBitmap\FastBitmap.csproj">
+      <Project>{5a864ac4-b72d-4d74-be4f-26d1c0541331}</Project>
+      <Name>FastBitmap</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="CellularAutomaton.Components.pfx" />
