@@ -4,9 +4,9 @@
 // Project type  : 
 // Language      : C# 6.0
 // File          : Recorder.cs
-// Author        : Антипкин С.С., Макаров Е.А.
+// Author        : Антипкин С.С.
 // Created       : 27.06.2017 13:41
-// Last Revision : 30.06.2017 15:27
+// Last Revision : 01.07.2017 20:54
 // Description   : 
 #endregion
 
@@ -251,6 +251,7 @@ namespace CellularAutomaton.Components.Recorder
             {
                 _task?.Dispose();
                 _cts?.Dispose();
+                _li?.Dispose();
                 _record.Clear();
             }
 
