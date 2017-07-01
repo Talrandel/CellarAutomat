@@ -6,7 +6,7 @@
 // File          : Player.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 29.06.2017 22:50
-// Last Revision : 01.07.2017 22:48
+// Last Revision : 01.07.2017 23:06
 // Description   : 
 #endregion
 
@@ -325,9 +325,10 @@ namespace CellularAutomaton.Components.Player
             if (State != StatePlayer.Stop)
             {
                 State = StatePlayer.Stop;
+                _timer.Stop();
                 OnStopPlay();
                 Reset();
-                _timer.Stop();
+                DrawCurrentFrame();
             }
         }
 
@@ -400,6 +401,15 @@ namespace CellularAutomaton.Components.Player
         }
 
         /// <summary>
+        /// Рисует и воспроизводит текущий кадр.
+        /// </summary>
+        private void DrawCurrentFrame()
+        {
+            _bufGr.Graphics.DrawImage(_recordEnumerator.Current, 0, 0);
+            Paint();
+        }
+
+        /// <summary>
         /// Подготавливает <see cref="Recorder.Recorder"/> к воспроизведению при установке новой записи <see cref="Core.Record"/>.
         /// </summary>
         private void InitializeNewRecord()
@@ -441,8 +451,7 @@ namespace CellularAutomaton.Components.Player
         /// <param name="e">Сведения о событии <see cref="Timer.Elapsed"/>.</param>
         private void TimerElapsed(object sender, ElapsedEventArgs e)
         {
-            _bufGr.Graphics.DrawImage(_recordEnumerator.Current, 0, 0);
-            Paint();
+            DrawCurrentFrame();
 
             if (!MoveNext()) // Достигнут конец записи?
                 Stop();
