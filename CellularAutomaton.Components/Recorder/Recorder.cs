@@ -215,14 +215,13 @@ namespace CellularAutomaton.Components.Recorder
                 Bitmap bitmap = null;
                 try
                 {
-                    bitmap = new Bitmap(field.Width, field.Height);
+                    bitmap = new Bitmap(field.Width, field.Height, PixelFormat.Format32bppArgb);
 
                     _li.SetImage(bitmap, ImageLockMode.WriteOnly);
 
                     for (int i = 0; i < field.Width; i++)
                     {
                         for (int j = 0; j < field.Height; j++)
-                            //bitmap.SetPixel(i, j, _colorize(field[i, j]));
                             _li.SetLockPixel(i, j, _colorize(field[i, j]));
                     }
 
