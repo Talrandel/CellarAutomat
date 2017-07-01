@@ -5,8 +5,8 @@
 // Language      : C# 6.0
 // File          : Player.cs
 // Author        : Антипкин С.С., Макаров Е.А.
-// Created       : 29.06.2017 18:08
-// Last Revision : 29.06.2017 20:41
+// Created       : 29.06.2017 22:50
+// Last Revision : 01.07.2017 22:48
 // Description   : 
 #endregion
 
@@ -216,8 +216,21 @@ namespace CellularAutomaton.Components.Player
             if (rec == null)
                 throw new ArgumentNullException(nameof(rec));
 
+            RecordClear();
             _record = rec;
             InitializeNewRecord();
+        }
+
+        /// <summary>
+        /// Освобождает ресурсы занимаемые воспроизводимой записью.
+        /// </summary>
+        /// <exception cref="InvalidOperationException">Воспроизведение не остановлено.</exception>
+        public void RecordClear()
+        {
+            if (State != StatePlayer.Stop)
+                throw new InvalidOperationException(Resources.Ex__PlaybackIsNotStopped);
+
+            _record?.Clear();
         }
 
         /// <summary>
@@ -339,12 +352,15 @@ namespace CellularAutomaton.Components.Player
             if (_disposed)
                 return;
 
+            Stop();
+
             if (disposing)
             {
                 _timer?.Close();
                 _e?.Dispose();
                 _bufGr?.Dispose();
                 _bufGrContext?.Dispose();
+                RecordClear();
             }
 
             _disposed = true;

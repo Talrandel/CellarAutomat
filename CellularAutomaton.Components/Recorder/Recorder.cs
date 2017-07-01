@@ -4,9 +4,9 @@
 // Project type  : 
 // Language      : C# 6.0
 // File          : Recorder.cs
-// Author        : Антипкин С.С.
+// Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 27.06.2017 13:41
-// Last Revision : 01.07.2017 20:54
+// Last Revision : 01.07.2017 22:10
 // Description   : 
 #endregion
 
@@ -17,6 +17,7 @@ using System.Drawing.Imaging;
 using System.Threading;
 using System.Threading.Tasks;
 
+using CellularAutomaton.Components.Properties;
 using CellularAutomaton.Core;
 
 using FastBitmap;
@@ -139,7 +140,7 @@ namespace CellularAutomaton.Components.Recorder
                 Stop();
                 State = StateRecorder.Record;
 
-                _record.Clear();
+                RecordClear();
 
                 OnStartRecord();
                 try
@@ -195,6 +196,18 @@ namespace CellularAutomaton.Components.Recorder
         /// Происходит при окончании записи.
         /// </summary>
         public event EventHandler StopRecord;
+
+        /// <summary>
+        /// Освобождает ресурсы занимаемые записанной записью.
+        /// </summary>
+        /// <exception cref="InvalidOperationException">Запись не остановлена.</exception>
+        public void RecordClear()
+        {
+            if (State != StateRecorder.Stop)
+                throw new InvalidOperationException(Resources.Ex__RecordingIsNotStopped);
+
+            _record.Clear();
+        }
         #endregion
 
         #region Members
@@ -247,12 +260,14 @@ namespace CellularAutomaton.Components.Recorder
             if (_disposed)
                 return;
 
+            Stop();
+
             if (disposing)
             {
                 _task?.Dispose();
                 _cts?.Dispose();
                 _li?.Dispose();
-                _record.Clear();
+                RecordClear();
             }
 
             _disposed = true;

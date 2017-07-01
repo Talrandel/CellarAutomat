@@ -6,7 +6,7 @@
 // File          : Record.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 29.06.2017 15:26
-// Last Revision : 29.06.2017 22:33
+// Last Revision : 01.07.2017 22:20
 // Description   : 
 #endregion
 
@@ -200,7 +200,11 @@ namespace CellularAutomaton.Core
         /// </summary>
         public void Clear()
         {
-            _rec.Clear();
+            if (0 < _rec.Count)
+            {
+                _rec.Clear();
+                GC.Collect();
+            }
         }
 
         /// <summary>
@@ -317,11 +321,7 @@ namespace CellularAutomaton.Core
                     nameof(fileName));
             }
 
-            if (10 < Count)
-            {
-                Clear();
-                GC.Collect();
-            }
+            Clear();
 
             using (FileStream fs = File.OpenRead(fileName))
             {

@@ -5,8 +5,8 @@
 // Language      : C# 6.0
 // File          : IRecorder.cs
 // Author        : Антипкин С.С., Макаров Е.А.
-// Created       : 18.06.2017 12:44
-// Last Revision : 24.06.2017 12:58
+// Created       : 29.06.2017 17:55
+// Last Revision : 01.07.2017 21:54
 // Description   : 
 #endregion
 
@@ -55,6 +55,12 @@ namespace CellularAutomaton.Components.Recorder
         /// Начинает запись.
         /// </summary>
         void Record();
+
+        /// <summary>
+        /// Освобождает ресурсы занимаемые записанной записью.
+        /// </summary>
+        /// <exception cref="InvalidOperationException">Запись не остановлена.</exception>
+        void RecordClear();
 
         /// <summary>
         /// Сохраняет запись в указанный файл.

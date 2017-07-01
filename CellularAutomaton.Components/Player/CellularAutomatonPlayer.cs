@@ -6,7 +6,7 @@
 // File          : CellularAutomatonPlayer.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 27.06.2017 13:41
-// Last Revision : 29.06.2017 21:10
+// Last Revision : 01.07.2017 22:47
 // Description   : 
 #endregion
 
@@ -314,6 +314,15 @@ namespace CellularAutomaton.Components.Player
         #endregion
 
         #region Members
+        /// <summary>
+        /// Освобождает ресурсы занимаемые воспроизводимой записью.
+        /// </summary>
+        /// <exception cref="InvalidOperationException">Воспроизведение не остановлено.</exception>
+        public void RecordClear()
+        {
+            playerController.RecordClear();
+        }
+
         /// <summary>
         /// Загружает запись из файла с именем заданным в <see cref="FileName"/>.
         /// </summary>

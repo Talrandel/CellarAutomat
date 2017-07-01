@@ -394,6 +394,24 @@ namespace CellularAutomaton.Components.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Воспроизведение не остановлено..
+        /// </summary>
+        internal static string Ex__PlaybackIsNotStopped {
+            get {
+                return ResourceManager.GetString("Ex__PlaybackIsNotStopped", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Запись не остановлена..
+        /// </summary>
+        internal static string Ex__RecordingIsNotStopped {
+            get {
+                return ResourceManager.GetString("Ex__RecordingIsNotStopped", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Нет данных для сохранения..
         /// </summary>
         internal static string Ex__RecordIsEmpty {

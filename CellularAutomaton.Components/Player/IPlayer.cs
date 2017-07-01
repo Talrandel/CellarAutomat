@@ -6,7 +6,7 @@
 // File          : IPlayer.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 27.06.2017 13:41
-// Last Revision : 29.06.2017 10:48
+// Last Revision : 01.07.2017 22:37
 // Description   : 
 #endregion
 
@@ -67,6 +67,12 @@ namespace CellularAutomaton.Components.Player
         #endregion
 
         #region Members
+        /// <summary>
+        /// Освобождает ресурсы занимаемые воспроизводимой записью.
+        /// </summary>
+        /// <exception cref="InvalidOperationException">Воспроизведение не остановлено.</exception>
+        void RecordClear();
+
         /// <summary>
         /// Загружает указанную запись в проигрыватель.
         /// </summary>

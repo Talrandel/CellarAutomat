@@ -6,7 +6,7 @@
 // File          : CellularAutomatonRecorder.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 27.06.2017 13:41
-// Last Revision : 29.06.2017 21:38
+// Last Revision : 01.07.2017 22:59
 // Description   : 
 #endregion
 
@@ -591,6 +591,25 @@ namespace CellularAutomaton.Components.Recorder
 
         #region Members
         /// <summary>
+        /// Освобождает ресурсы занимаемые <see cref="Recorder"/> .
+        /// </summary>
+        /// <exception cref="InvalidOperationException">Запись не остановлена.</exception>
+        public void Clear()
+        {
+            // TODO: Можно сделать лучше освобождение памяти после _recorder?
+            if (_recorder == null)
+                return;
+
+            if (_recorder.State != StateRecorder.Stop)
+                throw new InvalidOperationException(Resources.Ex__RecordingIsNotStopped);
+
+            _recorder.Dispose();
+            //int gen = GC.GetGeneration(_recorder);
+            _recorder = null;
+            //GC.Collect(gen);
+        }
+
+        /// <summary>
         /// Начинает запись функционирования клеточного автомата.
         /// </summary>
         /// <param name="indexRule">Индекс правила функционирования клеточного автомата заданного в <see cref="Rules"/>.</param>
@@ -676,15 +695,7 @@ namespace CellularAutomaton.Components.Recorder
         private void CellularAutomatonRecorder_Load(object sender, EventArgs e)
         {
             Stoped();
-            CheckIsStart();
-        }
-
-        /// <summary>
-        /// Проверяет заданы ли все необходимые для функционирования свойства.
-        /// </summary>
-        private void CheckIsStart()
-        {
-            Enabled = 0 < Rules.Count;
+            PrepareStart();
         }
 
         /// <summary>
@@ -732,14 +743,7 @@ namespace CellularAutomaton.Components.Recorder
                         nameof(Rules)));
             }
 
-            // TODO: Можно сделать лучше освобождение памяти после _recorder?
-            if (_recorder != null)
-            {
-                _recorder.Dispose();
-                //int gen = GC.GetGeneration(_recorder);
-                _recorder = null;
-                //GC.Collect(gen);
-            }
+            Clear();
 
             Core.CellularAutomaton ca = new Core.CellularAutomaton(
                 Rules[indexRule],
@@ -769,7 +773,15 @@ namespace CellularAutomaton.Components.Recorder
                 cBCellularAutomatonRules.SelectedIndex = 0;
             }
             else
-                CheckIsStart();
+                PrepareStart();
+        }
+
+        /// <summary>
+        /// Проверяет заданы ли все необходимые для функционирования свойства.
+        /// </summary>
+        private void PrepareStart()
+        {
+            Enabled = 0 < Rules.Count;
         }
 
         /// <summary>

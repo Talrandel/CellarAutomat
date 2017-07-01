@@ -6,7 +6,7 @@
 // File          : PlayerController.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 27.06.2017 13:41
-// Last Revision : 29.06.2017 21:07
+// Last Revision : 01.07.2017 22:45
 // Description   : 
 #endregion
 
@@ -179,6 +179,16 @@ namespace CellularAutomaton.Components.Player
 
         #region Members
         /// <summary>
+        /// Освобождает ресурсы занимаемые воспроизводимой записью.
+        /// </summary>
+        /// <exception cref="InvalidOperationException">Воспроизведение не остановлено.</exception>
+        public void RecordClear()
+        {
+            _player?.RecordClear();
+            PrepareStart();
+        }
+
+        /// <summary>
         /// Инициализирует <see cref="Player"/> заданным полотном.
         /// </summary>
         /// <param name="e">Поверхность рисования GDI+ на которую осуществляется вывод изображения.</param>
@@ -197,13 +207,22 @@ namespace CellularAutomaton.Components.Player
         /// <summary>
         /// Загрузка записи функционирования клеточного автомата из файла заданного свойством <see cref="FileName"/>.
         /// </summary>
+        /// <exception cref="InvalidOperationException">Не инициализирован <see cref="Player"/>. Для его инициализации вызовите метод <see cref="InitializePlayer(Graphics)"/>.</exception>
         /// <exception cref="ArgumentException">Имя файла не задано, пустое или состоит из одних пробелов.</exception>
         public void LoadRecord()
         {
+            if (_player == null)
+            {
+                throw new InvalidOperationException(
+                    string.Format(
+                        CultureInfo.CurrentCulture,
+                        Resources.Ex__NotInitializePlayer,
+                        nameof(Player),
+                        nameof(InitializePlayer)));
+            }
+
             _player.Load(FileName);
-            CheckIsStart();
-            tBFinder.Maximum = _player.Record.Count;
-            SetToolTiptBFinder();
+            PrepareStart();
         }
 
         /// <summary>
@@ -334,15 +353,6 @@ namespace CellularAutomaton.Components.Player
         }
 
         /// <summary>
-        /// Проверяет заданы ли все необходимые для функционирования свойства.
-        /// </summary>
-        private void CheckIsStart()
-        {
-            Enabled = (_player?.Record != null) && (0 < _player.Record.Count);
-            Invoke(_stoped);
-        }
-
-        /// <summary>
         /// Инициализирует делегаты обновления состояния пользовательского интерфейса.
         /// </summary>
         private void InitializeAction()
@@ -396,7 +406,7 @@ namespace CellularAutomaton.Components.Player
         /// <param name="e">Сведения о событии.</param>
         private void PlayerController_Load(object sender, EventArgs e)
         {
-            CheckIsStart();
+            PrepareStart();
         }
 
         /// <summary>
@@ -444,6 +454,18 @@ namespace CellularAutomaton.Components.Player
         /// <param name="e">Сведения о событии.</param>
         private void PlayerStopPlay(object sender, EventArgs e)
         {
+            Invoke(_stoped);
+        }
+
+        /// <summary>
+        /// Проверяет заданы ли все необходимые для функционирования свойства.
+        /// </summary>
+        private void PrepareStart()
+        {
+            Enabled = (_player?.Record != null) && (0 < _player.Record.Count);
+            tBFinder.Maximum = _player?.Record?.Count ?? 0;
+
+            SetToolTiptBFinder();
             Invoke(_stoped);
         }
 
