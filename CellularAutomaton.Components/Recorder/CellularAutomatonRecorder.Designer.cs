@@ -18,7 +18,6 @@
             if (disposing)
             {
                 _recorder?.Dispose();
-                _saveFileDialog?.Dispose();
                 components?.Dispose();
             }
             base.Dispose(disposing);
@@ -47,6 +46,12 @@
             this.nUDStatesCount = new System.Windows.Forms.NumericUpDown();
             this.lRule = new System.Windows.Forms.Label();
             this.cBCellularAutomatonRules = new System.Windows.Forms.ComboBox();
+            this.lMaxFrames = new System.Windows.Forms.Label();
+            this.nUDMaxFrames = new System.Windows.Forms.NumericUpDown();
+            this.gBProgress = new System.Windows.Forms.GroupBox();
+            this.tLPRecordInfo = new System.Windows.Forms.TableLayoutPanel();
+            this.lRecordedFrames = new System.Windows.Forms.Label();
+            this.lRecordedFramesValue = new System.Windows.Forms.Label();
             this.gBControlButton = new System.Windows.Forms.GroupBox();
             this.tLPControlButton = new System.Windows.Forms.TableLayoutPanel();
             this.bRecord = new System.Windows.Forms.Button();
@@ -60,6 +65,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.nUDHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDDencity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDStatesCount)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nUDMaxFrames)).BeginInit();
+            this.gBProgress.SuspendLayout();
+            this.tLPRecordInfo.SuspendLayout();
             this.gBControlButton.SuspendLayout();
             this.tLPControlButton.SuspendLayout();
             this.SuspendLayout();
@@ -68,7 +76,8 @@
             // 
             resources.ApplyResources(this.tLPMain, "tLPMain");
             this.tLPMain.Controls.Add(this.gBSettings, 0, 0);
-            this.tLPMain.Controls.Add(this.gBControlButton, 0, 1);
+            this.tLPMain.Controls.Add(this.gBProgress, 0, 1);
+            this.tLPMain.Controls.Add(this.gBControlButton, 0, 2);
             this.tLPMain.Name = "tLPMain";
             // 
             // gBSettings
@@ -91,6 +100,8 @@
             this.tLPSettings.Controls.Add(this.nUDStatesCount, 1, 3);
             this.tLPSettings.Controls.Add(this.lRule, 0, 4);
             this.tLPSettings.Controls.Add(this.cBCellularAutomatonRules, 1, 4);
+            this.tLPSettings.Controls.Add(this.lMaxFrames, 0, 5);
+            this.tLPSettings.Controls.Add(this.nUDMaxFrames, 1, 5);
             this.tLPSettings.Name = "tLPSettings";
             // 
             // lWidth
@@ -150,6 +161,41 @@
             this.cBCellularAutomatonRules.Name = "cBCellularAutomatonRules";
             this.toolTip.SetToolTip(this.cBCellularAutomatonRules, resources.GetString("cBCellularAutomatonRules.ToolTip"));
             // 
+            // lMaxFrames
+            // 
+            resources.ApplyResources(this.lMaxFrames, "lMaxFrames");
+            this.lMaxFrames.Name = "lMaxFrames";
+            // 
+            // nUDMaxFrames
+            // 
+            resources.ApplyResources(this.nUDMaxFrames, "nUDMaxFrames");
+            this.nUDMaxFrames.Name = "nUDMaxFrames";
+            this.toolTip.SetToolTip(this.nUDMaxFrames, resources.GetString("nUDMaxFrames.ToolTip"));
+            // 
+            // gBProgress
+            // 
+            resources.ApplyResources(this.gBProgress, "gBProgress");
+            this.gBProgress.Controls.Add(this.tLPRecordInfo);
+            this.gBProgress.Name = "gBProgress";
+            this.gBProgress.TabStop = false;
+            // 
+            // tLPRecordInfo
+            // 
+            resources.ApplyResources(this.tLPRecordInfo, "tLPRecordInfo");
+            this.tLPRecordInfo.Controls.Add(this.lRecordedFrames, 0, 0);
+            this.tLPRecordInfo.Controls.Add(this.lRecordedFramesValue, 1, 0);
+            this.tLPRecordInfo.Name = "tLPRecordInfo";
+            // 
+            // lRecordedFrames
+            // 
+            resources.ApplyResources(this.lRecordedFrames, "lRecordedFrames");
+            this.lRecordedFrames.Name = "lRecordedFrames";
+            // 
+            // lRecordedFramesValue
+            // 
+            resources.ApplyResources(this.lRecordedFramesValue, "lRecordedFramesValue");
+            this.lRecordedFramesValue.Name = "lRecordedFramesValue";
+            // 
             // gBControlButton
             // 
             resources.ApplyResources(this.gBControlButton, "gBControlButton");
@@ -207,6 +253,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.nUDHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDDencity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDStatesCount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nUDMaxFrames)).EndInit();
+            this.gBProgress.ResumeLayout(false);
+            this.gBProgress.PerformLayout();
+            this.tLPRecordInfo.ResumeLayout(false);
+            this.tLPRecordInfo.PerformLayout();
             this.gBControlButton.ResumeLayout(false);
             this.gBControlButton.PerformLayout();
             this.tLPControlButton.ResumeLayout(false);
@@ -236,5 +287,11 @@
         private System.Windows.Forms.Button bStop;
         private System.Windows.Forms.Button bRecord;
         private System.Windows.Forms.ToolTip toolTip;
+        private System.Windows.Forms.Label lMaxFrames;
+        private System.Windows.Forms.NumericUpDown nUDMaxFrames;
+        private System.Windows.Forms.TableLayoutPanel tLPRecordInfo;
+        private System.Windows.Forms.Label lRecordedFrames;
+        private System.Windows.Forms.Label lRecordedFramesValue;
+        private System.Windows.Forms.GroupBox gBProgress;
     }
 }

@@ -250,6 +250,15 @@ namespace CellularAutomaton.Components.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Максимальное число кадров в записи. Значение 0 - без ограничений..
+        /// </summary>
+        internal static string CellularAutomatonRecorder__MaxFramesDescr {
+            get {
+                return ResourceManager.GetString("CellularAutomatonRecorder__MaxFramesDescr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на record.
         /// </summary>
         internal static string CellularAutomatonRecorder__SaveFileDialogRecordDefFileName {
@@ -472,15 +481,6 @@ namespace CellularAutomaton.Components.Properties {
         internal static string Ex__You_are_attempting_to_go_to_frame_with_a_negative_index_ {
             get {
                 return ResourceManager.GetString("Ex__You_are_attempting_to_go_to_frame_with_a_negative_index_", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на 60.
-        /// </summary>
-        internal static string Player__FramesPerMinuteDefValue {
-            get {
-                return ResourceManager.GetString("Player__FramesPerMinuteDefValue", resourceCulture);
             }
         }
         

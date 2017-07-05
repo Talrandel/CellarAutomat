@@ -6,7 +6,7 @@
 // File          : Recorder.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 27.06.2017 13:41
-// Last Revision : 01.07.2017 22:10
+// Last Revision : 05.07.2017 17:18
 // Description   : 
 #endregion
 
@@ -63,7 +63,7 @@ namespace CellularAutomaton.Components.Recorder
         /// <summary>
         /// Объект <see cref="LockImage"/> предоставляющий методы работы с заблокированным в памяти объектом <see cref="Bitmap"/>.
         /// </summary>
-        private LockImage _li;
+        private readonly Lazy<LockImage> _li;
 
         /// <summary>
         /// Задача в которой выполняется расчёт поведения клеточного автомата.
@@ -84,6 +84,8 @@ namespace CellularAutomaton.Components.Recorder
 
             _ca = ca;
             _ca.GenerationChanged += CellularAutomatonGenerationChanged;
+
+            _li = new Lazy<LockImage>(LazyThreadSafetyMode.None);
 
             _record = new Record(ca);
             _colorize = PointValueToColor;
@@ -121,9 +123,9 @@ namespace CellularAutomaton.Components.Recorder
         }
 
         /// <summary>
-        /// Возвращает число кадров в записи.
+        /// Возвращает доступную только для чтения записанную запись.
         /// </summary>
-        public int RecordCount => _record.Count;
+        public IReadOnlyRecord GetRecord => (IReadOnlyRecord)_record;
 
         /// <summary>
         /// Возвращает состояние регистратора.
@@ -138,9 +140,8 @@ namespace CellularAutomaton.Components.Recorder
             if (State != StateRecorder.Record)
             {
                 Stop();
-                State = StateRecorder.Record;
-
                 RecordClear();
+                State = StateRecorder.Record;
 
                 OnStartRecord();
                 try
@@ -166,11 +167,11 @@ namespace CellularAutomaton.Components.Recorder
                 State = StateRecorder.Stop;
                 _cts.Cancel();
 
-                try
-                {
-                    _task.Wait();
-                }
-                catch (AggregateException e) when (e.GetBaseException() is OperationCanceledException) { }
+                //try
+                //{
+                //    _task.Wait();
+                //}
+                //catch (AggregateException e) when (e.GetBaseException() is OperationCanceledException) { }
 
                 OnStopRecord();
             }
@@ -196,6 +197,11 @@ namespace CellularAutomaton.Components.Recorder
         /// Происходит при окончании записи.
         /// </summary>
         public event EventHandler StopRecord;
+
+        /// <summary>
+        /// Происходит при записи очередного кадра.
+        /// </summary>
+        public event EventHandler FrameRecorded;
 
         /// <summary>
         /// Освобождает ресурсы занимаемые записанной записью.
@@ -224,21 +230,20 @@ namespace CellularAutomaton.Components.Recorder
                 if (field == null)
                     throw new ArgumentNullException(nameof(field));
 
-                _li = _li ?? new LockImage();
                 Bitmap bitmap = null;
                 try
                 {
                     bitmap = new Bitmap(field.Width, field.Height, PixelFormat.Format32bppArgb);
 
-                    _li.SetImage(bitmap, ImageLockMode.WriteOnly);
+                    _li.Value.SetImage(bitmap, ImageLockMode.WriteOnly);
 
                     for (int i = 0; i < field.Width; i++)
                     {
                         for (int j = 0; j < field.Height; j++)
-                            _li.SetLockPixel(i, j, _colorize(field[i, j]));
+                            _li.Value.SetLockPixel(i, j, _colorize(field[i, j]));
                     }
 
-                    _li.UnlockImage();
+                    _li.Value.UnlockImage();
 
                     return bitmap;
                 }
@@ -266,11 +271,19 @@ namespace CellularAutomaton.Components.Recorder
             {
                 _task?.Dispose();
                 _cts?.Dispose();
-                _li?.Dispose();
+                _li?.Value.Dispose();
                 RecordClear();
             }
 
             _disposed = true;
+        }
+
+        /// <summary>
+        /// Вызывает событие <see cref="FrameRecorded"/>.
+        /// </summary>
+        protected virtual void OnFrameRecorded()
+        {
+            FrameRecorded?.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>
@@ -297,6 +310,7 @@ namespace CellularAutomaton.Components.Recorder
         private void CellularAutomatonGenerationChanged(object sender, EventArgs e)
         {
             _record.Add(DrawingFromField(_ca.CurrentField));
+            OnFrameRecorded();
         }
 
         /// <summary>

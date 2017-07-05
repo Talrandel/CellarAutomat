@@ -240,9 +240,6 @@
   <data name="PlayerController__FileNameDescr" xml:space="preserve">
     <value>Имя файла, из которого осуществляется загрузка записи.</value>
   </data>
-  <data name="Player__FramesPerMinuteDefValue" xml:space="preserve">
-    <value>60</value>
-  </data>
   <data name="CellularAutomatonPlayer__FinderLargeChangeDescr" xml:space="preserve">
     <value>Число на которое перемещается ползунок по шкале поиска при щелчке мыши по элементу управления или нажатию клавиш PAGE UP, PAGE DOWN.</value>
   </data>
@@ -273,7 +270,10 @@
   <data name="Ex__RecordingIsNotStopped" xml:space="preserve">
     <value>Запись не остановлена.</value>
   </data>
-    <data name="Ex__PlaybackIsNotStopped" xml:space="preserve">
+  <data name="Ex__PlaybackIsNotStopped" xml:space="preserve">
     <value>Воспроизведение не остановлено.</value>
+  </data>
+  <data name="CellularAutomatonRecorder__MaxFramesDescr" xml:space="preserve">
+    <value>Максимальное число кадров в записи. Значение 0 - без ограничений.</value>
   </data>
 </root>

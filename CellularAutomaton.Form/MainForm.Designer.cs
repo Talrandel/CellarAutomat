@@ -51,10 +51,7 @@
             this.cellularAutomatonRecorder1.FileName = "record";
             this.cellularAutomatonRecorder1.Location = new System.Drawing.Point(12, 26);
             this.cellularAutomatonRecorder1.Name = "cellularAutomatonRecorder1";
-            this.cellularAutomatonRecorder1.Size = new System.Drawing.Size(256, 239);
-            this.cellularAutomatonRecorder1.StatesCountMax = 16;
-            this.cellularAutomatonRecorder1.StatesCountMin = 2;
-            this.cellularAutomatonRecorder1.StatesCountValue = 2;
+            this.cellularAutomatonRecorder1.Size = new System.Drawing.Size(260, 305);
             this.cellularAutomatonRecorder1.TabIndex = 1;
             // 
             // MainForm

@@ -136,7 +136,7 @@
     <value>3, 3</value>
   </data>
   <data name="pBMain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>283, 204</value>
+    <value>253, 204</value>
   </data>
   <data name="pBMain.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -163,7 +163,7 @@
     <value>3, 213</value>
   </data>
   <data name="playerController.Size" type="System.Drawing.Size, System.Drawing">
-    <value>283, 99</value>
+    <value>253, 99</value>
   </data>
   <data name="playerController.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -186,6 +186,9 @@
   <data name="tLPFramesPerMinute.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
+  <data name="lFramesPerMinute.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="lFramesPerMinute.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Left</value>
   </data>
@@ -196,13 +199,13 @@
     <value>3, 0</value>
   </data>
   <data name="lFramesPerMinute.Size" type="System.Drawing.Size, System.Drawing">
-    <value>91, 26</value>
+    <value>97, 26</value>
   </data>
   <data name="lFramesPerMinute.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="lFramesPerMinute.Text" xml:space="preserve">
-    <value>Кадров в минуту</value>
+    <value>Скорость воспроизведения</value>
   </data>
   <data name="lFramesPerMinute.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -223,10 +226,10 @@
     <value>Fill</value>
   </data>
   <data name="nUDFramesPerMinute.Location" type="System.Drawing.Point, System.Drawing">
-    <value>144, 3</value>
+    <value>129, 3</value>
   </data>
   <data name="nUDFramesPerMinute.Size" type="System.Drawing.Size, System.Drawing">
-    <value>136, 20</value>
+    <value>121, 20</value>
   </data>
   <data name="nUDFramesPerMinute.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -259,7 +262,7 @@
     <value>1</value>
   </data>
   <data name="tLPFramesPerMinute.Size" type="System.Drawing.Size, System.Drawing">
-    <value>283, 26</value>
+    <value>253, 26</value>
   </data>
   <data name="tLPFramesPerMinute.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -292,7 +295,7 @@
     <value>3, 350</value>
   </data>
   <data name="bLoadRecord.Size" type="System.Drawing.Size, System.Drawing">
-    <value>283, 23</value>
+    <value>253, 23</value>
   </data>
   <data name="bLoadRecord.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -325,7 +328,7 @@
     <value>4</value>
   </data>
   <data name="tLPMain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>289, 376</value>
+    <value>259, 376</value>
   </data>
   <data name="tLPMain.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -352,7 +355,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>289, 376</value>
+    <value>259, 376</value>
   </data>
   <data name="&gt;&gt;toolTip.Name" xml:space="preserve">
     <value>toolTip</value>
@@ -365,8 +368,5 @@
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-    <data name="Ex__PlayerController__NotInitializePlayer" xml:space="preserve">
-    <value>Не инициализирован {0}. Для его инициализации вызовите метод {1}.</value>
   </data>
 </root>

@@ -6,7 +6,7 @@
 // File          : CellularAutomatonRecorder.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 27.06.2017 13:41
-// Last Revision : 01.07.2017 22:59
+// Last Revision : 06.07.2017 0:36
 // Description   : 
 #endregion
 
@@ -15,13 +15,15 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 
 using CellularAutomaton.Components.Properties;
+using CellularAutomaton.Core;
 using CellularAutomaton.Core.Rules;
+
+using ControlExt;
 
 namespace CellularAutomaton.Components.Recorder
 {
@@ -59,6 +61,21 @@ namespace CellularAutomaton.Components.Recorder
         private const byte DencityValueDefValue = 50;
 
         /// <summary>
+        /// Значение по умолчанию свойства <see cref="MaxFrames"/>.
+        /// </summary>
+        private const int MaxFramesDefValue = 0;
+
+        /// <summary>
+        /// Верхняя граница диапазона значений свойства <see cref="MaxFrames"/>.
+        /// </summary>
+        private const decimal MaxFramesMaxDefValue = int.MaxValue;
+
+        /// <summary>
+        /// Нижняя граница диапазона значений свойства <see cref="MaxFrames"/>.
+        /// </summary>
+        private const decimal MaxFramesMinDefValue = 0;
+
+        /// <summary>
         /// Значение по умолчанию свойства <see cref="SizeFieldHeightMax"/>.
         /// </summary>
         private const int SizeFieldHeightMaxDefValue = 500;
@@ -91,19 +108,19 @@ namespace CellularAutomaton.Components.Recorder
 
         #region Fields
         /// <summary>
+        /// Флаг включения режима ограничения количества записываемых кадров.
+        /// </summary>
+        private bool _isLimitCountFrame;
+
+        /// <summary>
+        /// Метод обновления информации о количестве записанных кадров.
+        /// </summary>
+        private Action<int> _progress;
+
+        /// <summary>
         /// Объект реализующий интерфейс <see cref="IRecorder"/>, которым осуществляется управление.
         /// </summary>
         private IRecorder _recorder;
-
-        /// <summary>
-        /// Экземпляр класса <see cref="SaveFileDialog"/> - окно сохранения файла с записью.
-        /// </summary>
-        private SaveFileDialog _saveFileDialog;
-
-        /// <summary>
-        /// Предсталяет метод обрабатывающий действия возникающие при начале записи <see cref="Started"/>.
-        /// </summary>
-        private Action _started;
         #endregion
 
         #region Properties
@@ -242,12 +259,47 @@ namespace CellularAutomaton.Components.Recorder
         public string FileName { get; set; }
 
         /// <summary>
-        /// Возвращает число кадров в записи.
+        /// Возвращает доступную только для чтения записанную запись.
         /// </summary>
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public int FramesCount => _recorder.RecordCount;
+        public IReadOnlyRecord GetRecord => _recorder.GetRecord;
+
+        /// <summary>
+        /// Возвращает или задаёт максимальное число кадров в записи. Значение 0 - без ограничений.
+        /// </summary>
+        /// <remarks>
+        ///     <b>Значение по умолчанию - 0.</b>
+        /// </remarks>
+        /// <exception cref="ArgumentOutOfRangeException">Значение '<see cref="MaxFrames"/>' должно лежать в диапазоне от '0' до '<see cref="int.MaxValue"/>'.</exception>
+        [DefaultValue(MaxFramesDefValue)]
+        [Browsable(true)]
+        [EditorBrowsable(EditorBrowsableState.Always)]
+        [RefreshProperties(RefreshProperties.All)]
+        [CACategory("Appearance")]
+        [CADescription(nameof(CellularAutomatonRecorder) + "__" + nameof(MaxFrames) + CADescriptionAttribute.Suffix)]
+        public int MaxFrames
+        {
+            get { return Convert.ToInt32(nUDMaxFrames.Value); }
+            set
+            {
+                if (value < 0)
+                {
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        value,
+                        string.Format(
+                            CultureInfo.CurrentCulture,
+                            Resources.Ex__Value___0___must_be_between___1___and__2___,
+                            nameof(MaxFrames),
+                            0,
+                            int.MaxValue));
+                }
+
+                nUDMaxFrames.Value = value;
+            }
+        }
 
         /// <summary>
         /// Возвращает коллекцию правил построения клеточных автоматов.
@@ -473,10 +525,10 @@ namespace CellularAutomaton.Components.Recorder
         /// Возвращает или задаёт максимальное число состояний клетки клеточного автомата.
         /// </summary>
         /// <remarks>
-        ///     <b>Значение по умолчанию - <see cref="CellularAutomaton.Core.CellularAutomaton.StatesCountMax"/>.</b>
+        ///     <b>Значение по умолчанию - <see cref="Core.CellularAutomaton.StatesCountMax"/>.</b>
         /// </remarks>
-        /// <exception cref="ArgumentOutOfRangeException">Значение '<see cref="StatesCountMax"/>' должно лежать в интервале от '<see cref="StatesCountMin"/>' до <see cref="CellularAutomaton.Core.CellularAutomaton.StatesCountMax"/>.</exception>
-        [DefaultValue((short)Core.CellularAutomaton.StatesCountMax)]
+        /// <exception cref="ArgumentOutOfRangeException">Значение '<see cref="StatesCountMax"/>' должно лежать в интервале от '<see cref="StatesCountMin"/>' до <see cref="Core.CellularAutomaton.StatesCountMax"/>.</exception>
+        [DefaultValue(Core.CellularAutomaton.StatesCountMax)]
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [RefreshProperties(RefreshProperties.All)]
@@ -509,10 +561,10 @@ namespace CellularAutomaton.Components.Recorder
         /// Возвращает или задаёт минимальное число состояний клетки клеточного автомата.
         /// </summary>
         /// <remarks>
-        ///     <b>Значение по умолчанию - <see cref="CellularAutomaton.Core.CellularAutomaton.StatesCountMin"/>.</b>
+        ///     <b>Значение по умолчанию - <see cref="Core.CellularAutomaton.StatesCountMin"/>.</b>
         /// </remarks>
-        /// <exception cref="ArgumentOutOfRangeException">Значение '<see cref="StatesCountMin"/>' должно лежать в диапазоне от <see cref="CellularAutomaton.Core.CellularAutomaton.StatesCountMin"/> до '<see cref="StatesCountMax"/>'.</exception>
-        [DefaultValue((short)Core.CellularAutomaton.StatesCountMin)]
+        /// <exception cref="ArgumentOutOfRangeException">Значение '<see cref="StatesCountMin"/>' должно лежать в диапазоне от <see cref="Core.CellularAutomaton.StatesCountMin"/> до '<see cref="StatesCountMax"/>'.</exception>
+        [DefaultValue(Core.CellularAutomaton.StatesCountMin)]
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [RefreshProperties(RefreshProperties.All)]
@@ -545,10 +597,10 @@ namespace CellularAutomaton.Components.Recorder
         /// Возвращает или задаёт число состояний клетки клеточного автомата.
         /// </summary>
         /// <remarks>
-        ///     <b>Значение по умолчанию - <see cref="CellularAutomaton.Core.CellularAutomaton.StatesCountMin"/>.</b>
+        ///     <b>Значение по умолчанию - <see cref="Core.CellularAutomaton.StatesCountMin"/>.</b>
         /// </remarks>
         /// <exception cref="ArgumentOutOfRangeException">Значение '<see cref="StatesCountValue"/>' должно лежать в диапазоне от '<see cref="StatesCountMin"/>' до '<see cref="StatesCountMax"/>'.</exception>
-        [DefaultValue((short)Core.CellularAutomaton.StatesCountMin)]
+        [DefaultValue(Core.CellularAutomaton.StatesCountMin)]
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         [RefreshProperties(RefreshProperties.All)]
@@ -585,7 +637,11 @@ namespace CellularAutomaton.Components.Recorder
         public CellularAutomatonRecorder()
         {
             InitializeComponent();
+            gBProgress.EqualizationVerticalPadding();
+            gBControlButton.EqualizationVerticalPadding();
+
             InitializeProperties();
+            InitializeActions();
         }
         #endregion
 
@@ -607,6 +663,8 @@ namespace CellularAutomaton.Components.Recorder
             //int gen = GC.GetGeneration(_recorder);
             _recorder = null;
             //GC.Collect(gen);
+
+            _progress(0);
         }
 
         /// <summary>
@@ -617,6 +675,8 @@ namespace CellularAutomaton.Components.Recorder
         public void Record(int indexRule)
         {
             InitializeRecorder(indexRule);
+
+            _isLimitCountFrame = 0 < MaxFrames;
             _recorder.Record();
         }
 
@@ -694,8 +754,15 @@ namespace CellularAutomaton.Components.Recorder
         /// <param name="e">Сведения о событии.</param>
         private void CellularAutomatonRecorder_Load(object sender, EventArgs e)
         {
-            Stoped();
             PrepareStart();
+        }
+
+        /// <summary>
+        /// Инициализирует делегаты обновляющие состояние формы.
+        /// </summary>
+        private void InitializeActions()
+        {
+            _progress = (e => lRecordedFramesValue.Text = e.ToString(CultureInfo.InvariantCulture));
         }
 
         /// <summary>
@@ -725,6 +792,10 @@ namespace CellularAutomaton.Components.Recorder
             FileName = Resources.CellularAutomatonRecorder__SaveFileDialogRecordDefFileName;
             FileExtension = Resources.CellularAutomatonRecorder__SaveFileDialogRecordExt;
             FileFilter = Resources.CellularAutomatonRecorder__SaveFileDialogRecordFilter;
+
+            nUDMaxFrames.Minimum = MaxFramesMinDefValue;
+            nUDMaxFrames.Maximum = MaxFramesMaxDefValue;
+            MaxFrames = MaxFramesDefValue;
         }
 
         /// <summary>
@@ -756,6 +827,7 @@ namespace CellularAutomaton.Components.Recorder
 
             _recorder.StartRecord += Recorder_StartRecord;
             _recorder.StopRecord += Recorder_StopRecord;
+            _recorder.FrameRecorded += Recorder_FrameRecorded;
         }
 
         /// <summary>
@@ -785,13 +857,31 @@ namespace CellularAutomaton.Components.Recorder
         }
 
         /// <summary>
+        /// Обработчик события <see cref="IRecorder.FrameRecorded"/>. Проверяет ограничение максимального количества кадров и обновляет информацию о количестве записанных кадров.
+        /// </summary>
+        /// <param name="sender">Источник события.</param>
+        /// <param name="e">Сведения о событии.</param>
+        private void Recorder_FrameRecorded(object sender, EventArgs e)
+        {
+            int currentCountFrames = _recorder.GetRecord.Count;
+
+            if (_isLimitCountFrame)
+            {
+                if (MaxFrames <= currentCountFrames)
+                    Stop();
+            }
+
+            Invoke(_progress, currentCountFrames);
+        }
+
+        /// <summary>
         /// Обработчик события <see cref="IRecorder.StartRecord"/>.
         /// </summary>
         /// <param name="sender">Источник события.</param>
         /// <param name="e">Сведения о событии.</param>
         private void Recorder_StartRecord(object sender, EventArgs e)
         {
-            Invoke(_started = _started ?? Started);
+            Invoke(new Action(Started));
         }
 
         /// <summary>
@@ -801,54 +891,42 @@ namespace CellularAutomaton.Components.Recorder
         /// <param name="e">Сведения о событии.</param>
         private void Recorder_StopRecord(object sender, EventArgs e)
         {
-            Stoped();
+            Invoke(new Action(Stoped));
         }
 
         /// <summary>
         /// Отображает диалог выбора расположения для сохранения файла с записью работы клеточного автомата.
         /// </summary>
         /// <returns><b>True</b>, если пользователь нажал кнопку "Сохранить", иначе <b>false</b>.</returns>
-        [SuppressMessage("Microsoft.Reliability", "CA2000:Ликвидировать объекты перед потерей области")]
         private bool ShowSaveFileDialog()
         {
-            try
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
             {
-                if (_saveFileDialog == null)
-                {
-                    _saveFileDialog = new SaveFileDialog
-                    {
-                        CheckFileExists = false,
-                        CheckPathExists = true,
-                        ValidateNames = true,
-                        AddExtension = true,
-                        DereferenceLinks = true,
-                        RestoreDirectory = true,
-                        OverwritePrompt = true,
-                        InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-                        Title = Resources.CellularAutomatonRecorder__SaveFileDialogRecordTitle,
-                        FileName = FileName,
-                        DefaultExt = FileExtension,
-                        Filter = FileFilter
-                    };
-                }
+                saveFileDialog.CheckFileExists = false;
+                saveFileDialog.CheckPathExists = true;
+                saveFileDialog.ValidateNames = true;
+                saveFileDialog.AddExtension = true;
+                saveFileDialog.DereferenceLinks = true;
+                saveFileDialog.RestoreDirectory = true;
+                saveFileDialog.OverwritePrompt = true;
+                saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                saveFileDialog.Title = Resources.CellularAutomatonRecorder__SaveFileDialogRecordTitle;
+                saveFileDialog.FileName = FileName;
+                saveFileDialog.DefaultExt = FileExtension;
+                saveFileDialog.Filter = FileFilter;
 
-                if (_saveFileDialog.ShowDialog() == DialogResult.OK)
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    FileName = _saveFileDialog.FileName;
+                    FileName = saveFileDialog.FileName;
                     return true;
                 }
 
                 return false;
             }
-            catch
-            {
-                _saveFileDialog?.Dispose();
-                throw;
-            }
         }
 
         /// <summary>
-        /// Обрабатывает действия возникающие при остановке записи.
+        /// Обрабатывает действия возникающие при начале записи.
         /// </summary>
         private void Started()
         {
@@ -856,18 +934,19 @@ namespace CellularAutomaton.Components.Recorder
             bStop.Enabled = true;
             bSave.Enabled = false;
             gBSettings.Enabled = false;
+            _progress(0);
 
             OnStartRecord();
         }
 
         /// <summary>
-        /// Обрабатывает действия возникающие при начале записи.
+        /// Обрабатывает действия возникающие при остановке записи.
         /// </summary>
         private void Stoped()
         {
             bRecord.Enabled = true;
             bStop.Enabled = false;
-            bSave.Enabled = _recorder != null;
+            bSave.Enabled = true;
             gBSettings.Enabled = true;
 
             OnStopRecord();

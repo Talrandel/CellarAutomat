@@ -6,12 +6,14 @@
 // File          : IRecorder.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 29.06.2017 17:55
-// Last Revision : 01.07.2017 21:54
+// Last Revision : 03.07.2017 12:27
 // Description   : 
 #endregion
 
 using System;
 using System.Diagnostics.CodeAnalysis;
+
+using CellularAutomaton.Core;
 
 namespace CellularAutomaton.Components.Recorder
 {
@@ -21,11 +23,10 @@ namespace CellularAutomaton.Components.Recorder
     public interface IRecorder : IDisposable
     {
         #region Events
-        ///// <summary>
-        ///// Сохраняет записанную запись в указанный поток.
-        ///// </summary>
-        ///// <param name="stream">Поток для сохранения записи.</param>
-        //void Save(Stream stream);
+        /// <summary>
+        /// Происходит при записи очередного кадра.
+        /// </summary>
+        event EventHandler FrameRecorded;
 
         /// <summary>
         /// Происходит при начале записи.
@@ -40,9 +41,9 @@ namespace CellularAutomaton.Components.Recorder
 
         #region Properties
         /// <summary>
-        /// Возвращает число кадров в записи.
+        /// Возвращает доступную только для чтения записанную запись.
         /// </summary>
-        int RecordCount { get; }
+        IReadOnlyRecord GetRecord { get; }
 
         /// <summary>
         /// Возвращает состояние регистратора.
@@ -74,5 +75,12 @@ namespace CellularAutomaton.Components.Recorder
         [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Stop")]
         void Stop();
         #endregion
+
+        //void Save(Stream stream);
+        ///// <param name="stream">Поток для сохранения записи.</param>
+        ///// </summary>
+        ///// Сохраняет записанную запись в указанный поток.
+
+        ///// <summary>
     }
 }

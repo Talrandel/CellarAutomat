@@ -26,7 +26,7 @@ namespace CellularAutomaton.Components.Player
         /// <summary>
         /// Происходит при смене кадра.
         /// </summary>
-        event EventHandler<ChangeFrameEventArgs> ChangeFrame;
+        event EventHandler ChangeFrame;
 
         /// <summary>
         /// Происходит при приостановке воспроизведения.
@@ -89,7 +89,7 @@ namespace CellularAutomaton.Components.Player
         /// <summary>
         /// Воспроизводит текущий кадр.
         /// </summary>
-        void Paint();
+        void PaintCurrentFrame();
 
         /// <summary>
         /// Приостанавливает воспроизведение записи.

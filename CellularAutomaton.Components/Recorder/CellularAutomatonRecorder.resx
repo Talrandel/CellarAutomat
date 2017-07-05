@@ -465,6 +465,72 @@
   <data name="&gt;&gt;cBCellularAutomatonRules.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
+  <data name="lMaxFrames.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lMaxFrames.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="lMaxFrames.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lMaxFrames.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 131</value>
+  </data>
+  <data name="lMaxFrames.Size" type="System.Drawing.Size, System.Drawing">
+    <value>109, 26</value>
+  </data>
+  <data name="lMaxFrames.TabIndex" type="System.Int32, mscorlib">
+    <value>27</value>
+  </data>
+  <data name="lMaxFrames.Text" xml:space="preserve">
+    <value>Максимальная продолжительность</value>
+  </data>
+  <data name="lMaxFrames.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lMaxFrames.Name" xml:space="preserve">
+    <value>lMaxFrames</value>
+  </data>
+  <data name="&gt;&gt;lMaxFrames.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lMaxFrames.Parent" xml:space="preserve">
+    <value>tLPSettings</value>
+  </data>
+  <data name="&gt;&gt;lMaxFrames.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="nUDMaxFrames.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="nUDMaxFrames.Location" type="System.Drawing.Point, System.Drawing">
+    <value>125, 134</value>
+  </data>
+  <data name="nUDMaxFrames.Size" type="System.Drawing.Size, System.Drawing">
+    <value>116, 20</value>
+  </data>
+  <data name="nUDMaxFrames.TabIndex" type="System.Int32, mscorlib">
+    <value>26</value>
+  </data>
+  <data name="nUDMaxFrames.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Right</value>
+  </data>
+  <data name="nUDMaxFrames.ToolTip" xml:space="preserve">
+    <value>Максимальное число кадров в записи (0 - без ограничений).</value>
+  </data>
+  <data name="&gt;&gt;nUDMaxFrames.Name" xml:space="preserve">
+    <value>nUDMaxFrames</value>
+  </data>
+  <data name="&gt;&gt;nUDMaxFrames.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;nUDMaxFrames.Parent" xml:space="preserve">
+    <value>tLPSettings</value>
+  </data>
+  <data name="&gt;&gt;nUDMaxFrames.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
   <data name="tLPSettings.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
   </data>
@@ -472,10 +538,10 @@
     <value>3, 16</value>
   </data>
   <data name="tLPSettings.RowCount" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="tLPSettings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>244, 131</value>
+    <value>244, 157</value>
   </data>
   <data name="tLPSettings.TabIndex" type="System.Int32, mscorlib">
     <value>24</value>
@@ -493,7 +559,7 @@
     <value>0</value>
   </data>
   <data name="tLPSettings.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="lWidth" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="nUDWidth" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lHeight" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="nUDHeight" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lDencity" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lStatesCount" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="nUDDencity" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="nUDStatesCount" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lRule" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="cBCellularAutomatonRules" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,50,Percent,50" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,Absolute,20,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="lWidth" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="nUDWidth" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lHeight" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="nUDHeight" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lDencity" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lStatesCount" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="nUDDencity" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="nUDStatesCount" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lRule" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="cBCellularAutomatonRules" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lMaxFrames" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="nUDMaxFrames" Row="5" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,50,Percent,50" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="gBSettings.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
@@ -502,7 +568,7 @@
     <value>3, 3</value>
   </data>
   <data name="gBSettings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>250, 150</value>
+    <value>250, 176</value>
   </data>
   <data name="gBSettings.TabIndex" type="System.Int32, mscorlib">
     <value>23</value>
@@ -521,6 +587,141 @@
   </data>
   <data name="&gt;&gt;gBSettings.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="gBProgress.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="tLPRecordInfo.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="tLPRecordInfo.ColumnCount" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="lRecordedFrames.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lRecordedFrames.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="lRecordedFrames.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lRecordedFrames.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 0</value>
+  </data>
+  <data name="lRecordedFrames.Size" type="System.Drawing.Size, System.Drawing">
+    <value>98, 13</value>
+  </data>
+  <data name="lRecordedFrames.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="lRecordedFrames.Text" xml:space="preserve">
+    <value>Записано кадров:</value>
+  </data>
+  <data name="lRecordedFrames.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lRecordedFrames.Name" xml:space="preserve">
+    <value>lRecordedFrames</value>
+  </data>
+  <data name="&gt;&gt;lRecordedFrames.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lRecordedFrames.Parent" xml:space="preserve">
+    <value>tLPRecordInfo</value>
+  </data>
+  <data name="&gt;&gt;lRecordedFrames.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lRecordedFramesValue.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lRecordedFramesValue.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="lRecordedFramesValue.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lRecordedFramesValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>125, 0</value>
+  </data>
+  <data name="lRecordedFramesValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>13, 13</value>
+  </data>
+  <data name="lRecordedFramesValue.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="lRecordedFramesValue.Text" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lRecordedFramesValue.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lRecordedFramesValue.Name" xml:space="preserve">
+    <value>lRecordedFramesValue</value>
+  </data>
+  <data name="&gt;&gt;lRecordedFramesValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lRecordedFramesValue.Parent" xml:space="preserve">
+    <value>tLPRecordInfo</value>
+  </data>
+  <data name="&gt;&gt;lRecordedFramesValue.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tLPRecordInfo.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="tLPRecordInfo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 16</value>
+  </data>
+  <data name="tLPRecordInfo.RowCount" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tLPRecordInfo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>244, 13</value>
+  </data>
+  <data name="tLPRecordInfo.TabIndex" type="System.Int32, mscorlib">
+    <value>27</value>
+  </data>
+  <data name="&gt;&gt;tLPRecordInfo.Name" xml:space="preserve">
+    <value>tLPRecordInfo</value>
+  </data>
+  <data name="&gt;&gt;tLPRecordInfo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tLPRecordInfo.Parent" xml:space="preserve">
+    <value>gBProgress</value>
+  </data>
+  <data name="&gt;&gt;tLPRecordInfo.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tLPRecordInfo.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="lRecordedFrames" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lRecordedFramesValue" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,50,Percent,50" /&gt;&lt;Rows Styles="AutoSize,0,Absolute,13" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="gBProgress.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="gBProgress.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 185</value>
+  </data>
+  <data name="gBProgress.Size" type="System.Drawing.Size, System.Drawing">
+    <value>250, 32</value>
+  </data>
+  <data name="gBProgress.TabIndex" type="System.Int32, mscorlib">
+    <value>25</value>
+  </data>
+  <data name="&gt;&gt;gBProgress.Name" xml:space="preserve">
+    <value>gBProgress</value>
+  </data>
+  <data name="&gt;&gt;gBProgress.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;gBProgress.Parent" xml:space="preserve">
+    <value>tLPMain</value>
+  </data>
+  <data name="&gt;&gt;gBProgress.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="gBControlButton.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -573,6 +774,9 @@
   <data name="bStop.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
+  <data name="bStop.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="bStop.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -608,6 +812,9 @@
   </data>
   <data name="bSave.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
+  </data>
+  <data name="bSave.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="bSave.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -673,7 +880,7 @@
     <value>Fill</value>
   </data>
   <data name="gBControlButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 159</value>
+    <value>3, 223</value>
   </data>
   <data name="gBControlButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>250, 77</value>
@@ -691,7 +898,7 @@
     <value>tLPMain</value>
   </data>
   <data name="&gt;&gt;gBControlButton.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="tLPMain.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -700,10 +907,10 @@
     <value>0, 0</value>
   </data>
   <data name="tLPMain.RowCount" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="tLPMain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>256, 239</value>
+    <value>256, 303</value>
   </data>
   <data name="tLPMain.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
@@ -721,7 +928,7 @@
     <value>0</value>
   </data>
   <data name="tLPMain.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="gBSettings" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="gBControlButton" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="gBSettings" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="gBProgress" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="gBControlButton" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,Percent,100,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -733,7 +940,7 @@
     <value>True</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>256, 239</value>
+    <value>256, 303</value>
   </data>
   <data name="&gt;&gt;toolTip.Name" xml:space="preserve">
     <value>toolTip</value>

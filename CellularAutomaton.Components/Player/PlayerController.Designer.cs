@@ -64,7 +64,6 @@
             this.tBFinder.TickStyle = System.Windows.Forms.TickStyle.Both;
             this.tBFinder.Scroll += new System.EventHandler(this.tBFinder_Scroll);
             this.tBFinder.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tBFinder_MouseDown);
-            this.tBFinder.MouseUp += new System.Windows.Forms.MouseEventHandler(this.tBFinder_MouseUp);
             // 
             // bPlay
             // 

@@ -6,13 +6,12 @@
 // File          : CellularAutomatonPlayer.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 27.06.2017 13:41
-// Last Revision : 01.07.2017 22:47
+// Last Revision : 05.07.2017 21:40
 // Description   : 
 #endregion
 
 using System;
 using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
@@ -59,13 +58,6 @@ namespace CellularAutomaton.Components.Player
         /// Значение по умолчанию свойства <see cref="FinderTickFrequency"/>.
         /// </summary>
         private const short FinderTickFrequencyDefValue = 1;
-        #endregion
-
-        #region Fields
-        /// <summary>
-        /// Экземпляр класса <see cref="OpenFileDialog"/> - окно загрузки файла с записью.
-        /// </summary>
-        private OpenFileDialog _openFileDialog;
         #endregion
 
         #region Properties
@@ -294,19 +286,21 @@ namespace CellularAutomaton.Components.Player
 
             playerController.InitializePlayer(pBMain.CreateGraphics());
 
-            playerController.StartPlay += StartPlay;
             playerController.StartPlay += ((sender, e) =>
             {
                 nUDFramesPerMinute.Enabled = false;
                 bLoadRecord.Enabled = false;
+
+                OnStartPlay();
             });
 
-            playerController.PausePlay += PausePlay;
-            playerController.StopPlay += StopPlay;
+            playerController.PausePlay += (sender, e) => OnPausePlay();
             playerController.StopPlay += ((sender, e) =>
             {
                 nUDFramesPerMinute.Enabled = true;
                 bLoadRecord.Enabled = true;
+
+                OnStopPlay();
             });
 
             InitializeProperties();
@@ -315,20 +309,12 @@ namespace CellularAutomaton.Components.Player
 
         #region Members
         /// <summary>
-        /// Освобождает ресурсы занимаемые воспроизводимой записью.
-        /// </summary>
-        /// <exception cref="InvalidOperationException">Воспроизведение не остановлено.</exception>
-        public void RecordClear()
-        {
-            playerController.RecordClear();
-        }
-
-        /// <summary>
         /// Загружает запись из файла с именем заданным в <see cref="FileName"/>.
         /// </summary>
         /// <exception cref="ArgumentException">Имя файла не задано, пустое или состоит из одних пробелов.</exception>
         public void LoadRecord()
         {
+            pBMain.Refresh();
             playerController.LoadRecord();
         }
 
@@ -339,6 +325,15 @@ namespace CellularAutomaton.Components.Player
         public void Pause()
         {
             playerController.Pause();
+        }
+
+        /// <summary>
+        /// Освобождает ресурсы занимаемые воспроизводимой записью.
+        /// </summary>
+        /// <exception cref="InvalidOperationException">Воспроизведение не остановлено.</exception>
+        public void RecordClear()
+        {
+            playerController.RecordClear();
         }
 
         /// <summary>
@@ -361,6 +356,30 @@ namespace CellularAutomaton.Components.Player
         public void Stop()
         {
             playerController.Stop();
+        }
+
+        /// <summary>
+        /// Вызывает событие <see cref="PausePlay"/>.
+        /// </summary>
+        protected virtual void OnPausePlay()
+        {
+            PausePlay?.Invoke(this, EventArgs.Empty);
+        }
+
+        /// <summary>
+        /// Вызывает событие <see cref="StartPlay"/>.
+        /// </summary>
+        protected virtual void OnStartPlay()
+        {
+            StartPlay?.Invoke(this, EventArgs.Empty);
+        }
+
+        /// <summary>
+        /// Вызывает событие <see cref="StopPlay"/>.
+        /// </summary>
+        protected virtual void OnStopPlay()
+        {
+            StopPlay?.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>
@@ -401,55 +420,33 @@ namespace CellularAutomaton.Components.Player
         }
 
         /// <summary>
-        /// Обработчик события <see cref="Control.Paint"/>. Перерисовывает текущий кадр.
-        /// </summary>
-        /// <param name="sender">Источник события.</param>
-        /// <param name="e">Сведения о событии.</param>
-        private void pBMain_Paint(object sender, PaintEventArgs e)
-        {
-            playerController.RepaintCurrentFrame();
-        }
-
-        /// <summary>
         /// Отображает диалог выбора расположения для загрузки файла с записью работы клеточного автомата.
         /// </summary>
         /// <returns><b>True</b>, если пользователь нажал кнопку "Открыть", иначе <b>false</b>.</returns>
-        [SuppressMessage("Microsoft.Reliability", "CA2000:Ликвидировать объекты перед потерей области")]
         private bool ShowOpenFileDialog()
         {
-            try
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
-                if (_openFileDialog == null)
-                {
-                    _openFileDialog = new OpenFileDialog
-                    {
-                        CheckFileExists = true,
-                        CheckPathExists = true,
-                        ValidateNames = true,
-                        AddExtension = true,
-                        DereferenceLinks = true,
-                        RestoreDirectory = true,
-                        InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                openFileDialog.CheckFileExists = true;
+                openFileDialog.CheckPathExists = true;
+                openFileDialog.ValidateNames = true;
+                openFileDialog.AddExtension = true;
+                openFileDialog.DereferenceLinks = true;
+                openFileDialog.RestoreDirectory = true;
+                openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
-                        Title = Resources.CellularAutomatonPlayer__OpenFileDialogRecordTitle,
-                        FileName = FileName,
-                        DefaultExt = FileExtension,
-                        Filter = FileFilter
-                    };
-                }
+                openFileDialog.Title = Resources.CellularAutomatonPlayer__OpenFileDialogRecordTitle;
+                openFileDialog.FileName = FileName;
+                openFileDialog.DefaultExt = FileExtension;
+                openFileDialog.Filter = FileFilter;
 
-                if (_openFileDialog.ShowDialog() == DialogResult.OK)
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    FileName = _openFileDialog.FileName;
+                    FileName = openFileDialog.FileName;
                     return true;
                 }
 
                 return false;
-            }
-            catch
-            {
-                _openFileDialog?.Dispose();
-                throw;
             }
         }
         #endregion

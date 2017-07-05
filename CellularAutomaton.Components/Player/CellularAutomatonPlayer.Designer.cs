@@ -17,7 +17,6 @@
         {
             if (disposing)
             {
-                _openFileDialog?.Dispose();
                 components?.Dispose();
             }
 
@@ -62,7 +61,6 @@
             resources.ApplyResources(this.pBMain, "pBMain");
             this.pBMain.Name = "pBMain";
             this.pBMain.TabStop = false;
-            this.pBMain.Paint += new System.Windows.Forms.PaintEventHandler(this.pBMain_Paint);
             // 
             // playerController
             // 
@@ -108,6 +106,7 @@
             this.tLPMain.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pBMain)).EndInit();
             this.tLPFramesPerMinute.ResumeLayout(false);
+            this.tLPFramesPerMinute.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nUDFramesPerMinute)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

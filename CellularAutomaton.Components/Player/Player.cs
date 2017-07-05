@@ -6,7 +6,7 @@
 // File          : Player.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 29.06.2017 22:50
-// Last Revision : 01.07.2017 23:06
+// Last Revision : 03.07.2017 21:58
 // Description   : 
 #endregion
 
@@ -15,7 +15,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Globalization;
-using System.Timers;
+using System.Windows.Forms;
 
 using CellularAutomaton.Components.Properties;
 using CellularAutomaton.Core;
@@ -83,7 +83,7 @@ namespace CellularAutomaton.Components.Player
         /// <summary>
         /// Воспроизводимая запись.
         /// </summary>
-        private IRecord _record;
+        private Record _record;
 
         /// <summary>
         /// Перечислитель записи.
@@ -108,9 +108,9 @@ namespace CellularAutomaton.Components.Player
             _bufGrContext = new BufferedGraphicsContext();
 
             _timer = new Timer();
-            _timer.Elapsed += TimerElapsed;
+            _timer.Tick += TimerTick;
 
-            FramesPerMinute = Convert.ToInt16(Resources.Player__FramesPerMinuteDefValue, CultureInfo.CurrentCulture);
+            FramesPerMinute = FramesPerMinuteValueDefValue;
 
             Load(new Record());
         }
@@ -131,12 +131,12 @@ namespace CellularAutomaton.Components.Player
         /// <summary>
         /// Происходит при смене кадра.
         /// </summary>
-        public event EventHandler<ChangeFrameEventArgs> ChangeFrame;
+        public event EventHandler ChangeFrame;
 
         /// <summary>
         /// Возвращает воспроизводимую запись.
         /// </summary>
-        public IReadOnlyRecord Record => (IReadOnlyRecord)_record;
+        public IReadOnlyRecord Record => _record;
 
         /// <summary>
         /// Возвращает состояние проигрывателя.
@@ -173,7 +173,7 @@ namespace CellularAutomaton.Components.Player
 
                 //             1 second  =  1 000 milliseconds
                 // 1 minute = 60 seconds = 60 000 milliseconds
-                _timer.Interval = 60000D / value;
+                _timer.Interval = (int)Math.Ceiling(60000d / value);
             }
         }
 
@@ -186,7 +186,7 @@ namespace CellularAutomaton.Components.Player
             private set
             {
                 _currenFrame = value;
-                OnChangeFrame(new ChangeFrameEventArgs(value));
+                OnChangeFrame();
             }
         }
 
@@ -212,12 +212,12 @@ namespace CellularAutomaton.Components.Player
         /// <exception cref="ArgumentNullException">Параметр <paramref name="rec"/> имеет значение <b>null</b>.</exception>
         public void Load(IRecord rec)
         {
-            Stop();
             if (rec == null)
                 throw new ArgumentNullException(nameof(rec));
 
+            Stop();
             RecordClear();
-            _record = rec;
+            _record = (Record)rec;
             InitializeNewRecord();
         }
 
@@ -241,6 +241,7 @@ namespace CellularAutomaton.Components.Player
         public void Load(string fileName)
         {
             Stop();
+            // RecordClear(); // Т.к. очистка есть в Core.Record.Load(string).
             _record.Load(fileName);
             InitializeNewRecord();
         }
@@ -291,8 +292,6 @@ namespace CellularAutomaton.Components.Player
         /// </exception>
         public void Rewind(int frame)
         {
-            Pause();
-
             if (frame < 0)
             {
                 throw new ArgumentOutOfRangeException(nameof(frame), frame,
@@ -305,16 +304,25 @@ namespace CellularAutomaton.Components.Player
                     Resources.Ex__You_are_attempting_jump_to_frame_number_that_is_larger_than_count_frames_in_current_record_);
             }
 
+            Pause();
+
             if (frame != CurrenFrame) // Необходима перемотка?
             {
+                int startRewindFrame = CurrenFrame; // Номер кадра с которого будет производиться перемотка.
                 if (frame < CurrenFrame) // Необходимо перемотать на предыдущий кадр?
-                    Reset();
-
-                for (int i = CurrenFrame; i < frame; i++) // Перейти к указанному кадру.
+                {
+                    startRewindFrame = 0;
+                    _recordEnumerator.Reset();
                     MoveNext();
-            }
+                }
 
-            CurrenFrame = frame;
+                for (int i = startRewindFrame; i < frame; i++) // Перейти к указанному кадру.
+                    MoveNext();
+
+                DrawCurrentFrame();
+                PaintCurrentFrame();
+                CurrenFrame = frame;
+            }
         }
 
         /// <summary>
@@ -329,13 +337,14 @@ namespace CellularAutomaton.Components.Player
                 OnStopPlay();
                 Reset();
                 DrawCurrentFrame();
+                PaintCurrentFrame();
             }
         }
 
         /// <summary>
         /// Воспроизводит текущий кадр.
         /// </summary>
-        public void Paint()
+        public void PaintCurrentFrame()
         {
             _bufGr.Render();
         }
@@ -353,15 +362,13 @@ namespace CellularAutomaton.Components.Player
             if (_disposed)
                 return;
 
-            Stop();
-
             if (disposing)
             {
-                _timer?.Close();
+                _timer?.Dispose();
                 _e?.Dispose();
                 _bufGr?.Dispose();
                 _bufGrContext?.Dispose();
-                RecordClear();
+                _record?.Clear();
             }
 
             _disposed = true;
@@ -370,10 +377,9 @@ namespace CellularAutomaton.Components.Player
         /// <summary>
         /// Вызывает событие <see cref="ChangeFrame"/>.
         /// </summary>
-        /// <param name="e">Объект <see cref="ChangeFrameEventArgs"/> представляющий данные о событии.</param>
-        protected virtual void OnChangeFrame(ChangeFrameEventArgs e)
+        protected virtual void OnChangeFrame()
         {
-            ChangeFrame?.Invoke(this, e);
+            ChangeFrame?.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>
@@ -401,12 +407,11 @@ namespace CellularAutomaton.Components.Player
         }
 
         /// <summary>
-        /// Рисует и воспроизводит текущий кадр.
+        /// Рисует текущий кадр.
         /// </summary>
         private void DrawCurrentFrame()
         {
             _bufGr.Graphics.DrawImage(_recordEnumerator.Current, 0, 0);
-            Paint();
         }
 
         /// <summary>
@@ -414,8 +419,7 @@ namespace CellularAutomaton.Components.Player
         /// </summary>
         private void InitializeNewRecord()
         {
-            _recordEnumerator = Record.GetEnumerator();
-            MoveNext();
+            CurrenFrame = 0;
 
             if ((_record.FieldSize.Width != 0) &&
                 (_record.FieldSize.Height != 0))
@@ -423,6 +427,10 @@ namespace CellularAutomaton.Components.Player
 
             _bufGr?.Dispose();
             _bufGr = _bufGrContext.Allocate(_e, new Rectangle(0, 0, _record.FieldSize.Width, _record.FieldSize.Height));
+
+            _recordEnumerator = Record.GetEnumerator();
+            if (MoveNext())
+                DrawCurrentFrame();
         }
 
         /// <summary>
@@ -439,24 +447,26 @@ namespace CellularAutomaton.Components.Player
         /// </summary>
         private void Reset()
         {
-            CurrenFrame = 0;
             _recordEnumerator.Reset();
             MoveNext();
+            CurrenFrame = 0;
         }
 
         /// <summary>
-        /// Обработчик события <see cref="Timer.Elapsed"/>. Передаёт текущий кадр в буфер <see cref="_bufGr"/> для отображения.
+        /// Обработчик события <see cref="Timer.Tick"/>. Передаёт текущий кадр в буфер <see cref="_bufGr"/> для отображения.
         /// </summary>
         /// <param name="sender">Источник события.</param>
-        /// <param name="e">Сведения о событии <see cref="Timer.Elapsed"/>.</param>
-        private void TimerElapsed(object sender, ElapsedEventArgs e)
+        /// <param name="e">Сведения о событии.</param>
+        private void TimerTick(object sender, EventArgs e)
         {
-            DrawCurrentFrame();
-
             if (!MoveNext()) // Достигнут конец записи?
                 Stop();
             else
+            {
+                DrawCurrentFrame();
+                PaintCurrentFrame();
                 CurrenFrame++;
+            }
         }
         #endregion
     }

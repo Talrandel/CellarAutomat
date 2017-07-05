@@ -59,7 +59,6 @@
     <Compile Include="Player\PlayerController.Designer.cs">
       <DependentUpon>PlayerController.cs</DependentUpon>
     </Compile>
-    <Compile Include="Player\ChangeFrameEventArgs.cs" />
     <Compile Include="Player\StatePlayer.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -102,6 +101,10 @@
     <ProjectReference Include="..\CellularAutomaton.Core\CellularAutomaton.Core.csproj">
       <Project>{acca44e9-4895-4852-97f2-c6bf4bd588cf}</Project>
       <Name>CellularAutomaton.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ControlExt\ControlExt\ControlExt.csproj">
+      <Project>{964ace0a-1203-4f4b-aa93-2bd2c2812545}</Project>
+      <Name>ControlExt</Name>
     </ProjectReference>
     <ProjectReference Include="..\FastBitmap\FastBitmap\FastBitmap.csproj">
       <Project>{5a864ac4-b72d-4d74-be4f-26d1c0541331}</Project>

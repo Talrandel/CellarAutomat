@@ -6,7 +6,7 @@
 // File          : CellularAutomaton.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 27.06.2017 13:41
-// Last Revision : 29.06.2017 18:52
+// Last Revision : 05.07.2017 19:31
 // Description   : 
 #endregion
 
@@ -34,7 +34,7 @@ namespace CellularAutomaton.Core
 
         #region Static Fields and Constants
         /// <summary>
-        /// Максимальное количество состояний клетоки.
+        /// Максимальное количество состояний клетки.
         /// </summary>
         // ReSharper disable once MemberCanBePrivate.Global
         public const int StatesCountMax = 16;
@@ -53,7 +53,7 @@ namespace CellularAutomaton.Core
         private readonly IField _currentField;
 
         /// <summary>
-        /// Представляет, вызываемый при отправке сообщения в контекст синхронизации <see cref="_synchronizationContext"/>.
+        /// Представляет метод, вызываемый при отправке сообщения в контекст синхронизации <see cref="_synchronizationContext"/>.
         /// </summary>
         private readonly SendOrPostCallback _invokeHandlers;
 
@@ -163,7 +163,7 @@ namespace CellularAutomaton.Core
             StatesCount = statesCount;
 
             _synchronizationContext = new SynchronizationContext();
-            _invokeHandlers = state => OnGenerationChanged();
+            _invokeHandlers = (state => OnGenerationChanged());
 
             Initialize();
         }
@@ -268,29 +268,21 @@ namespace CellularAutomaton.Core
         /// <b>Внутренний метод.</b> Осуществляет вычисления при асинхронном расчёте поведения клеточного автомата.
         /// </summary>
         /// <exception cref="OperationCanceledException">Операция вычисления отменена.</exception>
+        /// <remarks>Для информирования в процессе расчёта <b>синхронно</b> вызывается событие <see cref="GenerationChanged"/>.</remarks>
         private void InnerProcessingAsync()
         {
             while (true)
             {
-                NextGeneration();
-                _synchronizationContext.Post(_invokeHandlers, null);
+                TransformCells(); // Gen + 1
 
-                if (_pastField.Equals((IField)CurrentField))
+                if (_ct.IsCancellationRequested || _pastField.Equals((IField)CurrentField) || _ct.IsCancellationRequested)
                     throw new OperationCanceledException();
 
-                _ct.ThrowIfCancellationRequested();
+                Generation++; // Yes this new Gen.
+                _synchronizationContext.Send(_invokeHandlers, null);
 
                 CurrentField.Copy(ref _pastField);
             }
-        }
-
-        /// <summary>
-        /// Осуществляет переход к следующему поколению.
-        /// </summary>
-        private void NextGeneration()
-        {
-            TransformCells();
-            Generation++;
         }
 
         /// <summary>

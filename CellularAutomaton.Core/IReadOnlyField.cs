@@ -60,7 +60,7 @@ namespace CellularAutomaton.Core
         /// <param name="x">Координата по оси X клетки.</param>
         /// <param name="y">Координата по оси Y клетки.</param>
         /// <param name="direction">Направление движения.</param>
-        /// <returns>Состояние клетки.</returns>
+        /// <returns>Состояние клетки.  Значение -1, если клетка по указанным координатам лежит вне поля.</returns>
         /// <exception cref="ArgumentOutOfRangeException">Недопустимое значение параметра <paramref name="direction"/>.</exception>
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "y")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "x")]

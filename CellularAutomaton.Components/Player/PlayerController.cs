@@ -6,7 +6,7 @@
 // File          : PlayerController.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 27.06.2017 13:41
-// Last Revision : 01.07.2017 22:45
+// Last Revision : 03.07.2017 21:16
 // Description   : 
 #endregion
 
@@ -20,14 +20,13 @@ using System.Windows.Forms;
 using CellularAutomaton.Components.Properties;
 using CellularAutomaton.Core;
 
+using ControlExt;
+
 namespace CellularAutomaton.Components.Player
 {
     /// <summary>
     /// Представляет элемент управления проигрывателем.
     /// </summary>
-    /// <remarks>
-    /// BUG: <b>При странном поведении разметки компонента в первую очередь попробовать отключить свойство <see cref="ButtonBase.AutoSize"/>.</b>
-    /// </remarks>
     public partial class PlayerController : UserControl
     {
         #region Events
@@ -69,16 +68,6 @@ namespace CellularAutomaton.Components.Player
         /// Объект <see cref="Player"/>, которым осуществляется управление.
         /// </summary>
         private Player _player;
-
-        /// <summary>
-        /// Представляет метод обновляющий значение свойства <see cref="TrackBar.Value"/> элемента управления <see cref="tBFinder"/>.
-        /// </summary>
-        private Action<int> _setValueFinder;
-
-        /// <summary>
-        /// Представляет метод, обработчик события <see cref="IPlayer.StopPlay"/>.
-        /// </summary>
-        private Action _stoped;
         #endregion
 
         #region Properties
@@ -171,23 +160,14 @@ namespace CellularAutomaton.Components.Player
         public PlayerController()
         {
             InitializeComponent();
+            groupBox.EqualizationVerticalPadding();
+
             SetToolTiptBFinder();
-            InitializeAction();
             InitializeProperties();
         }
         #endregion
 
         #region Members
-        /// <summary>
-        /// Освобождает ресурсы занимаемые воспроизводимой записью.
-        /// </summary>
-        /// <exception cref="InvalidOperationException">Воспроизведение не остановлено.</exception>
-        public void RecordClear()
-        {
-            _player?.RecordClear();
-            PrepareStart();
-        }
-
         /// <summary>
         /// Инициализирует <see cref="Player"/> заданным полотном.
         /// </summary>
@@ -245,11 +225,21 @@ namespace CellularAutomaton.Components.Player
         }
 
         /// <summary>
+        /// Освобождает ресурсы занимаемые воспроизводимой записью.
+        /// </summary>
+        /// <exception cref="InvalidOperationException">Воспроизведение не остановлено.</exception>
+        public void RecordClear()
+        {
+            _player?.RecordClear();
+            PrepareStart();
+        }
+
+        /// <summary>
         /// Перерисовывает текущий кадр.
         /// </summary>
         public void RepaintCurrentFrame()
         {
-            _player?.Paint();
+            _player?.PaintCurrentFrame();
         }
 
         /// <summary>
@@ -353,29 +343,6 @@ namespace CellularAutomaton.Components.Player
         }
 
         /// <summary>
-        /// Инициализирует делегаты обновления состояния пользовательского интерфейса.
-        /// </summary>
-        private void InitializeAction()
-        {
-            _setValueFinder = (e =>
-            {
-                tBFinder.Value = e;
-                SetToolTiptBFinder();
-            });
-
-            _stoped = (() =>
-            {
-                bPlay.Enabled = true;
-                bPause.Enabled = false;
-                bStop.Enabled = false;
-
-                tBFinder.Value = 0;
-
-                OnStopPlay();
-            });
-        }
-
-        /// <summary>
         /// Устанавливает значения свойств по умолчанию.
         /// </summary>
         private void InitializeProperties()
@@ -394,9 +361,10 @@ namespace CellularAutomaton.Components.Player
         /// </summary>
         /// <param name="sender">Источник события.</param>
         /// <param name="e">Сведения о событии.</param>
-        private void PlayerChangeFrame(object sender, ChangeFrameEventArgs e)
+        private void PlayerChangeFrame(object sender, EventArgs e)
         {
-            Invoke(_setValueFinder, e.ReproducedFrame);
+            tBFinder.Value = _player.CurrenFrame;
+            SetToolTiptBFinder();
         }
 
         /// <summary>
@@ -454,19 +422,27 @@ namespace CellularAutomaton.Components.Player
         /// <param name="e">Сведения о событии.</param>
         private void PlayerStopPlay(object sender, EventArgs e)
         {
-            Invoke(_stoped);
+            StopedWithoutEvent();
+            OnStopPlay();
         }
 
         /// <summary>
-        /// Проверяет заданы ли все необходимые для функционирования свойства.
+        /// Подготавливает компонент к воспроизведению новой записи.
         /// </summary>
         private void PrepareStart()
         {
-            Enabled = (_player?.Record != null) && (0 < _player.Record.Count);
-            tBFinder.Maximum = _player?.Record?.Count ?? 0;
+            bool isPlayer = _player != null;
+            bool isEnabled = isPlayer && (0 < _player.Record.Count);
 
+            tBFinder.Maximum = isPlayer ? ((0 < _player.Record.Count) ? (_player.Record.Count - 1) : 0 ): 0;
             SetToolTiptBFinder();
-            Invoke(_stoped);
+
+            if (Enabled == isEnabled)
+                RepaintCurrentFrame();
+            else
+                Enabled = isEnabled;
+
+            StopedWithoutEvent();
         }
 
         /// <summary>
@@ -480,7 +456,19 @@ namespace CellularAutomaton.Components.Player
                     CultureInfo.CurrentCulture,
                     Resources.PlayerController__SetToolTip__Finder,
                     tBFinder.Value + 1,
-                    _player?.Record?.Count + 1 ?? 0));
+                    _player?.Record.Count ?? 0));
+        }
+
+        /// <summary>
+        /// Обрабатывает действия возникающие при остановке воспроизведения.
+        /// </summary>
+        private void StopedWithoutEvent()
+        {
+            bPlay.Enabled = true;
+            bPause.Enabled = false;
+            bStop.Enabled = false;
+
+            tBFinder.Value = 0;
         }
 
         /// <summary>
@@ -494,22 +482,13 @@ namespace CellularAutomaton.Components.Player
         }
 
         /// <summary>
-        /// Обработчик события <see cref="Control.MouseDown"/>. Осуществляет переход к указанному спомощью <see cref="tBFinder_Scroll"/> кадру записи.
-        /// </summary>
-        /// <param name="sender">Источник события.</param>
-        /// <param name="e">Сведения о событии.</param>
-        private void tBFinder_MouseUp(object sender, MouseEventArgs e)
-        {
-            _player.Rewind(tBFinder.Value);
-        }
-
-        /// <summary>
-        /// Обработчик события <see cref="TrackBar.Scroll"/>. Отображает информацию об указанном кадре записи.
+        /// Обработчик события <see cref="TrackBar.Scroll"/>. Осуществляет переход к указанному спомощью <see cref="tBFinder_Scroll"/> кадру записи и отображает о нём информацию.
         /// </summary>
         /// <param name="sender">Источник события.</param>
         /// <param name="e">Сведения о событии.</param>
         private void tBFinder_Scroll(object sender, EventArgs e)
         {
+            _player.Rewind(tBFinder.Value);
             SetToolTiptBFinder();
         }
         #endregion
