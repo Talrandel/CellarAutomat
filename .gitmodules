@@ -1,3 +1,6 @@
 [submodule "FastBitmap"]
 	path = FastBitmap
 	url = https://github.com/Sergey8554/FastBitmap
+[submodule "ControlExt"]
+	path = ControlExt
+	url = https://github.com/Sergey8554/ControlExt.git
