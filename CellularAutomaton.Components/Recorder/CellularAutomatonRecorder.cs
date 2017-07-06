@@ -5,8 +5,8 @@
 // Language      : C# 6.0
 // File          : CellularAutomatonRecorder.cs
 // Author        : Антипкин С.С., Макаров Е.А.
-// Created       : 27.06.2017 13:41
-// Last Revision : 06.07.2017 0:36
+// Created       : 06.07.2017 0:50
+// Last Revision : 06.07.2017 10:17
 // Description   : 
 #endregion
 
@@ -664,6 +664,11 @@ namespace CellularAutomaton.Components.Recorder
             _recorder = null;
             //GC.Collect(gen);
 
+            bRecord.Enabled = true;
+            bStop.Enabled = false;
+            bSave.Enabled = false;
+            gBSettings.Enabled = true;
+
             _progress(0);
         }
 
@@ -934,7 +939,6 @@ namespace CellularAutomaton.Components.Recorder
             bStop.Enabled = true;
             bSave.Enabled = false;
             gBSettings.Enabled = false;
-            _progress(0);
 
             OnStartRecord();
         }

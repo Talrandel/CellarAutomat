@@ -5,8 +5,8 @@
 // Language      : C# 6.0
 // File          : Recorder.cs
 // Author        : Антипкин С.С., Макаров Е.А.
-// Created       : 27.06.2017 13:41
-// Last Revision : 05.07.2017 17:18
+// Created       : 06.07.2017 0:50
+// Last Revision : 06.07.2017 10:26
 // Description   : 
 #endregion
 
@@ -15,7 +15,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Threading;
-using System.Threading.Tasks;
 
 using CellularAutomaton.Components.Properties;
 using CellularAutomaton.Core;
@@ -46,6 +45,11 @@ namespace CellularAutomaton.Components.Recorder
         private readonly CancellationTokenSource _cts;
 
         /// <summary>
+        /// Объект <see cref="LockImage"/> предоставляющий методы работы с заблокированным в памяти объектом <see cref="Bitmap"/>.
+        /// </summary>
+        private readonly Lazy<LockImage> _li;
+
+        /// <summary>
         /// Объект блокировки.
         /// </summary>
         private readonly object _lock = new object();
@@ -59,16 +63,6 @@ namespace CellularAutomaton.Components.Recorder
         /// <b>True</b>, если освобождение ресурсов осуществлялось, иначе <b>false</b>.
         /// </summary>
         private bool _disposed;
-
-        /// <summary>
-        /// Объект <see cref="LockImage"/> предоставляющий методы работы с заблокированным в памяти объектом <see cref="Bitmap"/>.
-        /// </summary>
-        private readonly Lazy<LockImage> _li;
-
-        /// <summary>
-        /// Задача в которой выполняется расчёт поведения клеточного автомата.
-        /// </summary>
-        private Task _task;
         #endregion
 
         #region Constructors
@@ -146,8 +140,7 @@ namespace CellularAutomaton.Components.Recorder
                 OnStartRecord();
                 try
                 {
-                    _task = _ca.ProcessingAsync(_cts.Token);
-                    await _task;
+                    await _ca.ProcessingAsync(_cts.Token);
                 }
                 catch (OperationCanceledException)
                 {
@@ -166,12 +159,6 @@ namespace CellularAutomaton.Components.Recorder
             {
                 State = StateRecorder.Stop;
                 _cts.Cancel();
-
-                //try
-                //{
-                //    _task.Wait();
-                //}
-                //catch (AggregateException e) when (e.GetBaseException() is OperationCanceledException) { }
 
                 OnStopRecord();
             }
@@ -269,7 +256,6 @@ namespace CellularAutomaton.Components.Recorder
 
             if (disposing)
             {
-                _task?.Dispose();
                 _cts?.Dispose();
                 _li?.Value.Dispose();
                 RecordClear();

@@ -5,8 +5,8 @@
 // Language      : C# 6.0
 // File          : PlayerController.cs
 // Author        : Антипкин С.С., Макаров Е.А.
-// Created       : 27.06.2017 13:41
-// Last Revision : 03.07.2017 21:16
+// Created       : 06.07.2017 0:50
+// Last Revision : 06.07.2017 10:20
 // Description   : 
 #endregion
 
@@ -232,6 +232,7 @@ namespace CellularAutomaton.Components.Player
         {
             _player?.RecordClear();
             PrepareStart();
+            bPlay.Enabled = false;
         }
 
         /// <summary>
@@ -434,7 +435,7 @@ namespace CellularAutomaton.Components.Player
             bool isPlayer = _player != null;
             bool isEnabled = isPlayer && (0 < _player.Record.Count);
 
-            tBFinder.Maximum = isPlayer ? ((0 < _player.Record.Count) ? (_player.Record.Count - 1) : 0 ): 0;
+            tBFinder.Maximum = isPlayer ? ((0 < _player.Record.Count) ? (_player.Record.Count - 1) : 0) : 0;
             SetToolTiptBFinder();
 
             if (Enabled == isEnabled)
