@@ -230,8 +230,11 @@ namespace CellularAutomaton.Components.Player
             if (State != StatePlayer.Stop)
                 throw new InvalidOperationException(Resources.Ex__PlaybackIsNotStopped);
 
-            _record?.Clear();
-            InitializeNewRecord();
+            if (_record != null)
+            {
+                _record.Clear();
+                InitializeNewRecord(); 
+            }
         }
 
         /// <summary>
