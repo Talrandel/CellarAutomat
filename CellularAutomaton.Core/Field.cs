@@ -5,14 +5,15 @@
 // Language      : C# 6.0
 // File          : Field.cs
 // Author        : Антипкин С.С., Макаров Е.А.
-// Created       : 27.06.2017 13:41
-// Last Revision : 29.06.2017 14:28
+// Created       : 07.07.2017 11:16
+// Last Revision : 07.07.2017 11:17
 // Description   : 
 #endregion
 
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
+
 using CellularAutomaton.Core.Properties;
 
 namespace CellularAutomaton.Core
@@ -261,9 +262,9 @@ namespace CellularAutomaton.Core
                 {
                     for (int j = 0; j < Width; j++)
                         if (density < rnd.Next(1, 101))
-                            _cells[i, j] = rnd.Next(statesCountMin, statesCount);
+                            this[i, j] = rnd.Next(statesCountMin, statesCount);
                         else
-                            _cells[i, j] = 0;
+                            this[i, j] = 0;
                 }
             }
         }

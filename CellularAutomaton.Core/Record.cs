@@ -5,8 +5,8 @@
 // Language      : C# 6.0
 // File          : Record.cs
 // Author        : Антипкин С.С., Макаров Е.А.
-// Created       : 29.06.2017 15:26
-// Last Revision : 01.07.2017 22:20
+// Created       : 06.07.2017 0:50
+// Last Revision : 07.07.2017 11:17
 // Description   : 
 #endregion
 
@@ -17,6 +17,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
+using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 
 using CellularAutomaton.Core.Properties;
@@ -302,7 +303,7 @@ namespace CellularAutomaton.Core
 
             using (FileStream fs = File.Create(fileName))
             {
-                BinaryFormatter bf = new BinaryFormatter();
+                BinaryFormatter bf = new BinaryFormatter(null, new StreamingContext(StreamingContextStates.File));
                 bf.Serialize(fs, this);
             }
         }
@@ -325,7 +326,7 @@ namespace CellularAutomaton.Core
 
             using (FileStream fs = File.OpenRead(fileName))
             {
-                BinaryFormatter bf = new BinaryFormatter();
+                BinaryFormatter bf = new BinaryFormatter(null, new StreamingContext(StreamingContextStates.File));
                 Record loadedRec = bf.Deserialize(fs) as Record;
                 if (loadedRec == null)
                     throw new ArgumentException("Файл с записью повреждён.", nameof(fileName));
