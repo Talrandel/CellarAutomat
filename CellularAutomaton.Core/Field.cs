@@ -5,8 +5,8 @@
 // Language      : C# 6.0
 // File          : Field.cs
 // Author        : Антипкин С.С., Макаров Е.А.
-// Created       : 07.07.2017 11:16
-// Last Revision : 07.07.2017 11:17
+// Created       : 07.07.2017 22:10
+// Last Revision : 07.07.2017 22:22
 // Description   : 
 #endregion
 
@@ -27,8 +27,7 @@ namespace CellularAutomaton.Core
         /// <summary>
         /// Внутреннее представление поля.
         /// </summary>
-        [SuppressMessage("Microsoft.Performance", "CA1814:PreferJaggedArraysOverMultidimensional", MessageId = "Member")]
-        private readonly int[,] _cells;
+        private readonly int[][] _cells;
         #endregion
 
         #region Constructors
@@ -58,7 +57,9 @@ namespace CellularAutomaton.Core
 
             Width = width;
             Height = height;
-            _cells = new int[height, width];
+            _cells = new int[width][];
+            for (int i = 0; i < width; i++)
+                _cells[i] = new int[height];
         }
         #endregion
 
@@ -73,9 +74,9 @@ namespace CellularAutomaton.Core
             if (other == null)
                 return false;
             // TODO: Попробовать применить перечисление для ускорения вычислений.
-            for (int i = 0; i < Height; i++)
+            for (int i = 0; i < Width; i++)
             {
-                for (int j = 0; j < Width; j++)
+                for (int j = 0; j < Height; j++)
                     if (this[i, j] != other[i, j])
                         return false;
             }
@@ -94,8 +95,8 @@ namespace CellularAutomaton.Core
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "x")]
         public int this[int x, int y]
         {
-            get { return _cells[x, y]; }
-            set { _cells[x, y] = value; }
+            get { return _cells[x][y]; }
+            set { _cells[x][y] = value; }
         }
 
         /// <summary>
@@ -129,6 +130,7 @@ namespace CellularAutomaton.Core
 
                     if ((0 <= x) && (0 <= y))
                         return this[x, y];
+
                     break;
                 }
                 case Direction.South:
@@ -137,6 +139,7 @@ namespace CellularAutomaton.Core
 
                     if (0 <= x)
                         return this[x, y];
+
                     break;
                 }
                 case Direction.SouthEast:
@@ -146,6 +149,7 @@ namespace CellularAutomaton.Core
 
                     if ((0 <= x) && (y < Width))
                         return this[x, y];
+
                     break;
                 }
                 case Direction.East:
@@ -154,6 +158,7 @@ namespace CellularAutomaton.Core
 
                     if (y < Width)
                         return this[x, y];
+
                     break;
                 }
                 case Direction.NorthEast:
@@ -163,6 +168,7 @@ namespace CellularAutomaton.Core
 
                     if ((x < Height) && (y < Width))
                         return this[x, y];
+
                     break;
                 }
                 case Direction.North:
@@ -171,6 +177,7 @@ namespace CellularAutomaton.Core
 
                     if (x < Height)
                         return this[x, y];
+
                     break;
                 }
                 case Direction.NorthWest:
@@ -180,6 +187,7 @@ namespace CellularAutomaton.Core
 
                     if ((x < Height) && (0 <= y))
                         return this[x, y];
+
                     break;
                 }
                 case Direction.West:
@@ -188,6 +196,7 @@ namespace CellularAutomaton.Core
 
                     if (0 <= y)
                         return this[x, y];
+
                     break;
                 }
                 case Direction.Center:
@@ -219,9 +228,9 @@ namespace CellularAutomaton.Core
             if (other == null)
                 throw new ArgumentNullException(nameof(other));
 
-            for (int i = 0; i < Height; i++)
+            for (int i = 0; i < Width; i++)
             {
-                for (int j = 0; j < Width; j++)
+                for (int j = 0; j < Height; j++)
                     other[i, j] = this[i, j];
             }
         }
@@ -231,7 +240,8 @@ namespace CellularAutomaton.Core
         /// </summary>
         public void Reset()
         {
-            _cells.Initialize();
+            foreach (int[] row in _cells)
+                Array.Clear(row, 0, Height);
         }
 
         /// <summary>
@@ -255,10 +265,10 @@ namespace CellularAutomaton.Core
                 Reset();
             else
             {
-                Random rnd = new Random();
-                for (int i = 0; i < Height; i++)
+                Random rnd = new Random(0); #warning TEST!!!
+                for (int i = 0; i < Width; i++)
                 {
-                    for (int j = 0; j < Width; j++)
+                    for (int j = 0; j < Height; j++)
                         if (density < rnd.Next(1, 101))
                             this[i, j] = rnd.Next(statesCountMin, statesCount);
                         else

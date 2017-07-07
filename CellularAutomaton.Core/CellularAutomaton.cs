@@ -5,8 +5,8 @@
 // Language      : C# 6.0
 // File          : CellularAutomaton.cs
 // Author        : Антипкин С.С., Макаров Е.А.
-// Created       : 27.06.2017 13:41
-// Last Revision : 05.07.2017 19:31
+// Created       : 07.07.2017 22:10
+// Last Revision : 07.07.2017 22:22
 // Description   : 
 #endregion
 
@@ -164,8 +164,6 @@ namespace CellularAutomaton.Core
 
             _synchronizationContext = new SynchronizationContext();
             _invokeHandlers = (state => OnGenerationChanged());
-
-            Initialize();
         }
 
         /// <summary>
@@ -290,8 +288,8 @@ namespace CellularAutomaton.Core
         /// </summary>
         private void TransformCells()
         {
-            for (int i = 0; i < _pastField.Height; i++)
-                for (int j = 0; j < _pastField.Width; j++)
+            for (int i = 0; i < _pastField.Width; i++)
+                for (int j = 0; j < _pastField.Height; j++)
                     _currentField[i, j] = Rule.TransformCell(_pastField, i, j, StatesCount);
         }
         #endregion
