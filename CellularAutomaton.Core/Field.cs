@@ -120,7 +120,6 @@ namespace CellularAutomaton.Core
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "x")]
         public int GetCellAtDirection(int x, int y, Directions direction)
         {
-            int state = -1;
             switch (direction)
             {
                 case Directions.NorthWest:
@@ -129,7 +128,7 @@ namespace CellularAutomaton.Core
                     y--;
 
                     if ((0 <= x) && (0 <= y))
-                        state = this[x, y];
+                        return this[x, y];
                     break;
                 }
                 case Directions.North:
@@ -137,7 +136,7 @@ namespace CellularAutomaton.Core
                     x--;
 
                     if (0 <= x)
-                        state = this[x, y];
+                        return this[x, y];
                     break;
                 }
                 case Directions.NorthEast:
@@ -146,7 +145,7 @@ namespace CellularAutomaton.Core
                     y++;
 
                     if ((0 <= x) && (y < Width))
-                        state = this[x, y];
+                        return this[x, y];
                     break;
                 }
                 case Directions.East:
@@ -154,7 +153,7 @@ namespace CellularAutomaton.Core
                     y++;
 
                     if (y < Width)
-                        state = this[x, y];
+                        return this[x, y];
                     break;
                 }
                 case Directions.SouthEast:
@@ -163,7 +162,7 @@ namespace CellularAutomaton.Core
                     y++;
 
                     if ((x < Height) && (y < Width))
-                        state = this[x, y];
+                        return this[x, y];
                     break;
                 }
                 case Directions.South:
@@ -171,7 +170,7 @@ namespace CellularAutomaton.Core
                     x++;
 
                     if (x < Height)
-                        state = this[x, y];
+                        return this[x, y];
                     break;
                 }
                 case Directions.SouthWest:
@@ -180,7 +179,7 @@ namespace CellularAutomaton.Core
                     y--;
 
                     if ((x < Height) && (0 <= y))
-                        state = this[x, y];
+                        return this[x, y];
                     break;
                 }
                 case Directions.West:
@@ -188,13 +187,12 @@ namespace CellularAutomaton.Core
                     y--;
 
                     if (0 <= y)
-                        state = this[x, y];
+                        return this[x, y];
                     break;
                 }
                 case Directions.Center:
                 {
-                    state = this[x, y];
-                    break;
+                    return this[x, y];
                 }
                 default:
                     throw new ArgumentOutOfRangeException(
@@ -206,7 +204,7 @@ namespace CellularAutomaton.Core
                             nameof(direction)));
             }
 
-            return state;
+            return -1;
         }
 
         /// <summary>
