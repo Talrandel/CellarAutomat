@@ -41,8 +41,6 @@ namespace CellularAutomaton.Core.Rules
             if (pastFiled == null)
                 throw new ArgumentNullException(nameof(pastFiled));
 
-            // Possible check for -1 value of cell in case of addition all cell's neighbors to array
-            //int[] Neighbors = f.GetNeighborsInAllDirections(x, y);
             int northWestCell = pastFiled.GetCellAtDirection(x, y, Directions.NorthWest);
             int northEastCell = pastFiled.GetCellAtDirection(x, y, Directions.NorthEast);
             int northCell = pastFiled.GetCellAtDirection(x, y, Directions.North);
@@ -51,22 +49,6 @@ namespace CellularAutomaton.Core.Rules
             int southCell = pastFiled.GetCellAtDirection(x, y, Directions.South);
             int westCell = pastFiled.GetCellAtDirection(x, y, Directions.West);
             int eastCell = pastFiled.GetCellAtDirection(x, y, Directions.East);
-
-            int[] neighbors =
-            {
-                northWestCell,
-                northCell,
-                northEastCell,
-                eastCell,
-                southEastCell,
-                southCell,
-                southWestCell,
-                westCell
-            };
-
-            for (int i = 0; i < neighbors.Length; i++)
-                if (neighbors[i] < 0)
-                    neighbors[i] = 0;
 
             switch (pastFiled[x, y])
             {
