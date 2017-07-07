@@ -24,12 +24,12 @@ namespace CellularAutomaton.Core
     {
         #region Members
         /// <summary>
-        /// Получить количество живых соседей в окрестности Мура для клетки с координатами.
+        /// Возвращает число живых соседей в окрестности Мура для клетки с координатами.
         /// </summary>
         /// <param name="source">Объек <see cref="IField"/> в котором производится вычисление характеристики.</param>
-        /// <param name="x">Координата по оси X клетки.</param>
-        /// <param name="y">Координата по оси Y клетки.</param>
-        /// <returns>Количество живых соседей для выбранной клетки.</returns>
+        /// <param name="x">Координата клетки по оси X.</param>
+        /// <param name="y">Координата клетки по оси Y.</param>
+        /// <returns>Число живых соседей для клетки с заданными координатами.</returns>
         /// <exception cref="ArgumentNullException">Параметр <paramref name="source"/> имеет значение <b>null</b>.</exception>
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "y")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "x")]
@@ -77,12 +77,12 @@ namespace CellularAutomaton.Core
         }
 
         /// <summary>
-        /// Получить число живых соседей в окрестности Фон Неймана для клетки с координатами.
+        /// Возвращает число живых соседей в окрестности Фон Неймана для клетки с координатами.
         /// </summary>
         /// <param name="source">Объек <see cref="IField"/> в котором производится вычисление характеристики.</param>
-        /// <param name="x">Координата по оси X клетки.</param>
-        /// <param name="y">Координата по оси Y клетки.</param>
-        /// <returns>Количество живых соседей для выбранной клетки.</returns>
+        /// <param name="x">Координата клетки по оси X.</param>
+        /// <param name="y">Координата клетки по оси Y.</param>
+        /// <returns>Число живых соседей для клетки с заданными координатами.</returns>
         /// <exception cref="ArgumentNullException">Параметр <paramref name="source"/> имеет значение <b>null</b>.</exception>
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "y")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "x")]
@@ -103,11 +103,11 @@ namespace CellularAutomaton.Core
         }
 
         /// <summary>
-        /// Получить список соседей в окрестности Мура для клетки с координатами.
+        /// Возвращает значений существующих список соседей в окрестности Мура для клетки с координатами.
         /// </summary>
-        /// <param name="source">Объек <see cref="IField"/> в котором производится вычисление характеристики.</param>
-        /// <param name="x">Координата по оси X клетки.</param>
-        /// <param name="y">Координата по оси Y клетки.</param>
+        /// <param name="source">Объект для которого вычисляется <see cref="IField"/> значение.</param>
+        /// <param name="x">Координата клетки по оси X.</param>
+        /// <param name="y">Координата клетки по оси Y.</param>
         /// <returns>Список значений существующих соседей для клетки с заданными координатами.</returns>
         /// <exception cref="ArgumentNullException">Параметр <paramref name="source"/> имеет значение <b>null</b>.</exception>
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "y")]
@@ -133,11 +133,11 @@ namespace CellularAutomaton.Core
         }
 
         /// <summary>
-        /// Получить список соседей в окрестности Фон Неймана для клетки с координатами.
+        /// Возвращает список значений существующих соседей в окрестности Фон Неймана для клетки с заданными координатами.
         /// </summary>
         /// <param name="source">Объек <see cref="IField"/> в котором производится вычисление характеристики.</param>
-        /// <param name="x">Координата по оси X клетки.</param>
-        /// <param name="y">Координата по оси Y клетки.</param>
+        /// <param name="x">Координата клетки по оси X.</param>
+        /// <param name="y">Координата клетки по оси Y.</param>
         /// <returns>Список значений существующих соседей для клетки с заданными координатами.</returns>
         /// <exception cref="ArgumentNullException">Параметр <paramref name="source"/> имеет значение <b>null</b>.</exception>
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "y")]
@@ -159,11 +159,11 @@ namespace CellularAutomaton.Core
         }
 
         /// <summary>
-        /// Получить список соседей в двух направлениях (на западе и востоке) для клетки с координатами.
+        /// Возвращает список значений сущетсвующих соседей в двух направлениях (на западе и востоке) для клетки с координатами.
         /// </summary>
         /// <param name="source">Объек <see cref="IField"/> в котором производится вычисление характеристики.</param>
-        /// <param name="x">Координата по оси X клетки.</param>
-        /// <param name="y">Координата по оси Y клетки.</param>
+        /// <param name="x">Координата клетки по оси X.</param>
+        /// <param name="y">Координата клетки по оси Y.</param>
         /// <returns>Список значений существующих соседей для клетки с заданными координатами.</returns>
         /// <exception cref="ArgumentNullException">Параметр <paramref name="source"/> имеет значение <b>null</b>.</exception>
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "y")]
