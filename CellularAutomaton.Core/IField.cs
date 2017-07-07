@@ -64,7 +64,7 @@ namespace CellularAutomaton.Core
         /// <exception cref="ArgumentOutOfRangeException">Недопустимое значение параметра <paramref name="direction"/>.</exception>
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "y")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "x")]
-        int GetCellAtDirection(int x, int y, Directions direction);
+        int GetCellAtDirection(int x, int y, Direction direction);
 
         /// <summary>
         /// Устанавливает состояние клеток поля по умолчанию.

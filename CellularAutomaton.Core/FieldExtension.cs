@@ -38,15 +38,20 @@ namespace CellularAutomaton.Core
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
 
+
+            int sourceHeight = source.Height;
+            int sourceWidth = source.Width;
             int count = 0;
             for (int i = y - 1; i <= y; i++)
             {
                 for (int j = x - 1; j <= x; j++)
                 {
-                    if (i == y && j == x)
+                    if ((i == y) && (j == x))
                         continue;
 
-                    if (0 <= i && i <= source.Height && 0 <= j && j <= source.Width && source[i, j] != 0)
+                    if ((0 <= i) && (i <= sourceHeight) &&
+                        (0 <= j) && (j <= sourceWidth) &&
+                        (0 < source[i, j]))
                         count++;
                 }
             }
@@ -88,10 +93,10 @@ namespace CellularAutomaton.Core
 
             int[] tempArray =
             {
-                source.GetCellAtDirection(x, y, Directions.North),
-                source.GetCellAtDirection(x, y, Directions.East),
-                source.GetCellAtDirection(x, y, Directions.South),
-                source.GetCellAtDirection(x, y, Directions.West)
+                source.GetCellAtDirection(x, y, Direction.North),
+                source.GetCellAtDirection(x, y, Direction.East),
+                source.GetCellAtDirection(x, y, Direction.South),
+                source.GetCellAtDirection(x, y, Direction.West)
             };
 
             return tempArray.Count(item => item > 0);
@@ -103,7 +108,7 @@ namespace CellularAutomaton.Core
         /// <param name="source">Объек <see cref="IField"/> в котором производится вычисление характеристики.</param>
         /// <param name="x">Координата по оси X клетки.</param>
         /// <param name="y">Координата по оси Y клетки.</param>
-        /// <returns>Список существующих соседей для клетки с заданными координатами.</returns>
+        /// <returns>Список значений существующих соседей для клетки с заданными координатами.</returns>
         /// <exception cref="ArgumentNullException">Параметр <paramref name="source"/> имеет значение <b>null</b>.</exception>
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "y")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "x")]
@@ -114,14 +119,14 @@ namespace CellularAutomaton.Core
 
             int[] tempArray =
             {
-                source.GetCellAtDirection(x, y, Directions.NorthWest),
-                source.GetCellAtDirection(x, y, Directions.NorthEast),
-                source.GetCellAtDirection(x, y, Directions.North),
-                source.GetCellAtDirection(x, y, Directions.SouthWest),
-                source.GetCellAtDirection(x, y, Directions.SouthEast),
-                source.GetCellAtDirection(x, y, Directions.South),
-                source.GetCellAtDirection(x, y, Directions.West),
-                source.GetCellAtDirection(x, y, Directions.East)
+                source.GetCellAtDirection(x, y, Direction.NorthWest),
+                source.GetCellAtDirection(x, y, Direction.NorthEast),
+                source.GetCellAtDirection(x, y, Direction.North),
+                source.GetCellAtDirection(x, y, Direction.SouthWest),
+                source.GetCellAtDirection(x, y, Direction.SouthEast),
+                source.GetCellAtDirection(x, y, Direction.South),
+                source.GetCellAtDirection(x, y, Direction.West),
+                source.GetCellAtDirection(x, y, Direction.East)
             };
 
             return tempArray.Where(cell => cell != -1);
@@ -133,7 +138,7 @@ namespace CellularAutomaton.Core
         /// <param name="source">Объек <see cref="IField"/> в котором производится вычисление характеристики.</param>
         /// <param name="x">Координата по оси X клетки.</param>
         /// <param name="y">Координата по оси Y клетки.</param>
-        /// <returns>Список существующих соседей для клетки с заданными координатами.</returns>
+        /// <returns>Список значений существующих соседей для клетки с заданными координатами.</returns>
         /// <exception cref="ArgumentNullException">Параметр <paramref name="source"/> имеет значение <b>null</b>.</exception>
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "y")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "x")]
@@ -144,10 +149,10 @@ namespace CellularAutomaton.Core
 
             int[] tempArray =
             {
-                source.GetCellAtDirection(x, y, Directions.North),
-                source.GetCellAtDirection(x, y, Directions.South),
-                source.GetCellAtDirection(x, y, Directions.West),
-                source.GetCellAtDirection(x, y, Directions.East)
+                source.GetCellAtDirection(x, y, Direction.North),
+                source.GetCellAtDirection(x, y, Direction.South),
+                source.GetCellAtDirection(x, y, Direction.West),
+                source.GetCellAtDirection(x, y, Direction.East)
             };
 
             return tempArray.Where(cell => cell != -1);
@@ -159,7 +164,7 @@ namespace CellularAutomaton.Core
         /// <param name="source">Объек <see cref="IField"/> в котором производится вычисление характеристики.</param>
         /// <param name="x">Координата по оси X клетки.</param>
         /// <param name="y">Координата по оси Y клетки.</param>
-        /// <returns>Список существующих соседей для клетки с заданными координатами.</returns>
+        /// <returns>Список значений существующих соседей для клетки с заданными координатами.</returns>
         /// <exception cref="ArgumentNullException">Параметр <paramref name="source"/> имеет значение <b>null</b>.</exception>
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "y")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "x")]
@@ -170,8 +175,8 @@ namespace CellularAutomaton.Core
 
             int[] tempArray =
             {
-                source.GetCellAtDirection(x, y, Directions.West),
-                source.GetCellAtDirection(x, y, Directions.East)
+                source.GetCellAtDirection(x, y, Direction.West),
+                source.GetCellAtDirection(x, y, Direction.East)
             };
 
             return tempArray.Where(cell => cell != -1);

@@ -5,8 +5,8 @@
 // Language      : C# 6.0
 // File          : VenusSurface.cs
 // Author        : Антипкин С.С., Макаров Е.А.
-// Created       : 16.06.2017 13:14
-// Last Revision : 20.06.2017 22:26
+// Created       : 06.07.2017 0:50
+// Last Revision : 07.07.2017 12:40
 // Description   : 
 #endregion
 
@@ -41,14 +41,14 @@ namespace CellularAutomaton.Core.Rules
             if (pastFiled == null)
                 throw new ArgumentNullException(nameof(pastFiled));
 
-            int northWestCell = pastFiled.GetCellAtDirection(x, y, Directions.NorthWest);
-            int northEastCell = pastFiled.GetCellAtDirection(x, y, Directions.NorthEast);
-            int northCell = pastFiled.GetCellAtDirection(x, y, Directions.North);
-            int southWestCell = pastFiled.GetCellAtDirection(x, y, Directions.SouthWest);
-            int southEastCell = pastFiled.GetCellAtDirection(x, y, Directions.SouthEast);
-            int southCell = pastFiled.GetCellAtDirection(x, y, Directions.South);
-            int westCell = pastFiled.GetCellAtDirection(x, y, Directions.West);
-            int eastCell = pastFiled.GetCellAtDirection(x, y, Directions.East);
+            int northWestCell = pastFiled.GetCellAtDirection(x, y, Direction.NorthWest);
+            int northEastCell = pastFiled.GetCellAtDirection(x, y, Direction.NorthEast);
+            int northCell = pastFiled.GetCellAtDirection(x, y, Direction.North);
+            int southWestCell = pastFiled.GetCellAtDirection(x, y, Direction.SouthWest);
+            int southEastCell = pastFiled.GetCellAtDirection(x, y, Direction.SouthEast);
+            int southCell = pastFiled.GetCellAtDirection(x, y, Direction.South);
+            int westCell = pastFiled.GetCellAtDirection(x, y, Direction.West);
+            int eastCell = pastFiled.GetCellAtDirection(x, y, Direction.East);
 
             switch (pastFiled[x, y])
             {

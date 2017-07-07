@@ -118,11 +118,11 @@ namespace CellularAutomaton.Core
         /// <exception cref="ArgumentOutOfRangeException">Недопустимое значение параметра <paramref name="direction"/>.</exception>
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "y")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "x")]
-        public int GetCellAtDirection(int x, int y, Directions direction)
+        public int GetCellAtDirection(int x, int y, Direction direction)
         {
             switch (direction)
             {
-                case Directions.NorthWest:
+                case Direction.NorthWest:
                 {
                     x--;
                     y--;
@@ -131,7 +131,7 @@ namespace CellularAutomaton.Core
                         return this[x, y];
                     break;
                 }
-                case Directions.North:
+                case Direction.North:
                 {
                     x--;
 
@@ -139,7 +139,7 @@ namespace CellularAutomaton.Core
                         return this[x, y];
                     break;
                 }
-                case Directions.NorthEast:
+                case Direction.NorthEast:
                 {
                     x--;
                     y++;
@@ -148,7 +148,7 @@ namespace CellularAutomaton.Core
                         return this[x, y];
                     break;
                 }
-                case Directions.East:
+                case Direction.East:
                 {
                     y++;
 
@@ -156,7 +156,7 @@ namespace CellularAutomaton.Core
                         return this[x, y];
                     break;
                 }
-                case Directions.SouthEast:
+                case Direction.SouthEast:
                 {
                     x++;
                     y++;
@@ -165,7 +165,7 @@ namespace CellularAutomaton.Core
                         return this[x, y];
                     break;
                 }
-                case Directions.South:
+                case Direction.South:
                 {
                     x++;
 
@@ -173,7 +173,7 @@ namespace CellularAutomaton.Core
                         return this[x, y];
                     break;
                 }
-                case Directions.SouthWest:
+                case Direction.SouthWest:
                 {
                     x++;
                     y--;
@@ -182,7 +182,7 @@ namespace CellularAutomaton.Core
                         return this[x, y];
                     break;
                 }
-                case Directions.West:
+                case Direction.West:
                 {
                     y--;
 
@@ -190,7 +190,7 @@ namespace CellularAutomaton.Core
                         return this[x, y];
                     break;
                 }
-                case Directions.Center:
+                case Direction.Center:
                 {
                     return this[x, y];
                 }

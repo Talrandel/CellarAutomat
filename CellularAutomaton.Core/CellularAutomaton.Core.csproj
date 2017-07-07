@@ -34,6 +34,9 @@
     </DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>6</LangVersion>
+    <DebugSymbols>true</DebugSymbols>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject />
@@ -50,7 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FieldExtension.cs" />
-    <Compile Include="Directions.cs" />
+    <Compile Include="Direction.cs" />
     <Compile Include="IField.cs" />
     <Compile Include="IReadOnlyField.cs" />
     <Compile Include="IRecord.cs" />

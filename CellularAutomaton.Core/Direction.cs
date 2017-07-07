@@ -3,10 +3,10 @@
 // Project       : CellularAutomaton.Core
 // Project type  : 
 // Language      : C# 6.0
-// File          : Directions.cs
+// File          : Direction.cs
 // Author        : Антипкин С.С., Макаров Е.А.
-// Created       : 12.06.2017 17:05
-// Last Revision : 16.06.2017 12:48
+// Created       : 06.07.2017 0:50
+// Last Revision : 07.07.2017 14:46
 // Description   : 
 #endregion
 
@@ -15,7 +15,7 @@ namespace CellularAutomaton.Core
     /// <summary>
     /// Перечисление направлений определяющих соседей клетки.
     /// </summary>
-    public enum Directions
+    public enum Direction
     {
         /// <summary>
         /// Северо-запад.
