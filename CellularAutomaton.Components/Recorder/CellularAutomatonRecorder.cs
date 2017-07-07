@@ -83,7 +83,7 @@ namespace CellularAutomaton.Components.Recorder
         /// <summary>
         /// Значение по умолчанию свойства <see cref="SizeFieldHeightMin"/>.
         /// </summary>
-        private const int SizeFieldHeightMinDefValue = 50;
+        private const int SizeFieldHeightMinDefValue = 3;
 
         /// <summary>
         /// Значение по умолчанию свойства <see cref="SizeFieldHeightValue"/>.
@@ -98,7 +98,7 @@ namespace CellularAutomaton.Components.Recorder
         /// <summary>
         /// Значение по умолчанию свойства <see cref="SizeFieldWidthMin"/>.
         /// </summary>
-        private const int SizeFieldWidthMinDefValue = 50;
+        private const int SizeFieldWidthMinDefValue = 3;
 
         /// <summary>
         /// Значение по умолчанию свойства <see cref="SizeFieldWidthValue"/>.

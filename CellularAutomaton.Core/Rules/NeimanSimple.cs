@@ -4,9 +4,9 @@
 // Project type  : 
 // Language      : C# 6.0
 // File          : NeimanSimple.cs
-// Author        : Антипкин С.С., Макаров Е.А.
-// Created       : 16.06.2017 13:14
-// Last Revision : 20.06.2017 22:25
+// Author        : Антипкин С.С.
+// Created       : 06.07.2017 0:50
+// Last Revision : 07.07.2017 20:07
 // Description   : 
 #endregion
 
@@ -26,9 +26,7 @@ namespace CellularAutomaton.Core.Rules
         /// Возвращает название правила.
         /// </summary>
         public string Name => Resources.Rule_NeimanSimple_Name;
-        #endregion
 
-        #region Members
         /// <summary>
         /// Изменяет состояние клетки расположенной по заданным координатам.
         /// </summary>

@@ -41,7 +41,7 @@ namespace CellularAutomaton.Core.Rules
             if (pastFiled == null)
                 throw new ArgumentNullException(nameof(pastFiled));
 
-            return (pastFiled.GetLiveNeighborCount(x, y) == 1) ? 1 : pastFiled[x, y];
+            return (pastFiled.GetLiveNeighborMooreNeighborhoodCount(x, y) == 1) ? 1 : pastFiled[x, y];
         }
         #endregion
     }

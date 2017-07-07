@@ -41,7 +41,7 @@ namespace CellularAutomaton.Core.Rules
             if (pastFiled == null)
                 throw new ArgumentNullException(nameof(pastFiled));
 
-            switch (pastFiled.GetLiveNeighborCount(x, y))
+            switch (pastFiled.GetLiveNeighborMooreNeighborhoodCount(x, y))
             {
                 case 3:
                     return 1;

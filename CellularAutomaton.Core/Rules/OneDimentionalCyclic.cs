@@ -5,8 +5,8 @@
 // Language      : C# 6.0
 // File          : OneDimentionalCyclic.cs
 // Author        : Антипкин С.С., Макаров Е.А.
-// Created       : 16.06.2017 13:14
-// Last Revision : 20.06.2017 22:25
+// Created       : 06.07.2017 0:50
+// Last Revision : 07.07.2017 19:52
 // Description   : 
 #endregion
 
@@ -43,9 +43,9 @@ namespace CellularAutomaton.Core.Rules
 
             int nextState = (pastFiled[x, y] + 1) % statesCount;
 
-            foreach (int c in pastFiled.GetNeighborsInTwoDirections(x, y))
-                if (c == nextState)
-                    return nextState;
+            if ((pastFiled.GetCellAtDirection(x, y, Direction.West) == nextState) ||
+                (pastFiled.GetCellAtDirection(x, y, Direction.East) == nextState))
+                return nextState;
 
             return pastFiled[x, y];
         }

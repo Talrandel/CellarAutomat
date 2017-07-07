@@ -122,7 +122,7 @@ namespace CellularAutomaton.Core
         {
             switch (direction)
             {
-                case Direction.NorthWest:
+                case Direction.SouthWest:
                 {
                     x--;
                     y--;
@@ -131,7 +131,7 @@ namespace CellularAutomaton.Core
                         return this[x, y];
                     break;
                 }
-                case Direction.North:
+                case Direction.South:
                 {
                     x--;
 
@@ -139,7 +139,7 @@ namespace CellularAutomaton.Core
                         return this[x, y];
                     break;
                 }
-                case Direction.NorthEast:
+                case Direction.SouthEast:
                 {
                     x--;
                     y++;
@@ -156,7 +156,7 @@ namespace CellularAutomaton.Core
                         return this[x, y];
                     break;
                 }
-                case Direction.SouthEast:
+                case Direction.NorthEast:
                 {
                     x++;
                     y++;
@@ -165,7 +165,7 @@ namespace CellularAutomaton.Core
                         return this[x, y];
                     break;
                 }
-                case Direction.South:
+                case Direction.North:
                 {
                     x++;
 
@@ -173,7 +173,7 @@ namespace CellularAutomaton.Core
                         return this[x, y];
                     break;
                 }
-                case Direction.SouthWest:
+                case Direction.NorthWest:
                 {
                     x++;
                     y--;
