@@ -6,7 +6,7 @@
 // File          : Record.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 06.07.2017 0:50
-// Last Revision : 07.07.2017 11:17
+// Last Revision : 08.07.2017 20:17
 // Description   : 
 #endregion
 
@@ -35,9 +35,24 @@ namespace CellularAutomaton.Core
     {
         #region Fields
         /// <summary>
+        /// Размеры поля клеточного автомата.
+        /// </summary>
+        private Size _fieldSize;
+
+        /// <summary>
         /// Внутренняя структура содержащая данные записи.
         /// </summary>
         private LinkedList<Bitmap> _rec;
+
+        /// <summary>
+        /// Название правила поведения клеточного автомата.
+        /// </summary>
+        private string _rule;
+
+        /// <summary>
+        /// Количество состояний клетки клеточного автомата.
+        /// </summary>
+        private int _statesCount;
         #endregion
 
         #region Constructors
@@ -156,12 +171,20 @@ namespace CellularAutomaton.Core
         /// <summary>
         /// Возвращает название правила поведения клеточного автомата.
         /// </summary>
-        public string Rule { get; private set; }
+        public string Rule
+        {
+            get { return _rule; }
+            private set { _rule = value; }
+        }
 
         /// <summary>
         /// Возвращает количество состояний клетки клеточного автомата.
         /// </summary>
-        public int StatesCount { get; private set; }
+        public int StatesCount
+        {
+            get { return _statesCount; }
+            private set { _statesCount = value; }
+        }
 
         /// <summary>
         /// Возвращает число кадров в записи.
@@ -177,7 +200,11 @@ namespace CellularAutomaton.Core
         /// <summary>
         /// Возвращает размеры поля клеточного автомата.
         /// </summary>
-        public Size FieldSize { get; private set; }
+        public Size FieldSize
+        {
+            get { return _fieldSize; }
+            private set { _fieldSize = value; }
+        }
 
         /// <summary>
         /// Возвращает число поколений.
