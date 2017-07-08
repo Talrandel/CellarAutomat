@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.14
+VisualStudioVersion = 15.0.26430.15
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CellularAutomaton.Core", "CellularAutomaton.Core\CellularAutomaton.Core.csproj", "{ACCA44E9-4895-4852-97F2-C6BF4BD588CF}"
 EndProject
@@ -16,27 +16,38 @@ EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Performance|Any CPU = Performance|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{ACCA44E9-4895-4852-97F2-C6BF4BD588CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{ACCA44E9-4895-4852-97F2-C6BF4BD588CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACCA44E9-4895-4852-97F2-C6BF4BD588CF}.Performance|Any CPU.ActiveCfg = Performance|Any CPU
+		{ACCA44E9-4895-4852-97F2-C6BF4BD588CF}.Performance|Any CPU.Build.0 = Performance|Any CPU
 		{ACCA44E9-4895-4852-97F2-C6BF4BD588CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ACCA44E9-4895-4852-97F2-C6BF4BD588CF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0120F5FE-A962-4A80-8AE6-E09A89ADA4BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0120F5FE-A962-4A80-8AE6-E09A89ADA4BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0120F5FE-A962-4A80-8AE6-E09A89ADA4BF}.Performance|Any CPU.ActiveCfg = Performance|Any CPU
+		{0120F5FE-A962-4A80-8AE6-E09A89ADA4BF}.Performance|Any CPU.Build.0 = Performance|Any CPU
 		{0120F5FE-A962-4A80-8AE6-E09A89ADA4BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0120F5FE-A962-4A80-8AE6-E09A89ADA4BF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{96A01386-4F4F-4C24-899F-1DB4DA694A69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{96A01386-4F4F-4C24-899F-1DB4DA694A69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96A01386-4F4F-4C24-899F-1DB4DA694A69}.Performance|Any CPU.ActiveCfg = Performance|Any CPU
+		{96A01386-4F4F-4C24-899F-1DB4DA694A69}.Performance|Any CPU.Build.0 = Performance|Any CPU
 		{96A01386-4F4F-4C24-899F-1DB4DA694A69}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{96A01386-4F4F-4C24-899F-1DB4DA694A69}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5A864AC4-B72D-4D74-BE4F-26D1C0541331}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5A864AC4-B72D-4D74-BE4F-26D1C0541331}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A864AC4-B72D-4D74-BE4F-26D1C0541331}.Performance|Any CPU.ActiveCfg = Performance|Any CPU
+		{5A864AC4-B72D-4D74-BE4F-26D1C0541331}.Performance|Any CPU.Build.0 = Performance|Any CPU
 		{5A864AC4-B72D-4D74-BE4F-26D1C0541331}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5A864AC4-B72D-4D74-BE4F-26D1C0541331}.Release|Any CPU.Build.0 = Release|Any CPU
 		{964ACE0A-1203-4F4B-AA93-2BD2C2812545}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{964ACE0A-1203-4F4B-AA93-2BD2C2812545}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{964ACE0A-1203-4F4B-AA93-2BD2C2812545}.Performance|Any CPU.ActiveCfg = Performance|Any CPU
+		{964ACE0A-1203-4F4B-AA93-2BD2C2812545}.Performance|Any CPU.Build.0 = Performance|Any CPU
 		{964ACE0A-1203-4F4B-AA93-2BD2C2812545}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{964ACE0A-1203-4F4B-AA93-2BD2C2812545}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
