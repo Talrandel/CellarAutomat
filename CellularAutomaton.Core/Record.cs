@@ -129,7 +129,8 @@ namespace CellularAutomaton.Core
 
             Rule = ca.Rule.Name;
             StatesCount = ca.StatesCount;
-            FieldSize = new Size(ca.CurrentField.Width, ca.CurrentField.Height);
+            IReadOnlyField currentField = ca.CurrentField;
+            FieldSize = new Size(currentField.Width, currentField.Height);
         }
 
         /// <summary>
@@ -181,7 +182,7 @@ namespace CellularAutomaton.Core
         /// <summary>
         /// Возвращает число поколений.
         /// </summary>
-        public int Generation => Count;
+        public int Generation => _rec.Count;
 
         /// <summary>
         /// Добавляет новый кадр в конец записи.

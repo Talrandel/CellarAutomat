@@ -152,18 +152,18 @@ namespace CellularAutomaton.Core
 
             int sourceWidth = source.Width;
             int sourceHeight = source.Height;
-            int xStrart = (x == 0) ? 0 : (x - 1);
-            int yStart = (y == 0) ? 0 : (y - 1);
+            int i = (x == 0) ? 0 : (x - 1);
+            int jStart = (y == 0) ? 0 : (y - 1);
 
-            if ((sourceWidth <= xStrart) || (sourceHeight <= yStart))
+            if ((sourceWidth <= i) || (sourceHeight <= jStart))
                 return result;
 
             int xEnd = (x < sourceWidth - 1) ? (x + 1) : x;
             int yEnd = (y < sourceHeight - 1) ? (y + 1) : y;
 
-            for (int i = xStrart; i <= xEnd; i++)
+            for (; i <= xEnd; i++)
             {
-                for (int j = yStart; j <= yEnd; j++)
+                for (int j = jStart; j <= yEnd; j++)
                 {
                     if ((j == y) && (i == x))
                         continue;

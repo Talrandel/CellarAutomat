@@ -53,7 +53,8 @@ namespace CellularAutomaton.Core.Rules
                 return sum < 100 ? 2 : 3;
             }
 
-            return (centerCell == pastFiled[x, y] - 1) ? 0 : Math.Min(sum / 8 + 5, pastFiled[x, y] - 1);
+            int centerCellOddOne = centerCell - 1;
+            return (centerCell == centerCellOddOne) ? 0 : Math.Min(sum / 8 + 5, centerCellOddOne);
         }
         #endregion
     }

@@ -314,8 +314,8 @@ namespace CellularAutomaton.Core
         /// <param name="destinationField">Поле, в которое осуществляется копирование.</param>
         private void InnerCopyTo(Field destinationField)
         {
-            for (int i = 0; i < Width; i++)
-                Array.Copy(_cells[i], 0, destinationField._cells[i], 0, Height);
+            for (int i = 0; i < _width; i++)
+                Array.Copy(_cells[i], 0, destinationField._cells[i], 0, _height);
         }
         #endregion
     }

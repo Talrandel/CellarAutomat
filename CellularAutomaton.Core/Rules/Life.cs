@@ -43,10 +43,10 @@ namespace CellularAutomaton.Core.Rules
 
             switch (pastFiled.GetLiveNeighborMooreNeighborhoodCount(x, y))
             {
-                case 3:
-                    return 1;
                 case 2:
                     return pastFiled[x, y];
+                case 3:
+                    return 1;
                 default:
                     return 0;
             }

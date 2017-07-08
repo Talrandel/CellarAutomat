@@ -271,13 +271,13 @@ namespace CellularAutomaton.Core
             {
                 TransformCells(); // Gen + 1
 
-                if (_ct.IsCancellationRequested || _pastField.Equals((IField)CurrentField) || _ct.IsCancellationRequested)
+                if (_ct.IsCancellationRequested || _pastField.Equals(_currentField) || _ct.IsCancellationRequested)
                     throw new OperationCanceledException();
 
                 Generation++; // Yes this new Gen.
                 _synchronizationContext.Send(_invokeHandlers, null);
 
-                CurrentField.CopyTo(_pastField);
+                _currentField.CopyTo(_pastField);
             }
         }
 

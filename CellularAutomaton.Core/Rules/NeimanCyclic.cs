@@ -41,7 +41,8 @@ namespace CellularAutomaton.Core.Rules
             if (pastFiled == null)
                 throw new ArgumentNullException(nameof(pastFiled));
 
-            int nextState = (pastFiled[x, y] + 1) % statesCount;
+            int centerCell = pastFiled[x, y];
+            int nextState = (centerCell + 1) % statesCount;
 
             if ((pastFiled.GetCellAtDirection(x, y, Direction.North) == nextState) ||
                 (pastFiled.GetCellAtDirection(x, y, Direction.South) == nextState) ||
@@ -49,7 +50,7 @@ namespace CellularAutomaton.Core.Rules
                 (pastFiled.GetCellAtDirection(x, y, Direction.East) == nextState))
                 return nextState;
 
-            return pastFiled[x, y];
+            return centerCell;
         }
         #endregion
     }

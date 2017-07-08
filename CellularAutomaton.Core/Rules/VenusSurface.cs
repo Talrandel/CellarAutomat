@@ -6,7 +6,7 @@
 // File          : VenusSurface.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 06.07.2017 0:50
-// Last Revision : 07.07.2017 12:40
+// Last Revision : 08.07.2017 15:04
 // Description   : 
 #endregion
 
@@ -41,25 +41,24 @@ namespace CellularAutomaton.Core.Rules
             if (pastFiled == null)
                 throw new ArgumentNullException(nameof(pastFiled));
 
-            int northWestCell = pastFiled.GetCellAtDirection(x, y, Direction.NorthWest);
-            int northEastCell = pastFiled.GetCellAtDirection(x, y, Direction.NorthEast);
-            int northCell = pastFiled.GetCellAtDirection(x, y, Direction.North);
-            int southWestCell = pastFiled.GetCellAtDirection(x, y, Direction.SouthWest);
-            int southEastCell = pastFiled.GetCellAtDirection(x, y, Direction.SouthEast);
-            int southCell = pastFiled.GetCellAtDirection(x, y, Direction.South);
-            int westCell = pastFiled.GetCellAtDirection(x, y, Direction.West);
-            int eastCell = pastFiled.GetCellAtDirection(x, y, Direction.East);
-
             switch (pastFiled[x, y])
             {
                 case 0:
-                    return 2 * ((northWestCell % 2) ^ (northEastCell % 2)) + northCell % 2;
+                    return (((pastFiled.GetCellAtDirection(x, y, Direction.NorthWest) % 2) ^
+                             (pastFiled.GetCellAtDirection(x, y, Direction.NorthEast) % 2)) << 1) +
+                           pastFiled.GetCellAtDirection(x, y, Direction.North) % 2;
                 case 1:
-                    return 2 * ((northWestCell % 2) ^ (southWestCell % 2)) + westCell % 2;
+                    return (((pastFiled.GetCellAtDirection(x, y, Direction.NorthWest) % 2) ^
+                             (pastFiled.GetCellAtDirection(x, y, Direction.SouthWest) % 2)) << 1) +
+                           pastFiled.GetCellAtDirection(x, y, Direction.West) % 2;
                 case 2:
-                    return 2 * ((southWestCell % 2) ^ (southEastCell % 2)) + southCell % 2;
+                    return (((pastFiled.GetCellAtDirection(x, y, Direction.SouthWest) % 2) ^
+                             (pastFiled.GetCellAtDirection(x, y, Direction.SouthEast) % 2)) << 1) +
+                           pastFiled.GetCellAtDirection(x, y, Direction.South) % 2;
                 default:
-                    return 2 * ((southEastCell % 2) ^ (northEastCell % 2)) + eastCell % 2;
+                    return (((pastFiled.GetCellAtDirection(x, y, Direction.SouthEast) % 2) ^
+                             (pastFiled.GetCellAtDirection(x, y, Direction.NorthEast) % 2)) << 1) +
+                           pastFiled.GetCellAtDirection(x, y, Direction.East) % 2;
             }
         }
         #endregion
