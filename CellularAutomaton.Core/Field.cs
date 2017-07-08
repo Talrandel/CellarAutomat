@@ -6,7 +6,7 @@
 // File          : Field.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 07.07.2017 22:10
-// Last Revision : 07.07.2017 22:22
+// Last Revision : 08.07.2017 11:26
 // Description   : 
 #endregion
 
@@ -28,6 +28,16 @@ namespace CellularAutomaton.Core
         /// Внутреннее представление поля.
         /// </summary>
         private readonly int[][] _cells;
+
+        /// <summary>
+        /// Высота поля.
+        /// </summary>
+        private readonly int _height;
+
+        /// <summary>
+        /// Ширина поля.
+        /// </summary>
+        private readonly int _width;
         #endregion
 
         #region Constructors
@@ -55,8 +65,8 @@ namespace CellularAutomaton.Core
                     string.Format(CultureInfo.CurrentCulture, Resources.Ex__Высота_поля__0__меньше_нуля_, nameof(height)));
             }
 
-            Width = width;
-            Height = height;
+            _width = width;
+            _height = height;
             _cells = new int[width][];
             for (int i = 0; i < width; i++)
                 _cells[i] = new int[height];
@@ -68,15 +78,21 @@ namespace CellularAutomaton.Core
         /// Проверяет равенство заданного поля текущему.
         /// </summary>
         /// <param name="other">Сравниваемое поле.</param>
-        /// <returns>True - поля идентичны, иначе false.</returns>
+        /// <returns><b>True</b> - поля идентичны, иначе <b>false</b>.</returns>
         public bool Equals(IField other)
         {
             if (other == null)
                 return false;
-            // TODO: Попробовать применить перечисление для ускорения вычислений.
-            for (int i = 0; i < Width; i++)
+
+            if (ReferenceEquals(this, other))
+                return true;
+
+            if ((_width != other.Width) || (_height != other.Height))
+                return false;
+
+            for (int i = 0; i < _width; i++)
             {
-                for (int j = 0; j < Height; j++)
+                for (int j = 0; j < _height; j++)
                     if (this[i, j] != other[i, j])
                         return false;
             }
@@ -102,12 +118,12 @@ namespace CellularAutomaton.Core
         /// <summary>
         /// Возвращает ширину поля.
         /// </summary>
-        public int Width { get; }
+        public int Width => _width;
 
         /// <summary>
         /// Возвращает высоту поля.
         /// </summary>
-        public int Height { get; }
+        public int Height => _height;
 
         /// <summary>
         /// Возвращает состояние клетки расположенной в заданном направлении относительно клетки заданной координатами.
@@ -147,7 +163,7 @@ namespace CellularAutomaton.Core
                     x--;
                     y++;
 
-                    if ((0 <= x) && (y < Width))
+                    if ((0 <= x) && (y < _width))
                         return this[x, y];
 
                     break;
@@ -156,7 +172,7 @@ namespace CellularAutomaton.Core
                 {
                     y++;
 
-                    if (y < Width)
+                    if (y < _width)
                         return this[x, y];
 
                     break;
@@ -166,7 +182,7 @@ namespace CellularAutomaton.Core
                     x++;
                     y++;
 
-                    if ((x < Height) && (y < Width))
+                    if ((x < _height) && (y < _width))
                         return this[x, y];
 
                     break;
@@ -175,7 +191,7 @@ namespace CellularAutomaton.Core
                 {
                     x++;
 
-                    if (x < Height)
+                    if (x < _height)
                         return this[x, y];
 
                     break;
@@ -185,7 +201,7 @@ namespace CellularAutomaton.Core
                     x++;
                     y--;
 
-                    if ((x < Height) && (0 <= y))
+                    if ((x < _height) && (0 <= y))
                         return this[x, y];
 
                     break;
@@ -221,18 +237,16 @@ namespace CellularAutomaton.Core
         /// </summary>
         /// <param name="other">Поле, в которое осуществляется копирование.</param>
         /// <exception cref="ArgumentNullException">Параметр <paramref name="other"/> имеет значение <b>null</b>.</exception>
-        [SuppressMessage("Microsoft.Design", "CA1062:Проверить аргументы или открытые методы", MessageId = "0")]
-        [SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference", MessageId = "0#")]
-        public void Copy(ref IField other)
+        /// <exception cref="ArgumentOutOfRangeException">Не совпадают размеры текущего и заданного полей.</exception>
+        public void CopyTo(IField other)
         {
             if (other == null)
                 throw new ArgumentNullException(nameof(other));
 
-            for (int i = 0; i < Width; i++)
-            {
-                for (int j = 0; j < Height; j++)
-                    other[i, j] = this[i, j];
-            }
+            if ((_width != other.Width) || (_height != other.Height))
+                throw new ArgumentOutOfRangeException(nameof(other), Resources.Ex__Not_match_sizes_fields);
+
+            InnerCopyTo((Field)other);
         }
 
         /// <summary>
@@ -241,7 +255,7 @@ namespace CellularAutomaton.Core
         public void Reset()
         {
             foreach (int[] row in _cells)
-                Array.Clear(row, 0, Height);
+                Array.Clear(row, 0, _height);
         }
 
         /// <summary>
@@ -265,16 +279,43 @@ namespace CellularAutomaton.Core
                 Reset();
             else
             {
-                Random rnd = new Random(0); #warning TEST!!!
-                for (int i = 0; i < Width; i++)
+#if DEBUG || PERFORMANCE
+                Random rnd = new Random(0);
+#else
+                Random rnd = new Random();
+#endif
+                for (int i = 0; i < _width; i++)
                 {
-                    for (int j = 0; j < Height; j++)
+                    for (int j = 0; j < _height; j++)
                         if (density < rnd.Next(1, 101))
                             this[i, j] = rnd.Next(statesCountMin, statesCount);
                         else
                             this[i, j] = 0;
                 }
             }
+        }
+
+        /// <summary>
+        /// Создает новый объект, являющийся копией текущего экземпляра.
+        /// </summary>
+        /// <returns>Новый объект, являющийся копией этого экземпляра.</returns>
+        public object Clone()
+        {
+            Field newField = new Field(_width, _height);
+            InnerCopyTo(newField);
+            return newField;
+        }
+        #endregion
+
+        #region Members
+        /// <summary>
+        /// <b>Внутренний метод.</b> Осуществляет копирование внутреннего представления текущего поля <see cref="_cells"/> в заданное.
+        /// </summary>
+        /// <param name="destinationField">Поле, в которое осуществляется копирование.</param>
+        private void InnerCopyTo(Field destinationField)
+        {
+            for (int i = 0; i < Width; i++)
+                Array.Copy(_cells[i], 0, destinationField._cells[i], 0, Height);
         }
         #endregion
     }

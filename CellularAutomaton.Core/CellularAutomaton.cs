@@ -6,7 +6,7 @@
 // File          : CellularAutomaton.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 07.07.2017 22:10
-// Last Revision : 07.07.2017 22:22
+// Last Revision : 08.07.2017 11:29
 // Description   : 
 #endregion
 
@@ -70,7 +70,7 @@ namespace CellularAutomaton.Core
         /// <summary>
         /// Поле клеточного автомата на прошлой итерации.
         /// </summary>
-        private IField _pastField;
+        private readonly IField _pastField;
 
         /// <summary>
         /// Количество состояний клетки клеточного автомата.
@@ -157,9 +157,7 @@ namespace CellularAutomaton.Core
 
             Rule = rule;
             _pastField = createdField;
-
-            _currentField = new Field(createdField.Width, createdField.Height);
-            createdField.Copy(ref _currentField);
+            _currentField = (IField)createdField.Clone();
             StatesCount = statesCount;
 
             _synchronizationContext = new SynchronizationContext();
@@ -279,7 +277,7 @@ namespace CellularAutomaton.Core
                 Generation++; // Yes this new Gen.
                 _synchronizationContext.Send(_invokeHandlers, null);
 
-                CurrentField.Copy(ref _pastField);
+                CurrentField.CopyTo(_pastField);
             }
         }
 
@@ -288,8 +286,10 @@ namespace CellularAutomaton.Core
         /// </summary>
         private void TransformCells()
         {
-            for (int i = 0; i < _pastField.Width; i++)
-                for (int j = 0; j < _pastField.Height; j++)
+            int pastFieldWidth = _pastField.Width;
+            int pastFieldHeight = _pastField.Height;
+            for (int i = 0; i < pastFieldWidth; i++)
+                for (int j = 0; j < pastFieldHeight; j++)
                     _currentField[i, j] = Rule.TransformCell(_pastField, i, j, StatesCount);
         }
         #endregion

@@ -5,8 +5,8 @@
 // Language      : C# 6.0
 // File          : FieldExtension.cs
 // Author        : Антипкин С.С., Макаров Е.А.
-// Created       : 06.07.2017 0:50
-// Last Revision : 07.07.2017 20:03
+// Created       : 07.07.2017 22:10
+// Last Revision : 08.07.2017 11:28
 // Description   : 
 #endregion
 
@@ -145,32 +145,37 @@ namespace CellularAutomaton.Core
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "y")]
         private static ICollection<int> GetNeighborMooreNeighborhoodCount(this IField source, int x, int y, Func<int, bool> predicate)
         {
-            Debug.Assert(source == null);
-            Debug.Assert(predicate == null);
+            Debug.Assert(source != null);
+            Debug.Assert(predicate != null);
 
-            LinkedList<int> ll = new LinkedList<int>();
+            LinkedList<int> result = new LinkedList<int>();
 
-            int sourceHeight = source.Height;
             int sourceWidth = source.Width;
+            int sourceHeight = source.Height;
+            int xStrart = (x == 0) ? 0 : (x - 1);
+            int yStart = (y == 0) ? 0 : (y - 1);
 
-            for (int i = x - 1; (i <= x + 1) && (i < sourceWidth); i++)
+            if ((sourceWidth <= xStrart) || (sourceHeight <= yStart))
+                return result;
+
+            int xEnd = (x < sourceWidth - 1) ? (x + 1) : x;
+            int yEnd = (y < sourceHeight - 1) ? (y + 1) : y;
+
+            for (int i = xStrart; i <= xEnd; i++)
             {
-                if (i < 0)
-                    continue;
-
-                for (int j = y - 1; (j <= y + 1) && (j < sourceHeight); j++)
+                for (int j = yStart; j <= yEnd; j++)
                 {
-                    if ((j < 0) || ((j == y) && (i == x)))
+                    if ((j == y) && (i == x))
                         continue;
 
                     int value = source[i, j];
 
                     if (predicate(value))
-                        ll.AddLast(value);
+                        result.AddLast(value);
                 }
             }
 
-            return ll;
+            return result;
         }
         #endregion
     }

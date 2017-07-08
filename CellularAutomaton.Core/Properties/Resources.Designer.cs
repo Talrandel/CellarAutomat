@@ -79,6 +79,15 @@ namespace CellularAutomaton.Core.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Не совпадают размеры текущего и заданного полей..
+        /// </summary>
+        internal static string Ex__Not_match_sizes_fields {
+            get {
+                return ResourceManager.GetString("Ex__Not_match_sizes_fields", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Количество элементов в записи превышает доступное место, начиная с индекса {0} до конца массива назначения {1}.
         /// </summary>
         internal static string Ex__Record_CopyTo_ArgumentException {

@@ -5,8 +5,8 @@
 // Language      : C# 6.0
 // File          : IReadOnlyField.cs
 // Author        : Антипкин С.С., Макаров Е.А.
-// Created       : 20.06.2017 20:21
-// Last Revision : 23.06.2017 13:27
+// Created       : 06.07.2017 0:50
+// Last Revision : 08.07.2017 11:31
 // Description   : 
 #endregion
 
@@ -18,7 +18,7 @@ namespace CellularAutomaton.Core
     /// <summary>
     /// Определяет методы используемые для управления полями клеточных автоматов доступными только для чтения.
     /// </summary>
-    public interface IReadOnlyField : IEquatable<IField>
+    public interface IReadOnlyField : IEquatable<IField>, ICloneable
     {
         #region Properties
         /// <summary>
@@ -51,8 +51,7 @@ namespace CellularAutomaton.Core
         /// </summary>
         /// <param name="other">Поле, в которое осуществляется копирование.</param>
         /// <exception cref="ArgumentNullException">Параметр <paramref name="other"/> имеет значение <b>null</b>.</exception>
-        [SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference", MessageId = "0#")]
-        void Copy(ref IField other);
+        void CopyTo(IField other);
 
         /// <summary>
         /// Возвращает состояние клетки расположенной в заданном направлении относительно клетки заданной координатами.

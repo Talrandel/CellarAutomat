@@ -5,8 +5,8 @@
 // Language      : C# 6.0
 // File          : IField.cs
 // Author        : Антипкин С.С., Макаров Е.А.
-// Created       : 27.06.2017 13:41
-// Last Revision : 29.06.2017 14:28
+// Created       : 07.07.2017 11:15
+// Last Revision : 08.07.2017 11:31
 // Description   : 
 #endregion
 
@@ -18,7 +18,7 @@ namespace CellularAutomaton.Core
     /// <summary>
     /// Определяет методы используемые для управления полями клеточных автоматов.
     /// </summary>
-    public interface IField : IEquatable<IField>
+    public interface IField : IEquatable<IField>, ICloneable
     {
         #region Properties
         /// <summary>
@@ -51,8 +51,7 @@ namespace CellularAutomaton.Core
         /// </summary>
         /// <param name="other">Поле, в которое осуществляется копирование.</param>
         /// <exception cref="ArgumentNullException">Параметр <paramref name="other"/> имеет значение <b>null</b>.</exception>
-        [SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference", MessageId = "0#")]
-        void Copy(ref IField other);
+        void CopyTo(IField other);
 
         /// <summary>
         /// Возвращает состояние клетки расположенной в заданном направлении относительно клетки заданной координатами.
@@ -67,11 +66,6 @@ namespace CellularAutomaton.Core
         int GetCellAtDirection(int x, int y, Direction direction);
 
         /// <summary>
-        /// Устанавливает состояние клеток поля по умолчанию.
-        /// </summary>
-        void Reset();
-
-        /// <summary>
         /// Задаёт начальные состояния клеток на поле.
         /// </summary>
         /// <param name="statesCountMin">Минимальное число состояний клетки.</param>
@@ -79,6 +73,11 @@ namespace CellularAutomaton.Core
         /// <param name="density">Плотность распределения живых клеток на поле [0; 100].</param>
         /// <exception cref="ArgumentOutOfRangeException">Величина плотности распределения живых клеток на поле должна лежать в интервале [0; 100].</exception>
         void Initialize(int statesCountMin, int statesCount, byte density);
+
+        /// <summary>
+        /// Устанавливает состояние клеток поля по умолчанию.
+        /// </summary>
+        void Reset();
         #endregion
     }
 }

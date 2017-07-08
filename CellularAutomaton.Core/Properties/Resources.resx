@@ -165,4 +165,7 @@
     <data name="Ex__Record.CopyTo_ArgumentException" xml:space="preserve">
     <value>Количество элементов в записи превышает доступное место, начиная с индекса {0} до конца массива назначения {1}</value>
   </data>
+    <data name="Ex__Not_match_sizes_fields" xml:space="preserve">
+    <value>Не совпадают размеры текущего и заданного полей.</value>
+  </data>
 </root>
