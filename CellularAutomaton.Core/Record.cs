@@ -232,7 +232,7 @@ namespace CellularAutomaton.Core
             if (0 < _rec.Count)
             {
                 _rec.Clear();
-                GC.Collect();
+                GC.Collect(); // BUG
             }
         }
 

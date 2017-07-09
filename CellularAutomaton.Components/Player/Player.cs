@@ -5,8 +5,8 @@
 // Language      : C# 6.0
 // File          : Player.cs
 // Author        : Антипкин С.С., Макаров Е.А.
-// Created       : 06.07.2017 0:50
-// Last Revision : 09.07.2017 14:17
+// Created       : 09.07.2017 16:50
+// Last Revision : 09.07.2017 17:03
 // Description   : 
 #endregion
 
@@ -89,6 +89,11 @@ namespace CellularAutomaton.Components.Player
         /// Перечислитель записи.
         /// </summary>
         private IEnumerator<Bitmap> _recordEnumerator;
+
+        /// <summary>
+        /// Состояние проигрывателя.
+        /// </summary>
+        private StatePlayer _state;
         #endregion
 
         #region Constructors
@@ -120,9 +125,10 @@ namespace CellularAutomaton.Components.Player
         /// <summary>
         /// Освобождает все ресурсы занимаемые <see cref="Player"/>.
         /// </summary>
-        void IDisposable.Dispose()
+        public void Dispose()
         {
             Dispose(true);
+            GC.SuppressFinalize(this);
         }
         #endregion
 
@@ -135,25 +141,56 @@ namespace CellularAutomaton.Components.Player
         /// <summary>
         /// Возвращает воспроизводимую запись.
         /// </summary>
-        public IReadOnlyRecord Record => _record;
+        /// <exception cref="ObjectDisposedException">Ресурсы этого объекта были освобождены.</exception>
+        public IReadOnlyRecord Record
+        {
+            get
+            {
+                if (_disposed)
+                    throw new ObjectDisposedException(GetType().FullName);
+
+                return _record;
+            }
+        }
 
         /// <summary>
         /// Возвращает состояние проигрывателя.
         /// </summary>
-        public StatePlayer State { get; private set; }
+        /// <exception cref="ObjectDisposedException">Ресурсы этого объекта были освобождены.</exception>
+        public StatePlayer State
+        {
+            get
+            {
+                if (_disposed)
+                    throw new ObjectDisposedException(GetType().FullName);
+
+                return _state;
+            }
+            private set { _state = value; }
+        }
 
         /// <summary>
         /// Возвращает или задаёт число кадров в минуту.
         /// </summary>
         /// <exception cref="ArgumentOutOfRangeException">Значение <see name="FramesPerMinute"/> должно лежать в диапазоне от <see cref="FramesPerMinuteMinDefValue"/> до <see name="FramesPerMinuteMaxDefValue"/>.</exception>
+        /// <exception cref="ObjectDisposedException">Ресурсы этого объекта были освобождены.</exception>
         /// <remarks>
         ///     <b>Значение по умолчанию - <see name="FramesPerMinuteValueDefValue"/>.</b>
         /// </remarks>
         public short FramesPerMinute
         {
-            get { return _framesPerMinute; }
+            get
+            {
+                if (_disposed)
+                    throw new ObjectDisposedException(GetType().FullName);
+
+                return _framesPerMinute;
+            }
             set
             {
+                if (_disposed)
+                    throw new ObjectDisposedException(GetType().FullName);
+
                 if ((value < FramesPerMinuteMinDefValue) ||
                     (FramesPerMinuteMaxDefValue < value))
                 {
@@ -179,9 +216,16 @@ namespace CellularAutomaton.Components.Player
         /// <summary>
         /// Возвращает номер текущего кадра записи.
         /// </summary>
+        /// <exception cref="ObjectDisposedException">Ресурсы этого объекта были освобождены.</exception>
         public int CurrenFrame
         {
-            get { return _currenFrame; }
+            get
+            {
+                if (_disposed)
+                    throw new ObjectDisposedException(GetType().FullName);
+
+                return _currenFrame;
+            }
             private set
             {
                 _currenFrame = value;
@@ -208,9 +252,13 @@ namespace CellularAutomaton.Components.Player
         /// Устанавливает указанную запись в проигрыватель.
         /// </summary>
         /// <param name="rec">Объект реализующий интерфейс <see cref="IRecord"/>.</param>
+        /// <exception cref="ObjectDisposedException">Ресурсы этого объекта были освобождены.</exception>
         /// <exception cref="ArgumentNullException">Параметр <paramref name="rec"/> имеет значение <b>null</b>.</exception>
         public void Load(IRecord rec)
         {
+            if (_disposed)
+                throw new ObjectDisposedException(GetType().FullName);
+
             if (rec == null)
                 throw new ArgumentNullException(nameof(rec));
 
@@ -223,9 +271,13 @@ namespace CellularAutomaton.Components.Player
         /// <summary>
         /// Освобождает ресурсы занимаемые воспроизводимой записью.
         /// </summary>
+        /// <exception cref="ObjectDisposedException">Ресурсы этого объекта были освобождены.</exception>
         /// <exception cref="InvalidOperationException">Воспроизведение не остановлено.</exception>
         public void RecordClear()
         {
+            if (_disposed)
+                throw new ObjectDisposedException(GetType().FullName);
+
             if (State != StatePlayer.Stop)
                 throw new InvalidOperationException(Resources.Ex__PlaybackIsNotStopped);
 
@@ -240,9 +292,13 @@ namespace CellularAutomaton.Components.Player
         /// Загружает запись из указаннного файла.
         /// </summary>
         /// <param name="fileName">Имя файла содержащего запись для воспроизведения.</param>
+        /// <exception cref="ObjectDisposedException">Ресурсы этого объекта были освобождены.</exception>
         /// <exception cref="ArgumentException">Имя файла не задано, пустое или состоит из одних пробелов.</exception>
         public void Load(string fileName)
         {
+            if (_disposed)
+                throw new ObjectDisposedException(GetType().FullName);
+
             Stop();
             // RecordClear(); // Т.к. очистка есть в Core.Record.Load(string).
             _record.Load(fileName);
@@ -252,8 +308,12 @@ namespace CellularAutomaton.Components.Player
         /// <summary>
         /// Приостанавливает воспроизведение записи.
         /// </summary>
+        /// <exception cref="ObjectDisposedException">Ресурсы этого объекта были освобождены.</exception>
         public void Pause()
         {
+            if (_disposed)
+                throw new ObjectDisposedException(GetType().FullName);
+
             if (State == StatePlayer.Play)
             {
                 State = StatePlayer.Pause;
@@ -266,9 +326,13 @@ namespace CellularAutomaton.Components.Player
         /// <summary>
         /// Начинает воспроизведение записи с текущей позиции записи.
         /// </summary>
+        /// <exception cref="ObjectDisposedException">Ресурсы этого объекта были освобождены.</exception>
         /// <exception cref="Invalid​Operation​Exception">Не загружена запись для воспроизведения.</exception>
         public void Play()
         {
+            if (_disposed)
+                throw new ObjectDisposedException(GetType().FullName);
+
             if (_record == null)
                 throw new Invalid​Operation​Exception(Resources.Ex__RecordNotLoaded);
 
@@ -288,6 +352,7 @@ namespace CellularAutomaton.Components.Player
         /// Осуществляет переход к указаннному кадру записи.
         /// </summary>
         /// <param name="frame">Номер кадра.</param>
+        /// <exception cref="ObjectDisposedException">Ресурсы этого объекта были освобождены.</exception>
         /// <exception cref="ArgumentOutOfRangeException">
         ///     <para>Выполнена попытка перехода к кадру с отрицательным индексом.</para>
         ///     <para>-- или --</para>
@@ -295,6 +360,9 @@ namespace CellularAutomaton.Components.Player
         /// </exception>
         public void Rewind(int frame)
         {
+            if (_disposed)
+                throw new ObjectDisposedException(GetType().FullName);
+
             if (frame < 0)
             {
                 throw new ArgumentOutOfRangeException(nameof(frame), frame,
@@ -331,8 +399,12 @@ namespace CellularAutomaton.Components.Player
         /// <summary>
         /// Останавливает воспроизведение и переходит в начало записи.
         /// </summary>
+        /// <exception cref="ObjectDisposedException">Ресурсы этого объекта были освобождены.</exception>
         public void Stop()
         {
+            if (_disposed)
+                throw new ObjectDisposedException(GetType().FullName);
+
             if (State != StatePlayer.Stop)
             {
                 State = StatePlayer.Stop;
@@ -347,21 +419,17 @@ namespace CellularAutomaton.Components.Player
         /// <summary>
         /// Воспроизводит текущий кадр.
         /// </summary>
+        /// <exception cref="ObjectDisposedException">Ресурсы этого объекта были освобождены.</exception>
         public void PaintCurrentFrame()
         {
+            if (_disposed)
+                throw new ObjectDisposedException(GetType().FullName);
+
             _bufGr.Render();
         }
         #endregion
 
         #region Members
-        /// <summary>
-        /// Освобождает все ресурсы занимаемые <see cref="Player"/>.
-        /// </summary>
-        public void Dispose()
-        {
-            ((IDisposable)this).Dispose();
-        }
-
         /// <summary>
         /// Освобождает все ресурсы, используемые текущим объектом <see cref="Player"/>.
         /// </summary>
@@ -393,32 +461,48 @@ namespace CellularAutomaton.Components.Player
         /// <summary>
         /// Вызывает событие <see cref="ChangeFrame"/>.
         /// </summary>
+        /// <exception cref="ObjectDisposedException">Ресурсы этого объекта были освобождены.</exception>
         protected virtual void OnChangeFrame()
         {
+            if (_disposed)
+                throw new ObjectDisposedException(GetType().FullName);
+
             ChangeFrame?.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>
         /// Вызывает событие <see cref="PausePlay"/>.
         /// </summary>
+        /// <exception cref="ObjectDisposedException">Ресурсы этого объекта были освобождены.</exception>
         protected virtual void OnPausePlay()
         {
+            if (_disposed)
+                throw new ObjectDisposedException(GetType().FullName);
+
             PausePlay?.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>
         /// Вызывает событие <see cref="StartPlay"/>.
         /// </summary>
+        /// <exception cref="ObjectDisposedException">Ресурсы этого объекта были освобождены.</exception>
         protected virtual void OnStartPlay()
         {
+            if (_disposed)
+                throw new ObjectDisposedException(GetType().FullName);
+
             StartPlay?.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>
         /// Вызывает событие <see cref="StopPlay"/>.
         /// </summary>
+        /// <exception cref="ObjectDisposedException">Ресурсы этого объекта были освобождены.</exception>
         protected virtual void OnStopPlay()
         {
+            if (_disposed)
+                throw new ObjectDisposedException(GetType().FullName);
+
             StopPlay?.Invoke(this, EventArgs.Empty);
         }
 

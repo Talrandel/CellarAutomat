@@ -6,7 +6,7 @@
 // File          : Recorder.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 06.07.2017 0:50
-// Last Revision : 06.07.2017 10:26
+// Last Revision : 09.07.2017 15:11
 // Description   : 
 #endregion
 
@@ -26,6 +26,7 @@ namespace CellularAutomaton.Components.Recorder
     /// <summary>
     /// Представляет регистратор функционирования клеточного автомата.
     /// </summary>
+    // ReSharper disable once ClassWithVirtualMembersNeverInherited.Global
     public class Recorder : IRecorder
     {
         #region Fields
@@ -50,11 +51,6 @@ namespace CellularAutomaton.Components.Recorder
         private readonly Lazy<LockImage> _li;
 
         /// <summary>
-        /// Объект блокировки.
-        /// </summary>
-        private readonly object _lock = new object();
-
-        /// <summary>
         /// Запись функционирования клеточного автомата.
         /// </summary>
         private readonly IRecord _record;
@@ -63,6 +59,11 @@ namespace CellularAutomaton.Components.Recorder
         /// <b>True</b>, если освобождение ресурсов осуществлялось, иначе <b>false</b>.
         /// </summary>
         private bool _disposed;
+
+        /// <summary>
+        /// Состояние регистратора.
+        /// </summary>
+        private StateRecorder _state = StateRecorder.Stop;
         #endregion
 
         #region Constructors
@@ -97,6 +98,7 @@ namespace CellularAutomaton.Components.Recorder
         ///     <para>-- или --</para>
         ///     <para>Параметр <paramref name="colorize"/> имеет значение <b>null</b>.</para>
         /// </exception>
+        // ReSharper disable once UnusedMember.Global
         public Recorder(Core.CellularAutomaton ca, ConvertPointValueToColor colorize) : this(ca)
         {
             if (colorize == null)
@@ -108,29 +110,45 @@ namespace CellularAutomaton.Components.Recorder
 
         #region IRecorder Members
         /// <summary>
-        /// Освобождает все ресурсы занимаемые <see cref="Recorder"/>.
-        /// </summary>
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        /// <summary>
         /// Возвращает доступную только для чтения записанную запись.
         /// </summary>
-        public IReadOnlyRecord GetRecord => (IReadOnlyRecord)_record;
+        /// <exception cref="ObjectDisposedException">Ресурсы этого объекта были освобождены.</exception>
+        public IReadOnlyRecord GetRecord
+        {
+            get
+            {
+                if (_disposed)
+                    throw new ObjectDisposedException(GetType().FullName);
+
+                return (IReadOnlyRecord)_record;
+            }
+        }
 
         /// <summary>
         /// Возвращает состояние регистратора.
         /// </summary>
-        public StateRecorder State { get; private set; } = StateRecorder.Stop;
+        /// <exception cref="ObjectDisposedException">Ресурсы этого объекта были освобождены.</exception>
+        public StateRecorder State
+        {
+            get
+            {
+                if (_disposed)
+                    throw new ObjectDisposedException(GetType().FullName);
+
+                return _state;
+            }
+            private set { _state = value; }
+        }
 
         /// <summary>
         /// Начинает запись.
         /// </summary>
+        /// <exception cref="ObjectDisposedException">Ресурсы этого объекта были освобождены.</exception>
         public async void Record()
         {
+            if (_disposed)
+                throw new ObjectDisposedException(GetType().FullName);
+
             if (State != StateRecorder.Record)
             {
                 Stop();
@@ -153,8 +171,12 @@ namespace CellularAutomaton.Components.Recorder
         /// <summary>
         /// Останавливает запись.
         /// </summary>
+        /// <exception cref="ObjectDisposedException">Ресурсы этого объекта были освобождены.</exception>
         public void Stop()
         {
+            if (_disposed)
+                throw new ObjectDisposedException(GetType().FullName);
+
             if (State != StateRecorder.Stop)
             {
                 State = StateRecorder.Stop;
@@ -168,9 +190,13 @@ namespace CellularAutomaton.Components.Recorder
         /// Сохраняет запись в указанный файл.
         /// </summary>
         /// <param name="fileName">Имя файла для сохранения записи.</param>
+        /// <exception cref="ObjectDisposedException">Ресурсы этого объекта были освобождены.</exception>
         /// <exception cref="ArgumentException">Имя файла не задано, пустое или состоит из одних пробелов.</exception>
         public void Save(string fileName)
         {
+            if (_disposed)
+                throw new ObjectDisposedException(GetType().FullName);
+
             Stop();
             _record.Save(fileName);
         }
@@ -193,9 +219,13 @@ namespace CellularAutomaton.Components.Recorder
         /// <summary>
         /// Освобождает ресурсы занимаемые записанной записью.
         /// </summary>
+        /// <exception cref="ObjectDisposedException">Ресурсы этого объекта были освобождены.</exception>
         /// <exception cref="InvalidOperationException">Запись не остановлена.</exception>
         public void RecordClear()
         {
+            if (_disposed)
+                throw new ObjectDisposedException(GetType().FullName);
+
             if (State != StateRecorder.Stop)
                 throw new InvalidOperationException(Resources.Ex__RecordingIsNotStopped);
 
@@ -205,17 +235,29 @@ namespace CellularAutomaton.Components.Recorder
 
         #region Members
         /// <summary>
+        /// Освобождает все ресурсы занимаемые <see cref="Recorder"/>.
+        /// </summary>
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
         /// Создаёт рисунок из поля клеточного автомата.
         /// </summary>
         /// <param name="field">Визуализируемое поле клеточного автомата.</param>
         /// <returns>Визуализированное поле.</returns>
+        /// <exception cref="ObjectDisposedException">Ресурсы этого объекта были освобождены.</exception>
         /// <exception cref="ArgumentNullException">Параметр <paramref name="field"/> имеет значение <b>null</b>.</exception>
+        // ReSharper disable once MemberCanBePrivate.Global
         public Bitmap DrawingFromField(IReadOnlyField field)
         {
-            lock (_lock)
-            {
-                if (field == null)
-                    throw new ArgumentNullException(nameof(field));
+            if (_disposed)
+                throw new ObjectDisposedException(GetType().FullName);
+
+            if (field == null)
+                throw new ArgumentNullException(nameof(field));
 
                 Bitmap bitmap = null;
                 try
@@ -239,7 +281,6 @@ namespace CellularAutomaton.Components.Recorder
                     bitmap?.Dispose();
                     throw;
                 }
-            }
         }
 
         /// <summary>
@@ -267,24 +308,36 @@ namespace CellularAutomaton.Components.Recorder
         /// <summary>
         /// Вызывает событие <see cref="FrameRecorded"/>.
         /// </summary>
+        /// <exception cref="ObjectDisposedException">Ресурсы этого объекта были освобождены.</exception>
         protected virtual void OnFrameRecorded()
         {
+            if (_disposed)
+                throw new ObjectDisposedException(GetType().FullName);
+
             FrameRecorded?.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>
         /// Вызывает событие <see cref="StartRecord"/>.
         /// </summary>
+        /// <exception cref="ObjectDisposedException">Ресурсы этого объекта были освобождены.</exception>
         protected virtual void OnStartRecord()
         {
+            if (_disposed)
+                throw new ObjectDisposedException(GetType().FullName);
+
             StartRecord?.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>
         /// Вызывает событие <see cref="StopRecord"/>.
         /// </summary>
+        /// <exception cref="ObjectDisposedException">Ресурсы этого объекта были освобождены.</exception>
         protected virtual void OnStopRecord()
         {
+            if (_disposed)
+                throw new ObjectDisposedException(GetType().FullName);
+
             StopRecord?.Invoke(this, EventArgs.Empty);
         }
 
