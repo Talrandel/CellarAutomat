@@ -6,7 +6,7 @@
 // File          : CellularAutomatonPlayer.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 06.07.2017 0:50
-// Last Revision : 06.07.2017 10:27
+// Last Revision : 09.07.2017 14:58
 // Description   : 
 #endregion
 
@@ -286,22 +286,9 @@ namespace CellularAutomaton.Components.Player
 
             playerController.InitializePlayer(pBMain.CreateGraphics());
 
-            playerController.StartPlay += ((sender, e) =>
-            {
-                nUDFramesPerMinute.Enabled = false;
-                bLoadRecord.Enabled = false;
-
-                OnStartPlay();
-            });
-
-            playerController.PausePlay += (sender, e) => OnPausePlay();
-            playerController.StopPlay += ((sender, e) =>
-            {
-                nUDFramesPerMinute.Enabled = true;
-                bLoadRecord.Enabled = true;
-
-                OnStopPlay();
-            });
+            playerController.StartPlay += PlayerController_StartPlay;
+            playerController.PausePlay += PlayerController_PausePlay;
+            playerController.StopPlay += PlayerController_StopPlay;
 
             InitializeProperties();
         }
@@ -418,6 +405,42 @@ namespace CellularAutomaton.Components.Player
         private void nUDFramesPerMinute_ValueChanged(object sender, EventArgs e)
         {
             playerController.FramesPerMinuteValue = FramesPerMinuteValue;
+        }
+
+        /// <summary>
+        /// Обработчик события <see cref="PlayerController.PausePlay"/>.
+        /// </summary>
+        /// <param name="sender">Источник события.</param>
+        /// <param name="e">Сведения о событии.</param>
+        private void PlayerController_PausePlay(object sender, EventArgs e)
+        {
+            OnPausePlay();
+        }
+
+        /// <summary>
+        /// Обработчик события <see cref="PlayerController.StartPlay"/>.
+        /// </summary>
+        /// <param name="sender">Источник события.</param>
+        /// <param name="e">Сведения о событии.</param>
+        private void PlayerController_StartPlay(object sender, EventArgs e)
+        {
+            nUDFramesPerMinute.Enabled = false;
+            bLoadRecord.Enabled = false;
+
+            OnStartPlay();
+        }
+
+        /// <summary>
+        /// Обработчик события <see cref="PlayerController.StopPlay"/>.
+        /// </summary>
+        /// <param name="sender">Источник события.</param>
+        /// <param name="e">Сведения о событии.</param>
+        private void PlayerController_StopPlay(object sender, EventArgs e)
+        {
+            nUDFramesPerMinute.Enabled = true;
+            bLoadRecord.Enabled = true;
+
+            OnStopPlay();
         }
 
         /// <summary>

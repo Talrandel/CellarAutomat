@@ -6,7 +6,7 @@
 // File          : Player.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 06.07.2017 0:50
-// Last Revision : 06.07.2017 10:24
+// Last Revision : 09.07.2017 14:17
 // Description   : 
 #endregion
 
@@ -108,7 +108,7 @@ namespace CellularAutomaton.Components.Player
             _bufGrContext = new BufferedGraphicsContext();
 
             _timer = new Timer();
-            _timer.Tick += TimerTick;
+            _timer.Tick += Timer_Tick;
 
             FramesPerMinute = FramesPerMinuteValueDefValue;
 
@@ -120,10 +120,9 @@ namespace CellularAutomaton.Components.Player
         /// <summary>
         /// Освобождает все ресурсы занимаемые <see cref="Player"/>.
         /// </summary>
-        public void Dispose()
+        void IDisposable.Dispose()
         {
             Dispose(true);
-            GC.SuppressFinalize(this);
         }
         #endregion
 
@@ -233,7 +232,7 @@ namespace CellularAutomaton.Components.Player
             if (_record != null)
             {
                 _record.Clear();
-                InitializeNewRecord(); 
+                InitializeNewRecord();
             }
         }
 
@@ -356,6 +355,14 @@ namespace CellularAutomaton.Components.Player
 
         #region Members
         /// <summary>
+        /// Освобождает все ресурсы занимаемые <see cref="Player"/>.
+        /// </summary>
+        public void Dispose()
+        {
+            ((IDisposable)this).Dispose();
+        }
+
+        /// <summary>
         /// Освобождает все ресурсы, используемые текущим объектом <see cref="Player"/>.
         /// </summary>
         /// <param name="disposing">True - освободить управляемые и неуправляемые ресурсы; false освободить только неуправляемые ресурсы.</param>
@@ -368,7 +375,12 @@ namespace CellularAutomaton.Components.Player
 
             if (disposing)
             {
-                _timer?.Dispose();
+                if (_timer != null)
+                {
+                    _timer.Tick -= Timer_Tick;
+                    _timer.Dispose();
+                }
+
                 _e?.Dispose();
                 _bufGr?.Dispose();
                 _bufGrContext?.Dispose();
@@ -461,7 +473,7 @@ namespace CellularAutomaton.Components.Player
         /// </summary>
         /// <param name="sender">Источник события.</param>
         /// <param name="e">Сведения о событии.</param>
-        private void TimerTick(object sender, EventArgs e)
+        private void Timer_Tick(object sender, EventArgs e)
         {
             if (!MoveNext()) // Достигнут конец записи?
                 Stop();

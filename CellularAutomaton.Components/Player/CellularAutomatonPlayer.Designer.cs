@@ -17,6 +17,13 @@
         {
             if (disposing)
             {
+                if (playerController != null)
+                {
+                    playerController.StartPlay -= PlayerController_StartPlay;
+                    playerController.PausePlay -= PlayerController_PausePlay;
+                    playerController.StopPlay -= PlayerController_StopPlay;
+                }
+
                 components?.Dispose();
             }
 
