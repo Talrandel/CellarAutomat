@@ -6,7 +6,7 @@
 // File          : Recorder.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 06.07.2017 0:50
-// Last Revision : 09.07.2017 15:11
+// Last Revision : 10.07.2017 15:58
 // Description   : 
 #endregion
 
@@ -46,19 +46,24 @@ namespace CellularAutomaton.Components.Recorder
         private readonly CancellationTokenSource _cts;
 
         /// <summary>
-        /// Объект <see cref="LockImage"/> предоставляющий методы работы с заблокированным в памяти объектом <see cref="Bitmap"/>.
-        /// </summary>
-        private readonly Lazy<LockImage> _li;
-
-        /// <summary>
         /// Запись функционирования клеточного автомата.
         /// </summary>
         private readonly IRecord _record;
 
         /// <summary>
+        /// Кешированное значение структуры <see cref="Rectangle"/> используемой в методе <see cref="DrawingFromField(IReadOnlyField)"/>.
+        /// </summary>
+        private Rectangle _cachedFieldRect;
+
+        /// <summary>
         /// <b>True</b>, если освобождение ресурсов осуществлялось, иначе <b>false</b>.
         /// </summary>
         private bool _disposed;
+
+        /// <summary>
+        /// Объект <see cref="FastBitmapFormat32bppArgb"/> предоставляющий методы работы с заблокированным в памяти объектом <see cref="Bitmap"/>.
+        /// </summary>
+        private FastBitmapFormat32bppArgb _fastBitmap;
 
         /// <summary>
         /// Состояние регистратора.
@@ -79,8 +84,6 @@ namespace CellularAutomaton.Components.Recorder
 
             _ca = ca;
             _ca.GenerationChanged += CellularAutomatonGenerationChanged;
-
-            _li = new Lazy<LockImage>(LazyThreadSafetyMode.None);
 
             _record = new Record(ca);
             _colorize = PointValueToColor;
@@ -231,9 +234,7 @@ namespace CellularAutomaton.Components.Recorder
 
             _record.Clear();
         }
-        #endregion
 
-        #region Members
         /// <summary>
         /// Освобождает все ресурсы занимаемые <see cref="Recorder"/>.
         /// </summary>
@@ -242,7 +243,9 @@ namespace CellularAutomaton.Components.Recorder
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+        #endregion
 
+        #region Members
         /// <summary>
         /// Создаёт рисунок из поля клеточного автомата.
         /// </summary>
@@ -259,28 +262,38 @@ namespace CellularAutomaton.Components.Recorder
             if (field == null)
                 throw new ArgumentNullException(nameof(field));
 
-                Bitmap bitmap = null;
-                try
+            int fieldWidth = field.Width;
+            int fieldHeight = field.Height;
+
+            if ((_cachedFieldRect.Width != fieldWidth) || (_cachedFieldRect.Height != fieldHeight))
+                _cachedFieldRect = new Rectangle(0, 0, fieldWidth, fieldHeight);
+
+            Bitmap bitmap = null;
+            try
+            {
+                bitmap = new Bitmap(fieldWidth, fieldHeight, PixelFormat.Format32bppArgb);
+                BitmapData bitmapData = bitmap.LockBits(_cachedFieldRect, ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
+
+                if (_fastBitmap == null)
+                    _fastBitmap = new FastBitmapFormat32bppArgb(bitmapData);
+                else
+                    _fastBitmap.SetBitmapData(bitmapData);
+
+                for (int i = 0; i < fieldWidth; i++)
                 {
-                    bitmap = new Bitmap(field.Width, field.Height, PixelFormat.Format32bppArgb);
-
-                    _li.Value.SetImage(bitmap, ImageLockMode.WriteOnly);
-
-                    for (int i = 0; i < field.Width; i++)
-                    {
-                        for (int j = 0; j < field.Height; j++)
-                            _li.Value.SetLockPixel(i, j, _colorize(field[i, j]));
-                    }
-
-                    _li.Value.UnlockImage();
-
-                    return bitmap;
+                    for (int j = 0; j < fieldHeight; j++)
+                        _fastBitmap.SetLockPixel(i, j, _colorize(field[i, j]));
                 }
-                catch
-                {
-                    bitmap?.Dispose();
-                    throw;
-                }
+
+                bitmap.UnlockBits(bitmapData);
+
+                return bitmap;
+            }
+            catch
+            {
+                bitmap?.Dispose();
+                throw;
+            }
         }
 
         /// <summary>
@@ -298,7 +311,6 @@ namespace CellularAutomaton.Components.Recorder
             if (disposing)
             {
                 _cts?.Dispose();
-                _li?.Value.Dispose();
                 RecordClear();
             }
 
