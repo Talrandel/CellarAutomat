@@ -66,6 +66,8 @@
     <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConvertPointValueToColor.cs" />
+    <Compile Include="FieldDrawing.cs" />
     <Compile Include="FieldExtension.cs" />
     <Compile Include="Direction.cs" />
     <Compile Include="IField.cs" />
@@ -103,6 +105,12 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FastBitmap\FastBitmap\FastBitmap.csproj">
+      <Project>{5A864AC4-B72D-4D74-BE4F-26D1C0541331}</Project>
+      <Name>FastBitmap</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

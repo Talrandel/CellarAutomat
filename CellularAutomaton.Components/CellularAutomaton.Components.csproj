@@ -83,7 +83,6 @@
     <Compile Include="Recorder\CellularAutomatonRecorder.Designer.cs">
       <DependentUpon>CellularAutomatonRecorder.cs</DependentUpon>
     </Compile>
-    <Compile Include="Recorder\ConvertPointValueToColor.cs" />
     <Compile Include="Recorder\IRecorder.cs" />
     <Compile Include="Recorder\Recorder.cs" />
     <Compile Include="Recorder\StateRecorder.cs" />

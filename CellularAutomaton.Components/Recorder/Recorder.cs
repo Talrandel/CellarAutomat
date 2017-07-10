@@ -6,20 +6,16 @@
 // File          : Recorder.cs
 // Author        : Антипкин С.С., Макаров Е.А.
 // Created       : 06.07.2017 0:50
-// Last Revision : 10.07.2017 15:58
+// Last Revision : 10.07.2017 22:15
 // Description   : 
 #endregion
 
 using System;
 using System.Diagnostics.CodeAnalysis;
-using System.Drawing;
-using System.Drawing.Imaging;
 using System.Threading;
 
 using CellularAutomaton.Components.Properties;
 using CellularAutomaton.Core;
-
-using FastBitmap;
 
 namespace CellularAutomaton.Components.Recorder
 {
@@ -36,14 +32,14 @@ namespace CellularAutomaton.Components.Recorder
         private readonly Core.CellularAutomaton _ca;
 
         /// <summary>
-        /// Метод преобразования кода клетки поля в цвет.
-        /// </summary>
-        private readonly ConvertPointValueToColor _colorize;
-
-        /// <summary>
         /// Источник сигнала отмены расчёта функционирования елеточного автомата <see cref="Record"/>.
         /// </summary>
         private readonly CancellationTokenSource _cts;
+
+        /// <summary>
+        /// Экземпляр класса <see cref="FieldDrawing"/> предоставляющий методы для раскрашивания поля.
+        /// </summary>
+        private readonly FieldDrawing _fieldDrawing;
 
         /// <summary>
         /// Запись функционирования клеточного автомата.
@@ -51,19 +47,9 @@ namespace CellularAutomaton.Components.Recorder
         private readonly IRecord _record;
 
         /// <summary>
-        /// Кешированное значение структуры <see cref="Rectangle"/> используемой в методе <see cref="DrawingFromField(IReadOnlyField)"/>.
-        /// </summary>
-        private Rectangle _cachedFieldRect;
-
-        /// <summary>
         /// <b>True</b>, если освобождение ресурсов осуществлялось, иначе <b>false</b>.
         /// </summary>
         private bool _disposed;
-
-        /// <summary>
-        /// Объект <see cref="FastBitmapFormat32bppArgb"/> предоставляющий методы работы с заблокированным в памяти объектом <see cref="Bitmap"/>.
-        /// </summary>
-        private FastBitmapFormat32bppArgb _fastBitmap;
 
         /// <summary>
         /// Состояние регистратора.
@@ -86,8 +72,7 @@ namespace CellularAutomaton.Components.Recorder
             _ca.GenerationChanged += CellularAutomatonGenerationChanged;
 
             _record = new Record(ca);
-            _colorize = PointValueToColor;
-
+            _fieldDrawing = new FieldDrawing();
             _cts = new CancellationTokenSource();
         }
 
@@ -104,10 +89,7 @@ namespace CellularAutomaton.Components.Recorder
         // ReSharper disable once UnusedMember.Global
         public Recorder(Core.CellularAutomaton ca, ConvertPointValueToColor colorize) : this(ca)
         {
-            if (colorize == null)
-                throw new ArgumentNullException(nameof(colorize));
-
-            _colorize = colorize;
+            _fieldDrawing.Colorize = colorize;
         }
         #endregion
 
@@ -247,56 +229,6 @@ namespace CellularAutomaton.Components.Recorder
 
         #region Members
         /// <summary>
-        /// Создаёт рисунок из поля клеточного автомата.
-        /// </summary>
-        /// <param name="field">Визуализируемое поле клеточного автомата.</param>
-        /// <returns>Визуализированное поле.</returns>
-        /// <exception cref="ObjectDisposedException">Ресурсы этого объекта были освобождены.</exception>
-        /// <exception cref="ArgumentNullException">Параметр <paramref name="field"/> имеет значение <b>null</b>.</exception>
-        // ReSharper disable once MemberCanBePrivate.Global
-        public Bitmap DrawingFromField(IReadOnlyField field)
-        {
-            if (_disposed)
-                throw new ObjectDisposedException(GetType().FullName);
-
-            if (field == null)
-                throw new ArgumentNullException(nameof(field));
-
-            int fieldWidth = field.Width;
-            int fieldHeight = field.Height;
-
-            if ((_cachedFieldRect.Width != fieldWidth) || (_cachedFieldRect.Height != fieldHeight))
-                _cachedFieldRect = new Rectangle(0, 0, fieldWidth, fieldHeight);
-
-            Bitmap bitmap = null;
-            try
-            {
-                bitmap = new Bitmap(fieldWidth, fieldHeight, PixelFormat.Format32bppArgb);
-                BitmapData bitmapData = bitmap.LockBits(_cachedFieldRect, ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
-
-                if (_fastBitmap == null)
-                    _fastBitmap = new FastBitmapFormat32bppArgb(bitmapData);
-                else
-                    _fastBitmap.SetBitmapData(bitmapData);
-
-                for (int i = 0; i < fieldWidth; i++)
-                {
-                    for (int j = 0; j < fieldHeight; j++)
-                        _fastBitmap.SetLockPixel(i, j, _colorize(field[i, j]));
-                }
-
-                bitmap.UnlockBits(bitmapData);
-
-                return bitmap;
-            }
-            catch
-            {
-                bitmap?.Dispose();
-                throw;
-            }
-        }
-
-        /// <summary>
         /// Освобождает все ресурсы, используемые текущим объектом <see cref="Recorder"/>.
         /// </summary>
         /// <param name="disposing"><b>True</b> - освободить управляемые и неуправляемые ресурсы; <b>false</b> освободить только неуправляемые ресурсы.</param>
@@ -360,55 +292,8 @@ namespace CellularAutomaton.Components.Recorder
         /// <param name="e">Информация о событии.</param>
         private void CellularAutomatonGenerationChanged(object sender, EventArgs e)
         {
-            _record.Add(DrawingFromField(_ca.CurrentField));
+            _record.Add(_fieldDrawing.Drawing((IField)_ca.CurrentField));
             OnFrameRecorded();
-        }
-
-        /// <summary>
-        /// Преобразует состояние клетки поля клеточного автомата в цвет.
-        /// </summary>
-        /// <param name="value">Состояние клетки поля.</param>
-        /// <returns>Цвет соответствующий состоянию клетки.</returns>
-        private static Color PointValueToColor(int value)
-        {
-            // TODO: заменить на функцию задания цвета?
-            switch (value)
-            {
-                case 0:
-                    return Color.Red;
-                case 1:
-                    return Color.Green;
-                case 2:
-                    return Color.Blue;
-                case 3:
-                    return Color.Yellow;
-                case 4:
-                    return Color.Pink;
-                case 5:
-                    return Color.DarkBlue;
-                case 6:
-                    return Color.White;
-                case 7:
-                    return Color.Orange;
-                case 8:
-                    return Color.GreenYellow;
-                case 9:
-                    return Color.MediumVioletRed;
-                case 10:
-                    return Color.BlueViolet;
-                case 11:
-                    return Color.PaleVioletRed;
-                case 12:
-                    return Color.LightGreen;
-                case 13:
-                    return Color.Purple;
-                case 14:
-                    return Color.PapayaWhip;
-                case 15:
-                    return Color.SaddleBrown;
-                default:
-                    return Color.Black;
-            }
         }
         #endregion
     }
